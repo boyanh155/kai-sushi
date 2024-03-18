@@ -1,0 +1,15 @@
+{
+    "Home": {
+        "food": "food",
+        "beverage": "beverage",
+        "menu": "menu",
+        "address1": "17A 6 Street, 1 Quarter, Thanh My Loi Ward, District 2, Ho Chi Minh City",
+        "open_time": "Open time",
+        "specific_time": "Monday - Sunday 16:00 - 22:00"
+    },
+    "Navbar": {
+        "booking": "booking",
+        "takeaway": "takeaway",
+        "menu": "menu"
+    }
+}

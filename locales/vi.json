@@ -1,0 +1,16 @@
+{
+    "Home": {
+        "food": "món ăn",
+        "beverage": "đồ uống",
+        "menu": "thực đơn",
+        "address1": "17A Đường số 6, khu phố 1, phường Thạnh Mỹ Lợi, Quận 2, TP.HCM",
+        "open_time": "Giờ hoạt động",
+        "specific_time": "Thứ 2 - Chủ nhật 16:00 - 22:00"
+    },
+    "Navbar": {
+        "booking": "đặt bàn",
+        "takeaway": "mang về",
+        "menu": "thực đơn"
+
+    }
+}
