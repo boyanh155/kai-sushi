@@ -10,7 +10,6 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
-
 export default function LocaleLayout({
   children,
   params: { locale },
@@ -18,7 +17,6 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-
   const messages = useMessages();
   return (
     <html lang={locale}>
