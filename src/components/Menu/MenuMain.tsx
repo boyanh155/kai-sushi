@@ -27,9 +27,9 @@ const MenuMain = (props: Props) => {
       {/* IMAGE  */}
       <div
         className={`w-screen h-56 ${
-          (type === "food" ? menuData : beverageData)[currentIndex].image &&
+          (type === "food" ? menuData : beverageData)[currentIndex]?.image &&
           ` bg-[url('${
-            (type === "food" ? menuData : beverageData)[currentIndex].image
+            (type === "food" ? menuData : beverageData)[currentIndex]?.image
           }')] bg-no-repeat bg-cover bg-center`
         }`}
       ></div>

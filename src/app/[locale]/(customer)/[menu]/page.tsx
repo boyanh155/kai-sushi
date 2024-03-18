@@ -1,4 +1,4 @@
-import MenuPage from '@/pages/Menu'
+import MenuPage from '@/_pages/Menu'
 import React from 'react'
 
 type Props = {}

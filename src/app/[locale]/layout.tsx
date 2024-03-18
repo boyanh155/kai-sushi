@@ -1,5 +1,7 @@
 import FooterMain from "@/components/shared/Footer/FooterMain";
+import { AppConfig } from "@/libs/AppConfig";
 import { NextIntlClientProvider, useMessages } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { Nunito } from "next/font/google";
 
 const nunito = Nunito({
@@ -7,6 +9,9 @@ const nunito = Nunito({
   style: ["normal", "italic"],
   subsets: ["latin"],
 });
+export function generateStaticParams() {
+  return AppConfig.locales.map((locale) => ({ locale }));
+}
 
 export default function LocaleLayout({
   children,
@@ -15,15 +20,13 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const messages = useMessages();
   return (
     <html lang={locale}>
       <body className={nunito.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="pb-72">
-
-          {children}
-          </div>
+          <div className="pb-72">{children}</div>
         </NextIntlClientProvider>
         <FooterMain />
       </body>

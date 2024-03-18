@@ -17,10 +17,10 @@ const HomeMain = (props: Props) => {
   const locale = useLocale();
   const moveToListMenu = (type: "food" | "beverage") => {
     if (type === "food") {
-      router.push(locale + "/" + menuData[0].slug);
+      router.push(locale + "/" + menuData[0]?.slug);
       return;
     }
-    router.push(locale + "/" + beverageData[0].slug);
+    router.push(locale + "/" + beverageData[0]?.slug);
     return;
   };
   return (
