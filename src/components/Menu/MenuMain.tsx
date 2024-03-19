@@ -5,10 +5,14 @@ import { beverageData, menuData } from "./dummy/menu";
 import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Close, CloseOutlined } from "@mui/icons-material";
 type Props = {};
 
 const MenuMain = (props: Props) => {
   const [type, setType] = useState<"food" | "beverage">("food");
+  const t = useTranslations("Home");
 
   const pathName = usePathname();
 
@@ -26,13 +30,25 @@ const MenuMain = (props: Props) => {
     <div className=" flex flex-col overflow-x-hidden">
       {/* IMAGE  */}
       <div
-        className={`w-screen h-56 ${
-          (type === "food" ? menuData : beverageData)[currentIndex]?.image &&
-          ` bg-[url('${
-            (type === "food" ? menuData : beverageData)[currentIndex]?.image
-          }')] bg-no-repeat bg-cover bg-center`
-        }`}
-      ></div>
+        style={{
+          backgroundImage:
+            (type === "food" ? menuData : beverageData)[currentIndex]?.image &&
+            `url('${
+              (type === "food" ? menuData : beverageData)[currentIndex]?.image
+            }')`,
+        }}
+        className={`w-screen   uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
+      >
+        <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-2">
+          <Link
+            href="/"
+            className="bg-black p-1.5 border-[0.5px] border-[#878787a6] rounded-sm"
+          >
+            <CloseOutlined sx={{ fontSize: 20, fontWeight: 300 }} />
+          </Link>
+          <p className=" ">{type === "food" ? t("food") : t("beverage")}</p>
+        </div>
+      </div>
       {/* NAV HEADER */}
       <div className="ps-4">
         <div className="flex flex-row gap-6 w-screen overflow-scroll">
@@ -43,7 +59,7 @@ const MenuMain = (props: Props) => {
       </div>
 
       {/* CONTENT */}
-      <div className="px-8">
+      <div className="px-8 gap-16 flex flex-col">
         {(type === "food" ? menuData : beverageData)[
           currentIndex
         ]?.NavChildren?.map((v, id) => (

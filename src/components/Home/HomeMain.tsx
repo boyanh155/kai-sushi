@@ -24,9 +24,9 @@ const HomeMain = (props: Props) => {
     return;
   };
   return (
-    <div className="flex flex-col bg-black content-container items-center pt-14">
+    <div className="flex flex-col content-container items-center pt-14">
       {/* Center logo */}
-      <div className="w-[107px] max-h-[150px]">
+      <div className="w-[40%] max-h-[300px]">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
       <h2 className="text-white uppercase text-3xl">{t("menu")}</h2>
@@ -48,7 +48,7 @@ const HomeMain = (props: Props) => {
       {/* Bottom content */}
       <div className="mt-80 flex flex-col items-center">
         {/* Small log */}
-        <div className="w-[61px] max-h-[100px]">
+        <div className="w-[25%] max-h-[200px]">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
         <p className="text-xs text-center w-60 font-light">{t("address1")}</p>

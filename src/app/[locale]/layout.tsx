@@ -22,7 +22,9 @@ export default function LocaleLayout({
     <html lang={locale}>
       <body className={nunito.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="pb-72">{children}</div>
+          <div className="pb-72 relative before:block before:top-0 before:left-0 before:inset-0 before:opacity-50 before:absolute before:w-screen before:bg-black bg-opacity-60 w-screen  before:bg-no-repeat  before:bg-cover z-10 before:z-0  before:bg-center  before:bg-[url('../../src/assets/bg-home.png')]">
+            <main className="w-full h-full relative">{children}</main>
+          </div>
         </NextIntlClientProvider>
         <FooterMain />
       </body>
