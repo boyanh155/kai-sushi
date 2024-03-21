@@ -3,7 +3,7 @@ import { NavChildType } from "../../types/NavbarType";
 
 interface IMenuHeader {
   title: string;
-  image: string;
+  image?: string;
   slug: string;
   children: IMenuChild[];
 }
@@ -41,6 +41,18 @@ const menuHeader = new Schema<IMenuHeader>({
     type: String,
     required: true,
     unique: true,
+  },
+  image: {
+    type: String,
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  children: {
+    type: [menuChild],
+    required: true,
   },
 });
 
