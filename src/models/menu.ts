@@ -1,19 +1,6 @@
 import { Schema, model, models } from "mongoose";
 import { NavChildType } from "../../types/NavbarType";
-
-interface IMenuHeader {
-  title: string;
-  image: string;
-  slug: string;
-  children: IMenuChild[];
-}
-interface IMenuChild {
-  title: string;
-  type: NavChildType;
-  children?: IMenuChild[];
-  description?: string;
-  price: number;
-}
+import { IMenuChild, IMenuHeader } from "./IMenu";
 
 const menuChild = new Schema<IMenuChild>({
   title: {
@@ -25,16 +12,34 @@ const menuChild = new Schema<IMenuChild>({
     enum: [NavChildType.Body, NavChildType.Content],
     required: true,
   },
+  order: {
+    type: Number,
+    required: true,
+  },
   description: {
     type: String,
   },
   price: {
     type: Number,
-    required: true,
   },
 });
 
-menuChild.add({ children: [menuChild] });
+menuChild.add({
+  children: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "MenuChild",
+    },
+  ],
+});
+
+// auto generate number
+menuChild.pre("save", function (next) {
+  if (!this.order) {
+    this.order = this._id;
+  }
+  next();
+});
 
 const menuHeader = new Schema<IMenuHeader>({
   title: {
@@ -42,8 +47,38 @@ const menuHeader = new Schema<IMenuHeader>({
     required: true,
     unique: true,
   },
+  order: {
+    type: Number,
+    required: true,
+  },
+  image: {
+    type: String,
+  },
+  imageId: {
+    type: String,
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: ["food", "beverage"],
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  children: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "MenuChild",
+    },
+  ],
 });
 
-const menuHeaderModel = model<IMenuHeader>("MenuHeader", menuHeader);
+const menuHeaderModel =
+  models.MenuHeader || model<IMenuHeader>("MenuHeader", menuHeader);
 
-export default menuHeaderModel;
+const menuChildModel =
+  models.MenuChild || model<IMenuChild>("MenuChild", menuChild);
+
+export { menuHeaderModel, menuChildModel };

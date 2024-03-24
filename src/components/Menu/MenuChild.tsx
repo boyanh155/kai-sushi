@@ -15,7 +15,7 @@ const MenuChild = ({ item }: Props) => {
         </p>
         {/* CONTENT */}
         <div className="">
-          {item.NavChildren?.map((v, id) => (
+          {item.children?.map((v, id) => (
             <div
               key={id}
               className="flex-col mt-4 pt-4 px-2 pb-8  border-[0.4px] border-[#959595] rounded-sm"

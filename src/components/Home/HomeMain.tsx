@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logoSquare from "@/assets/kai-logo-square.svg";
 import { useLocale, useTranslations } from "next-intl";
 import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { beverageData, menuData } from "../Menu/dummy/menu";
+import { useGetMenu } from "@/hooks/api/useMenuApi";
+// import { beverageData, menuData } from "../Menu/dummy/menu";
+import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 
 type Props = {};
 
@@ -16,12 +18,7 @@ const HomeMain = (props: Props) => {
   const router = useRouter();
   const locale = useLocale();
   const moveToListMenu = (type: "food" | "beverage") => {
-    if (type === "food") {
-      router.push(locale + "/" + menuData[0]?.slug);
-      return;
-    }
-    router.push(locale + "/" + beverageData[0]?.slug);
-    return;
+    router.push(locale + "/" + type);
   };
   return (
     <div className="flex flex-col content-container items-center pt-14">
