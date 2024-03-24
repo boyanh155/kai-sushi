@@ -38,7 +38,6 @@ const MenuMain = (props: Props) => {
   }, [menuData, headerType]);
   const t = useTranslations("Home");
 
-  console.log(currentIndex);
 
   return (
     <div className=" flex flex-col overflow-x-hidden">
