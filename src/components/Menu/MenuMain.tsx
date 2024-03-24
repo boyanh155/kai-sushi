@@ -22,10 +22,11 @@ const MenuMain = (props: Props) => {
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const api = useGetMenu(menuType);
+  console.log(menuType);
   useEffect(() => {
     if (isEmpty(api?.data)) return;
     setMenuData(api?.data!);
-  }, [api?.isPending]);
+  }, [api?.data]);
   useEffect(() => {
     if (!headerType) return setCurrentIndex(0);
 
@@ -36,7 +37,7 @@ const MenuMain = (props: Props) => {
     );
   }, [menuData, headerType]);
   const t = useTranslations("Home");
-
+  console.log(menuData);
   return api?.isLoading ? (
     <Loading />
   ) : menuData ? (
@@ -62,15 +63,21 @@ const MenuMain = (props: Props) => {
       {/* NAV HEADER */}
       <div className="ps-4">
         <div className="flex flex-row gap-6 w-screen overflow-scroll">
-          {menuData.map((v, id) => (
-            <MenuHeader menuType={menuType} active={false} item={v} key={id} />
-          ))}
+          {!isEmpty(menuData) &&
+            menuData?.map((v, id) => (
+              <MenuHeader
+                menuType={menuType}
+                active={false}
+                item={v}
+                key={id}
+              />
+            ))}
         </div>
       </div>
 
       {/* CONTENT */}
       <div className="px-8 gap-16 flex flex-col">
-        {menuData[currentIndex]?.children?.map((v, id) => (
+        {menuData?.[currentIndex]?.children?.map((v, id) => (
           <MenuChild item={v} key={id} />
         ))}
       </div>

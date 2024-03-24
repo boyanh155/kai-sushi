@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logoSquare from "@/assets/kai-logo-square.svg";
 import { useLocale, useTranslations } from "next-intl";
 import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useGetMenu } from "@/hooks/api/useMenuApi";
 
-import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 
 type Props = {};
 

@@ -1,17 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import { getLocale } from "next-intl/server";
-import { AppConfig } from "@/libs/AppConfig";
 
-export let baseUrl = async () => {
-  // const locale = (await getLocale()) || AppConfig.defaultLocale;
-  if (process.env.NODE_ENV === "production") {
-    return `${process.env.NEXT_PUBLIC_API_URL}/vi/api`;
-  }
-  // change locale
-  return `http://localhost:3000/vi/api`;
-};
-
+export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/api`;
 export const getUserInfo = () => {
   const _user = localStorage.getItem("user");
   return typeof window !== "undefined" && _user
@@ -37,15 +27,16 @@ export async function api(
   customConfig = {}
 ) {
   try {
+    console.log();
     switch (method) {
       case "GET":
         return await axios
-          .get(`${await baseUrl()}/${url}`, { ...config(), ...customConfig })
+          .get(`${baseUrl}/${url}`, { ...config(), ...customConfig })
           .then((res) => res.data);
 
       case "POST":
         return await axios
-          .post(`${await baseUrl()}/${url}`, obj, {
+          .post(`${baseUrl}/${url}`, obj, {
             ...config(),
             ...customConfig,
           })
@@ -53,7 +44,7 @@ export async function api(
 
       case "PUT":
         return await axios
-          .put(`${await baseUrl()}/${url}`, obj, {
+          .put(`${baseUrl}/${url}`, obj, {
             ...config(),
             ...customConfig,
           })
@@ -61,7 +52,7 @@ export async function api(
 
       case "DELETE":
         return await axios
-          .delete(`${await baseUrl()}/${url}`, { ...config(), ...customConfig })
+          .delete(`${baseUrl}/${url}`, { ...config(), ...customConfig })
           .then((res) => res.data);
     }
   } catch (error: any) {
@@ -97,7 +88,7 @@ export default function useApi<ResponseBody>({
   customConfig,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
-
+  console.log(url);
   switch (method) {
     case "GET":
       // eslint-disable-next-line
