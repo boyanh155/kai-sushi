@@ -6,11 +6,13 @@ import { Delete, Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React from "react";
 import { isEmpty } from "lodash";
+import DeleteHeaderModal from "@/components/Admin/Menu/DeleteHeaderModal";
 
 type Props = {};
 
 const Menu = (props: Props) => {
   const menuData = useGetMenu("both");
+  const [deleteId, setDeleteId] = React.useState<string>("");
   return menuData && menuData?.isLoading ? (
     <Loading />
   ) : !isEmpty(menuData?.data) ? (
@@ -50,10 +52,10 @@ const Menu = (props: Props) => {
               </td>
 
               <td>
-                <IconButton>
+                <IconButton color="primary">
                   <Edit />
                 </IconButton>
-                <IconButton>
+                <IconButton color="error" onClick={() => setDeleteId(item._id)}>
                   <Delete />
                 </IconButton>
               </td>
@@ -61,6 +63,11 @@ const Menu = (props: Props) => {
           ))}
         </tbody>
       </table>
+      {/* Delete Modal */}
+      <DeleteHeaderModal
+        deleteId={deleteId}
+        handleClose={() => setDeleteId("")}
+      />
     </div>
   ) : (
     <div>No data</div>

@@ -2,7 +2,8 @@ import CreateButton from "@/components/Admin/Menu/CreateButton";
 import ApiProvider from "@/libs/ApiProvider";
 import { useLocale } from "next-intl";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from "../Loading";
 
 type Props = {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ const AdminLayout = ({ children }: Props) => {
     <html data-theme="winter">
       <body>
         <ApiProvider>
-          <div className=" flex flex-col w-full gap-2">
+          <div className=" flex flex-col w-full gap-2 ">
             {/* sidebar */}
             <div className="flex flex-row w-full  bg-white rounded-lg px-4 py-3">
               {SideBarData.map((v) => (
@@ -36,7 +37,9 @@ const AdminLayout = ({ children }: Props) => {
               ))}
             </div>
             {/* content */}
-            <div className="content-container">{children}</div>
+            <Suspense fallback={<Loading />}>
+              <div className="content-container py-10">{children}</div>
+            </Suspense>
           </div>
         </ApiProvider>
         <CreateButton />

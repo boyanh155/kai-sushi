@@ -7,7 +7,8 @@ import { useLocale, useTranslations } from "next-intl";
 import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-
+import { Gideon_Roman } from "next/font/google";
+import { gideon } from "@/libs/GoogleFont";
 
 type Props = {};
 
@@ -24,18 +25,20 @@ const HomeMain = (props: Props) => {
       <div className="w-[40%] max-h-[300px]">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
-      <h2 className="text-white uppercase text-3xl">{t("menu")}</h2>
+      <h2 className={`text-white uppercase text-3xl ${gideon.className}`}>
+        {t("menu")}
+      </h2>
       {/* Button group */}
       <div className="flex flex-col mt-16">
         <div
           onClick={() => moveToListMenu("food")}
-          className="font-light uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
+          className="active:bg-[#8C773E99] active:border-0 font-light uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
         >
           {t("food")}
         </div>
         <div
           onClick={() => moveToListMenu("beverage")}
-          className="font-light mt-2 uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
+          className="active:bg-[#8C773E99] active:border-0  font-light mt-2 uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
         >
           {t("beverage")}
         </div>

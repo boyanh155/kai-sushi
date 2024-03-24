@@ -12,6 +12,7 @@ import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
+import { gideon } from "@/libs/GoogleFont";
 type Props = {};
 
 const MenuMain = (props: Props) => {
@@ -37,7 +38,6 @@ const MenuMain = (props: Props) => {
     );
   }, [menuData, headerType]);
   const t = useTranslations("Home");
-  console.log(menuData);
   return api?.isLoading ? (
     <Loading />
   ) : menuData ? (
@@ -57,7 +57,9 @@ const MenuMain = (props: Props) => {
           >
             <CloseOutlined sx={{ fontSize: 20, fontWeight: 300 }} />
           </Link>
-          <p className=" ">{menuType === "food" ? t("food") : t("beverage")}</p>
+          <p className={`uppercase ${gideon.className}`}>
+            {menuType === "food" ? t("food") : t("beverage")}
+          </p>
         </div>
       </div>
       {/* NAV HEADER */}

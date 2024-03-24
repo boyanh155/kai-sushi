@@ -3,14 +3,12 @@ import { NavChild, NavChildType } from "../../../../types/NavbarType";
 import { Add } from "@mui/icons-material";
 import _ from "lodash";
 
-
 type Props = {
   changeHandler: (value: NavChild[]) => void;
 };
 
 const AddSubMenuData = ({ changeHandler }: Props) => {
-  const [children, setChildren] = useState<NavChild[]>([
-  ]);
+  const [children, setChildren] = useState<NavChild[]>([]);
 
   useEffect(() => {
     if (_.isEmpty(children)) return;
@@ -146,7 +144,7 @@ const AddSubMenuData = ({ changeHandler }: Props) => {
                     <label className="input input-bordered w-full flex items-center gap-2">
                       Price
                       <input
-                        type="text"
+                        type="number"
                         className="grow"
                         value={subChild.price}
                         onChange={(e) => {
