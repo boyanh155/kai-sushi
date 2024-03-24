@@ -44,10 +44,10 @@ export async function GET(request: NextRequest) {
       expires_in,
       refresh_token_expires_in,
     } = _res.data;
-    console.log(access_token);
-    console.log(refresh_token);
-    console.log(expires_in);
-    console.log(refresh_token_expires_in);
+    // console.log(access_token);
+    // console.log(refresh_token);
+    // console.log(expires_in);
+    // console.log(refresh_token_expires_in);
     return NextResponse.json({}, { status: 200 });
     // store db
   } catch (err: any) {

@@ -80,7 +80,9 @@ const FooterMain = (props: Props) => {
         {navData.map((navItem) => (
           <Link href={navItem.to} key={navItem.to} className="p-4">
             <div className="flex flex-col items-center gap-3">
-              {navItem.icon}
+              <div className="h-7 w-full flex justify-center items-center">
+                {navItem.icon}
+              </div>
               <p className="uppercase text-sm font-light golden-title">
                 {navItem.text}
               </p>

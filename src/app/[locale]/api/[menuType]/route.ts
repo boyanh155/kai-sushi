@@ -39,7 +39,6 @@ export async function GET(
       });
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
- 
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
@@ -96,34 +95,39 @@ export async function POST(
 
       const content = children?.reduce((acc: any, item: any) => {
         if (item.children) {
-          acc.push(...item.children);
+          acc.push(item.children);
         }
         return acc;
       }, []);
 
-      const contentIds: string[] = [];
+      const contentIds: string[][] = [];
       for (const item of content) {
-        if (isEmpty(item)) continue;
-        const _new = await menuChildModel.create({
-          title: item.title,
-          type: "content",
-          order: item.order,
-          description: item.description,
-          price: item.price,
-        });
-        contentIds.push(_new?.id);
+        const _jtemBuff: string[] = [];
+        for (const _jtem of item) {
+          if (isEmpty(_jtem)) continue;
+          const _new = await menuChildModel.create({
+            title: _jtem.title,
+            type: "content",
+            order: _jtem.order,
+            description: _jtem.description,
+            price: _jtem.price,
+          });
+          _jtemBuff.push(_new?.id);
+        }
+        if (!isEmpty(_jtemBuff)) contentIds.push(_jtemBuff);
       }
       // body
 
       const _body = [...children];
 
-      for (const item of _body) {
+      for (const _id in _body) {
+        const item = _body[_id];
         if (isEmpty(item)) continue;
         const _new = await menuChildModel.create({
           title: item.title,
           type: "body",
           order: item.order,
-          children: contentIds,
+          children: contentIds[_id],
         });
         bodyIds.push(_new?.id);
       }
