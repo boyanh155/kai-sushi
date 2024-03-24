@@ -4,19 +4,16 @@ import Loading from "@/components/shared/Loading";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { Delete, Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import React, { useEffect } from "react";
-import { menuData } from "../../components/Menu/dummy/menu";
+import React from "react";
+import { isEmpty } from "lodash";
 
 type Props = {};
 
 const Menu = (props: Props) => {
   const menuData = useGetMenu("both");
-  useEffect(() => {
-    console.log(menuData?.data);
-  }, [menuData?.isPending]);
-  return menuData?.isLoading ? (
+  return menuData && menuData?.isLoading ? (
     <Loading />
-  ) : menuData?.data?.length > 0 ? (
+  ) : !isEmpty(menuData?.data) ? (
     <div className="overflow-x-auto w-full flex justify-between rounded-sm text-black bg-white">
       <table className="table flex-grow">
         <thead>

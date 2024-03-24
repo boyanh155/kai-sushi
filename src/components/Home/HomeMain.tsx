@@ -8,7 +8,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
-// import { beverageData, menuData } from "../Menu/dummy/menu";
+
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 
 type Props = {};
