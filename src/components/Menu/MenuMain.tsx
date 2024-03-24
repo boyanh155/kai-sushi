@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Close, CloseOutlined } from "@mui/icons-material";
+import { CloseOutlined } from "@mui/icons-material";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
-import { NavChild } from "../../../types/NavbarType";
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
+import Loading from "../shared/Loading";
 type Props = {};
 
 const MenuMain = (props: Props) => {
@@ -22,7 +22,6 @@ const MenuMain = (props: Props) => {
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const api = useGetMenu(menuType);
-  console.log(menuType);
   useEffect(() => {
     if (isEmpty(api?.data)) return;
     setMenuData(api?.data!);
@@ -38,8 +37,9 @@ const MenuMain = (props: Props) => {
   }, [menuData, headerType]);
   const t = useTranslations("Home");
 
-
-  return (
+  return api?.isLoading ? (
+    <Loading />
+  ) : menuData ? (
     <div className=" flex flex-col overflow-x-hidden">
       {/* IMAGE  */}
       <div
@@ -75,6 +75,8 @@ const MenuMain = (props: Props) => {
         ))}
       </div>
     </div>
+  ) : (
+    <div>No data</div>
   );
 };
 

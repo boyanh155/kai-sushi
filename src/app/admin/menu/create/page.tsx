@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import {
@@ -13,6 +13,7 @@ import AddSubMenuData from "@/components/Admin/Menu/AddSubMenuData";
 import { NavChild } from "../../../../../types/NavbarType";
 import { usePostMenu } from "@/hooks/api/useMenuApi";
 import useApi from "@/hooks/api/useApi";
+import Loading from "@/components/shared/Loading";
 
 type Props = {};
 
@@ -62,8 +63,30 @@ const CreateMenu = (props: Props) => {
     },
   });
 
-  return (
+  return apiPost.post?.isPending ? (
+    <Loading />
+  ) : (
     <div className="flex flex-col text-black py-6 gap-2 px-4 bg-green-300 my-4 rounded-md">
+      {apiPost.post?.isSuccess ? (
+        <div role="alert" className="alert alert-success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>Success!</span>
+        </div>
+      ) : (
+        <></>
+      )}
       {/* TITLE */}
       <label
         className={`input input-bordered flex items-center gap-2 w-full ${
