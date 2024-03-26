@@ -11,5 +11,17 @@
         "booking": "booking",
         "takeaway": "takeaway",
         "menu": "menu"
+    },
+    "Booking":{
+        "booking": "booking",
+        "adult": "adult",
+        "date": "date",
+        "time": "time",
+        "next": "next",
+        "people": "people",
+        "fullname": "fullname",
+        "phone": "phone",
+        "is_sms_notify":"notify me by SMS",
+        "complete": "complete"
     }
 }
