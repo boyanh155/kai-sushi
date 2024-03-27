@@ -38,11 +38,35 @@ body {
 }
 
 /* layer */
-
 @layer components {
   .golden-title {
     @apply bg-gradient-to-t from-[#8C773E] to-[#D7CEB8];
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  /* INPUT FLOAT */
+  .input-float {
+    @apply relative;
+    & > label {
+      @apply transition-all duration-300 absolute font-light text-[#FEFEFE]  text-base left-5 top-3  w-12 py-0 px-1 bg-[#0E0E10];
+      & > p {
+        @apply text-[#E42020] inline ms-1 font-light text-xs;
+      }
+    }
+    & > input {
+      @apply w-full outline-none bg-[#0E0E10] text-base border-[0.4px] rounded-sm text-[#959595] font-light border-[#515151] ps-9 py-4 pe-4;
+      &:focus {
+        @apply border-golden;
+        + label {
+          @apply text-xs -top-3 left-5 transition-all duration-300;
+        }
+        &::placeholder {
+          @apply text-[#959595];
+        }
+      }
+      &::placeholder {
+        @apply text-transparent  text-base font-light transition-all duration-300;
+      }
+    }
   }
 }
