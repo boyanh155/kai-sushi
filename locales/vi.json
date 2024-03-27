@@ -11,6 +11,17 @@
         "booking": "đặt bàn",
         "takeaway": "mang về",
         "menu": "thực đơn"
-
+    },
+    "Booking": {
+        "booking": "đặt chỗ",
+        "adult": "người lớn",
+        "date": "ngày",
+        "time": "giờ",
+        "next": "tiếp theo",
+        "people": "Số lượng",
+        "fullname": "họ và tên",
+        "phone": "số điện thoại",
+        "is_sms_notify": "thông báo cho tôi qua SMS",
+        "complete": "hoàn tất"
     }
 }

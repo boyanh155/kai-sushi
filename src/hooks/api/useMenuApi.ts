@@ -22,7 +22,7 @@ export const usePostMenu = (input?: {
   const { post } = useApi<MenuDataResponseBody>({
     key: ["menu"],
     method: "POST",
-    url: `/menu/${input?.type || "food"}`,
+    url: `menu/${input?.type || "food"}`,
   });
   if (_.isEmpty(input?.bodyData)) return;
   post?.mutateAsync(input?.bodyData);
@@ -33,7 +33,7 @@ export const usePutMenu = (bodyData: MenuDataRequestBody) => {
   const { put } = useApi<MenuDataResponseBody>({
     key: ["menu"],
     method: "PUT",
-    url: "/menu",
+    url: "menu",
   });
   put?.mutateAsync(bodyData);
   return put;
