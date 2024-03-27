@@ -19,16 +19,18 @@ export async function GET(request: NextRequest) {
   console.log(query);
   try {
     const code = query.get("code");
+    const oa_id = query.get("oa_id");
     if (!code) {
       throw new Error("Missing code");
     }
 
     // get zalo access token
     const _res = await axios.post<ZaloAccessTokenResponse>(
-      `https://oauth.zaloapp.com/v4/access_token `,
+      `https://oauth.zaloapp.com/v4/oa/access_token`,
       {
         app_id: process.env.ZALO_APP_ID,
-        code: code,
+        code,
+        oa_id,
         grant_type: "authorization_code",
       },
       {
@@ -44,7 +46,7 @@ export async function GET(request: NextRequest) {
       expires_in,
       refresh_token_expires_in,
     } = _res.data;
-    // console.log(access_token);
+    console.log(access_token);
     // console.log(refresh_token);
     // console.log(expires_in);
     // console.log(refresh_token_expires_in);
@@ -55,14 +57,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-//     const data = await zaloAuthModel.findOne({ code });
-//     if (!data) {
-//       throw new Error("Invalid code");
-//     }
-//     return NextResponse.redirect(
-//       `${process.env.NEXT_PUBLIC_WEB_URL}/auth/zalo?access_token=${data.access_token}`
-//     );
-//   } catch (error: any) {
-//     console.log(error);
-//     return NextResponse.json({ message: error.message }, { status: 500 });
-//   }
+export async function POST(request: NextRequest) {
+  return new NextResponse("", { status: 200 });
+}
