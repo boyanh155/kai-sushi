@@ -1,42 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (request: NextRequest, params: any) => {
+export const GET = async (req: NextRequest) => {
   try {
-    const query = request.nextUrl.searchParams;
+    const query = req.nextUrl.searchParams;
+
     const mode = query.get("hub.mode");
     const token = query.get("hub.verify_token");
     const challenge = query.get("hub.challenge");
 
-    if (mode === "subscribe" && token === process.env.FB_VERIFY_TOKEN) {
-      console.log("WEBHOOK_VERIFIED");
+    if (mode === "subscribe" && token === process.env.FB_VERIFY_CODE) {
       return new NextResponse(challenge, { status: 200 });
     } else {
-      throw { status: 403 };
+      return new NextResponse(null, { status: 404 });
     }
   } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+    return new NextResponse(null, err.status || 500);
   }
 };
 
-export const POST = async (request: Request, params: any) => {
+export const POST = async (req: Request) => {
   try {
-    const body = await request.json();
-    console.log(body);
-
+    const body = await req.json();
     if (body.object === "page") {
-      // Returns a '200 OK' response to all requests
-      console.log(body);
-      console.log(body.entry[0].messaging);
-      return NextResponse.json("EVENT_RECEIVED", { status: 200 });
+      return new NextResponse("EVENT_RECEIVED", { status: 200 });
     } else {
-      // Return a '404 Not Found' if event is not from a page subscription
-      throw { status: 404 };
+      return new NextResponse(null, { status: 404 });
     }
   } catch (err: any) {
-    console.log(err);
-    return NextResponse.json(
-      { message: err.message || err.stack },
-      { status: err.status || 500 }
-    );
+    return new NextResponse(null, err.status || 500);
   }
 };
