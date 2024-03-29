@@ -22,6 +22,7 @@ const OrderInfoPage = (props: Props) => {
   const bookingState = useBookingStore(selectBookingState);
   const _setBookingState = useBookingStore(setBookingState);
   const selectedE = useRef<HTMLLIElement>(null);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const t = useTranslations("Booking");
   const _now = moment();
@@ -37,7 +38,12 @@ const OrderInfoPage = (props: Props) => {
     : "16:00";
   // save time
   const [selectedTime, setSelectedTime] = useState(minTime);
-
+  // submit form
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    if (isInvalid) return;
+    router.push("user-info");
+  };
   const handleInput = (
     e: any,
     customName?: keyof IBookingClient,
@@ -87,7 +93,7 @@ const OrderInfoPage = (props: Props) => {
         </h2>
       </div>
       {/* INPUT BOX */}
-      <form className=" flex flex-col justify-center">
+      <form className=" flex flex-col justify-center" id="form-order">
         {/* AMOUNT SELECTION */}
         <div className="dropdown select-float w-full ">
           <div
@@ -169,8 +175,18 @@ const OrderInfoPage = (props: Props) => {
             id="timeInput"
             value={selectedTime}
             className={(selectedTime ? "filled" : "") + " !text-white"}
-            onChange={(e) => setSelectedTime(e.target.value)}
-            step={15 * 60}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value < minTime || value > maxTime) {
+                setIsInvalid(true);
+                e.target.classList.add("input-error");
+              } else {
+                setIsInvalid(false);
+
+                e.target.classList.remove("input-error");
+              }
+              setSelectedTime(value);
+            }}
             min={minTime}
             max={maxTime}
           />
@@ -202,10 +218,9 @@ const OrderInfoPage = (props: Props) => {
         {/* NEXT BUTTON */}
         <div className="w-full flex justify-end hover:opacity-60 transition-all mt-4">
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("user-info");
-            }}
+            onClick={handleSubmitForm}
+            type="submit"
+            form="form-order"
             className="p-4 font-light text-base text-center transition-all"
           >
             {t("next")}

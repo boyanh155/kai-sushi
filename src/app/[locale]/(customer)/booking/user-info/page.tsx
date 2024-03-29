@@ -5,12 +5,13 @@ import useBookingStore, {
   selectBookingState,
   setBookingState,
 } from "@/stores/useBookingStore";
-import { isEmpty, isNumber } from "lodash";
+import { isEmpty, isFinite } from "lodash";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useApi from "@/hooks/api/useApi";
 
 type Props = {};
 
@@ -19,6 +20,12 @@ const UserInfoPage = (props: Props) => {
   const t = useTranslations("Booking");
   const bookingState = useBookingStore(selectBookingState);
   const _setBookingState = useBookingStore(setBookingState);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const api = useApi({
+    key: ["booking"],
+    method: "POST",
+    url: "booking",
+  }).post;
 
   const handleInput = (
     e: any,
@@ -35,16 +42,20 @@ const UserInfoPage = (props: Props) => {
   };
   const submitForm = (e) => {
     e.preventDefault();
-
+    setIsSubmit(true);
     const form = e.target as HTMLFormElement;
     if (form.checkValidity()) {
-      // handle submit
-      console.log(bookingState)
-      router.push("success");
+      // handle booking api
+      api?.mutateAsync(bookingState);
+      console.log(api?.isSuccess);
+      // router.push("success");
     } else {
-      form.reportValidity(); 
+      form.reportValidity();
     }
   };
+  useEffect(() => {
+    console.log(api?.isSuccess);
+  }, [api?.isSuccess]);
   return (
     <>
       <Link href="order-info" className="flex absolute top-16 left-8">
@@ -66,13 +77,16 @@ const UserInfoPage = (props: Props) => {
             id="name"
             type="text"
             name="name"
+            required
             onChange={handleInput}
             value={bookingState.name}
-            className={`${isEmpty(bookingState.name) ? "" : "filled"}`}
+            className={`${isEmpty(bookingState.name) ? "" : "filled"} ${
+              isSubmit && isEmpty(bookingState.name) ? "input-error" : ""
+            }`}
             placeholder="Enter your name"
           />{" "}
-          <label htmlFor="name" id="labelName">
-            Name
+          <label htmlFor="name" className="capitalize" id="labelName">
+            {t("fullname")}
             <p>*</p>
           </label>
         </div>
@@ -87,8 +101,8 @@ const UserInfoPage = (props: Props) => {
             className={`${isEmpty(bookingState.email) ? "" : "filled"}`}
             placeholder="Enter your email"
           />{" "}
-          <label htmlFor="name" id="labelName">
-            Email
+          <label htmlFor="email" className="capitalize">
+            {t("email")}
           </label>
         </div>
         {/* Phone */}
@@ -96,14 +110,25 @@ const UserInfoPage = (props: Props) => {
           <input
             id="phone"
             name="phone"
+            required
             type="text"
-            onChange={handleInput}
+            onChange={(e) => {
+              console.log(e.target.value);
+              if (!isFinite(Number(e.target.value))) {
+                e.target.classList.add("input-error");
+                return;
+              }
+              e.target.classList.remove("input-error");
+              handleInput(e);
+            }}
             value={bookingState.phone}
-            className={`${isEmpty(bookingState.phone) ? "" : "filled"}`}
+            className={`${isEmpty(bookingState.phone) ? "" : "filled"} ${
+              isSubmit && isEmpty(bookingState.phone) ? "input-error" : ""
+            }`}
             placeholder="+84"
           />{" "}
-          <label htmlFor="name" id="labelName">
-            Phone
+          <label htmlFor="phone" className="capitalize">
+            {t("phone")}
             <p>*</p>
           </label>
         </div>
@@ -113,7 +138,13 @@ const UserInfoPage = (props: Props) => {
             id="isNotify"
             name="isNotify"
             type="checkbox"
-            defaultChecked
+            checked={bookingState.isNotify}
+            onChange={(e) => {
+              _setBookingState({
+                ...bookingState,
+                isNotify: e.target.checked,
+              });
+            }}
             className="checkbox w-3 h-3 border-white [--chkbg:theme(colors.indigo.600)]  border-[0.4px] rounded-sm"
           />
           <label htmlFor="isNotify" className=" ms-2  font-light text-sm">

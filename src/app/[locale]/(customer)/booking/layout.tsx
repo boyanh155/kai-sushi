@@ -1,4 +1,3 @@
-
 import React from "react";
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
 
 const BookingLayout = ({ children }: Props) => {
   return (
-    <div className=" flex flex-col relative content-container items-center px-7">
+    <div className=" flex flex-col relative content-container items-center px-7 overflow-hidden">
       {children}
     </div>
   );

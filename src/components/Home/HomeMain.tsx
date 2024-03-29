@@ -20,7 +20,7 @@ const HomeMain = (props: Props) => {
     router.push(locale + "/" + type);
   };
   return (
-    <div className="flex flex-col content-container items-center pt-14">
+    <div className="flex flex-col content-container items-center pt-14 pb-72">
       {/* Center logo */}
       <div className="w-[40%] max-h-[300px]">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />

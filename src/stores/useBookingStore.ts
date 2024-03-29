@@ -15,7 +15,7 @@ const intialState: Pick<BookingStore, keyof BookingState> = {
     name: "",
     phone: "",
     email: "",
-    isNotify: false,
+    isNotify: true,
     note: "",
   },
 };

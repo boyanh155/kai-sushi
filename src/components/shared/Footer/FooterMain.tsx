@@ -77,7 +77,7 @@ const navData = [
 const FooterMain = (props: Props) => {
   const locale = useLocale();
   return (
-    <div className=" fixed z-50 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-screen">
+    <div className=" sticky z-50 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-screen">
       <div className=" flex flex-row justify-between content-container px-7 py-1 ">
         {navData.map((navItem) => (
           <Link

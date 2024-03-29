@@ -42,7 +42,7 @@ body {
 
 @layer utilities {
   .input-golden {
-    @apply w-full outline-none bg-[#0E0E10] text-base border-[0.4px] rounded-sm text-[#959595] font-light border-[#515151] ps-9 py-4 pe-4;
+    @apply w-full outline-none bg-[#0E0E10] text-base border-[0.4px] rounded-sm text-[#959595] font-light border-[#515151] ps-9 py-4 pe-4 text-white;
     &:focus,
     &:hover {
       @apply border-golden bg-[#0E0E10];
@@ -66,7 +66,7 @@ body {
   .input-float {
     @apply relative;
     & > label {
-      @apply float-label  left-5 top-3  w-12;
+      @apply float-label  left-5 top-3;
       & > p {
         @apply text-[#E42020] inline ms-1 font-light text-xs;
       }
@@ -74,9 +74,16 @@ body {
     & > input,
     & > textarea {
       @apply input-golden;
+      &.input-error {
+        border: 1px solid #e42020 !important;
+      }
       &::-webkit-calendar-picker-indicator {
         filter: brightness(0) saturate(100%) invert(49%) sepia(13%)
           saturate(1450%) hue-rotate(6deg) brightness(92%) contrast(92%);
+      }
+      &::-webkit-datetime-edit-year-field,
+      &::-webkit-datetime-edit-ampm-field {
+        color: white;
       }
       &::-webkit-datetime-edit {
         @apply text-white;

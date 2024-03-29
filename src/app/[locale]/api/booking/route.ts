@@ -6,6 +6,7 @@ export const POST = async (req: NextRequest) => {
   try {
     const body: IBooking = await req.json();
     const { amount, bookDate, name, phone, isNotify } = body;
+    console.log({ amount, bookDate, name, phone, isNotify });
     if (!amount || !moment.isDate(bookDate) || !name || !phone || !isNotify)
       return new NextResponse("Bad request", { status: 400 });
     if (moment(bookDate).add(30, "seconds").isBefore(moment())) {
