@@ -14,14 +14,20 @@
     },
     "Booking": {
         "booking": "đặt chỗ",
-        "adult": "người lớn",
+        "adult": "Người lớn",
+        "peopleLabel": "người",
         "date": "ngày",
         "time": "giờ",
-        "next": "tiếp theo",
+        "next": "Tiếp tục",
         "people": "Số lượng",
         "fullname": "họ và tên",
         "phone": "số điện thoại",
         "is_sms_notify": "thông báo cho tôi qua SMS",
-        "complete": "hoàn tất"
+        "complete": "hoàn tất",
+        "other": "khác",
+        "enter_number": "Nhập số",
+        "label_time": "giờ",
+        "label_date": "ngày",
+        "note": "Ghi chú"
     }
 }

@@ -1,7 +1,8 @@
 import { model, models, Schema } from "mongoose";
-import { IBooking } from "./IBooking";
+import { IBookingDocument } from "./IBooking";
+import { EBookingState } from "../../types/Booking";
 
-const booking = new Schema<IBooking>(
+const booking = new Schema<IBookingDocument>(
   {
     amount: {
       type: Number,
@@ -34,8 +35,8 @@ const booking = new Schema<IBooking>(
     },
     state: {
       type: String,
-      enum: ["available", "expired", "pending"],
-      default: "pending",
+      enum: Object.values(EBookingState),
+      default: EBookingState.PENDING,
     },
   },
   {
@@ -50,6 +51,7 @@ booking.pre("save", function (next) {
   next();
 });
 
-const bookingModel = models.Booking || model<IBooking>("Booking", booking);
+const bookingModel =
+  models.Booking || model<IBookingDocument>("Booking", booking);
 
 export default bookingModel;

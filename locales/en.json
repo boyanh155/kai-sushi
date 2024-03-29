@@ -12,16 +12,22 @@
         "takeaway": "takeaway",
         "menu": "menu"
     },
-    "Booking":{
+    "Booking": {
         "booking": "booking",
-        "adult": "adult",
+        "adult": "Adult",
+        "peopleLabel": "people",
         "date": "date",
         "time": "time",
-        "next": "next",
+        "next": "Continue",
         "people": "people",
         "fullname": "fullname",
         "phone": "phone",
-        "is_sms_notify":"notify me by SMS",
-        "complete": "complete"
+        "is_sms_notify": "notify me by SMS",
+        "complete": "complete",
+        "other": "other",
+        "enter_number": "enter number",
+        "label_time": "time",
+        "label_date": "date",
+        "note": "note"
     }
 }
