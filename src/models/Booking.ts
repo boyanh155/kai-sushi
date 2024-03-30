@@ -1,6 +1,7 @@
 import { model, models, Schema } from "mongoose";
 import { IBookingDocument } from "./IBooking";
 import { EBookingState } from "../../types/Booking";
+import moment from "moment";
 
 const booking = new Schema<IBookingDocument>(
   {
@@ -44,12 +45,15 @@ const booking = new Schema<IBookingDocument>(
   }
 );
 
-booking.pre("save", function (next) {
-  if (!this.expiredDate) {
-    this.expiredDate = new Date(this.bookDate.getTime() + 30 * 60 * 1000);
-  }
-  next();
-});
+// booking.pre("save", function (next) {
+//   // console.log(moment(this.bookDate).toDate());
+//   // if (!this.expiredDate) {
+//   //   this.expiredDate = new Date(
+//   //     moment(this.bookDate).toDate().getTime() + 30 * 60 * 1000
+//   //   );
+//   // }
+//   next();
+// });
 
 const bookingModel =
   models.Booking || model<IBookingDocument>("Booking", booking);

@@ -1,19 +1,68 @@
 import { NextRequest, NextResponse } from "next/server";
 import moment from "moment";
 import { IBooking } from "../../../../../types/Booking";
+import { formatLocaleDate, formatLocaleDateString } from "@/libs/format";
+import a from "./dummy.json";
+import { sendMessageToManyRecipients } from "@/services/meta";
+import bookingModel from "@/models/Booking";
+import connectDB from "@/libs/connectDb";
 
 export const POST = async (req: NextRequest) => {
+  await connectDB();
   try {
     const body: IBooking = await req.json();
-    const { amount, bookDate, name, phone, isNotify } = body;
-    console.log({ amount, bookDate, name, phone, isNotify });
-    if (!amount || !moment.isDate(bookDate) || !name || !phone || !isNotify)
-      return new NextResponse("Bad request", { status: 400 });
-    if (moment(bookDate).add(30, "seconds").isBefore(moment())) {
-      return new NextResponse("Invalid dat e", { status: 400 });
-    }
-    const _time = moment(bookDate).toISOString();
+    console.log("HI");
+    const { amount, bookDate, name, phone, isNotify, email, note } = body;
+
+    //  // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
+    const _date = formatLocaleDateString(bookDate);
+
+    if (
+      !amount ||
+      !moment.isMoment(moment(_date, formatLocaleDate)) ||
+      !name ||
+      !phone
+    )
+      throw {
+        status: 400,
+        message: "Missing information",
+      };
+
+    if (moment(_date).add(30, "seconds").isBefore(moment()))
+      throw {
+        status: 400,
+        message: "Invalid date",
+      };
+
+    //  new booking
+    const newBooking = await bookingModel.create({
+      name,
+      amount,
+      phone,
+      bookDate: moment(_date).toDate(),
+      isNotify,
+      email,
+      note,
+    });
+    console.log(newBooking);
+    await newBooking.save();
+    await sendMessageToManyRecipients(a.recipientId, a.text, {
+      orderID: newBooking._id,
+      "user-name": newBooking.name,
+      amount: newBooking.amount,
+      "time-of-booking": moment(newBooking.bookDate).format("LT"),
+      "date-of-booking": moment(newBooking.bookDate).format("LL"),
+      "user-note": newBooking.note ?? "",
+      "booking-url": `https://kai-sushi.vercel.app/vi/booking/success/${newBooking._id}`,
+      "user-phone": newBooking.phone,
+    });
+
+    return new NextResponse(
+      `https://kai-sushi.vercel.app/vi/booking/success/${newBooking._id}`,
+      { status: 200 }
+    );
   } catch (err: any) {
+    console.log(err.stack);
     return new NextResponse(err.message || err.stack, {
       status: err.status || 500,
     });

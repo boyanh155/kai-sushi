@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {
+    orderId:string
+}
 
-const SuccessPage = (props: Props) => {
-  return <div>page</div>;
+const Success = ({ orderId }: Props) => {
+  return <div>{orderId}123444</div>;
 };
 
-export default SuccessPage;
+export default Success

@@ -5,13 +5,14 @@ import useBookingStore, {
   selectBookingState,
   setBookingState,
 } from "@/stores/useBookingStore";
-import { isEmpty, isFinite } from "lodash";
+import { isEmpty, isError, isFinite } from "lodash";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useApi from "@/hooks/api/useApi";
+import Loading from "@/components/shared/Loading";
 
 type Props = {};
 
@@ -48,15 +49,27 @@ const UserInfoPage = (props: Props) => {
       // handle booking api
       api?.mutateAsync(bookingState);
       console.log(api?.isSuccess);
+      console.log(api?.isError);
       // router.push("success");
     } else {
       form.reportValidity();
     }
   };
   useEffect(() => {
-    console.log(api?.isSuccess);
+    console.log(!api?.isSuccess || isEmpty(api?.data));
+    console.log(api?.data);
+    if (!api?.isSuccess || isEmpty(api?.data)) return;
+    router.replace(api.data);
   }, [api?.isSuccess]);
-  return (
+  useEffect(() => {
+    console.log(api?.error);
+    console.log(api?.isError);
+    if (api?.isError) {
+    }
+  }, [api?.isError]);
+  return api?.isPending ? (
+    <Loading />
+  ) : (
     <>
       <Link href="order-info" className="flex absolute top-16 left-8">
         <BackwardButton />
