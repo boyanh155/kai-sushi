@@ -13,6 +13,9 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "vi" }];
+}
 export default function LocaleLayout({
   children,
   params: { locale },

@@ -14,7 +14,8 @@ export interface IBooking {
   isNotify: boolean;
   expiredDate: Date;
   state: EBookingState;
+  qrcode?:string;
 }
 
 export interface IBookingClient
-  extends Omit<IBooking, "expiredDate" | "state" | "expiredDate"> {}
+  extends Omit<IBooking, "expiredDate" | "state" > {}

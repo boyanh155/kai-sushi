@@ -29,6 +29,9 @@
         "enter_number": "enter number",
         "label_time": "time",
         "label_date": "date",
-        "note": "note"
+        "note": "note",
+        "success_message": "Your booking has been successfully submitted.",
+        "scan_qr": "Scan QR code to access order information",
+        "or": "or"
     }
 }

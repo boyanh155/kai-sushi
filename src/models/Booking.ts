@@ -39,6 +39,9 @@ const booking = new Schema<IBookingDocument>(
       enum: Object.values(EBookingState),
       default: EBookingState.PENDING,
     },
+    qrcode: {
+      type: String,
+    },
   },
   {
     timestamps: true,

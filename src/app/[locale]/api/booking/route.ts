@@ -6,6 +6,9 @@ import a from "./dummy.json";
 import { sendMessageToManyRecipients } from "@/services/meta";
 import bookingModel from "@/models/Booking";
 import connectDB from "@/libs/connectDb";
+import { generateQRCodeWithLogo } from "@/libs/qrcode";
+import path from "path";
+import fs from "fs";
 
 export const POST = async (req: NextRequest) => {
   await connectDB();
@@ -33,7 +36,6 @@ export const POST = async (req: NextRequest) => {
         status: 400,
         message: "Invalid date",
       };
-
     //  new booking
     const newBooking = await bookingModel.create({
       name,
@@ -44,7 +46,16 @@ export const POST = async (req: NextRequest) => {
       email,
       note,
     });
-    console.log(newBooking);
+
+    const bookingUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/booking/success?orderId=${newBooking._id}`;
+    const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
+    await generateQRCodeWithLogo(
+      bookingUrl,
+      `./public/qrcode-booking/qr_${newBooking._id}.png`
+    );
+    const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
+    newBooking.qrcode = _url.href;
+
     await newBooking.save();
     await sendMessageToManyRecipients(a.recipientId, a.text, {
       orderID: newBooking._id,
@@ -53,14 +64,11 @@ export const POST = async (req: NextRequest) => {
       "time-of-booking": moment(newBooking.bookDate).format("LT"),
       "date-of-booking": moment(newBooking.bookDate).format("LL"),
       "user-note": newBooking.note ?? "",
-      "booking-url": `https://kai-sushi.vercel.app/vi/booking/success/${newBooking._id}`,
+      "booking-url": bookingUrl,
       "user-phone": newBooking.phone,
     });
 
-    return new NextResponse(
-      `https://kai-sushi.vercel.app/vi/booking/success/${newBooking._id}`,
-      { status: 200 }
-    );
+    return new NextResponse(bookingUrl, { status: 200 });
   } catch (err: any) {
     console.log(err.stack);
     return new NextResponse(err.message || err.stack, {

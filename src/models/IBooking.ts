@@ -11,4 +11,5 @@ export interface IBookingDocument extends Document<IBooking> {
   note?: boolean;
   expiredDate: Date;
   state: EBookingState;
+  qrcode?:string;
 }

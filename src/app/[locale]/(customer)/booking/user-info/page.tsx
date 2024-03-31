@@ -56,17 +56,10 @@ const UserInfoPage = (props: Props) => {
     }
   };
   useEffect(() => {
-    console.log(!api?.isSuccess || isEmpty(api?.data));
-    console.log(api?.data);
     if (!api?.isSuccess || isEmpty(api?.data)) return;
     router.replace(api.data);
   }, [api?.isSuccess]);
-  useEffect(() => {
-    console.log(api?.error);
-    console.log(api?.isError);
-    if (api?.isError) {
-    }
-  }, [api?.isError]);
+
   return api?.isPending ? (
     <Loading />
   ) : (

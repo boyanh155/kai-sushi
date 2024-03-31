@@ -29,6 +29,9 @@
         "enter_number": "Nhập số",
         "label_time": "giờ",
         "label_date": "ngày",
-        "note": "Ghi chú"
+        "note": "Ghi chú",
+        "success_message": "Bạn đã đặt bàn thành công!",
+        "scan_qr": "Quét mã QR để truy cập thông tin đặt hàng",
+        "or": "hoặc"
     }
 }
