@@ -25,6 +25,6 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ result }, { status: 200 });
   } catch (err: any) {
-    return new NextResponse(err.message || err.stack, err.status || 500);
+    return new NextResponse(err.message || err.stack, { status: 500 });
   }
 };
