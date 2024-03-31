@@ -3,16 +3,15 @@ import path from "path";
 import QRCode from "qrcode";
 import fs from "fs";
 
-
 export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   // Generate QR code
-console.log(outputPath)
+  console.log(outputPath);
   const qrCodeImage = await QRCode.toBuffer(text, { type: "png" });
- 
+
   // Read the QR code and the logo
   const [qr, logo] = await Promise.all([
     Jimp.read(qrCodeImage),
-    Jimp.read("./public/logo.png"),
+    Jimp.read(new URL("logo.png", process.env.NEXT_PUBLIC_API_URL!).href!),
   ]);
 
   // Resize the logo
@@ -30,4 +29,3 @@ console.log(outputPath)
   // Save the final image
   await qr.writeAsync(outputPath);
 }
-

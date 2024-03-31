@@ -6,8 +6,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
-import Image from "next/image";
-import path from "path";
+
 
 type Props = {
   searchParams: {
