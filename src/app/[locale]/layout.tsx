@@ -23,6 +23,7 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const messages = useMessages();
   return (
     <html lang={locale} data-theme="winter">
