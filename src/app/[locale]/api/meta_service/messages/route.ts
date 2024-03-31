@@ -13,7 +13,7 @@ export const POST = async (req: NextRequest) => {
     }: { recipientId: string[]; text: string; vars: Record<string, string> } =
       body;
     if (!recipientId || !text) {
-      return { status: 400, message: "Bad Request" };
+      throw { status: 400, message: "Bad Request" };
     }
     let _text = text;
     if (vars) {
