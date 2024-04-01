@@ -21,10 +21,10 @@ input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
   display: block;
-  /* -webkit-appearance: textfield; */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  /* -moz-appearance: textfield; */
+  -webkit-appearance: textfield;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
+  -moz-appearance: textfield;
   min-height: 1.2em;
   min-width:95%
 }
