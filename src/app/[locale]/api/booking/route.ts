@@ -47,14 +47,14 @@ export const POST = async (req: NextRequest) => {
       note,
     });
 
-    const bookingUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/booking/success?orderId=${newBooking._id}`;
+    const bookingUrl = `${process.env.NEXT_PUBLIC_API_URL}/booking/success?orderId=${newBooking._id}`;
     const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
     console.log("sd");
     console.log(outputQr);
-    const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
-    console.log(_url.href);
-    await generateQRCodeWithLogo(bookingUrl, outputQr);
-    newBooking.qrcode = _url.href;
+    // const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
+  
+    const _url = await generateQRCodeWithLogo(bookingUrl, newBooking);
+    newBooking.qrcode = _url;
 
     await newBooking.save();
     await sendMessageToManyRecipients(a.recipientId, a.text, {

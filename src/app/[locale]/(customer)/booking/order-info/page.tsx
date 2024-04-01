@@ -107,9 +107,9 @@ const OrderInfoPage = (props: Props) => {
               });
             }}
           >
-            <div className="float-label text-nowrap -top-3.5 left-2">
+            <label className="float-label text-nowrap -top-3.5 left-2">
               {t("adult")}
-            </div>
+            </label>
             <p className="uppercase text-white">
               {
                 optionsAmount.find(
@@ -211,7 +211,7 @@ const OrderInfoPage = (props: Props) => {
             } !text-white resize-none`}
             placeholder="Enter your note"
           ></textarea>
-          <label htmlFor="note" id="labelNote" className="!w-14 text-nowrap">
+          <label htmlFor="note" id="labelNote" className="!w-14 text-nowrap capitalize">
             {t("note")}
           </label>
         </div>

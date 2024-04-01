@@ -5,6 +5,7 @@ export enum EBookingState {
   CANCELLED = "cancelled",
 }
 export interface IBooking {
+  _id: string;
   amount: number;
   bookDate: Date;
   name: string;
@@ -14,8 +15,8 @@ export interface IBooking {
   isNotify: boolean;
   expiredDate: Date;
   state: EBookingState;
-  qrcode?:string;
+  qrcode?: string;
 }
 
 export interface IBookingClient
-  extends Omit<IBooking, "expiredDate" | "state" > {}
+  extends Omit<IBooking, "expiredDate" | "state"> {}

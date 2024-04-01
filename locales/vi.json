@@ -32,6 +32,9 @@
         "note": "Ghi chú",
         "success_message": "Bạn đã đặt bàn thành công!",
         "scan_qr": "Quét mã QR để truy cập thông tin đặt hàng",
-        "or": "hoặc"
+        "or": "hoặc",
+        "thanks": "KAI rất hân hạnh được phục vụ quý khách.",
+        "booking_cancel": "Hủy bàn",
+        "menu_check": "xem menu tại đây"
     }
 }

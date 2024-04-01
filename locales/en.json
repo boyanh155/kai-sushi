@@ -32,6 +32,9 @@
         "note": "note",
         "success_message": "Your booking has been successfully submitted.",
         "scan_qr": "Scan QR code to access order information",
-        "or": "or"
+        "or": "or",
+        "thanks": "KAI is very honored to serve you.",
+        "booking_cancel": "Cancel",
+        "menu_check": "view the menu here"
     }
 }
