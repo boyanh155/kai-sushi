@@ -12,6 +12,7 @@ export const config = {
   // Match only internationalized pathnames
   matcher: [
     "/",
+    "/qrcode-booking",
     "/(vi|en)/:path*",
     "/((?!_next|_vercel|admin|.*\\..*).*)",
     // "/((?!.+\\.[\\w]+$|_next).*)",

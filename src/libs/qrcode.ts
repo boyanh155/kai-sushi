@@ -5,17 +5,13 @@ import fs from "fs";
 
 export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   // Generate QR code
-  console.log(outputPath);
-  if (!fs.existsSync(path.dirname(outputPath))) {
-    console.log("ghi");
-    fs.mkdirSync(outputPath, { recursive: true });
-  }
+
   const qrCodeImage = await QRCode.toBuffer(text, { type: "png" });
 
   // Read the QR code and the logo
   const [qr, logo] = await Promise.all([
     Jimp.read(qrCodeImage),
-    Jimp.read(new URL("logo.png", process.env.NEXT_PUBLIC_API_URL!).href!),
+    Jimp.read("./public/logo.png"),
   ]);
 
   // Resize the logo
@@ -31,6 +27,6 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   qr.composite(logo, logoPos.x, logoPos.y);
   console.log("w");
   // Save the final image
-  await qr.writeAsync(outputPath,);
-  console.log('dsd')
+  await qr.writeAsync(path.join("public", outputPath));
+  console.log("dsd");
 }

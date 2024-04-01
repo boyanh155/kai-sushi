@@ -53,7 +53,7 @@ export const POST = async (req: NextRequest) => {
     console.log(outputQr);
     const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
     console.log(_url.href);
-    await generateQRCodeWithLogo(bookingUrl, _url.href);
+    await generateQRCodeWithLogo(bookingUrl, outputQr);
     newBooking.qrcode = _url.href;
 
     await newBooking.save();
