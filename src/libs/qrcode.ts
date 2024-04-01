@@ -11,7 +11,7 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   // Read the QR code and the logo
   const [qr, logo] = await Promise.all([
     Jimp.read(qrCodeImage),
-    Jimp.read("./public/logo.png"),
+    Jimp.read(path.join(process.cwd(), "public/logo.png")),
   ]);
 
   // Resize the logo
@@ -27,6 +27,6 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   qr.composite(logo, logoPos.x, logoPos.y);
   console.log("w");
   // Save the final image
-  await qr.writeAsync(path.join("public", outputPath));
+  await qr.writeAsync(path.join(process.cwd(), "public", outputPath));
   console.log("dsd");
 }
