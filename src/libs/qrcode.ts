@@ -27,6 +27,7 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   qr.composite(logo, logoPos.x, logoPos.y);
   console.log("w");
   // Save the final image
-  await qr.writeAsync(path.join(process.cwd(), "public", outputPath));
+  // await qr.writeAsync(path.join(process.cwd(), "public", outputPath));
+  await qr.writeAsync(path.join("/tmp", outputPath));
   console.log("dsd");
 }
