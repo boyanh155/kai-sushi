@@ -26,10 +26,11 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
     x: (qr.bitmap.width - logo.bitmap.width) / 2,
     y: (qr.bitmap.height - logo.bitmap.height) / 2,
   };
-
+  console.log(";");
   // Composite the logo onto the QR code
   qr.composite(logo, logoPos.x, logoPos.y);
-
+  console.log("w");
   // Save the final image
-  await qr.writeAsync(outputPath);
+  await qr.writeAsync(outputPath,);
+  console.log('dsd')
 }
