@@ -19,4 +19,4 @@ export interface IBooking {
 }
 
 export interface IBookingClient
-  extends Omit<IBooking, "expiredDate" | "state"> {}
+  extends Omit<IBooking, "expiredDate" | "state" | "_id"> {}

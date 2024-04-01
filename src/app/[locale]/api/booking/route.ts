@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import moment from "moment";
-import { IBooking } from "../../../../../types/Booking";
+import { IBooking, IBookingClient } from "../../../../../types/Booking";
 import { formatLocaleDate, formatLocaleDateString } from "@/libs/format";
 import a from "./dummy.json";
 import { sendMessageToManyRecipients } from "@/services/meta";
@@ -13,7 +13,7 @@ import fs from "fs";
 export const POST = async (req: NextRequest) => {
   await connectDB();
   try {
-    const body: IBooking = await req.json();
+    const body: IBookingClient = await req.json();
     console.log("HI");
     const { amount, bookDate, name, phone, isNotify, email, note } = body;
 
