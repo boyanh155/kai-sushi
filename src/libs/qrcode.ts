@@ -5,8 +5,11 @@ import fs from "fs";
 
 export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   // Generate QR code
-  if (!fs.existsSync(path.dirname(outputPath)))
+  console.log(outputPath);
+  if (!fs.existsSync(path.dirname(outputPath))) {
+    console.log("ghi");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  }
   const qrCodeImage = await QRCode.toBuffer(text, { type: "png" });
 
   // Read the QR code and the logo
