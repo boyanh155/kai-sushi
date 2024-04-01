@@ -15,6 +15,16 @@
     }
 } */
 
+/* IOS HANDLE INPUT DATE */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  display: block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 1.2em;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
