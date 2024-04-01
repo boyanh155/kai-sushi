@@ -8,7 +8,7 @@ export async function generateQRCodeWithLogo(text: string, outputPath: string) {
   console.log(outputPath);
   if (!fs.existsSync(path.dirname(outputPath))) {
     console.log("ghi");
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.mkdirSync(outputPath, { recursive: true });
   }
   const qrCodeImage = await QRCode.toBuffer(text, { type: "png" });
 
