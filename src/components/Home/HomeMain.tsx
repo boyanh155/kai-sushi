@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import logoSquare from "@/assets/kai-logo-square.svg";
+import logoSquare from "@/public/logo.svg";
 import { useLocale, useTranslations } from "next-intl";
 import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
@@ -22,10 +22,10 @@ const HomeMain = (props: Props) => {
   return (
     <div className="flex flex-col content-container items-center pt-14 pb-72">
       {/* Center logo */}
-      <div className="w-[40%] max-h-[300px]">
+      <div className="w-[60px] max-h-[60px]">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
-      <h2 className={`text-white uppercase text-3xl ${gideon.className}`}>
+      <h2 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
         {t("menu")}
       </h2>
       {/* Button group */}
@@ -44,12 +44,12 @@ const HomeMain = (props: Props) => {
         </div>
       </div>
       {/* Bottom content */}
-      <div className="mt-80 flex flex-col items-center">
+      <div className="mt-[24rem] flex flex-col items-center">
         {/* Small log */}
         <div className="w-[25%] max-h-[200px]">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
-        <p className="text-xs text-center w-60 font-light">{t("address1")}</p>
+        <p className="text-xs text-center w-60 mt-6 font-light">{t("address1")}</p>
         {/* ICON */}
         <IconButton size="medium" className="text-white">
           <PlaceIcon />

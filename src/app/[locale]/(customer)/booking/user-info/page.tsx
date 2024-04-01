@@ -119,7 +119,7 @@ const UserInfoPage = (props: Props) => {
             required
             type="text"
             onChange={(e) => {
-              console.log(e.target.value);
+     
               if (!isFinite(Number(e.target.value))) {
                 e.target.classList.add("input-error");
                 return;

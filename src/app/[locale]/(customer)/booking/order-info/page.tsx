@@ -8,7 +8,7 @@ import useBookingStore, {
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import logoSquare from "@/assets/kai-logo-square.svg";
+import logoSquare from "@/public/logo.svg";
 import { gideon } from "@/libs/GoogleFont";
 import { optionsAmount } from "./optionAmount";
 import { IBookingClient } from "../../../../../../types/Booking";
@@ -83,11 +83,11 @@ const OrderInfoPage = (props: Props) => {
     <div className=" w-full">
       {/* IMAGE */}
       <div className="w-full flex flex-col items-center">
-        <div className="w-[100px] h-[100px] mt-8">
+        <div className="w-[60px] h-[60px] mt-8">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
         <h2
-          className={` text-white uppercase text-3xl mt-1 ${gideon.className}`}
+          className={` text-white uppercase text-3xl mt-4 ${gideon.className}`}
         >
           {t("booking")}
         </h2>
@@ -107,7 +107,7 @@ const OrderInfoPage = (props: Props) => {
               });
             }}
           >
-            <label className="float-label text-nowrap -top-3.5 left-2">
+            <label className="!text-xs float-label text-nowrap -top-3.5 left-2">
               {t("adult")}
             </label>
             <p className="uppercase text-white">
@@ -130,7 +130,7 @@ const OrderInfoPage = (props: Props) => {
           </div>
           <ul
             tabIndex={0}
-            className=" dropdown-content z-[1] flex flex-col w-full p-0 h-64 overflow-y-scroll overflow-x-hidden"
+            className=" dropdown-content z-[1] flex flex-col w-full p-0 h-64 overflow-y-scroll overflow-x-hidden border border-s-golden border-t-0 border-b-golden border-e-golden"
           >
             {optionsAmount.map((option) => (
               <li
@@ -211,7 +211,11 @@ const OrderInfoPage = (props: Props) => {
             } !text-white resize-none`}
             placeholder="Enter your note"
           ></textarea>
-          <label htmlFor="note" id="labelNote" className="!w-14 text-nowrap capitalize">
+          <label
+            htmlFor="note"
+            id="labelNote"
+            className="text-nowrap capitalize"
+          >
             {t("note")}
           </label>
         </div>

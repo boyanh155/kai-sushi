@@ -23,7 +23,7 @@
         "email": "email",
         "fullname": "name",
         "phone": "phone",
-        "is_sms_notify": "notify me by SMS",
+        "is_sms_notify": "Notify me by SMS",
         "complete": "complete",
         "other": "other",
         "enter_number": "enter number",
