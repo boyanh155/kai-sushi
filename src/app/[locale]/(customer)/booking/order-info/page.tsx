@@ -43,7 +43,7 @@ const OrderInfoPage = (props: Props) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (isInvalid) return;
-   
+
     router.push("user-info");
   };
   const handleInput = (
@@ -214,10 +214,8 @@ const OrderInfoPage = (props: Props) => {
             onResize={(e) => e.preventDefault()}
             value={bookingState.note}
             rows={4}
-            className={`${
-              bookingState.note ? "filled" : ""
-            } !text-white resize-none`}
-            placeholder="Enter your note"
+            className={`filled !text-white resize-none  placeholder:!text-[#959595]`}
+            placeholder={t("note_placeholder")}
           ></textarea>
           <label
             htmlFor="note"

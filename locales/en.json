@@ -1,10 +1,10 @@
 {
     "Home": {
         "food": "food",
-        "beverage": "beverage",
+        "beverage": "beverages",
         "menu": "menu",
-        "address1": "17A 6 Street, 1 Quarter, Thanh My Loi Ward, District 2, Ho Chi Minh City",
-        "open_time": "Open time",
+        "address1": "17A Street 6, Quarter 1, Thanh My Loi Ward, District 2",
+        "open_time": "Opening hours",
         "specific_time": "Monday - Sunday 16:00 - 22:00",
         "map_show": "Xem KAI map",
         "google_map": "Open google map"
@@ -32,12 +32,13 @@
         "label_time": "time",
         "label_date": "date",
         "note": "note",
-        "success_message": "Your booking has been successfully submitted.",
-        "scan_qr": "Scan QR code to access order information",
+        "success_message": "Your booking has been successfully submitted!",
+        "scan_qr": "Scan QR code to access booking information",
         "or": "or",
         "thanks": "KAI is very honored to serve you.",
         "booking_cancel": "Cancel",
         "menu_check": "view the menu here",
-        "error_bellow": "Please check the information below:"
+        "error_bellow": "Please check the information below:",
+        "note_placeholder": "Birthday party, outdoor,..."
     }
 }

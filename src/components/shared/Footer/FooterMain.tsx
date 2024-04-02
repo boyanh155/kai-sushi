@@ -1,4 +1,4 @@
-import { useLocale } from "next-intl";
+import {  useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -75,22 +75,19 @@ const navData = [
 ];
 
 const FooterMain = (props: Props) => {
-  const locale = useLocale();
+
+  const t = useTranslations("Navbar");
   return (
     <div className=" sticky z-50 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-screen">
       <div className=" flex flex-row justify-between content-container px-7 py-1 ">
         {navData.map((navItem) => (
-          <Link
-            href={"/" + locale + "/" + navItem.to}
-            key={navItem.to}
-            className="p-4"
-          >
+          <Link href={"/" + navItem.to} key={navItem.to} className="p-4">
             <div className="flex flex-col items-center gap-3">
               <div className="h-7 w-full flex justify-center items-center">
                 {navItem.icon}
               </div>
               <p className="uppercase text-sm font-light golden-title">
-                {navItem.text}
+                {t(navItem.text)}
               </p>
             </div>
           </Link>

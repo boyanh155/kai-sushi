@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import logoSquare from "@/public/logo.svg";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import PlaceIcon from "@mui/icons-material/Place";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -15,12 +15,12 @@ type Props = {};
 const HomeMain = (props: Props) => {
   const t = useTranslations("Home");
   const router = useRouter();
-  const locale = useLocale();
+
   const moveToListMenu = (type: "food" | "beverage") => {
-    router.push(locale + "/" + type);
+    router.push("/" + type);
   };
   return (
-    <div className="flex flex-col content-container items-center pt-14 pb-72">
+    <div className="flex flex-col content-container items-center pt-14 pb-32">
       {/* Center logo */}
       <div className="w-[60px] max-h-[60px]">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
@@ -67,15 +67,14 @@ const HomeMain = (props: Props) => {
           {/* embedded map */}
         </div>
         {/* frame map */}
-        
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4269969477878!2d106.7568407731047!3d10.778571889370289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175250037db517f%3A0x85970d4da0e1e6cb!2sKAI%20Sushi%26Lounge!5e0!3m2!1svi!2s!4v1712025491006!5m2!1svi!2s"
-            className="border-0 w-[110%] min-h-[220px] md:min-h-[500px] md:min-w-[750px]"
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4269969477878!2d106.7568407731047!3d10.778571889370289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175250037db517f%3A0x85970d4da0e1e6cb!2sKAI%20Sushi%26Lounge!5e0!3m2!1svi!2s!4v1712025491006!5m2!1svi!2s"
+          className="border-0 w-[110%] min-h-[220px] md:min-h-[500px] md:min-w-[750px]"
+          allowFullScreen={false}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
 
         {/* Phone */}
 

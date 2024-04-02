@@ -38,6 +38,7 @@
         "thanks": "KAI rất hân hạnh được phục vụ quý khách.",
         "booking_cancel": "Hủy bàn",
         "menu_check": "xem menu tại đây",
-        "error_bellow": "Phát hiện có lỗi sau:"
+        "error_bellow": "Phát hiện có lỗi sau:",
+        "note_placeholder":"Sinh nhật, bàn ngoài trời,..."
     }
 }

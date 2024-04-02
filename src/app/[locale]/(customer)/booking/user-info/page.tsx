@@ -79,7 +79,6 @@ const UserInfoPage = (props: Props) => {
         }
       )?.error
     ) {
-      console.log(api?.error);
       setIsShowAlert(true);
     }
   }, [api?.isError]);

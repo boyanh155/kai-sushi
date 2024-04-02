@@ -1,6 +1,5 @@
 import CreateButton from "@/components/Admin/Menu/CreateButton";
 import ApiProvider from "@/libs/ApiProvider";
-import { useLocale } from "next-intl";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import Loading from "../Loading";
