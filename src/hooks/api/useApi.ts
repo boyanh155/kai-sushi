@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { ApiErrorResponse } from "../../../types/ErrorType";
 
 export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/api`;
 export const getUserInfo = () => {
@@ -27,7 +28,7 @@ export async function api(
   customConfig = {}
 ) {
   try {
-    console.log();
+   
     switch (method) {
       case "GET":
         return await axios
@@ -58,7 +59,7 @@ export async function api(
   } catch (error: any) {
     const errRes = error?.response;
 
-    const err = errRes?.data?.error || "Something went wrong";
+    const err = errRes?.data?.message || "Something went wrong";
     const expectedErrors = ["invalid signature", "jwt expired"];
     if (expectedErrors.includes(err)) {
       localStorage.removeItem("user");
@@ -67,8 +68,8 @@ export async function api(
     throw {
       status: errRes?.status,
       message: err,
-      error,
-    };
+      error: errRes?.data || error,
+    } as ApiErrorResponse;
   }
 }
 
@@ -88,7 +89,7 @@ export default function useApi<ResponseBody>({
   customConfig,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
-  console.log(url);
+
   switch (method) {
     case "GET":
       // eslint-disable-next-line

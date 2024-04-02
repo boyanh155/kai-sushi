@@ -22,8 +22,6 @@ export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     if (body.object === "page") {
-        console.log(body)
-        console.log(body.entry[0].messaging);
       return new NextResponse("EVENT_RECEIVED", { status: 200 });
     } else {
       return new NextResponse(null, { status: 404 });

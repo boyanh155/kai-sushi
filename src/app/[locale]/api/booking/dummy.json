@@ -1,0 +1,17 @@
+{
+    "recipientId": [
+        "7247720955323500",
+        "25426354376978598"
+    ],
+    "text": "Booking#[orderID]:\n\nName: [user-name]\nNumber of Guests: [amount] people \nPhone number: [user-phone]\nTime: [time-of-booking]\nDate: [date-of-booking]\nNote: [user-note]\n\nBooking URL: [booking-url]",
+    "vars": {
+        "orderID": 123,
+        "user-name": "Loc Hoang Le",
+        "amount": 3,
+        "time-of-booking": "16:15",
+        "date-of-booking": "April 14,2022",
+        "user-note": "Birthday, rooftop",
+        "booking-url": "https://kai-sushi.vercel.app/",
+        "user-phone": 123
+    }
+}

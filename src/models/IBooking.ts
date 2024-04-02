@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
+import { EBookingState, IBooking } from "../../types/Booking";
 
-export interface IBooking extends Document {
+export interface IBookingDocument extends Document<IBooking> {
   amount: number;
   bookDate: Date;
   name: string;
@@ -9,5 +10,6 @@ export interface IBooking extends Document {
   isNotify: boolean;
   note?: boolean;
   expiredDate: Date;
-  state: "pending" | "approved" | "rejected";
+  state: EBookingState;
+  qrcode?:string;
 }

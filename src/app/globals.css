@@ -6,6 +6,7 @@
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
 }
+
 /* @media (prefers-color-scheme: dark) {
      :root {
         --foreground-rgb: 255, 255, 255;
@@ -14,6 +15,19 @@
     }
 } */
 
+/* IOS HANDLE INPUT DATE */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  display: block;
+  /* -webkit-appearance: textfield; */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* -moz-appearance: textfield; */
+  min-height: 1.2em;
+  min-width:95%
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -39,10 +53,78 @@ body {
 
 /* layer */
 
+@layer utilities {
+  .input-golden {
+    @apply w-full outline-none bg-[#0E0E10] text-base border-[0.4px] rounded-sm text-[#959595] font-light border-[#515151] ps-9 py-4 pe-4 text-white;
+    &:focus,
+    &:hover {
+      @apply border-golden bg-[#0E0E10];
+    }
+    &::placeholder {
+      @apply text-transparent text-base font-light transition-all duration-300;
+    }
+  }
+  .float-label {
+    @apply transition-all duration-300 absolute font-light text-[#FEFEFE] text-base py-0 px-1 bg-[#0E0E10];
+  }
+}
+
 @layer components {
   .golden-title {
     @apply bg-gradient-to-t from-[#8C773E] to-[#D7CEB8];
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  /* INPUT FLOAT */
+  .input-float {
+    @apply relative;
+    & > label {
+      @apply float-label  left-5 top-3 text-sm;
+      & > p {
+        @apply text-[#E42020] inline ms-1 font-light text-xs;
+      }
+    }
+    & > input,
+    & > textarea {
+      @apply input-golden;
+      &.input-error {
+        border: 1px solid #e42020 !important;
+      }
+      &::-webkit-calendar-picker-indicator {
+        filter: brightness(0) saturate(100%) invert(49%) sepia(13%)
+          saturate(1450%) hue-rotate(6deg) brightness(92%) contrast(92%);
+      }
+      &::-webkit-datetime-edit-year-field,
+      &::-webkit-datetime-edit-ampm-field,
+      &::-webkit-datetime-edit-hour-field {
+        color: white;
+      }
+      &::-webkit-datetime-edit {
+        @apply text-white;
+      }
+
+      &:focus {
+        + label {
+          @apply text-xs -top-3 left-5 transition-all duration-300;
+        }
+        &::placeholder {
+          @apply text-[#959595];
+        }
+      }
+      &.filled {
+        + label {
+          @apply text-xs -top-3 left-5 transition-all duration-300;
+        }
+      }
+    }
+  }
+  .select-float {
+    @apply relative;
+    & > ul > li {
+      @apply input-golden;
+    }
+    > .label {
+      @apply float-label;
+    }
   }
 }

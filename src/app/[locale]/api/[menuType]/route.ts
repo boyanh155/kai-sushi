@@ -127,6 +127,8 @@ export async function POST(
           title: item.title,
           type: "body",
           order: item.order,
+          description: item.description,
+
           children: contentIds[_id],
         });
         bodyIds.push(_new?.id);

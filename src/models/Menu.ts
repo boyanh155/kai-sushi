@@ -20,7 +20,7 @@ const menuChild = new Schema<IMenuChild>({
     type: String,
   },
   price: {
-    type: Number,
+    type: String,
   },
 });
 

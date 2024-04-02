@@ -1,7 +1,9 @@
 import { model, models, Schema } from "mongoose";
-import { IBooking } from "./IBooking";
+import { IBookingDocument } from "./IBooking";
+import { EBookingState } from "../../types/Booking";
+import moment from "moment";
 
-const booking = new Schema<IBooking>(
+const booking = new Schema<IBookingDocument>(
   {
     amount: {
       type: Number,
@@ -34,8 +36,11 @@ const booking = new Schema<IBooking>(
     },
     state: {
       type: String,
-      enum: ["available", "expired", "pending"],
-      default: "pending",
+      enum: Object.values(EBookingState),
+      default: EBookingState.PENDING,
+    },
+    qrcode: {
+      type: String,
     },
   },
   {
@@ -43,13 +48,17 @@ const booking = new Schema<IBooking>(
   }
 );
 
-booking.pre("save", function (next) {
-  if (!this.expiredDate) {
-    this.expiredDate = new Date(this.bookDate.getTime() + 30 * 60 * 1000);
-  }
-  next();
-});
+// booking.pre("save", function (next) {
+//   // console.log(moment(this.bookDate).toDate());
+//   // if (!this.expiredDate) {
+//   //   this.expiredDate = new Date(
+//   //     moment(this.bookDate).toDate().getTime() + 30 * 60 * 1000
+//   //   );
+//   // }
+//   next();
+// });
 
-const bookingModel = models.Booking || model<IBooking>("Booking", booking);
+const bookingModel =
+  models.Booking || model<IBookingDocument>("Booking", booking);
 
 export default bookingModel;

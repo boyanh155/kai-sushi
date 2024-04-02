@@ -11,5 +11,32 @@
         "booking": "booking",
         "takeaway": "takeaway",
         "menu": "menu"
+    },
+    "Booking": {
+        "booking": "booking",
+        "adult": "Adult",
+        "peopleLabel": "people",
+        "date": "date",
+        "time": "time",
+        "next": "Continue",
+        "people": "people",
+        "email": "email",
+        "fullname": "name",
+        "phone": "phone",
+        "is_sms_notify": "Notify me by SMS",
+        "complete": "complete",
+        "other": "other",
+        "enter_number": "enter number",
+        "label_time": "time",
+        "label_date": "date",
+        "note": "note",
+        "success_message": "Your booking has been successfully submitted.",
+        "scan_qr": "Scan QR code to access order information",
+        "or": "or",
+        "thanks": "KAI is very honored to serve you.",
+        "booking_cancel": "Cancel",
+        "menu_check": "view the menu here",
+        "map_show": "Xem KAI map",
+        "google_map": "Open google map"
     }
 }

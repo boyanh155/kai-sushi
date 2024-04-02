@@ -11,6 +11,32 @@
         "booking": "đặt bàn",
         "takeaway": "mang về",
         "menu": "thực đơn"
-
+    },
+    "Booking": {
+        "booking": "đặt chỗ",
+        "adult": "Người lớn",
+        "peopleLabel": "người",
+        "date": "ngày",
+        "time": "giờ",
+        "email": "email",
+        "next": "Tiếp tục",
+        "people": "Số lượng",
+        "fullname": "tên",
+        "phone": "số điện thoại",
+        "is_sms_notify": "Thông báo cho tôi qua SMS",
+        "complete": "hoàn tất",
+        "other": "khác",
+        "enter_number": "Nhập số",
+        "label_time": "giờ",
+        "label_date": "ngày",
+        "note": "Ghi chú",
+        "success_message": "Bạn đã đặt bàn thành công!",
+        "scan_qr": "Quét mã QR để truy cập thông tin đặt hàng",
+        "or": "hoặc",
+        "thanks": "KAI rất hân hạnh được phục vụ quý khách.",
+        "booking_cancel": "Hủy bàn",
+        "menu_check": "xem menu tại đây",
+        "map_show": "Mở KAI bản đồ",
+        "google_map": "Mở google map"
     }
 }

@@ -10,7 +10,6 @@
     "moduleResolution": "bundler",
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -20,9 +19,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "index.js"],
-  "exclude": ["node_modules"]
+  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/**/*.ts"
+  ]
 }
