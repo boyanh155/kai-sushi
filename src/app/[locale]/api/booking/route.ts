@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
     const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
 
     // const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
-  
+
     const _url = await generateQRCodeWithLogo(bookingUrl, newBooking);
     newBooking.qrcode = _url;
 

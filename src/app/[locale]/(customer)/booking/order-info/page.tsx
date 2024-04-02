@@ -43,6 +43,7 @@ const OrderInfoPage = (props: Props) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (isInvalid) return;
+   
     router.push("user-info");
   };
   const handleInput = (
@@ -88,13 +89,13 @@ const OrderInfoPage = (props: Props) => {
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
         <h2
-          className={` text-white uppercase text-3xl mt-4 ${gideon.className}`}
+          className={` text-white uppercase text-3xl mt-3 ${gideon.className}`}
         >
           {t("booking")}
         </h2>
       </div>
       {/* INPUT BOX */}
-      <form className=" flex flex-col justify-center" id="form-order">
+      <form className=" flex flex-col justify-center  mt-10" id="form-order">
         {/* AMOUNT SELECTION */}
         <details
           ref={selectorElement}
@@ -103,7 +104,7 @@ const OrderInfoPage = (props: Props) => {
           <summary
             tabIndex={0}
             role="button"
-            className=" relative mt-20 input-golden flex justify-between items-center w-full"
+            className=" relative input-golden flex justify-between items-center w-full"
             onClick={(e) => {
               selectedE?.current?.scrollIntoView({
                 behavior: "smooth",

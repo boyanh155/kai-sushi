@@ -46,19 +46,42 @@ const HomeMain = (props: Props) => {
       {/* Bottom content */}
       <div className="mt-[24rem] flex flex-col items-center">
         {/* Small log */}
-        <div className="w-[25%] max-h-[200px]">
+        <div className="w-[60px] max-h-[60px]">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
-        <p className="text-xs text-center w-60 mt-6 font-light">{t("address1")}</p>
-        {/* ICON */}
-        <IconButton size="medium" className="text-white">
-          <PlaceIcon />
-        </IconButton>
+        <p className="text-xs text-center w-60 mt-6 font-light">
+          {t("address1")}
+        </p>
+        <div className="flex flex-row-reverse">
+          {/* Open gg */}
+          <IconButton
+            size="medium"
+            className="text-white cursor-pointer tooltip-bottom transition-all tooltip"
+            data-tip={t("google_map")}
+            onClick={() =>
+              window.open("https://maps.app.goo.gl/LYy9G6vWYYdCLeTY8", "_blank")
+            }
+          >
+            <PlaceIcon />
+          </IconButton>
+          {/* embedded map */}
+        </div>
+        {/* frame map */}
+        
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4269969477878!2d106.7568407731047!3d10.778571889370289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175250037db517f%3A0x85970d4da0e1e6cb!2sKAI%20Sushi%26Lounge!5e0!3m2!1svi!2s!4v1712025491006!5m2!1svi!2s"
+            className="border-0 w-[110%] min-h-[220px] md:min-h-[500px] md:min-w-[750px]"
+            allowFullScreen={false}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        
+
         {/* Phone */}
 
         <a
           href="tel:090 634 10 53"
-          className="cursor-pointer hover:opacity-60 transition-all tracking-wider px-8 py-1 bg-[#424242] font-light text-xs text-center border border-[#5B5B5B] rounded-sm"
+          className="cursor-pointer mt-4 hover:opacity-60 transition-all tracking-wider px-8 py-1 bg-[#424242] font-light text-xs text-center border border-[#5B5B5B] rounded-sm"
         >
           090 634 10 53
         </a>

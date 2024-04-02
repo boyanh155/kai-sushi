@@ -1,12 +1,93 @@
+"use client";
+
+import styled, { keyframes } from "styled-components";
+
 import React from "react";
 
 type Props = {};
 
+const pulsIn = keyframes`
+  0% {
+    box-shadow: inset 0 0 0 1rem #fff;
+    opacity: 1;
+  }
+  50%, 100% {
+    box-shadow: inset 0 0 0 0 #fff;
+    opacity: 0;
+  }
+`;
+const LoadingContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  overflow: hidden;
+`;
+const pulsOut = keyframes`
+  0%, 50% {
+    box-shadow: 0 0 0 0 #fff;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 1rem #fff;
+    opacity: 1;
+  }
+`;
+
+const Loader = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    animation: ${pulsOut} 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+  }
+
+  &:before {
+    width: 100%;
+    padding-bottom: 100%;
+    box-shadow: inset 0 0 0 1rem #fff;
+    animation-name: ${pulsIn};
+  }
+
+  &:after {
+    width: calc(100% - 2rem);
+    padding-bottom: calc(100% - 2rem);
+    box-shadow: 0 0 0 0 #fff;
+  }
+`;
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    1
+  ); 
+  z-index: 50; 
+`;
 const Loading = (props: Props) => {
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="loading loading-bars loading-lg relative top-1/2 left-1/2"></div>
-    </div>
+    <LoadingContainer>
+      <Overlay />
+      <Loader className="absolute z-[101] top-[38%] translate-y-full left-1/2 -translate-x-1/2" />
+    </LoadingContainer>
   );
 };
 

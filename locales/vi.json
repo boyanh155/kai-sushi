@@ -5,7 +5,9 @@
         "menu": "thực đơn",
         "address1": "17A Đường số 6, khu phố 1, phường Thạnh Mỹ Lợi, Quận 2, TP.HCM",
         "open_time": "Giờ hoạt động",
-        "specific_time": "Thứ 2 - Chủ nhật 16:00 - 22:00"
+        "specific_time": "Thứ 2 - Chủ nhật 16:00 - 22:00",
+        "map_show": "Mở KAI bản đồ",
+        "google_map": "Mở google map"
     },
     "Navbar": {
         "booking": "đặt bàn",
@@ -35,6 +37,7 @@
         "or": "hoặc",
         "thanks": "KAI rất hân hạnh được phục vụ quý khách.",
         "booking_cancel": "Hủy bàn",
-        "menu_check": "xem menu tại đây"
+        "menu_check": "xem menu tại đây",
+        "error_bellow": "Phát hiện có lỗi sau:"
     }
 }

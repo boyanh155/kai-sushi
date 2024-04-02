@@ -5,7 +5,7 @@ import useBookingStore, {
   selectBookingState,
   setBookingState,
 } from "@/stores/useBookingStore";
-import { isEmpty, isError, isFinite } from "lodash";
+import { isEmpty, isError, isFinite, set } from "lodash";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
+import Alert from "@/components/shared/Alert";
 
 type Props = {};
 
@@ -22,6 +23,8 @@ const UserInfoPage = (props: Props) => {
   const bookingState = useBookingStore(selectBookingState);
   const _setBookingState = useBookingStore(setBookingState);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowAlert, setIsShowAlert] = useState(false);
   const api = useApi({
     key: ["booking"],
     method: "POST",
@@ -42,38 +45,85 @@ const UserInfoPage = (props: Props) => {
     _setBookingState({ ...bookingState, [name]: value });
   };
   const submitForm = (e) => {
-    e.preventDefault();
-    setIsSubmit(true);
-    const form = e.target as HTMLFormElement;
-    if (form.checkValidity()) {
-      // handle booking api
-      api?.mutateAsync(bookingState);
+    try {
+      setIsLoading(true);
+      e.preventDefault();
+      setIsSubmit(true);
+      const form = e.target as HTMLFormElement;
+      if (form.checkValidity()) {
+        // handle booking api
+        api?.mutateAsync(bookingState);
 
-      // router.push("success");
-    } else {
-      form.reportValidity();
+        // router.push("success");
+      } else {
+        form.reportValidity();
+      }
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     if (!api?.isSuccess || isEmpty(api?.data)) return;
-    router.replace(api.data);
+    setIsLoading(true);
+    router.push(api.data);
   }, [api?.isSuccess]);
+  useEffect(() => {
+    if (
+      api?.isError &&
+      (
+        api?.error as unknown as {
+          status: number;
+          message: string;
+          error: string | string[];
+        }
+      )?.error
+    ) {
+      console.log(api?.error);
+      setIsShowAlert(true);
+    }
+  }, [api?.isError]);
+  useEffect(() => {
+    if (api?.isPending) {
+      setIsLoading(true);
+      return;
+    }
+    setIsLoading(false);
+    return;
+  }, [api?.isPending]);
 
-  return api?.isPending ? (
+  return api?.isPending || isLoading ? (
     <Loading />
   ) : (
     <>
       <Link href="order-info" className="flex absolute top-16 left-8">
         <BackwardButton />
       </Link>
-      <h2 className={`pt-32 text-white uppercase text-3xl ${gideon.className}`}>
+      <h2
+        className={`pt-32 text-center text-white uppercase text-3xl ${gideon.className}`}
+      >
         {t("booking")}
       </h2>
+      <Alert
+        color="error"
+        isVisible={isShowAlert}
+        setIsVisible={setIsShowAlert}
+        className="mt-3"
+        messages={
+          (
+            api?.error as unknown as {
+              status: number;
+              message: string;
+              error: string | string[];
+            }
+          )?.error || "Lỗi không xác định"
+        }
+      />
       {/* Button group */}
       <form
         id="form_user"
         onSubmit={submitForm}
-        className="flex flex-col mt-16 w-full "
+        className="flex flex-col mt-10 w-full "
       >
         {/* Adult */}
         {/* Name */}
@@ -118,7 +168,6 @@ const UserInfoPage = (props: Props) => {
             required
             type="text"
             onChange={(e) => {
-     
               if (!isFinite(Number(e.target.value))) {
                 e.target.classList.add("input-error");
                 return;

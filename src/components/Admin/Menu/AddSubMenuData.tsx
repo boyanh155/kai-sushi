@@ -54,6 +54,27 @@ const AddSubMenuData = ({ changeHandler }: Props) => {
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2">
+                Description
+                <input
+                  type="text"
+                  className="grow"
+                  placeholder="Enter description"
+                  onChange={(e) => {
+                    setChildren((prev) => {
+                      return prev.map((item, index) => {
+                        if (index === id) {
+                          return {
+                            ...item,
+                            description: e.target.value,
+                          };
+                        }
+                        return item;
+                      });
+                    });
+                  }}
+                />
+              </label>
+              <label className="input input-bordered flex items-center gap-2">
                 Order
                 <input
                   type="number"
@@ -144,7 +165,7 @@ const AddSubMenuData = ({ changeHandler }: Props) => {
                     <label className="input input-bordered w-full flex items-center gap-2">
                       Price
                       <input
-                        type="number"
+                        type="text"
                         className="grow"
                         value={subChild.price}
                         onChange={(e) => {
@@ -154,7 +175,7 @@ const AddSubMenuData = ({ changeHandler }: Props) => {
                             ];
                             newChild[subId] = {
                               ...newChild[subId],
-                              price: parseInt(e.target.value),
+                              price: e.target.value,
                             };
                             return prev.map((item, index) => {
                               if (index === id) {

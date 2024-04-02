@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Suspense } from "react";
+import LoadingPage from "./loading";
 
 type Props = {
   children: React.ReactNode;
@@ -6,9 +7,11 @@ type Props = {
 
 const BookingLayout = ({ children }: Props) => {
   return (
-    <div className=" flex flex-col relative content-container items-center px-7 overflow-hidden">
-      {children}
-    </div>
+    <Suspense fallback={<LoadingPage />}>
+      <div className="relative content-container items-center px-7 overflow-hidden">
+        {children}
+      </div>
+    </Suspense>
   );
 };
 

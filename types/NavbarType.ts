@@ -21,5 +21,5 @@ export type NavChild = {
   children?: NavChild[];
   order: number;
   description?: string;
-  price?: number;
+  price?: string;
 };

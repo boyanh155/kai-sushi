@@ -7,7 +7,7 @@ export interface IMenuChild extends Document {
   children?: IMenuChild[];
   order: number;
   description?: string;
-  price?: number;
+  price?: string;
 }
 
 export interface IMenuHeader extends Document {
