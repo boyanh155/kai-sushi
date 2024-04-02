@@ -23,6 +23,7 @@ const OrderInfoPage = (props: Props) => {
   const _setBookingState = useBookingStore(setBookingState);
   const selectedE = useRef<HTMLLIElement>(null);
   const [isInvalid, setIsInvalid] = useState(false);
+  const selectorElement = useRef<HTMLDetailsElement>(null);
 
   const t = useTranslations("Booking");
   const _now = moment();
@@ -95,8 +96,11 @@ const OrderInfoPage = (props: Props) => {
       {/* INPUT BOX */}
       <form className=" flex flex-col justify-center" id="form-order">
         {/* AMOUNT SELECTION */}
-        <div className="dropdown select-float w-full ">
-          <div
+        <details
+          ref={selectorElement}
+          className="dropdown select-float w-full "
+        >
+          <summary
             tabIndex={0}
             role="button"
             className=" relative mt-20 input-golden flex justify-between items-center w-full"
@@ -127,7 +131,7 @@ const OrderInfoPage = (props: Props) => {
             >
               <path d="M1 1.25L7.5 8.75L14.5 1.25" stroke="#959595" />
             </svg>
-          </div>
+          </summary>
           <ul
             tabIndex={0}
             className=" dropdown-content z-[1] flex flex-col w-full p-0 h-64 overflow-y-scroll overflow-x-hidden border border-s-golden border-t-0 border-b-golden border-e-golden"
@@ -135,7 +139,10 @@ const OrderInfoPage = (props: Props) => {
             {optionsAmount.map((option) => (
               <li
                 ref={bookingState.amount === option.value ? selectedE : null}
-                onClick={(e) => handleInput(e, "amount")}
+                onClick={(e) => {
+                  handleInput(e, "amount");
+                  selectorElement?.current?.blur();
+                }}
                 key={option.value}
                 className={`w-full block uppercase cursor-pointer !text-white ${
                   bookingState.amount === option.value ? "!bg-[#8C773E]" : ""
@@ -146,7 +153,7 @@ const OrderInfoPage = (props: Props) => {
               </li>
             ))}
           </ul>
-        </div>
+        </details>
         {/* ..AMOUNT SELECTION */}
         {/* DATE PICKER */}
         {/* ..DATE PICKER */}

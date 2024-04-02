@@ -48,8 +48,7 @@ const UserInfoPage = (props: Props) => {
     if (form.checkValidity()) {
       // handle booking api
       api?.mutateAsync(bookingState);
-      console.log(api?.isSuccess);
-      console.log(api?.isError);
+
       // router.push("success");
     } else {
       form.reportValidity();

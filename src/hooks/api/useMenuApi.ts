@@ -6,7 +6,7 @@ import useApi from "./useApi";
 import _ from "lodash";
 
 export const useGetMenu = (type: "food" | "beverage" | "both" = "both") => {
-  console.log( type);
+  console.log(type);
   const { get } = useApi<MenuDataResponseBody[]>({
     key: ["menu", type],
     method: "GET",

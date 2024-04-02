@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
   await connectDB();
   try {
     const body: IBookingClient = await req.json();
-    console.log("HI");
+
     const { amount, bookDate, name, phone, isNotify, email, note } = body;
 
     //  // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
@@ -49,8 +49,7 @@ export const POST = async (req: NextRequest) => {
 
     const bookingUrl = `${process.env.NEXT_PUBLIC_API_URL}/booking/success?orderId=${newBooking._id}`;
     const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
-    console.log("sd");
-    console.log(outputQr);
+
     // const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
   
     const _url = await generateQRCodeWithLogo(bookingUrl, newBooking);

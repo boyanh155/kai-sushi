@@ -13,7 +13,7 @@ export const sendMessageToManyRecipients: (
         _text = _text.replace(new RegExp(`\\[${_var}\\]`, "g"), vars[_var]);
       }
     }
-    console.log(recipients, text, vars);
+
     const _promises: Promise<unknown>[] = recipients.map(
       (_id: string) =>
         new Promise((_resolve, _reject) => {

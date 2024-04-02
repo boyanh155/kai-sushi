@@ -16,7 +16,7 @@ type ZaloAccessTokenResponse = {
 
 export async function GET(request: NextRequest) {
   const query = request.nextUrl.searchParams;
-  console.log(query);
+
   try {
     const code = query.get("code");
     const oa_id = query.get("oa_id");

@@ -13,6 +13,7 @@ import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
+import useApi from "@/hooks/api/useApi";
 type Props = {};
 
 const MenuMain = (props: Props) => {
@@ -22,31 +23,40 @@ const MenuMain = (props: Props) => {
 
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const api = useGetMenu(menuType);
-  console.log(menuType);
+
+  const api = useApi<MenuDataResponseBody[]>({
+    key: ["menu", "food"],
+    method: "GET",
+    url: "food",
+  }).get;
+  // const api = useGetMenu(menuType);
+
+  // useEffect(() => {
+  //   if (isEmpty(api?.data) && !isEmpty(menuData)) return;
+  //   setMenuData(api?.data!);
+  //   console.log("f");
+  // }, [api?.isPending]);
+
   useEffect(() => {
-    if (isEmpty(api?.data)) return;
-    setMenuData(api?.data!);
-  }, [api?.data]);
-  useEffect(() => {
+    console.log(api?.data);
     if (!headerType) return setCurrentIndex(0);
 
     setCurrentIndex(
-      menuData.findIndex(
+      api?.data?.findIndex(
         (v) => headerType.toLowerCase() === v.slug.toLowerCase()
       ) || 0
     );
-  }, [menuData, headerType]);
+  }, [headerType, api?.data]);
   const t = useTranslations("Home");
   return api?.isLoading ? (
     <Loading />
-  ) : menuData ? (
+  ) : api?.data ? (
     <div className=" flex flex-col overflow-x-hidden">
       {/* IMAGE  */}
       <div
         style={{
           backgroundImage:
-            menuData[currentIndex]?.image && `url('${menuData[0]?.image}')`,
+            api?.data[currentIndex]?.image && `url('${api?.data[0]?.image}')`,
         }}
         className={`w-screen   uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
       >
@@ -65,11 +75,11 @@ const MenuMain = (props: Props) => {
       {/* NAV HEADER */}
       <div className="ps-4">
         <div className="flex flex-row gap-6 w-screen overflow-scroll">
-          {!isEmpty(menuData) &&
-            menuData?.map((v, id) => (
+          {!isEmpty(api?.data) &&
+            api?.data?.map((v, id) => (
               <MenuHeader
                 menuType={menuType}
-                active={false}
+                active={headerType === v.slug}
                 item={v}
                 key={id}
               />
@@ -79,7 +89,7 @@ const MenuMain = (props: Props) => {
 
       {/* CONTENT */}
       <div className="px-8 gap-16 flex flex-col">
-        {menuData?.[currentIndex]?.children?.map((v, id) => (
+        {api?.data?.[currentIndex]?.children?.map((v, id) => (
           <MenuChild item={v} key={id} />
         ))}
       </div>
