@@ -5,7 +5,9 @@
         "menu": "menu",
         "address1": "17A 6 Street, 1 Quarter, Thanh My Loi Ward, District 2, Ho Chi Minh City",
         "open_time": "Open time",
-        "specific_time": "Monday - Sunday 16:00 - 22:00"
+        "specific_time": "Monday - Sunday 16:00 - 22:00",
+        "map_show": "Xem KAI map",
+        "google_map": "Open google map"
     },
     "Navbar": {
         "booking": "booking",
@@ -35,8 +37,6 @@
         "or": "or",
         "thanks": "KAI is very honored to serve you.",
         "booking_cancel": "Cancel",
-        "menu_check": "view the menu here",
-        "map_show": "Xem KAI map",
-        "google_map": "Open google map"
+        "menu_check": "view the menu here"
     }
 }
