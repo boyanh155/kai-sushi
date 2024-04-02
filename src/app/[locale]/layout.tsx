@@ -27,7 +27,7 @@ export default function LocaleLayout({
   const messages = useMessages();
   return (
     <html lang={locale} data-theme="winter">
-      <body className={nunito.className}>
+      <body className={nunito.className+" overflow-x-hidden"}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="min-h-[calc(100vh-100px)] overflow-x-hidden relative before:block before:h-full before:top-0 before:left-0 before:inset-0 before:opacity-50 before:absolute before:w-screen before:bg-black bg-opacity-60 w-screen  before:bg-no-repeat  before:bg-cover z-10 before:z-0  before:bg-center  before:bg-[url('../../src/assets/bg-home.png')]">
             <ApiProvider>
