@@ -103,14 +103,16 @@ const MenuMain = (props: Props) => {
           className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
         >
           {!isEmpty(menuData) &&
-            menuData?.map((v, id) => (
-              <MenuHeader
-                menuType={menuType}
-                active={currentIndex == id}
-                item={v}
-                key={id}
-              />
-            ))}
+            menuData
+              ?.sort((a, b) => +a.order - +b.order)
+              .map((v, id) => (
+                <MenuHeader
+                  menuType={menuType}
+                  active={currentIndex == id}
+                  item={v}
+                  key={id}
+                />
+              ))}
         </div>
       </div>
 

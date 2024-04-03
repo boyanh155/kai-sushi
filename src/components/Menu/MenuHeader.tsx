@@ -11,7 +11,6 @@ type Props = {
 };
 
 const MenuHeader = ({ item, active, menuType }: Props) => {
-console.log(`/${menuType}/${item.slug}`);
   return (
     <Link
       href={`/${menuType}/${item.slug}` as any}

@@ -18,10 +18,10 @@ const DeleteHeaderModal = ({ deleteId, handleClose }: Props) => {
   const confirmDelete = () => {
     console.log(deleteId);
     api?.deleteObj?.mutateAsync(deleteId);
-    handleClose();
   };
   useEffect(() => {
     if (api.deleteObj?.isSuccess) {
+      handleClose();
       return router.refresh();
       // if (api.deleteObj.status == 200) router.reload();
     }
