@@ -8,6 +8,7 @@ import moment from "moment";
 import Loading from "@/components/shared/Loading";
 import { screenShotElement } from "@/libs/screenshot";
 import { useRouter, Link } from "@/navigation";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   searchParams: {
@@ -21,6 +22,9 @@ const saveButtonClickHandler = () => {
 };
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
+  const searchs = useSearchParams()
+  console.log(searchs.toString())
+  console.log('asdsad')
   const copyButtonClickHandler = () => {
     navigator.clipboard.writeText(window.location.href);
     setIsCopy(true);

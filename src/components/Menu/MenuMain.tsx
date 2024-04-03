@@ -6,7 +6,6 @@ import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { CloseOutlined } from "@mui/icons-material";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
@@ -14,6 +13,7 @@ import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
 import useApi from "@/hooks/api/useApi";
+import { Link } from "@/navigation";
 type Props = {};
 
 const MenuMain = (props: Props) => {
