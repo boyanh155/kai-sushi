@@ -32,8 +32,7 @@ const LocaleSwitcher = (props: Props) => {
   console.log(params);
   console.log(pathName);
   function onSelectChange(event: MouseEvent<HTMLDivElement>) {
-    event.preventDefault();
-    event.stopPropagation();
+
 
     const nextLocale = event.currentTarget.getAttribute("data-value");
     console.log(nextLocale);
