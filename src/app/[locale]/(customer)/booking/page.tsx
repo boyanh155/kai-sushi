@@ -1,11 +1,10 @@
-
 import { redirect } from "@/navigation";
 import React from "react";
 
 type Props = {};
 
-const page = (props: Props) => {
+const BookingPage = (props: Props) => {
   return redirect("/booking/order-info");
 };
 
-export default page;
+export default BookingPage;

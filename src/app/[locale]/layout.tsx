@@ -44,8 +44,8 @@ export default function LocaleLayout({
               </Suspense>
             </ApiProvider>
           </div>
-        </NextIntlClientProvider>
         <FooterMain />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

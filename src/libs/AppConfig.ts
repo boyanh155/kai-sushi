@@ -30,6 +30,10 @@ export const pathnames = {
     vi: "/dat-lich/thanh-cong?:query",
     en: "/booking/success?:query",
   },
+  "/booking/:path*": {
+    vi: "/dat-lich/:path*",
+    en: "/booking/:path*",
+  },
   // menu
   "/food/:path*": {
     vi: "/mon-an/:path*",
