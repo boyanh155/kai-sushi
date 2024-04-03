@@ -21,6 +21,10 @@ export const POST = async (req: NextRequest) => {
         _text = _text.replace(new RegExp(`\\[${_var}\\]`, "g"), vars[_var]);
       }
     }
+    // "recipientId": [
+    //     "7247720955323500",
+    //     "25426354376978598"
+    // ],
     const result = await sendMessageToManyRecipients(recipientId, _text);
 
     return NextResponse.json({ result }, { status: 200 });
