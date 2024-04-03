@@ -4,6 +4,7 @@ import { AppConfig, pathnames } from "./libs/AppConfig";
 export default createMiddleware({
   // A list of all locales that are supported
   locales: AppConfig.locales,
+  localePrefix: AppConfig.localePrefix,
   // Used when no locale matches
   defaultLocale: AppConfig.defaultLocale,
   pathnames,

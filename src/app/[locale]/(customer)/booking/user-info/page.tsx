@@ -10,10 +10,11 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
 import Alert from "@/components/shared/Alert";
+import { useRouter } from "@/navigation";
 
 type Props = {};
 

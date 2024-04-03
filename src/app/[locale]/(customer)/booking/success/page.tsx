@@ -8,7 +8,8 @@ import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
 import Loading from "@/components/shared/Loading";
 import { screenShotElement } from "@/libs/screenshot";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+
 
 type Props = {
   searchParams: {

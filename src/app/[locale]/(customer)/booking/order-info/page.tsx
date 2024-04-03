@@ -214,7 +214,7 @@ const OrderInfoPage = (props: Props) => {
             onResize={(e) => e.preventDefault()}
             value={bookingState.note}
             rows={4}
-            className={`filled !text-white resize-none  placeholder:!text-[#959595]`}
+            className={`filled !text-white resize-none  placeholder:text-[#959595]`}
             placeholder={t("note_placeholder")}
           ></textarea>
           <label
