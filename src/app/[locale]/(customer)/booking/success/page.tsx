@@ -30,7 +30,8 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
     setIsCopy(true);
   };
   const router = useRouter();
-  const api = useGetBookingById(orderId || search.get("orderId")!);
+  const _orderId = orderId || search.get("orderId")!;
+  const api = useGetBookingById(_orderId);
   const t = useTranslations("Booking");
 
   return api?.isLoading ? (
@@ -38,7 +39,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   ) : (
     <>
       <Link
-        href={`/booking/order-info?orderId=${orderId}` as any}
+        href={`/booking/order-info?orderId=${_orderId}` as any}
         className="flex absolute top-16 left-8"
       >
         <BackwardButton />
@@ -54,7 +55,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
           {t("booking")}
         </h2>
         {/* ID */}
-        <p className="text-[#959595] font-light mt-6">#{orderId}</p>
+        <p className="text-[#959595] font-light mt-6">#{_orderId}</p>
         <p className="font-light mt-1">{t("success_message")}</p>
         {/* Info card */}
         <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden border px-5 p-4">
