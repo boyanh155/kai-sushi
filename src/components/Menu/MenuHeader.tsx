@@ -2,8 +2,8 @@
 import React from "react";
 import { NavHeader } from "../../../types/NavbarType";
 
-import Link from "next/link";
-
+// import Link from "next/link";
+import { Link } from "@/navigation";
 type Props = {
   item: NavHeader;
   active: boolean;
@@ -11,10 +11,10 @@ type Props = {
 };
 
 const MenuHeader = ({ item, active, menuType }: Props) => {
-
+console.log(`/${menuType}/${item.slug}`);
   return (
     <Link
-      href={`/${menuType}/${item.slug}`}
+      href={`/${menuType}/${item.slug}` as any}
     >
       <div
         className={`${
