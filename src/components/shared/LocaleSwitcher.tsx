@@ -5,7 +5,7 @@ import enFlag from "@/assets/intl-flag/en-flag.svg";
 import viFlag from "@/assets/intl-flag/vi-flag.svg";
 import { useLocale } from "next-intl";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useRouter, usePathname } from "@/navigation";
 
 type Props = {};
@@ -27,22 +27,21 @@ const LocaleSwitcher = (props: Props) => {
   const locale = useLocale();
   const router = useRouter();
   const pathName = usePathname();
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const params = useParams();
-  console.log(params);
-  console.log(pathName);
+
   function onSelectChange(event: MouseEvent<HTMLDivElement>) {
-
-
     const nextLocale = event.currentTarget.getAttribute("data-value");
     console.log(nextLocale);
+    console.log();
     startTransition(() => {
       router.replace(
         {
           // are used in combination with a given `pathname`. Since the two will
           // always match for the current route, we can skip runtime checks.
-          pathname: pathName,
           // @ts-expect-error -- TypeScript will validate that only known `params`
+          pathname: pathName + "?" + searchParams.toString(),
           params,
         },
         {

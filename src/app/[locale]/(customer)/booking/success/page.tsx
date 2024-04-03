@@ -2,14 +2,12 @@
 import React, { useState } from "react";
 import { useGetBookingById } from "../../../../../hooks/api/useBooking";
 import BackwardButton from "@/components/Booking/BackwardButton";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
 import Loading from "@/components/shared/Loading";
 import { screenShotElement } from "@/libs/screenshot";
-import { useRouter } from "@/navigation";
-
+import { useRouter, Link } from "@/navigation";
 
 type Props = {
   searchParams: {
@@ -36,7 +34,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   ) : (
     <>
       <Link
-        href={`order-info?orderId=${orderId}`}
+        href={`/booking/order-info?orderId=${orderId}` as any}
         className="flex absolute top-16 left-8"
       >
         <BackwardButton />
