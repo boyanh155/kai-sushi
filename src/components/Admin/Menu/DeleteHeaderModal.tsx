@@ -1,8 +1,8 @@
 import Loading from "@/components/shared/Loading";
 import useApi from "@/hooks/api/useApi";
 import { Modal } from "@mui/material";
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 type Props = {
   deleteId: string;
   handleClose: () => void;
@@ -14,11 +14,18 @@ const DeleteHeaderModal = ({ deleteId, handleClose }: Props) => {
     method: "DELETE",
     key: ["menu", "delete", deleteId],
   });
+  const router = useRouter();
   const confirmDelete = () => {
     console.log(deleteId);
     api?.deleteObj?.mutateAsync(deleteId);
     handleClose();
   };
+  useEffect(() => {
+    if (api.deleteObj?.isSuccess) {
+      return router.refresh();
+      // if (api.deleteObj.status == 200) router.reload();
+    }
+  }, [api.deleteObj?.isSuccess]);
   return (
     <Modal open={!!deleteId} onClose={handleClose}>
       {api.deleteObj?.isPending ? (
