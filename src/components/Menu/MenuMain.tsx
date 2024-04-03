@@ -100,7 +100,7 @@ const MenuMain = (props: Props) => {
       <div className="ps-4">
         <div
           ref={activeHeaderElement}
-          className="flex flex-row gap-6 w-screen overflow-scroll"
+          className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
         >
           {!isEmpty(menuData) &&
             menuData?.map((v, id) => (
