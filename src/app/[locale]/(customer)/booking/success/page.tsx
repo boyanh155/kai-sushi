@@ -22,15 +22,15 @@ const saveButtonClickHandler = () => {
 };
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
-  const searchs = useSearchParams()
-  console.log(searchs.toString())
+  const search = useSearchParams()
+  console.log(search.get("orderId"));
   console.log('asdsad')
   const copyButtonClickHandler = () => {
     navigator.clipboard.writeText(window.location.href);
     setIsCopy(true);
   };
   const router = useRouter();
-  const api = useGetBookingById(orderId);
+  const api = useGetBookingById(orderId || search.get("orderId")!);
   const t = useTranslations("Booking");
 
   return api?.isLoading ? (
