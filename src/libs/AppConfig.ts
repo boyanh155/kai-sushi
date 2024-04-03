@@ -13,10 +13,24 @@ export const pathnames = {
     vi: "/dat-lich",
     en: "/booking",
   },
-  "/booking/:path*": {
-    vi: "/dat-lich/:path*",
-    en: "/booking/:path*",
+  // booking
+  "/booking/order-info": {
+    vi: "/dat-lich/thong-tin-dat-ban",
+    en: "/booking/order-info",
   },
+  "/booking/user-info": {
+    vi: "/dat-lich/thong-tin-lien-lac",
+    en: "/booking/user-info",
+  },
+  "/booking/success": {
+    vi: "/dat-lich/thanh-cong",
+    en: "/booking/success",
+  },
+  "/booking/success?:query": {
+    vi: "/dat-lich/thanh-cong?:query",
+    en: "/booking/success?:query",
+  },
+  // menu
   "/food/:path*": {
     vi: "/mon-an/:path*",
     en: "/food/:path*",
@@ -24,6 +38,15 @@ export const pathnames = {
   "/beverage/:path*": {
     vi: "/do-uong/:path*",
     en: "/beverage/:path*",
+  },
+  // take away
+  "/take-away": {
+    vi: "/mang-ve",
+    en: "/take-away",
+  },
+  "/take-away/:path*": {
+    vi: "/mang-ve/:path*",
+    en: "/take-away/:path*",
   },
 } satisfies Pathnames<typeof locales>;
 
@@ -38,6 +61,5 @@ export const AppConfig: {
   defaultLocale: "en" satisfies typeOfLocale,
   localePrefix,
 };
-
 
 export type AppPathnames = keyof typeof pathnames;

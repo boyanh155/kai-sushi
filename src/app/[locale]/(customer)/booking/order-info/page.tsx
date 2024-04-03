@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import useBookingStore, {
   selectBookingState,
   setBookingState,
@@ -44,7 +44,7 @@ const OrderInfoPage = (props: Props) => {
     e.preventDefault();
     if (isInvalid) return;
 
-    router.push("user-info");
+    router.push("/booking/user-info");
   };
   const handleInput = (
     e: any,

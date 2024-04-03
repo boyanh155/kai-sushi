@@ -29,7 +29,8 @@ const LocaleSwitcher = (props: Props) => {
   const pathName = usePathname();
   const [isPending, startTransition] = useTransition();
   const params = useParams();
-
+  console.log(params);
+  console.log(pathName);
   function onSelectChange(event: MouseEvent<HTMLDivElement>) {
     event.preventDefault();
     event.stopPropagation();
@@ -39,25 +40,25 @@ const LocaleSwitcher = (props: Props) => {
     startTransition(() => {
       router.replace(
         {
-          // @ts-expect-error -- TypeScript will validate that only known `params`
           // are used in combination with a given `pathname`. Since the two will
           // always match for the current route, we can skip runtime checks.
           pathname: pathName,
-          params: params,
+          // @ts-expect-error -- TypeScript will validate that only known `params`
+          params,
         },
         {
-          locale: nextLocale,
+          locale: nextLocale || "en",
         }
       );
     });
   }
   return (
     // <div className="relative content-container">
-    <div className="absolute top-6 right-6 w-6 h-6">
+    <div className="absolute top-6 right-6 w-6 h-6 z-[9999]">
       {localeOptions.map((option, index) => {
         return locale.split("/").includes(option.item) ? (
           <div
-            className="list-none"
+            className="list-none cursor-pointer hover:opacity-60 transition-all"
             key={index}
             data-value={option.value}
             onClick={onSelectChange}
