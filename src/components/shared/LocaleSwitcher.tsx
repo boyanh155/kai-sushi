@@ -14,13 +14,13 @@ const localeOptions = [
   {
     value: "vi",
     item: "en",
-    label: <Image src={enFlag} alt="EN flag" width={100} height={100} />,
+    label: <Image src={viFlag} alt="VI flag" width={100} height={100} />,
   },
   {
     value: "en",
 
     item: "vi",
-    label: <Image src={viFlag} alt="VI flag" width={100} height={100} />,
+    label: <Image src={enFlag} alt="EN flag" width={100} height={100} />,
   },
 ];
 const LocaleSwitcher = (props: Props) => {
