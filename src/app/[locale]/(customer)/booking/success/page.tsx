@@ -2,14 +2,13 @@
 import React, { useState } from "react";
 import { useGetBookingById } from "../../../../../hooks/api/useBooking";
 import BackwardButton from "@/components/Booking/BackwardButton";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
 import Loading from "@/components/shared/Loading";
 import { screenShotElement } from "@/libs/screenshot";
-import { useRouter } from "@/navigation";
-
+import { useRouter, Link } from "@/navigation";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   searchParams: {
@@ -23,12 +22,16 @@ const saveButtonClickHandler = () => {
 };
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
+  const search = useSearchParams()
+  console.log(search.get("orderId"));
+  console.log('asdsad')
   const copyButtonClickHandler = () => {
     navigator.clipboard.writeText(window.location.href);
     setIsCopy(true);
   };
   const router = useRouter();
-  const api = useGetBookingById(orderId);
+  const _orderId = orderId || search.get("orderId")!;
+  const api = useGetBookingById(_orderId);
   const t = useTranslations("Booking");
 
   return api?.isLoading ? (
@@ -36,7 +39,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   ) : (
     <>
       <Link
-        href={`order-info?orderId=${orderId}`}
+        href={`/booking/order-info?orderId=${_orderId}` as any}
         className="flex absolute top-16 left-8"
       >
         <BackwardButton />
@@ -52,7 +55,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
           {t("booking")}
         </h2>
         {/* ID */}
-        <p className="text-[#959595] font-light mt-6">#{orderId}</p>
+        <p className="text-[#959595] font-light mt-6">#{_orderId}</p>
         <p className="font-light mt-1">{t("success_message")}</p>
         {/* Info card */}
         <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden border px-5 p-4">

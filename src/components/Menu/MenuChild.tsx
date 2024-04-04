@@ -25,7 +25,18 @@ const MenuChild = ({ item }: Props) => {
             >
               <div className="flex flex-row justify-between text-white  uppercase">
                 <p className="font-light w-2/3">{v.title}</p>
-                <p className="font-light">{v.price}</p>
+                <p className="font-light">
+                  {v.price?.split("/").map((line, index, array) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      {index < array.length - 1 && (
+                        <>
+                          /<br />
+                        </>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </p>
               </div>
               <p className="text-[#FEFEFECC] mt-2 opacity-80 text-xs w-60 font-light">
                 {v.description}

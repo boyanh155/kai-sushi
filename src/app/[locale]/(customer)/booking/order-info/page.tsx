@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import logoSquare from "@/public/logo.svg";
-import { gideon } from "@/libs/GoogleFont";
+import { gideon, nunito } from "@/libs/GoogleFont";
 import { optionsAmount } from "./optionAmount";
 import { IBookingClient } from "../../../../../../types/Booking";
 import { isNumber } from "lodash";
@@ -31,10 +31,7 @@ const OrderInfoPage = (props: Props) => {
   // TIME
   const _nowTime = _now.format("HH:mm");
   const maxTime = "22:00";
-  const minTime = moment(_nowTime, "HH:mm").isBetween(
-    moment("16:00", "HH:mm"),
-    moment(maxTime, "HH:mm")
-  )
+  const minTime = moment(_nowTime, "HH:mm").isBefore(moment(maxTime, "HH:mm"))
     ? _nowTime
     : "16:00";
   // save time
@@ -63,10 +60,7 @@ const OrderInfoPage = (props: Props) => {
 
   const maxDate = _now.clone().add(3, "weeks").format("YYYY-MM-DD");
 
-  const minDate = moment(_nowTime, "HH:mm").isBetween(
-    moment("16:00", "HH:mm"),
-    moment(maxTime, "HH:mm")
-  )
+  const minDate = moment(_nowTime, "HH:mm").isBefore(moment(maxTime, "HH:mm"))
     ? _now.format("YYYY-MM-DD")
     : moment().clone().add(1, "days").format("YYYY-MM-DD");
 
@@ -164,7 +158,11 @@ const OrderInfoPage = (props: Props) => {
             type="date"
             id="dateInput"
             value={selectedDate}
-            className={(selectedDate ? "filled" : "") + " !text-white"}
+            className={
+              (selectedDate ? "filled" : "") +
+              " !text-white " +
+              nunito.className
+            }
             onChange={(e) => setSelectedDate(e.target.value)}
             min={minDate}
             max={maxDate}
@@ -214,7 +212,7 @@ const OrderInfoPage = (props: Props) => {
             onResize={(e) => e.preventDefault()}
             value={bookingState.note}
             rows={4}
-            className={`filled !text-white resize-none  placeholder:text-[#959595]`}
+            className={`filled !text-white resize-none  placeholder:!text-[#959595]`}
             placeholder={t("note_placeholder")}
           ></textarea>
           <label

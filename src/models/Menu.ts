@@ -75,6 +75,15 @@ const menuHeader = new Schema<IMenuHeader>({
   ],
 });
 
+menuHeader.pre("deleteOne", async function (next) {
+  // 'this' is the MenuHeader being removed. Provide callbacks here if you want
+  // to be notified of the calls' result.
+  await model("MenuChild").deleteMany({
+    _id: { $in: (this as any).children },
+  });
+  next();
+});
+
 const menuHeaderModel =
   models.MenuHeader || model<IMenuHeader>("MenuHeader", menuHeader);
 

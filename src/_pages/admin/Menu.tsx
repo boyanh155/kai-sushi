@@ -66,7 +66,10 @@ const Menu = (props: Props) => {
       {/* Delete Modal */}
       <DeleteHeaderModal
         deleteId={deleteId}
-        handleClose={() => setDeleteId("")}
+        handleClose={() => {
+          setDeleteId("");
+          menuData?.refetch();
+        }}
       />
     </div>
   ) : (

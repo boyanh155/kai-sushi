@@ -3,16 +3,12 @@ import Loading from "@/components/shared/Loading";
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import ApiProvider from "@/libs/ApiProvider";
 import { AppConfig } from "@/libs/AppConfig";
+import { nunito } from "@/libs/GoogleFont";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { Nunito } from "next/font/google";
 import { Suspense } from "react";
 
-const nunito = Nunito({
-  weight: ["400", "700", "500", "300"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
+
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "vi" }];

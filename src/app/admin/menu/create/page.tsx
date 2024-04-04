@@ -46,7 +46,7 @@ const CreateMenu = (props: Props) => {
       title: yup.string().required("Title is required"),
       slug: yup.string().required("Slug is required"),
       children: yup.array().of(yup.object()),
-      order: yup.number().min(0).required("Order is required"),
+      order: yup.number().min(0),
     }),
     onSubmit: (values) => {
       const form = new FormData();

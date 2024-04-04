@@ -9,11 +9,12 @@ import { isEmpty, isError, isFinite, set } from "lodash";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
-import { Link, useRouter } from "@/navigation";
+import Link from "next/link";
 
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
 import Alert from "@/components/shared/Alert";
+import { useRouter } from "@/navigation";
 
 type Props = {};
 
@@ -87,7 +88,8 @@ const UserInfoPage = (props: Props) => {
       setIsLoading(true);
       return;
     }
-    if (!api?.isError || api.isSuccess) {
+    if(!api?.isError || api.isSuccess){
+
       setIsLoading(false);
     }
     return;

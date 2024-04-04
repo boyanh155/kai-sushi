@@ -26,7 +26,7 @@ input[type="month"] {
   -moz-appearance: none;
   /* -moz-appearance: textfield; */
   min-height: 1.2em;
-  min-width:95%
+  min-width: 95%;
 }
 body {
   color: rgb(var(--foreground-rgb));
@@ -94,13 +94,22 @@ body {
         filter: brightness(0) saturate(100%) invert(49%) sepia(13%)
           saturate(1450%) hue-rotate(6deg) brightness(92%) contrast(92%);
       }
-      &::-webkit-datetime-edit-year-field,
       &::-webkit-datetime-edit-ampm-field,
-      &::-webkit-datetime-edit-hour-field {
+      &::-webkit-datetime-edit-day-field,
+      &::-webkit-datetime-edit-hour-field,
+      &::-webkit-datetime-edit-millisecond-field,
+      &::-webkit-datetime-edit-minute-field,
+      &::-webkit-datetime-edit-month-field,
+      &::-webkit-datetime-edit-second-field,
+      &::-webkit-datetime-edit-week-field,
+      &::-webkit-datetime-edit-year-field,
+      &::-webkit-datetime-edit-text {
         color: white;
+        text-align: left;
       }
       &::-webkit-datetime-edit {
         @apply text-white;
+        text-align: left;
       }
 
       &:focus {

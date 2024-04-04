@@ -114,7 +114,7 @@ const HomeMain = (props: Props) => {
           </a>
 
           {/* instagram */}
-          <a href="https://www.instagram.com/kaisushinlounge/" target="_blank">
+          <a href="https://www.instagram.com/kaisushiloungesg/" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="22"

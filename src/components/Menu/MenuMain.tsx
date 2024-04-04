@@ -6,14 +6,14 @@ import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { CloseOutlined } from "@mui/icons-material";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
-
+import useApi from "@/hooks/api/useApi";
+import { Link } from "@/navigation";
 type Props = {};
 
 const MenuMain = (props: Props) => {
@@ -100,17 +100,19 @@ const MenuMain = (props: Props) => {
       <div className="ps-4">
         <div
           ref={activeHeaderElement}
-          className="flex flex-row gap-6 w-screen overflow-scroll"
+          className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
         >
           {!isEmpty(menuData) &&
-            menuData?.map((v, id) => (
-              <MenuHeader
-                menuType={menuType}
-                active={currentIndex == id}
-                item={v}
-                key={id}
-              />
-            ))}
+            menuData
+              ?.sort((a, b) => +a.order - +b.order)
+              .map((v, id) => (
+                <MenuHeader
+                  menuType={menuType}
+                  active={currentIndex == id}
+                  item={v}
+                  key={id}
+                />
+              ))}
         </div>
       </div>
 

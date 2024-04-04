@@ -15,7 +15,7 @@
         "menu": "thực đơn"
     },
     "Booking": {
-        "booking": "đặt chỗ",
+        "booking": "đặt bàn",
         "adult": "Người lớn",
         "peopleLabel": "người",
         "date": "ngày",
@@ -39,6 +39,6 @@
         "booking_cancel": "Hủy bàn",
         "menu_check": "xem menu tại đây",
         "error_bellow": "Phát hiện có lỗi sau:",
-        "note_placeholder":"Sinh nhật, bàn ngoài trời,..."
+        "note_placeholder": "Sinh nhật, bàn ngoài trời,..."
     }
 }
