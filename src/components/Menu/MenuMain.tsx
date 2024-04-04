@@ -13,7 +13,7 @@ import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
-import useApi from "@/hooks/api/useApi";
+
 type Props = {};
 
 const MenuMain = (props: Props) => {
@@ -29,7 +29,7 @@ const MenuMain = (props: Props) => {
   // Assuming activeHeaderElement is a reference to a DOM element
   useEffect(() => {
     // On page load, set the scroll position to the stored value
-    console.log(activeHeaderElement.current);
+
     if (!activeHeaderElement.current) return;
     const scrollPos = localStorage.getItem("scrollPosX");
     if (scrollPos && activeHeaderElement.current) {
@@ -61,7 +61,7 @@ const MenuMain = (props: Props) => {
   }, [api?.data]);
 
   useEffect(() => {
-    console.log(api?.data);
+
     if (!headerType) return setCurrentIndex(0);
 
     setCurrentIndex(
