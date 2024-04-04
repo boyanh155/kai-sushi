@@ -2,7 +2,7 @@ import cloudinary from "@/libs/cloudinary";
 import connectDB from "@/libs/connectDb";
 import { menuChildModel, menuHeaderModel } from "@/models/Menu";
 import { NextResponse } from "next/server";
-import { NavChild } from "../../../../../types/NavbarType";
+import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
 
 type MenuType = "food" | "beverage";
