@@ -88,7 +88,7 @@ const UserInfoPage = (props: Props) => {
       setIsLoading(true);
       return;
     }
-    if(!api?.isError || api.isSuccess){
+    if(api?.isError || api?.isSuccess){
 
       setIsLoading(false);
     }

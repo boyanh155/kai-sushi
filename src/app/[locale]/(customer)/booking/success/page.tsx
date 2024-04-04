@@ -23,8 +23,7 @@ const saveButtonClickHandler = () => {
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
   const search = useSearchParams()
-  console.log(search.get("orderId"));
-  console.log('asdsad')
+
   const copyButtonClickHandler = () => {
     navigator.clipboard.writeText(window.location.href);
     setIsCopy(true);

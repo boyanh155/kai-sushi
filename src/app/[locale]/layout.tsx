@@ -1,5 +1,5 @@
 import FooterMain from "@/components/shared/Footer/FooterMain";
-import Loading from "@/components/shared/Loading";
+
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import ApiProvider from "@/libs/ApiProvider";
 import { AppConfig } from "@/libs/AppConfig";
@@ -7,7 +7,7 @@ import { nunito } from "@/libs/GoogleFont";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
-
+import Loading from "./loading";
 
 
 export async function generateStaticParams() {
