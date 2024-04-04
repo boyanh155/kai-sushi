@@ -35,22 +35,22 @@ export const pathnames = {
     en: "/booking/:path*",
   },
   // menu
-  "/food": {
-    vi: "/mon-an",
-    en: "/food",
-  },
-  "/beverage": {
-    vi: "/do-uong",
-    en: "/beverage",
-  },
-  "/food/[...rest]": {
-    vi: "/mon-an/[...rest]",
-    en: "/food/[...rest]",
-  },
-  "/beverage/[...rest]": {
-    vi: "/do-uong/[...rest]",
-    en: "/beverage/[...rest]",
-  },
+  // "/food": {
+  //   vi: "/mon-an",
+  //   en: "/food",
+  // },
+  // "/beverage": {
+  //   vi: "/do-uong",
+  //   en: "/beverage",
+  // },
+  // "/food/[...rest]": {
+  //   vi: "/mon-an/[...rest]",
+  //   en: "/food/[...rest]",
+  // },
+  // "/beverage/[...rest]": {
+  //   vi: "/do-uong/[...rest]",
+  //   en: "/beverage/[...rest]",
+  // },
   // take away
   "/take-away": {
     vi: "/mang-ve",

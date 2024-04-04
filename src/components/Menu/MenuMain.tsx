@@ -71,6 +71,7 @@ const MenuMain = (props: Props) => {
     );
   }, [headerType, api?.data]);
   const t = useTranslations("Home");
+  console.log(menuData)
   return api?.isLoading ? (
     <Loading />
   ) : menuData ? (
