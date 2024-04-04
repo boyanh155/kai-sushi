@@ -103,7 +103,8 @@ body {
       &::-webkit-datetime-edit-second-field,
       &::-webkit-datetime-edit-week-field,
       &::-webkit-datetime-edit-year-field,
-      &::-webkit-datetime-edit-text {
+      &::-webkit-datetime-edit-text,
+      &::-webkit-date-and-time-value {
         color: white;
         text-align: left;
       }
