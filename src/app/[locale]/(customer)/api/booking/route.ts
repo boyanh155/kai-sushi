@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import moment from "moment";
-import { IBooking, IBookingClient } from "../../../../../types/Booking";
+import { IBooking, IBookingClient } from "@/../types/Booking";
 import { formatLocaleDate, formatLocaleDateString } from "@/libs/format";
 import a from "./dummy.json";
 import { sendMessageToManyRecipients } from "@/services/meta";
