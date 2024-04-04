@@ -67,6 +67,14 @@ const OrderInfoPage = (props: Props) => {
   const [selectedDate, setSelectedDate] = useState(minDate);
   useEffect(() => {
     //  change booking info date
+    if (
+      (selectedTime < minTime || selectedTime > maxTime) &&
+      !moment(selectedDate).isAfter(_now, "day")
+    ) {
+      setIsInvalid(true);
+    } else {
+      setIsInvalid(false);
+    }
     _setBookingState({
       ...bookingState,
       bookDate: moment(
@@ -159,9 +167,9 @@ const OrderInfoPage = (props: Props) => {
             id="dateInput"
             value={selectedDate}
             className={
-              (selectedDate ? "filled" : "") +
-              " !text-white " +
-              nunito.className
+              "filled " + " !text-white " + nunito.className +( isInvalid
+                ? " input-error"
+                : "")
             }
             onChange={(e) => setSelectedDate(e.target.value)}
             min={minDate}
@@ -180,17 +188,15 @@ const OrderInfoPage = (props: Props) => {
             type="time"
             id="timeInput"
             value={selectedTime}
-            className={(selectedTime ? "filled" : "") + " !text-white"}
+            className={
+              "filled " +
+              " !text-white " +
+              (isInvalid ? "input-error " : " ") +
+              nunito.className
+            }
             onChange={(e) => {
               const value = e.target.value;
-              if (value < minTime || value > maxTime) {
-                setIsInvalid(true);
-                e.target.classList.add("input-error");
-              } else {
-                setIsInvalid(false);
 
-                e.target.classList.remove("input-error");
-              }
               setSelectedTime(value);
             }}
             min={minTime}
@@ -212,7 +218,7 @@ const OrderInfoPage = (props: Props) => {
             onResize={(e) => e.preventDefault()}
             value={bookingState.note}
             rows={4}
-            className={`filled !text-white resize-none  placeholder:!text-[#959595]`}
+            className={`filled  !text-white resize-none  placeholder:!text-[#959595]`}
             placeholder={t("note_placeholder")}
           ></textarea>
           <label
