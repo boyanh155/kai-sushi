@@ -17,7 +17,7 @@ const MenuHeader = ({ item, menuType }: Props) => {
     <Link href={`/${menuType}/${item.slug}` as any}>
       <div
         className={`${
-          pathName.split("/")[2].toLocaleLowerCase() === item.slug.toLowerCase()
+          pathName?.split("/")?.[2]?.toLocaleLowerCase() === item?.slug?.toLowerCase()
             ? "text-white"
             : "text-[#959595]"
         } py-2  pe-8 min-w-16 cursor-pointer text-nowrap hover:text-white transition-all duration-300 ease-in-out`}

@@ -12,7 +12,6 @@ import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
-import useApi from "@/hooks/api/useApi";
 import { Link } from "@/navigation";
 type Props = {};
 
