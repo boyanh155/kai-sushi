@@ -12,7 +12,7 @@ type Props = {
 
 const MenuHeader = ({ item, active, menuType }: Props) => {
   return (
-    <Link href={`/${menuType}/${item.slug}` as any}>
+    <Link href={`/${menuType}/${item.slug}` as any} >
       <div
         className={`${
           active ? "text-white" : "text-[#959595]"
