@@ -6,7 +6,6 @@ import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { CloseOutlined } from "@mui/icons-material";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
@@ -87,9 +86,9 @@ const MenuMain = (props: Props) => {
         <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-2">
           <Link
             href="/"
-            className="bg-black p-1.5 border-[0.5px] border-[#878787a6] rounded-sm"
+            className="bg-black px-2 py-2.5 border-[0.5px] border-[#878787a6] rounded-sm text-xl"
           >
-            <CloseOutlined sx={{ fontSize: 20, fontWeight: 300 }} />
+            x
           </Link>
           <p className={`uppercase ${gideon.className}`}>
             {menuType === "food" ? t("food") : t("beverage")}

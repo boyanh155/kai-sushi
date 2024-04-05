@@ -8,7 +8,7 @@ import bookingModel from "@/models/Booking";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
 import path from "path";
-import fs from "fs";
+
 
 export const POST = async (req: NextRequest) => {
   await connectDB();

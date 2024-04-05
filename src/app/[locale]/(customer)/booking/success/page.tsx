@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
 import Loading from "@/components/shared/Loading";
-import { screenShotElement } from "@/libs/screenshot";
+
 import { useRouter, Link } from "@/navigation";
 import { useSearchParams } from "next/navigation";
 
@@ -17,9 +17,7 @@ type Props = {
   };
 };
 
-const saveButtonClickHandler = () => {
-  screenShotElement("#kai-booking__screenshot__success-order");
-};
+
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
   const search = useSearchParams()

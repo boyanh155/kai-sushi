@@ -4,8 +4,7 @@ import Image from "next/image";
 import React from "react";
 import logoSquare from "@/public/logo.svg";
 import { useTranslations } from "next-intl";
-import PlaceIcon from "@mui/icons-material/Place";
-import { IconButton } from "@mui/material";
+
 import { useRouter } from "next/navigation";
 import { Gideon_Roman } from "next/font/google";
 import { gideon } from "@/libs/GoogleFont";
@@ -52,9 +51,9 @@ const HomeMain = (props: Props) => {
         <p className="text-xs text-center w-60 mt-6 font-light">
           {t("address1")}
         </p>
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row-reverse mt-4">
           {/* Open gg */}
-          <IconButton
+          {/* <IconButton
             size="medium"
             className="text-white cursor-pointer tooltip-bottom transition-all tooltip"
             data-tip={t("google_map")}
@@ -63,7 +62,7 @@ const HomeMain = (props: Props) => {
             }
           >
             <PlaceIcon />
-          </IconButton>
+          </IconButton> */}
           {/* embedded map */}
         </div>
         {/* frame map */}

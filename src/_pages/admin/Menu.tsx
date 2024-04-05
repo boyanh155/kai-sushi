@@ -2,8 +2,7 @@
 
 import Loading from "@/components/shared/Loading";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
-import { Delete, Edit } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+
 import React from "react";
 import { isEmpty } from "lodash";
 import DeleteHeaderModal from "@/components/Admin/Menu/DeleteHeaderModal";
@@ -52,12 +51,9 @@ const Menu = (props: Props) => {
               </td>
 
               <td>
-                <IconButton color="primary">
-                  <Edit />
-                </IconButton>
-                <IconButton color="error" onClick={() => setDeleteId(item._id)}>
-                  <Delete />
-                </IconButton>
+                <button>Edit bt</button>
+                <button onClick={() => setDeleteId(item._id)}>Delete bt</button>
+        
               </td>
             </tr>
           ))}
