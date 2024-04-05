@@ -33,8 +33,7 @@ const LocaleSwitcher = (props: Props) => {
 
   function onSelectChange(event: MouseEvent<HTMLDivElement>) {
     const nextLocale = event.currentTarget.getAttribute("data-value");
-    console.log(nextLocale);
-    console.log();
+
     startTransition(() => {
       router.replace(
         {

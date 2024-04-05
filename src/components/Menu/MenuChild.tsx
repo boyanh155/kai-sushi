@@ -26,23 +26,23 @@ const MenuChild = ({ headerId }: Props) => {
         <div className="">
           {item.children?.map((v, id) => (
             <div
-              key={id}
+              key={`qa__${id}`}
               className="flex-col mt-4 pt-4 px-2 pb-8  border-[0.4px] border-[#959595] rounded-sm"
             >
               <div className="flex flex-row justify-between text-white  uppercase">
                 <p className="font-light w-2/3">{v.title}</p>
-                <p className="font-light">
+                <div className="font-light">
                   {v.price?.split("/").map((line, index, array) => (
-                    <React.Fragment key={index}>
+                    <div key={`ia__${index}`}>
                       {line}
                       {index < array.length - 1 && (
                         <>
                           /<br />
                         </>
                       )}
-                    </React.Fragment>
+                    </div>
                   ))}
-                </p>
+                </div>
               </div>
               <p className="text-[#FEFEFECC] mt-2 opacity-80 text-xs w-60 font-light">
                 {v.description}

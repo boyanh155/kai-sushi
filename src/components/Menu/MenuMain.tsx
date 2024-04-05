@@ -18,6 +18,7 @@ const MenuMain = (props: Props) => {
   const pathName = usePathname();
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType = pathName?.split("/")[3] as string;
+
   const activeHeaderElement = useRef<HTMLDivElement>(null);
 
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
@@ -27,9 +28,9 @@ const MenuMain = (props: Props) => {
   // Assuming activeHeaderElement is a reference to a DOM element
   useEffect(() => {
     // On page load, set the scroll position to the stored value
-
     if (!activeHeaderElement.current) return;
     const scrollPos = localStorage.getItem("scrollPosX");
+    console.log(scrollPos);
     if (scrollPos && activeHeaderElement.current) {
       activeHeaderElement.current.scrollLeft = Number(scrollPos);
     }
@@ -55,16 +56,16 @@ const MenuMain = (props: Props) => {
   }, [activeHeaderElement.current]); // Empty dependency array to run only once on mount
   useEffect(() => {
     if (isEmpty(api?.data)) return;
-    setMenuData(api?.data!);
+    setMenuData(api?.data?.sort((a, b) => +a.order - +b.order)!);
   }, [api?.data]);
 
   useEffect(() => {
     if (!headerType) return setCurrentIndex(0);
 
     setCurrentIndex(
-      api?.data?.findIndex(
-        (v) => headerType.toLowerCase() === v.slug.toLowerCase()
-      ) || 0
+      api?.data?.findIndex((v) => {
+        return headerType.toLowerCase() === v.slug.toLowerCase();
+      }) || 0
     );
   }, [headerType, api?.data]);
 
@@ -102,16 +103,9 @@ const MenuMain = (props: Props) => {
           className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
         >
           {!isEmpty(menuData) &&
-            menuData
-              ?.sort((a, b) => +a.order - +b.order)
-              .map((v, id) => (
-                <MenuHeader
-                  menuType={menuType}
-     
-                  item={v}
-                  key={id}
-                />
-              ))}
+            menuData.map((v, id) => (
+              <MenuHeader menuType={menuType} item={v} key={v._id} />
+            ))}
         </div>
       </div>
 
@@ -120,7 +114,7 @@ const MenuMain = (props: Props) => {
         {/* {menuData?.[currentIndex]?.children?.map((v, id) => (
           <MenuChild item={v} key={id} headerId={menuData[currentIndex]._id} />
         ))} */}
-        {<MenuChild headerId={menuData?.[currentIndex]?._id} />}
+        <MenuChild headerId={menuData?.[currentIndex]?._id} />
       </div>
     </div>
   ) : (

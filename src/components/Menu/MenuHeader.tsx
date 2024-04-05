@@ -12,7 +12,7 @@ type Props = {
 
 const MenuHeader = ({ item, menuType }: Props) => {
   const pathName = usePathname();
-  console.log(pathName);
+
   return (
     <Link href={`/${menuType}/${item.slug}` as any}>
       <div
