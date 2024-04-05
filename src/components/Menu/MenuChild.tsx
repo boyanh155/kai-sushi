@@ -1,14 +1,20 @@
 import React from "react";
 import { NavChild, NavChildType } from "../../../types/NavbarType";
+import { useGetMenuHeaderDetailById } from "@/hooks/api/useMenuApi";
+import Loading from "../shared/Loading";
+import { isEmpty } from "lodash";
 
 type Props = {
-  item?: NavChild;
+  headerId: string;
 };
 
-const MenuChild = ({ item }: Props) => {
-  return (
-    item?.type === NavChildType.Body && (
-      <div className="flex flex-col text-base font-medium">
+const MenuChild = ({ headerId }: Props) => {
+  const api = useGetMenuHeaderDetailById(headerId);
+  return api?.isLoading ? (
+    <Loading />
+  ) : !isEmpty(api?.data) ? (
+    api?.data?.children?.map((item, _id) => (
+      <div key={_id} className="flex flex-col text-base font-medium">
         {/* BODY */}
         <div className="flex flex-col gap-1 mb-5 mt-4 items-center">
           <p className="golden-title uppercase text-center">{item.title}</p>
@@ -45,7 +51,9 @@ const MenuChild = ({ item }: Props) => {
           ))}
         </div>
       </div>
-    )
+    ))
+  ) : (
+    <div>No data </div>
   );
 };
 

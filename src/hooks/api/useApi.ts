@@ -28,7 +28,6 @@ export async function api(
   customConfig = {}
 ) {
   try {
-   
     switch (method) {
       case "GET":
         return await axios
@@ -95,7 +94,7 @@ export default function useApi<ResponseBody>({
       // eslint-disable-next-line
       const get = useQuery<ResponseBody>({
         queryKey: key,
-        queryFn: () => api(method, url, {}, customConfig),
+        queryFn: (obj?: any) => api(method, url, obj, customConfig),
         retry: 0,
       });
       return { get };

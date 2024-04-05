@@ -23,20 +23,24 @@ export async function GET(
       throw new Error("Invalid menu type");
     }
     await connectDB();
-    const data = await menuHeaderModel
-      .find(
-        menuType === "both"
-          ? {}
-          : {
-              type: menuType,
-            }
-      )
-      .populate({
-        path: "children",
-        populate: {
-          path: "children",
-        },
-      });
+    const data = await menuHeaderModel.find(
+      menuType === "both"
+        ? {}
+        : {
+            type: menuType,
+          },
+      {
+        imageId: 0,
+        children: 0,
+        "__v": 0,
+      }
+    );
+    // .populate({
+    //   path: "children",
+    //   populate: {
+    //     path: "children",
+    //   },
+    // });
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });

@@ -14,6 +14,15 @@ export const useGetMenu = (type: "food" | "beverage" | "both" = "both") => {
   });
   return get;
 };
+export const useGetMenuHeaderDetailById = (id: string) => {
+  const { get } = useApi<MenuDataResponseBody>({
+    key: ["menuHeaderDetail", id],
+    method: "GET",
+    url: `menu/${id}`,
+  });
+
+  return get;
+};
 
 export const usePostMenu = (input?: {
   bodyData?: MenuDataRequestBody;

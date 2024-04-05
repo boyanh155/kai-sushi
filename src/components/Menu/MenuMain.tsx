@@ -61,7 +61,6 @@ const MenuMain = (props: Props) => {
   }, [api?.data]);
 
   useEffect(() => {
-
     if (!headerType) return setCurrentIndex(0);
 
     setCurrentIndex(
@@ -70,11 +69,12 @@ const MenuMain = (props: Props) => {
       ) || 0
     );
   }, [headerType, api?.data]);
+
   const t = useTranslations("Home");
-  console.log(menuData)
+
   return api?.isLoading ? (
     <Loading />
-  ) : menuData ? (
+  ) : !isEmpty(menuData) ? (
     <div className=" flex flex-col overflow-x-hidden pb-2">
       {/* IMAGE  */}
       <div
@@ -119,9 +119,10 @@ const MenuMain = (props: Props) => {
 
       {/* CONTENT */}
       <div className="px-8 gap-16 flex flex-col">
-        {menuData?.[currentIndex]?.children?.map((v, id) => (
-          <MenuChild item={v} key={id} />
-        ))}
+        {/* {menuData?.[currentIndex]?.children?.map((v, id) => (
+          <MenuChild item={v} key={id} headerId={menuData[currentIndex]._id} />
+        ))} */}
+        {<MenuChild headerId={menuData?.[currentIndex]?._id} />}
       </div>
     </div>
   ) : (

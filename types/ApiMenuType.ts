@@ -12,8 +12,9 @@ export type MenuDataResponseBody = {
   _id: string;
   title: string;
   slug: string;
-  type:string;
+  description?: string;
+  type: string;
   children: NavChild[];
   image: string;
   order: number;
-};;
+};

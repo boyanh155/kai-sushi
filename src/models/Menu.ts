@@ -24,6 +24,8 @@ const menuChild = new Schema<IMenuChild>({
   },
 });
 
+menuChild.index({ type: "text" });
+menuChild.index({ slug: "text" }, { unique: true });
 menuChild.add({
   children: [
     {
