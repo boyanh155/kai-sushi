@@ -109,7 +109,7 @@ const MenuMain = (props: Props) => {
               .map((v, id) => (
                 <MenuHeader
                   menuType={menuType}
-                  active={currentIndex == id}
+     
                   item={v}
                   key={id}
                 />

@@ -3,19 +3,23 @@ import React from "react";
 import { NavHeader } from "../../../types/NavbarType";
 
 // import Link from "next/link";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 type Props = {
   item: NavHeader;
-  active: boolean;
+
   menuType: "food" | "beverage";
 };
 
-const MenuHeader = ({ item, active, menuType }: Props) => {
+const MenuHeader = ({ item, menuType }: Props) => {
+  const pathName = usePathname();
+  console.log(pathName);
   return (
-    <Link href={`/${menuType}/${item.slug}` as any} >
+    <Link href={`/${menuType}/${item.slug}` as any}>
       <div
         className={`${
-          active ? "text-white" : "text-[#959595]"
+          pathName.split("/")[2].toLocaleLowerCase() === item.slug.toLowerCase()
+            ? "text-white"
+            : "text-[#959595]"
         } py-2  pe-8 min-w-16 cursor-pointer text-nowrap hover:text-white transition-all duration-300 ease-in-out`}
       >
         {item.title}
