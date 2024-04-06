@@ -17,7 +17,7 @@ const pulsIn = keyframes`
   }
 `;
 const LoadingContainer = styled.div`
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -69,7 +69,7 @@ const Loader = styled.div`
   }
 `;
 const Overlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -84,6 +84,7 @@ const Overlay = styled.div`
 `;
 const Loading = (props: Props) => {
   return (
+  
     <LoadingContainer>
       <Overlay />
       <Loader className="absolute z-[101] top-[38%] translate-y-full left-1/2 -translate-x-1/2" />

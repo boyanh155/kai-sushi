@@ -14,14 +14,13 @@ import { gideon } from "@/libs/GoogleFont";
 import { Link } from "@/navigation";
 type Props = {};
 
-const MenuMain = (props: Props) => {
+const MenuMain = () => {
   const pathName = usePathname();
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType = pathName?.split("/")[3] as string;
 
   const activeHeaderElement = useRef<HTMLDivElement>(null);
 
-  const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const api = useGetMenu(menuType);
@@ -34,6 +33,7 @@ const MenuMain = (props: Props) => {
 
     if (scrollPos && activeHeaderElement.current) {
       activeHeaderElement.current.scrollLeft = Number(scrollPos);
+      activeHeaderElement.current.style.scrollBehavior = "auto";
     }
 
     const handleScroll = () => {
@@ -48,17 +48,13 @@ const MenuMain = (props: Props) => {
 
     activeHeaderElement.current.addEventListener("scroll", handleScroll);
 
-    // Cleanup function to remove the event listener
     return () => {
       if (activeHeaderElement.current) {
         activeHeaderElement.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [activeHeaderElement.current]); // Empty dependency array to run only once on mount
-  useEffect(() => {
-    if (isEmpty(api?.data)) return;
-    setMenuData(api?.data?.sort((a, b) => +a.order - +b.order)!);
-  }, [api?.data]);
+  }, []);
+  const sortedMenuData = api?.data?.sort((a, b) => +a.order - +b.order);
 
   useEffect(() => {
     if (!headerType) return setCurrentIndex(0);
@@ -73,17 +69,15 @@ const MenuMain = (props: Props) => {
   const t = useTranslations("Home");
 
   return api?.isLoading ? (
-    <>
-      <Loading />
-    </>
-  ) : !isEmpty(menuData) ? (
+    <Loading />
+  ) : !isEmpty(sortedMenuData) ? (
     <div className=" flex flex-col overflow-x-hidden pb-2">
       {/* IMAGE  */}
       <div
         style={{
           backgroundImage:
-            menuData[currentIndex]?.image &&
-            `url('${menuData[currentIndex]?.image}')`,
+            sortedMenuData?.[currentIndex]?.image &&
+            `url('${sortedMenuData[currentIndex]?.image}')`,
         }}
         className={`w-screen   uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
       >
@@ -105,19 +99,23 @@ const MenuMain = (props: Props) => {
           ref={activeHeaderElement}
           className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
         >
-          {!isEmpty(menuData) &&
-            menuData.map((v, id) => (
-              <MenuHeader menuType={menuType} item={v} key={v._id} />
-            ))}
+          {sortedMenuData?.map((v, id) => (
+            <MenuHeader
+              menuType={menuType}
+              item={v}
+              key={v._id}
+              active={id === currentIndex}
+            />
+          ))}
         </div>
       </div>
 
       {/* CONTENT */}
-      <div className="px-8 gap-16 flex flex-col">
-        {/* {menuData?.[currentIndex]?.children?.map((v, id) => (
-          <MenuChild item={v} key={id} headerId={menuData[currentIndex]._id} />
+      <div className="px-8 gap-16 flex flex-col flex-grow">
+        {/* {sortedMenuData?.[currentIndex]?.children?.map((v, id) => (
+          <MenuChild item={v} key={id} headerId={sortedMenuData[currentIndex]._id} />
         ))} */}
-        <MenuChild headerId={menuData?.[currentIndex]?._id} />
+        <MenuChild headerId={sortedMenuData?.[currentIndex]?._id!} />
       </div>
     </div>
   ) : (

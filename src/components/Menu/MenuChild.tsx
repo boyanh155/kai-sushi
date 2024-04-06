@@ -10,7 +10,7 @@ type Props = {
 
 const MenuChild = ({ headerId }: Props) => {
   const api = useGetMenuHeaderDetailById(headerId);
-  return !api?.isLoading ? (
+  return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(api?.data) ? (
     api?.data?.children?.map((item, _id) => (
