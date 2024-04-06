@@ -9,7 +9,8 @@ const BookingLayout = ({ children }: Props) => {
   return (
     <Suspense fallback={<LoadingPage />}>
       <div className="relative content-container items-center px-7 overflow-hidden">
-        {children}
+        {/* {children} */}
+        <LoadingPage />
       </div>
     </Suspense>
   );
