@@ -15,7 +15,7 @@ type Params = {
 };
 
 export async function GET(
-  req: Request,
+  _: Request,
   { params: { menuType = "both" } }: Params
 ) {
   try {
@@ -32,7 +32,7 @@ export async function GET(
       {
         imageId: 0,
         children: 0,
-        "__v": 0,
+        __v: 0,
       }
     );
     // .populate({

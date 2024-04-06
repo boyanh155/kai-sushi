@@ -21,10 +21,13 @@ const MenuMain = (props: Props) => {
 
   const activeHeaderElement = useRef<HTMLDivElement>(null);
 
+
+
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const api = useGetMenu(menuType);
+
   // Assuming activeHeaderElement is a reference to a DOM element
   useEffect(() => {
     // On page load, set the scroll position to the stored value

@@ -95,6 +95,7 @@ export default function useApi<ResponseBody>({
       const get = useQuery<ResponseBody>({
         queryKey: key,
         queryFn: (obj?: any) => api(method, url, obj, customConfig),
+        staleTime: 1000 * 60 * 30,
         retry: 0,
       });
       return { get };
