@@ -58,7 +58,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
         <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden border px-5 p-4">
           <p className=" capitalize  text-base">{api?.data?.name}</p>
           <div className="flex justify-between">
-            <p className="text-nowrap flex items-center justify-center gap-2  font-light">
+            <p className="text-nowrap whitespace-nowrap flex items-center justify-center gap-2  font-light">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -76,7 +76,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
             </p>
             <p
               className={
-                "text-nowrap flex items-center justify-center gap-2  font-light"
+                "text-nowrap whitespace-nowrap flex items-center justify-center gap-2  font-light"
               }
             >
               <svg

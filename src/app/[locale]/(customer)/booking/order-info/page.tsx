@@ -114,7 +114,7 @@ const OrderInfoPage = (props: Props) => {
               });
             }}
           >
-            <label className="!text-xs float-label text-nowrap -top-3.5 left-2">
+            <label className="!text-xs float-label text-nowrap whitespace-nowrap no -top-3.5 left-2">
               {t("adult")}
             </label>
             <p className="uppercase text-white">
@@ -224,7 +224,7 @@ const OrderInfoPage = (props: Props) => {
           <label
             htmlFor="note"
             id="labelNote"
-            className="text-nowrap capitalize"
+            className="text-nowrap whitespace-nowrap capitalize"
           >
             {t("note")}
           </label>

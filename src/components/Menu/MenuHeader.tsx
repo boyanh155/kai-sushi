@@ -20,7 +20,7 @@ const MenuHeader = ({ item, menuType }: Props) => {
           pathName?.split("/")?.[2]?.toLocaleLowerCase() === item?.slug?.toLowerCase()
             ? "text-white"
             : "text-[#959595]"
-        } py-2  pe-8 min-w-16 cursor-pointer text-nowrap hover:text-white transition-all duration-300 ease-in-out`}
+        } py-2  pe-8 min-w-16 cursor-pointer text-nowrap whitespace-nowrap hover:text-white transition-all duration-300 ease-in-out`}
       >
         {item.title}
       </div>
