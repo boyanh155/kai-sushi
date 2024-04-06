@@ -21,8 +21,6 @@ const MenuMain = (props: Props) => {
 
   const activeHeaderElement = useRef<HTMLDivElement>(null);
 
-
-
   const [menuData, setMenuData] = useState<MenuDataResponseBody[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -33,7 +31,7 @@ const MenuMain = (props: Props) => {
     // On page load, set the scroll position to the stored value
     if (!activeHeaderElement.current) return;
     const scrollPos = localStorage.getItem("scrollPosX");
-    console.log(scrollPos);
+
     if (scrollPos && activeHeaderElement.current) {
       activeHeaderElement.current.scrollLeft = Number(scrollPos);
     }
@@ -75,7 +73,9 @@ const MenuMain = (props: Props) => {
   const t = useTranslations("Home");
 
   return api?.isLoading ? (
-    <Loading />
+    <>
+      <Loading />
+    </>
   ) : !isEmpty(menuData) ? (
     <div className=" flex flex-col overflow-x-hidden pb-2">
       {/* IMAGE  */}

@@ -11,9 +11,10 @@ type Props = {
 const ApiProvider = ({ children }: Props) => {
   const [client] = useState(
     new QueryClient({
-      defaultOptions: { queries: { staleTime: 30 * 1000 * 60, } },
+      defaultOptions: { queries: { staleTime: 30 * 1000 * 60 } },
     })
   );
+
   return (
     <QueryClientProvider client={client}>
       {children}
