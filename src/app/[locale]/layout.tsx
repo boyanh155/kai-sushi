@@ -33,7 +33,9 @@ export default function LocaleLayout({
               <Suspense fallback={<Loading />}>
                 <main className="w-full relative flex flex-grow">
                   <LocaleSwitcher />
-                  <div className="flex-grow flex">{children}</div>
+                  <div className="min-h-full">
+                    {children}
+                    </div>
                 </main>
               </Suspense>
             </ApiProvider>
