@@ -3,21 +3,22 @@
 import { NavHeader } from "../../../types/NavbarType";
 
 // import Link from "next/link";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 type Props = {
   item: NavHeader;
-  active: boolean;
   menuType: "food" | "beverage";
 };
 
-const MenuHeader = ({ item, menuType, active }: Props) => {
+const MenuHeader = ({ item, menuType }: Props) => {
+  const pathName = usePathname();
+  const isActive = (pathName.split("/")[2] || "appetizer")?.toLowerCase() === `${item.slug}`.toLowerCase();
 
   return (
     <Link href={`/${menuType}/${item.slug}` as any}>
       <div
         className={`${
-          active ? "text-white" : "text-[#959595]"
-        } py-2 pe-8 min-w-16 cursor-pointer text-nowrap whitespace-nowrap hover:text-white transition-all duration-300 ease-in-out`}
+          isActive ? "active text-white" : "text-[#959595]"
+        } py-5 pe-6 min-w-16 ps-4 cursor-pointer text-nowrap whitespace-nowrap hover:text-white transition-all duration-300 ease-in-out`}
       >
         {item.title}
       </div>

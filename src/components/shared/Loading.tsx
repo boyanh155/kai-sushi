@@ -18,8 +18,11 @@ const LoadingContainer = styled.div`
   position: relative;
   top: 0;
   left: 0;
+  flex-grow:1;
   width: 100%;
-  height: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   z-index: 200;
   overflow: hidden;
 `;
@@ -39,10 +42,11 @@ const Loader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  top:0;
+  left:0;
   width: 100%;
   max-width: 6rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+
 
   &:before,
   &:after {
@@ -85,7 +89,7 @@ const Loading = () => {
   
     <LoadingContainer>
       <Overlay />
-      <Loader className="absolute z-[101] top-[38%] translate-y-full left-1/2 -translate-x-1/2" />
+      <Loader className="absolute z-[101] top-[38%]" />
     </LoadingContainer>
   );
 };

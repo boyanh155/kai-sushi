@@ -69,7 +69,7 @@ const MenuMain = () => {
   return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(sortedMenuData) ? (
-    <div className=" flex flex-col overflow-x-hidden pb-2">
+    <div className=" flex flex-col absolute min-h-full">
       {/* IMAGE  */}
       <div
         style={{
@@ -92,29 +92,27 @@ const MenuMain = () => {
         </div>
       </div>
       {/* NAV HEADER */}
-      <div className="ps-4">
+      <div className=" sticky top-0 w-full bg-black">
         <div
           ref={activeHeaderElement}
-          className="flex flex-row ps-6 gap-4 w-screen overflow-scroll"
+          className="flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8"
         >
-          {sortedMenuData?.map((v, id) => (
+          {sortedMenuData?.map((v) => (
             <MenuHeader
               menuType={menuType}
               item={v}
               key={v._id}
-              active={id === currentIndex}
             />
           ))}
         </div>
       </div>
 
       {/* CONTENT */}
-      <div className="px-8 gap-16 flex flex-col flex-grow">
         {/* {sortedMenuData?.[currentIndex]?.children?.map((v, id) => (
           <MenuChild item={v} key={id} headerId={sortedMenuData[currentIndex]._id} />
         ))} */}
         <MenuChild headerId={sortedMenuData?.[currentIndex]?._id!} />
-      </div>
+        
     </div>
   ) : (
     <div>No data</div>

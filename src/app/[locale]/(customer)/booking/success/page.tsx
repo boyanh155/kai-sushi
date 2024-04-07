@@ -17,10 +17,9 @@ type Props = {
   };
 };
 
-
 const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const [isCopy, setIsCopy] = useState(false);
-  const search = useSearchParams()
+  const search = useSearchParams();
 
   const copyButtonClickHandler = () => {
     navigator.clipboard.writeText(window.location.href);
