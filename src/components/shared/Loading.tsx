@@ -19,7 +19,8 @@ const LoadingContainer = styled.div`
   top: 0;
   left: 0;
   flex-grow:1;
-  width: 100%;
+  width: vw;
+  height:100%;
   display:flex;
   justify-content:center;
   align-items:center;
