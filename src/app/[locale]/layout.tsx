@@ -25,7 +25,7 @@ export default function LocaleLayout({
       <body
         className={
           nunito.className +
-          " overflow-x-hidden overflow-y-visible flex flex-col  min-h-screen pb-28"
+          " overflow-x-hidden flex flex-col  min-h-screen pb-24"
         }
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
@@ -35,12 +35,12 @@ export default function LocaleLayout({
                 <main className="w-full relative flex flex-grow">
                   <LocaleSwitcher />
                   {children}
+                  <FooterMain />
                 </main>
               </Suspense>
             </ApiProvider>
           </div>
         </NextIntlClientProvider>
-        <FooterMain />
       </body>
     </html>
   );
