@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import moment from "moment";
-import {  IBookingClient } from "@/../types/Booking";
+import { IBookingClient } from "@/../types/Booking";
 import { formatLocaleDate, formatLocaleDateString } from "@/libs/format";
 import a from "./dummy.json";
 import { sendMessageToManyRecipients } from "@/services/meta";
@@ -15,6 +15,7 @@ export const POST = async (req: NextRequest) => {
     const body: IBookingClient = await req.json();
 
     const { amount, bookDate, name, phone, isNotify, email, note } = body;
+    console.log({ amount, bookDate, name, phone, isNotify, email, note });
 
     // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
     const _date = formatLocaleDateString(bookDate);
@@ -55,7 +56,8 @@ export const POST = async (req: NextRequest) => {
     newBooking.qrcode = _url;
 
     await newBooking.save();
-    await sendMessageToManyRecipients(a.recipientId, a.text, {
+
+    sendMessageToManyRecipients(a.recipientId, a.text, {
       orderID: newBooking._id,
       "user-name": newBooking.name,
       amount: newBooking.amount,

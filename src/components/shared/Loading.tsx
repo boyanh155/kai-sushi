@@ -14,6 +14,7 @@ const pulsIn = keyframes`
 `;
 const LoadingContainer = styled.div`
   inset: 0;
+  display: flex;
   position: relative;
   top: 0;
   left: 0;
@@ -21,7 +22,7 @@ const LoadingContainer = styled.div`
   right: 0;
   flex-grow: 1;
   width: 100vw;
-  
+  height: auto;
   z-index: 200;
   overflow: hidden;
 `;
@@ -44,6 +45,7 @@ const Loader = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   max-width: 6rem;
   min-width: 6rem;
   min-height: 6rem;

@@ -30,7 +30,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   const api = useGetBookingById(_orderId);
   const t = useTranslations("Booking");
 
-  return api?.isLoading ? (
+  return !api?.isLoading ? (
     <Loading />
   ) : (
     <>

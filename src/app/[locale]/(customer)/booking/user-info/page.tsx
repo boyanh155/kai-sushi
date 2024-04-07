@@ -22,7 +22,7 @@ const UserInfoPage = () => {
   const bookingState = useBookingStore(selectBookingState);
   const _setBookingState = useBookingStore(setBookingState);
   const [isSubmit, setIsSubmit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isShowAlert, setIsShowAlert] = useState(false);
   const api = useApi({
     key: ["booking"],
@@ -45,7 +45,8 @@ const UserInfoPage = () => {
   };
   const submitForm = (e) => {
     try {
-      setIsLoading(true);
+      if (api?.isPending) return;
+
       e.preventDefault();
       setIsSubmit(true);
       const form = e.target as HTMLFormElement;
@@ -59,14 +60,13 @@ const UserInfoPage = () => {
       }
     } catch (err) {
       console.error(err);
-      setIsLoading(false);
     }
   };
+
   useEffect(() => {
     if (!api?.isSuccess || isEmpty(api?.data)) return;
-    setIsLoading(true);
     router.push(api.data);
-  }, [api?.isSuccess]);
+  }, [api?.isSuccess, api?.data]);
   useEffect(() => {
     if (
       api?.isError &&
@@ -81,20 +81,8 @@ const UserInfoPage = () => {
       setIsShowAlert(true);
     }
   }, [api?.isError]);
-  useEffect(() => {
-    if (api?.isPending) {
-      setIsLoading(true);
-      return;
-    }
-    if (api?.isError || api?.isSuccess) {
-      setIsLoading(false);
-    }
-    return;
-  }, [api?.isPending]);
 
-  return api?.isPending || isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <>
       <Link href="/booking/order-info" className="flex absolute top-16 left-8">
         <BackwardButton />
@@ -123,7 +111,9 @@ const UserInfoPage = () => {
       <form
         id="form_user"
         onSubmit={submitForm}
-        className="flex flex-col mt-10 w-full "
+        className={`flex flex-col mt-10 w-full transition-all duration-300 ${
+          api?.isPending ? "opacity-0 invisible" : ""
+        }`}
       >
         {/* Adult */}
         {/* Name */}
@@ -206,14 +196,22 @@ const UserInfoPage = () => {
           </label>
         </div>{" "}
         {/* CONFIRM  */}
-        <button
-          type="submit"
-          form="form_user"
-          className="mt-16 cursor-pointer w-full bg-[#8C773E99] text-white font-light text-base uppercase py-3 text-center"
-        >
-          {t("complete")}
-        </button>
       </form>
+
+      <button
+        type="submit"
+        form="form_user"
+        disabled={api?.isPending}
+        className={`${
+          api?.isPending ? " -top-64 " : "top-0"
+        } relative transition-all duration-300 mt-16 cursor-pointer w-full bg-[#8C773E99] text-white font-light text-base uppercase py-3 text-center flex justify-center items-center`}
+      >
+        {api?.isPending ? (
+          <span className="loading loading-spinner"></span>
+        ) : (
+          <p>{t("complete")}</p>
+        )}
+      </button>
     </>
   );
 };
