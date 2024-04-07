@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import React from "react";
+
 
 type AlertProps = {
   messages: string[] | string;

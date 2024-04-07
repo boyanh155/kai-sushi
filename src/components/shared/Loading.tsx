@@ -2,9 +2,7 @@
 
 import styled, { keyframes } from "styled-components";
 
-import React from "react";
 
-type Props = {};
 
 const pulsIn = keyframes`
   0% {
@@ -82,7 +80,7 @@ const Overlay = styled.div`
   ); 
   z-index: 50; 
 `;
-const Loading = (props: Props) => {
+const Loading = () => {
   return (
   
     <LoadingContainer>

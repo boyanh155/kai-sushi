@@ -8,7 +8,7 @@ type Params = {
   };
 };
 export const DELETE = async (
-  req: NextRequest,
+  _: NextRequest,
   { params: { headerId } }: Params
 ) => {
   try {
@@ -31,7 +31,7 @@ export const DELETE = async (
 };
 
 export const GET = async (
-  req: NextRequest,
+  _: NextRequest,
   { params: { headerId } }: Params
 ) => {
   try {

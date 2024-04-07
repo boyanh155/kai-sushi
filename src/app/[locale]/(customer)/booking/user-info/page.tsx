@@ -5,7 +5,7 @@ import useBookingStore, {
   selectBookingState,
   setBookingState,
 } from "@/stores/useBookingStore";
-import { isEmpty, isError, isFinite, set } from "lodash";
+import { isEmpty, isFinite } from "lodash";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { IBookingClient } from "../../../../../../types/Booking";
@@ -16,9 +16,7 @@ import Loading from "@/components/shared/Loading";
 import Alert from "@/components/shared/Alert";
 import { useRouter } from "@/navigation";
 
-type Props = {};
-
-const UserInfoPage = (props: Props) => {
+const UserInfoPage = () => {
   const router = useRouter();
   const t = useTranslations("Booking");
   const bookingState = useBookingStore(selectBookingState);
@@ -88,8 +86,7 @@ const UserInfoPage = (props: Props) => {
       setIsLoading(true);
       return;
     }
-    if(api?.isError || api?.isSuccess){
-
+    if (api?.isError || api?.isSuccess) {
       setIsLoading(false);
     }
     return;

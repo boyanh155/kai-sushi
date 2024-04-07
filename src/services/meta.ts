@@ -5,7 +5,7 @@ export const sendMessageToManyRecipients: (
   text: string,
   vars?: Record<any, any>
 ) => Promise<any> = (recipients, text, vars) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     let _text = text;
 
     if (vars) {

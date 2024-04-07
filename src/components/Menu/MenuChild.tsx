@@ -1,5 +1,3 @@
-import React from "react";
-import { NavChild, NavChildType } from "../../../types/NavbarType";
 import { useGetMenuHeaderDetailById } from "@/hooks/api/useMenuApi";
 import Loading from "../shared/Loading";
 import { isEmpty } from "lodash";

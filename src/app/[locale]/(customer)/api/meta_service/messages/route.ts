@@ -1,5 +1,4 @@
 import { sendMessageToManyRecipients } from "@/services/meta";
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {

@@ -1,9 +1,8 @@
 import { redirect } from "next/navigation";
-import React from "react";
 
-type Props = {};
 
-const BookingPage = (props: Props) => {
+
+const BookingPage = () => {
   return redirect("/booking/order-info");
 };
 

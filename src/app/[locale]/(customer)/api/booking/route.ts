@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import moment from "moment";
-import { IBooking, IBookingClient } from "@/../types/Booking";
+import {  IBookingClient } from "@/../types/Booking";
 import { formatLocaleDate, formatLocaleDateString } from "@/libs/format";
 import a from "./dummy.json";
 import { sendMessageToManyRecipients } from "@/services/meta";
 import bookingModel from "@/models/Booking";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
-import path from "path";
-
 
 export const POST = async (req: NextRequest) => {
   await connectDB();
@@ -49,7 +47,7 @@ export const POST = async (req: NextRequest) => {
     });
 
     const bookingUrl = `${process.env.NEXT_PUBLIC_API_URL}/booking/success?orderId=${newBooking._id}`;
-    const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
+    // const outputQr = path.join("qrcode-booking", `qr_${newBooking._id}.png`);
 
     // const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
 

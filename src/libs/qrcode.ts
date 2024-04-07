@@ -3,7 +3,6 @@ import path from "path";
 import QRCode from "qrcode";
 import cloudinary from "./cloudinary";
 import { IBooking } from "../../types/Booking";
-import { UploadApiResponse } from "cloudinary";
 
 export async function generateQRCodeWithLogo(
   text: string,
@@ -41,7 +40,7 @@ export async function generateQRCodeWithLogo(
   // upload to cloudinary
   const imageBuffer = await qr.getBufferAsync(Jimp.MIME_PNG);
 
-  const result: UploadApiResponse | undefined = await new Promise(
+  const result: any | undefined = await new Promise(
     (resolve, reject) => {
       cloudinary.v2.uploader
         .upload_stream(

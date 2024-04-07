@@ -1,17 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
 import logoSquare from "@/public/logo.svg";
 import { useTranslations } from "next-intl";
 
 import { useRouter } from "next/navigation";
-import { Gideon_Roman } from "next/font/google";
 import { gideon } from "@/libs/GoogleFont";
 
-type Props = {};
 
-const HomeMain = (props: Props) => {
+const HomeMain = () => {
   const t = useTranslations("Home");
   const router = useRouter();
 

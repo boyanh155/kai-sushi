@@ -12,12 +12,10 @@ import logoSquare from "@/public/logo.svg";
 import { gideon, nunito } from "@/libs/GoogleFont";
 import { optionsAmount } from "./optionAmount";
 import { IBookingClient } from "../../../../../../types/Booking";
-import { isNumber } from "lodash";
 import moment from "moment";
 
-type Props = {};
 
-const OrderInfoPage = (props: Props) => {
+const OrderInfoPage = () => {
   const router = useRouter();
   const bookingState = useBookingStore(selectBookingState);
   const _setBookingState = useBookingStore(setBookingState);
@@ -107,7 +105,7 @@ const OrderInfoPage = (props: Props) => {
             tabIndex={0}
             role="button"
             className=" relative input-golden flex justify-between items-center w-full"
-            onClick={(e) => {
+            onClick={_ => {
               selectedE?.current?.scrollIntoView({
                 behavior: "smooth",
                 block: "nearest",

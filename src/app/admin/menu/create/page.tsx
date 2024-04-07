@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import {
@@ -7,17 +7,14 @@ import {
   MenuDataResponseBody,
 } from "../../../../../types/ApiMenuType";
 
-import cloudinary from "@/libs/cloudinary";
-import { fileUpdateHandler } from "@/components/Admin/Menu/fn/fileUpdate";
 import AddSubMenuData from "@/components/Admin/Menu/AddSubMenuData";
 import { NavChild } from "../../../../../types/NavbarType";
-import { usePostMenu } from "@/hooks/api/useMenuApi";
+
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
 
-type Props = {};
 
-const CreateMenu = (props: Props) => {
+const CreateMenu = () => {
   const [img, setImg] = useState<File | undefined>(undefined);
   const [type, setType] = useState<"food" | "beverage">("food");
   const apiPost = useApi<MenuDataResponseBody>({

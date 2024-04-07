@@ -7,12 +7,10 @@ import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
-import { MenuDataResponseBody } from "../../../types/ApiMenuType";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
 import { Link } from "@/navigation";
-type Props = {};
 
 const MenuMain = () => {
   const pathName = usePathname();

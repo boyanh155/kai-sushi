@@ -1,9 +1,7 @@
 import { useTranslations } from "next-intl";
 // import Link from "next/link";
 import { Link } from "@/navigation";
-import React from "react";
 
-type Props = {};
 const navData: { to: "/booking" | "/take-away" | "/"; icon: any; text: string }[] =
   [
     {
@@ -76,7 +74,7 @@ const navData: { to: "/booking" | "/take-away" | "/"; icon: any; text: string }[
     },
   ];
 
-const FooterMain = (props: Props) => {
+const FooterMain = () => {
   const t = useTranslations("Navbar");
   return (
     <div className=" sticky z-50 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-screen">

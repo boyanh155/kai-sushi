@@ -7,7 +7,7 @@ type Props = {
     id: string;
   };
 };
-export const GET = async (req: NextRequest, { params: { id } }: Props) => {
+export const GET = async (_: NextRequest, { params: { id } }: Props) => {
   try {
     await connectDB();
     const booking = await bookingModel.findById(id, {

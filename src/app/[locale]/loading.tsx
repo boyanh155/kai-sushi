@@ -1,9 +1,8 @@
 import Loading from "@/components/shared/Loading";
-import React from "react";
 
-type Props = {};
 
-const loading = (props: Props) => {
+
+const loading = () => {
   return <Loading />;
 };
 

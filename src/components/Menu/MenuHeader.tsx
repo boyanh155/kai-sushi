@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+
 import { NavHeader } from "../../../types/NavbarType";
 
 // import Link from "next/link";
-import { Link, usePathname } from "@/navigation";
+import { Link } from "@/navigation";
 type Props = {
   item: NavHeader;
   active: boolean;
@@ -11,7 +11,6 @@ type Props = {
 };
 
 const MenuHeader = ({ item, menuType, active }: Props) => {
-  const pathName = usePathname();
 
   return (
     <Link href={`/${menuType}/${item.slug}` as any}>

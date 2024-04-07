@@ -1,7 +1,6 @@
 import { model, models, Schema } from "mongoose";
 import { IBookingDocument } from "./IBooking";
 import { EBookingState } from "../../types/Booking";
-import moment from "moment";
 
 const booking = new Schema<IBookingDocument>(
   {

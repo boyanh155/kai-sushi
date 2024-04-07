@@ -1,8 +1,7 @@
-import React from "react";
 
-type Props = {};
 
-const NotFoundPage = (props: Props) => {
+
+const NotFoundPage = () => {
   return (
     <html lang="en" className="w-screen h-screen">
       <div>404</div>

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { ChangeEvent, MouseEvent, useTransition } from "react";
+import React, {  MouseEvent, useTransition } from "react";
 import enFlag from "@/assets/intl-flag/en-flag.svg";
 import viFlag from "@/assets/intl-flag/vi-flag.svg";
 import { useLocale } from "next-intl";
@@ -8,7 +8,7 @@ import { useLocale } from "next-intl";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter, usePathname } from "@/navigation";
 
-type Props = {};
+
 
 const localeOptions = [
   {
@@ -23,12 +23,12 @@ const localeOptions = [
     label: <Image src={enFlag} alt="EN flag" width={100} height={100} />,
   },
 ];
-const LocaleSwitcher = (props: Props) => {
+const LocaleSwitcher = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+  const [_, startTransition] = useTransition();
   const params = useParams();
 
   function onSelectChange(event: MouseEvent<HTMLDivElement>) {

@@ -1,11 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React from "react";
 
-type Props = {};
-
-const CreateButton = (props: Props) => {
+const CreateButton = () => {
   const router = useRouter();
   return (
     <div

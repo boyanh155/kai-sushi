@@ -2,14 +2,12 @@
 
 import Loading from "@/components/shared/Loading";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
-
 import React from "react";
+
 import { isEmpty } from "lodash";
 import DeleteHeaderModal from "@/components/Admin/Menu/DeleteHeaderModal";
 
-type Props = {};
-
-const Menu = (props: Props) => {
+const Menu = () => {
   const menuData = useGetMenu("both");
   const [deleteId, setDeleteId] = React.useState<string>("");
   return menuData && menuData?.isLoading ? (
