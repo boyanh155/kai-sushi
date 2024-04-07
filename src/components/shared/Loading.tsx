@@ -2,8 +2,6 @@
 
 import styled, { keyframes } from "styled-components";
 
-
-
 const pulsIn = keyframes`
   0% {
     box-shadow: inset 0 0 0 1rem #fff;
@@ -15,15 +13,15 @@ const pulsIn = keyframes`
   }
 `;
 const LoadingContainer = styled.div`
+  inset: 0;
   position: relative;
   top: 0;
   left: 0;
-  flex-grow:1;
-  width: vw;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  bottom: 0;
+  right: 0;
+  flex-grow: 1;
+  width: 100vw;
+  
   z-index: 200;
   overflow: hidden;
 `;
@@ -43,11 +41,13 @@ const Loader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   max-width: 6rem;
-
+  min-width: 6rem;
+  min-height: 6rem;
+  margin: auto;
 
   &:before,
   &:after {
@@ -77,17 +77,11 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    1
-  ); 
-  z-index: 50; 
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 50;
 `;
 const Loading = () => {
   return (
-  
     <LoadingContainer>
       <Overlay />
       <Loader className="absolute z-[101] top-[38%]" />
