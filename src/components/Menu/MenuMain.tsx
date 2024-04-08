@@ -107,7 +107,7 @@ const MenuMain = () => {
       {/* {sortedMenuData?.[currentIndex]?.children?.map((v, id) => (
           <MenuChild item={v} key={id} headerId={sortedMenuData[currentIndex]._id} />
         ))} */}
-      <div className="flex-grow basis-auto flex">
+      <div className="flex-grow basis-auto flex flex-col">
         <MenuChild headerId={sortedMenuData?.[currentIndex]?._id!} />
       </div>
     </div>

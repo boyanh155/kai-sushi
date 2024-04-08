@@ -5,7 +5,7 @@ type Props = {
 };
 const BookingLayout = ({ children }: Props) => {
   return (
-    <div className="relative content-container items-center px-7 overflow-hidden">
+    <div className="flex flex-col relative content-container items-center px-7 overflow-hidden">
       {children}
       {/* <LoadingPage /> */}
     </div>

@@ -50,7 +50,6 @@ const Loader = styled.div`
   min-width: 6rem;
   min-height: 6rem;
   margin: auto;
-
   &:before,
   &:after {
     content: "";

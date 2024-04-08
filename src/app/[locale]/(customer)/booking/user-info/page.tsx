@@ -12,7 +12,6 @@ import { IBookingClient } from "../../../../../../types/Booking";
 import Link from "next/link";
 
 import useApi from "@/hooks/api/useApi";
-import Loading from "@/components/shared/Loading";
 import Alert from "@/components/shared/Alert";
 import { useRouter } from "@/navigation";
 
