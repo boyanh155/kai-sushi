@@ -14,24 +14,28 @@ import { optionsAmount } from "./optionAmount";
 import { IBookingClient } from "../../../../../../types/Booking";
 import moment from "moment";
 
-
 const OrderInfoPage = () => {
   const router = useRouter();
   const bookingState = useBookingStore(selectBookingState);
+  const [isOpen, setIsOpen] = useState(false);
   const _setBookingState = useBookingStore(setBookingState);
   const selectedE = useRef<HTMLLIElement>(null);
   const [isInvalid, setIsInvalid] = useState(false);
-  const selectorElement = useRef<HTMLDetailsElement>(null);
 
   const t = useTranslations("Booking");
-  const _now = moment();
+  const _now = moment(bookingState.bookDate);
 
   // TIME
   const _nowTime = _now.format("HH:mm");
   const maxTime = "22:00";
-  const minTime = moment(_nowTime, "HH:mm").isBefore(moment(maxTime, "HH:mm"))
+  console.log(bookingState.bookDate);
+  const minTime = moment(_nowTime, "HH:mm").isBetween(
+    moment("16:00", "HH:mm"),
+    moment(maxTime, "HH:mm")
+  )
     ? _nowTime
     : "16:00";
+
   // save time
   const [selectedTime, setSelectedTime] = useState(minTime);
   // submit form
@@ -57,12 +61,12 @@ const OrderInfoPage = () => {
   // save
 
   const maxDate = _now.clone().add(3, "weeks").format("YYYY-MM-DD");
-
   const minDate = moment(_nowTime, "HH:mm").isBefore(moment(maxTime, "HH:mm"))
     ? _now.format("YYYY-MM-DD")
     : moment().clone().add(1, "days").format("YYYY-MM-DD");
 
   const [selectedDate, setSelectedDate] = useState(minDate);
+
   useEffect(() => {
     //  change booking info date
     if (
@@ -97,15 +101,13 @@ const OrderInfoPage = () => {
       {/* INPUT BOX */}
       <form className=" flex flex-col justify-center  mt-10" id="form-order">
         {/* AMOUNT SELECTION */}
-        <details
-          ref={selectorElement}
-          className="dropdown select-float w-full "
-        >
-          <summary
+        <div className="dropdown select-float w-full ">
+          <div
             tabIndex={0}
             role="button"
             className=" relative input-golden flex justify-between items-center w-full"
-            onClick={_ => {
+            onClick={(_) => {
+              setIsOpen(!isOpen);
               selectedE?.current?.scrollIntoView({
                 behavior: "smooth",
                 block: "nearest",
@@ -132,9 +134,12 @@ const OrderInfoPage = () => {
             >
               <path d="M1 1.25L7.5 8.75L14.5 1.25" stroke="#959595" />
             </svg>
-          </summary>
+          </div>
           <ul
             tabIndex={0}
+            style={{
+              display: isOpen ? "block" : "none",
+            }}
             className=" dropdown-content z-[1] flex flex-col w-full p-0 h-64 overflow-y-scroll overflow-x-hidden border border-s-golden border-t-0 border-b-golden border-e-golden"
           >
             {optionsAmount.map((option) => (
@@ -142,7 +147,7 @@ const OrderInfoPage = () => {
                 ref={bookingState.amount === option.value ? selectedE : null}
                 onClick={(e) => {
                   handleInput(e, "amount");
-                  selectorElement?.current?.blur();
+                  setIsOpen(false);
                 }}
                 key={option.value}
                 className={`w-full block uppercase cursor-pointer !text-white ${
@@ -154,7 +159,7 @@ const OrderInfoPage = () => {
               </li>
             ))}
           </ul>
-        </details>
+        </div>
         {/* ..AMOUNT SELECTION */}
         {/* DATE PICKER */}
         {/* ..DATE PICKER */}
@@ -165,9 +170,10 @@ const OrderInfoPage = () => {
             id="dateInput"
             value={selectedDate}
             className={
-              "filled " + " !text-white " + nunito.className +( isInvalid
-                ? " input-error"
-                : "")
+              "filled " +
+              " !text-white " +
+              nunito.className +
+              (isInvalid ? " input-error" : "")
             }
             onChange={(e) => setSelectedDate(e.target.value)}
             min={minDate}
