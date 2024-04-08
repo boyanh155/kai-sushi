@@ -18,6 +18,7 @@ export const POST = async (req: NextRequest) => {
     console.log({ amount, bookDate, name, phone, isNotify, email, note });
 
     // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
+    // "7247720955323500", "7420483581350467";
     const _date = formatLocaleDateString(bookDate);
 
     if (

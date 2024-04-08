@@ -1,7 +1,4 @@
-"use client";
-
-import React, { useEffect, useRef, useState } from "react";
-
+'use client'
 import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
@@ -17,55 +14,48 @@ const MenuMain = () => {
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType = pathName?.split("/")[3] as string;
 
-  const activeHeaderElement = useRef<HTMLDivElement>(null);
-
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const activeHeaderElement = useRef<HTMLDivElement>(null);
 
   const api = useGetMenu(menuType);
 
   // Assuming activeHeaderElement is a reference to a DOM element
-  useEffect(() => {
-    // On page load, set the scroll position to the stored value
-    if (!activeHeaderElement.current) return;
-    const scrollPos = localStorage.getItem("scrollPosX");
+  // useEffect(() => {
+  //   // On page load, set the scroll position to the stored value
+  //   if (!activeHeaderElement.current) return;
+  //   const scrollPos = localStorage.getItem("scrollPosX");
 
-    if (scrollPos && activeHeaderElement.current) {
-      activeHeaderElement.current.scrollLeft = Number(scrollPos);
-      activeHeaderElement.current.style.scrollBehavior = "auto";
-    }
+  //   if (scrollPos && activeHeaderElement.current) {
+  //     activeHeaderElement.current.scrollLeft = Number(scrollPos);
+  //   }
 
-    const handleScroll = () => {
-      if (activeHeaderElement.current) {
-        // On scroll, store the current scroll position
-        localStorage.setItem(
-          "scrollPosX",
-          String(activeHeaderElement.current.scrollLeft)
-        );
-      }
-    };
+  //   const handleScroll = () => {
+  //     if (activeHeaderElement.current) {
+  //       // On scroll, store the current scroll position
+  //       localStorage.setItem(
+  //         "scrollPosX",
+  //         String(activeHeaderElement.current.scrollLeft)
+  //       );
+  //     }
+  //   };
 
-    activeHeaderElement.current.addEventListener("scroll", handleScroll);
+  //   activeHeaderElement.current.addEventListener("scroll", handleScroll);
 
-    return () => {
-      if (activeHeaderElement.current) {
-        activeHeaderElement.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
-  const sortedMenuData = api?.data?.sort((a, b) => +a.order - +b.order);
+  //   return () => {
+  //     if (activeHeaderElement.current) {
+  //       activeHeaderElement.current.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
+  const sortedMenuData = api?.data ? [...api?.data] : [];
+  sortedMenuData?.sort((a, b) => +a.order - +b.order);
 
-  useEffect(() => {
-    if (!headerType) return setCurrentIndex(0);
 
-    setCurrentIndex(
-      api?.data?.findIndex((v) => {
-        return headerType.toLowerCase() === v.slug.toLowerCase();
-      }) || 0
-    );
-  }, [headerType, api?.data]);
+  const currentIndex =
+    api?.data?.findIndex((v) => {
+      return headerType.toLowerCase() === v.slug.toLowerCase();
+    }) || 0;
 
   const t = useTranslations("Home");
-
   return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(sortedMenuData) ? (
@@ -94,7 +84,7 @@ const MenuMain = () => {
       {/* NAV HEADER */}
       <div className=" sticky  top-0">
         <div
-          ref={activeHeaderElement}
+          // ref={activeHeaderElement}
           className="flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8"
         >
           {sortedMenuData?.map((v) => (

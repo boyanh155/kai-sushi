@@ -13,7 +13,7 @@ import Link from "next/link";
 
 import useApi from "@/hooks/api/useApi";
 import Alert from "@/components/shared/Alert";
-import { useRouter } from "@/navigation";
+import { useRouter, redirect } from "@/navigation";
 
 const UserInfoPage = () => {
   const router = useRouter();
@@ -42,9 +42,11 @@ const UserInfoPage = () => {
     if (!name?.toString()) return;
     _setBookingState({ ...bookingState, [name]: value });
   };
+  const [isLoading, setIsLoading] = useState(false);
+
   const submitForm = (e) => {
     try {
-      if (api?.isPending) return;
+      if (api?.isPending || isLoading) return;
 
       e.preventDefault();
       setIsSubmit(true);
@@ -61,9 +63,11 @@ const UserInfoPage = () => {
       console.error(err);
     }
   };
-
   useEffect(() => {
     if (!api?.isSuccess || isEmpty(api?.data)) return;
+    setIsLoading(true);
+
+    // router.push(api.data);
     router.push(api.data);
   }, [api?.isSuccess, api?.data]);
   useEffect(() => {
@@ -111,7 +115,7 @@ const UserInfoPage = () => {
         id="form_user"
         onSubmit={submitForm}
         className={`flex flex-col mt-10 w-full transition-all duration-300 ${
-          api?.isPending ? "opacity-0 invisible" : ""
+          api?.isPending || isLoading ? "opacity-0 invisible" : ""
         }`}
       >
         {/* Adult */}
@@ -200,12 +204,12 @@ const UserInfoPage = () => {
       <button
         type="submit"
         form="form_user"
-        disabled={api?.isPending}
+        disabled={api?.isPending || isLoading}
         className={`${
-          api?.isPending ? " -top-64 " : "top-0"
+          api?.isPending || isLoading ? " -top-64 " : "top-0"
         } relative transition-all duration-300 mt-16 cursor-pointer w-full bg-[#8C773E99] text-white font-light text-base uppercase py-3 text-center flex justify-center items-center`}
       >
-        {api?.isPending ? (
+        {api?.isPending || isLoading ? (
           <span className="loading loading-spinner"></span>
         ) : (
           <p>{t("complete")}</p>

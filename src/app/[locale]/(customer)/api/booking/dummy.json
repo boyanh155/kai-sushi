@@ -1,9 +1,7 @@
 {
 
     "recipientId": [
-        "7247720955323500",
-        "7420483581350467"
-
+        "7247720955323500"
     ],
     "text": "Booking#[orderID]:\n\nName: [user-name]\nNumber of Guests: [amount] people \nPhone number: [user-phone]\nTime: [time-of-booking]\nDate: [date-of-booking]\nNote: [user-note]\n\nBooking URL: [booking-url]",
     "vars": {
