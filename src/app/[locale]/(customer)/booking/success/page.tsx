@@ -9,6 +9,7 @@ import Loading from "@/components/shared/Loading";
 
 import { useRouter, Link } from "@/navigation";
 import { useSearchParams } from "next/navigation";
+import Toast from "@/components/shared/Toast";
 
 type Props = {
   searchParams: {
@@ -55,6 +56,10 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
           <p className="text-[#959595] font-light mt-6">#{_orderId}</p>
           <p className="font-light mt-1">{t("success_message")}</p>
           {/* Info card */}
+          <Toast isShow={isCopy} setIsShow={setIsCopy}>
+            {t("saved")}
+          </Toast>
+
           <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden border px-5 p-4">
             <p className=" capitalize  text-base">{(api?.data as any)?.name}</p>
             <div className="flex justify-between">
@@ -98,7 +103,9 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
                     fill="#8C773E"
                   />
                 </svg>
-                {moment((api?.data as any)?.bookDate).format("DD/MM/YYYY, HH:mm")}
+                {moment((api?.data as any)?.bookDate).format(
+                  "DD/MM/YYYY, HH:mm"
+                )}
               </p>
             </div>
           </div>

@@ -39,6 +39,8 @@
         "booking_cancel": "Cancel",
         "menu_check": "view the menu here",
         "error_bellow": "Please check the information below:",
-        "note_placeholder": "Birthday party, outdoor,..."
+        "note_placeholder": "Birthday party, outdoor,...",
+        "saved": "Saved",
+        "click_outside": "Click outside to close"
     }
 }

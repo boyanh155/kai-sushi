@@ -1,0 +1,10 @@
+{
+    "crons": [{
+        "path": "/api/cron",
+        "schedule": "*/5 * * * *"
+    }],
+    "regions": [
+        "hkg1",
+        "sin1"
+    ]
+}

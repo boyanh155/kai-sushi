@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
 import { usePathname } from "next/navigation";
@@ -8,47 +8,47 @@ import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
 import { Link } from "@/navigation";
+import { useEffect, useRef } from "react";
 
 const MenuMain = () => {
   const pathName = usePathname();
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType = (pathName?.split("/")[3] as string) || "appetizer";
 
-  // const activeHeaderElement = useRef<HTMLDivElement>(null);
+  const activeHeaderElement = useRef<HTMLDivElement>(null);
 
   const api = useGetMenu(menuType);
 
   // Assuming activeHeaderElement is a reference to a DOM element
-  // useEffect(() => {
-  //   // On page load, set the scroll position to the stored value
-  //   if (!activeHeaderElement.current) return;
-  //   const scrollPos = localStorage.getItem("scrollPosX");
+  useEffect(() => {
+    // On page load, set the scroll position to the stored value
+    if (!activeHeaderElement.current) return;
+    const scrollPos = localStorage.getItem("scrollPosX");
 
-  //   if (scrollPos && activeHeaderElement.current) {
-  //     activeHeaderElement.current.scrollLeft = Number(scrollPos);
-  //   }
+    if (scrollPos && activeHeaderElement.current) {
+      activeHeaderElement.current.scrollLeft = Number(scrollPos);
+    }
 
-  //   const handleScroll = () => {
-  //     if (activeHeaderElement.current) {
-  //       // On scroll, store the current scroll position
-  //       localStorage.setItem(
-  //         "scrollPosX",
-  //         String(activeHeaderElement.current.scrollLeft)
-  //       );
-  //     }
-  //   };
+    const handleScroll = () => {
+      if (activeHeaderElement.current) {
+        // On scroll, store the current scroll position
+        localStorage.setItem(
+          "scrollPosX",
+          String(activeHeaderElement.current.scrollLeft)
+        );
+      }
+    };
 
-  //   activeHeaderElement.current.addEventListener("scroll", handleScroll);
+    activeHeaderElement.current.addEventListener("scroll", handleScroll);
 
-  //   return () => {
-  //     if (activeHeaderElement.current) {
-  //       activeHeaderElement.current.removeEventListener("scroll", handleScroll);
-  //     }
-  //   };
-  // }, []);
+    return () => {
+      if (activeHeaderElement.current) {
+        activeHeaderElement.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
   const sortedMenuData = api?.data ? [...api?.data] : [];
   sortedMenuData?.sort((a, b) => +a.order - +b.order);
-
 
   const currentIndex =
     api?.data?.findIndex((v) => {
@@ -84,7 +84,7 @@ const MenuMain = () => {
       {/* NAV HEADER */}
       <div className=" sticky  top-0">
         <div
-          // ref={activeHeaderElement}
+          ref={activeHeaderElement}
           className="flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8"
         >
           {sortedMenuData?.map((v) => (

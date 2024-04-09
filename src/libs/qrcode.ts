@@ -22,7 +22,7 @@ export async function generateQRCodeWithLogo(
   logo.resize(qr.bitmap.width / 5, Jimp.AUTO);
 
   // Calculate the position for the logo (center of the QR code)
-  const padding = 10; // Adjust this value to change the padding
+  const padding = 5; // Adjust this value to change the padding
   const paddedLogo = new Jimp(
     logo.bitmap.width + padding * 2,
     logo.bitmap.height + padding * 2,
