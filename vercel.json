@@ -4,7 +4,7 @@
         "schedule": "0 0 * * *"
     }],
     "regions": [
-        "hkg1",
-        "sin1"
+        "hkg1"
+
     ]
 }
