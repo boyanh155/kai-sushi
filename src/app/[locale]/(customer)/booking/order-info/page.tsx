@@ -76,7 +76,6 @@ const OrderInfoPage = () => {
       !moment(selectedDate).isAfter(_now, "day")
     ) {
       setIsInvalid(true);
-      return;
     } else {
       setIsInvalid(false);
     }
