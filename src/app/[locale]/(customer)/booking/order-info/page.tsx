@@ -34,7 +34,6 @@ const OrderInfoPage = () => {
     ? moment(Date.now()).format("HH:mm")
     : "16:00";
 
-
   // save time
   const [selectedTime, setSelectedTime] = useState(minTime);
   // submit form
@@ -60,7 +59,7 @@ const OrderInfoPage = () => {
   // save
 
   const minDate = moment(Date.now()).isBefore(moment(maxTime, "HH:mm"))
-    ? _now.format("YYYY-MM-DD")
+    ? moment().format("YYYY-MM-DD")
     : moment().clone().add(1, "days").format("YYYY-MM-DD");
   const maxDate = moment(minDate, "YYYY-MM-DD")
     .clone()
@@ -72,8 +71,9 @@ const OrderInfoPage = () => {
   useEffect(() => {
     //  change booking info date
     if (
-      (selectedTime < minTime || selectedTime > maxTime) ||
-      !moment(selectedDate).isAfter(_now, "day")
+      selectedTime < minTime ||
+      selectedTime > maxTime ||
+      !moment(selectedDate).isAfter(Date.now(), "day")
     ) {
       setIsInvalid(true);
     } else {
