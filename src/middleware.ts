@@ -16,7 +16,7 @@ export const config = {
     "/",
     "/qrcode-booking",
     "/(vi|en)/:path*",
-    "/((?!_next|_vercel|admin|.*\\..*).*)",
+    "/((?!_next|_vercel|admin|api|.*\\..*).*)",
     // "/((?!.+\\.[\\w]+$|_next).*)",
     // "/(api|trpc)(.*)",
   ],
