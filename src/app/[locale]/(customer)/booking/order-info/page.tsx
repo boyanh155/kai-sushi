@@ -72,7 +72,7 @@ const OrderInfoPage = () => {
   useEffect(() => {
     //  change booking info date
     if (
-      (selectedTime < minTime || selectedTime > maxTime) &&
+      (selectedTime < minTime || selectedTime > maxTime) ||
       !moment(selectedDate).isAfter(_now, "day")
     ) {
       setIsInvalid(true);
