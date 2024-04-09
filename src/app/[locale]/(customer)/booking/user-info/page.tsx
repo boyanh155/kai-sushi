@@ -13,7 +13,7 @@ import Link from "next/link";
 
 import useApi from "@/hooks/api/useApi";
 import Alert from "@/components/shared/Alert";
-import { useRouter, redirect } from "@/navigation";
+import { useRouter } from "@/navigation";
 
 const UserInfoPage = () => {
   const router = useRouter();

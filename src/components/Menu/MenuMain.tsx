@@ -12,7 +12,7 @@ import { Link } from "@/navigation";
 const MenuMain = () => {
   const pathName = usePathname();
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
-  const headerType = pathName?.split("/")[3] as string;
+  const headerType = (pathName?.split("/")[3] as string) || "appetizer";
 
   // const activeHeaderElement = useRef<HTMLDivElement>(null);
 
