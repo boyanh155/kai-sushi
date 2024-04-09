@@ -13,7 +13,9 @@ import { useEffect, useRef } from "react";
 const MenuMain = () => {
   const pathName = usePathname();
   const menuType = pathName?.split("/")[2] as "food" | "beverage";
-  const headerType = (pathName?.split("/")[3] as string) || "appetizer";
+  const headerType =
+    (pathName?.split("/")[3] as string) ||
+    (menuType === "food" ? "appetizer" : "no-alcohol");
 
   const activeHeaderElement = useRef<HTMLDivElement>(null);
 
@@ -85,7 +87,9 @@ const MenuMain = () => {
       <div className=" sticky  top-0">
         <div
           ref={activeHeaderElement}
-          className="flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8"
+          className={`flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8 ${
+            menuType === "beverage" ? "justify-center" : "justify-start"
+          }`}
         >
           {sortedMenuData?.map((v) => (
             <MenuHeader menuType={menuType} item={v} key={v._id} />

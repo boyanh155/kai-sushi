@@ -11,7 +11,12 @@ type Props = {
 
 const MenuHeader = ({ item, menuType }: Props) => {
   const pathName = usePathname();
-  const isActive = (pathName.split("/")[2] || "appetizer")?.toLowerCase() === `${item.slug}`.toLowerCase();
+  console.log("pathName", pathName)
+  const isActive =
+    (
+      pathName.split("/")[2] ||
+      (menuType === "food" ? "appetizer" : "no-alcohol")
+    )?.toLowerCase() === `${item.slug}`.toLowerCase();
 
   return (
     <Link href={`/${menuType}/${item.slug}` as any}>
