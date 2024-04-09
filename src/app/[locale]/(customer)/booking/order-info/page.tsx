@@ -26,7 +26,6 @@ const OrderInfoPage = () => {
   const _now = moment(bookingState.bookDate);
 
   // TIME
-  const _nowTime = _now.format("HH:mm");
   const maxTime = "22:00";
   const minTime = moment(Date.now()).isBetween(
     moment("16:00", "HH:mm"),
