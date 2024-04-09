@@ -34,13 +34,7 @@ const OrderInfoPage = () => {
   )
     ? moment(Date.now()).format("HH:mm")
     : "16:00";
-  console.log(moment(Date.now()).format("HH:mm"));
-  console.log(
-    moment(Date.now()).isBetween(
-      moment("16:00", "HH:mm"),
-      moment(maxTime, "HH:mm")
-    )
-  );
+
 
   // save time
   const [selectedTime, setSelectedTime] = useState(minTime);
