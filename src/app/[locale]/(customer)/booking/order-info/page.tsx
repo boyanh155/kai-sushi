@@ -28,13 +28,19 @@ const OrderInfoPage = () => {
   // TIME
   const _nowTime = _now.format("HH:mm");
   const maxTime = "22:00";
-  console.log(bookingState.bookDate);
-  const minTime = moment(_nowTime, "HH:mm").isBetween(
+  const minTime = moment(Date.now()).isBetween(
     moment("16:00", "HH:mm"),
     moment(maxTime, "HH:mm")
   )
-    ? _nowTime
+    ? moment(Date.now()).format("HH:mm")
     : "16:00";
+  console.log(moment(Date.now()).format("HH:mm"));
+  console.log(
+    moment(Date.now()).isBetween(
+      moment("16:00", "HH:mm"),
+      moment(maxTime, "HH:mm")
+    )
+  );
 
   // save time
   const [selectedTime, setSelectedTime] = useState(minTime);
@@ -60,10 +66,13 @@ const OrderInfoPage = () => {
   };
   // save
 
-  const maxDate = _now.clone().add(3, "weeks").format("YYYY-MM-DD");
-  const minDate = moment(_nowTime, "HH:mm").isBefore(moment(maxTime, "HH:mm"))
+  const minDate = moment(Date.now()).isBefore(moment(maxTime, "HH:mm"))
     ? _now.format("YYYY-MM-DD")
     : moment().clone().add(1, "days").format("YYYY-MM-DD");
+  const maxDate = moment(minDate, "YYYY-MM-DD")
+    .clone()
+    .add(3, "weeks")
+    .format("YYYY-MM-DD");
 
   const [selectedDate, setSelectedDate] = useState(minDate);
 
@@ -74,6 +83,7 @@ const OrderInfoPage = () => {
       !moment(selectedDate).isAfter(_now, "day")
     ) {
       setIsInvalid(true);
+      return;
     } else {
       setIsInvalid(false);
     }
