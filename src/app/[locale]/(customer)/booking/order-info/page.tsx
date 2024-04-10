@@ -27,15 +27,22 @@ const OrderInfoPage = () => {
 
   // TIME
   const maxTime = "22:00";
-  const minTime = moment(Date.now()).isBetween(
+  console.log(_now);
+  const isBetweenTime = _now.isBetween(
     moment("16:00", "HH:mm"),
-    moment(maxTime, "HH:mm")
-  )
-    ? moment(Date.now()).format("HH:mm")
-    : "16:00";
-
+    moment(maxTime, "HH:mm"),
+    undefined,
+    "[]"
+  );
+  console.log(moment(_now, "HH:mm").format("HH:mm"));
+  console.log(moment("16:00", "HH:mm").format("HH:mm"));
+  console.log(moment(maxTime, "HH:mm").format("HH:mm"));
+  const minTime = isBetweenTime ? moment().format("HH:mm") : "16:00";
   // save time
-  const [selectedTime, setSelectedTime] = useState(minTime);
+  const [selectedTime, setSelectedTime] = useState(
+    isBetweenTime ? _now.format("HH:mm") : "16:00"
+  );
+
   // submit form
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -57,8 +64,8 @@ const OrderInfoPage = () => {
     _setBookingState({ ...bookingState, [name]: value });
   };
   // save
-
-  const minDate = moment(Date.now()).isBefore(moment(maxTime, "HH:mm"))
+  const isAddDate = moment().isBefore(moment(maxTime, "HH:mm"));
+  const minDate = isAddDate
     ? moment().format("YYYY-MM-DD")
     : moment().clone().add(1, "days").format("YYYY-MM-DD");
   const maxDate = moment(minDate, "YYYY-MM-DD")
@@ -66,16 +73,28 @@ const OrderInfoPage = () => {
     .add(3, "weeks")
     .format("YYYY-MM-DD");
 
-  const [selectedDate, setSelectedDate] = useState(minDate);
+  const [selectedDate, setSelectedDate] = useState(
+    isAddDate ? _now.format("YYYY-MM-DD") : minDate
+  );
 
   useEffect(() => {
     //  change booking info date
     if (
-      selectedTime < minTime ||
-      selectedTime > maxTime ||
-      !moment(selectedDate).isAfter(Date.now(), "day")
+      !moment(selectedTime, "HH:mm").isBetween(
+        moment(minTime, "HH:mm"),
+        moment(maxTime, "HH:mm"),
+        undefined,
+        "[]"
+      ) ||
+      !moment(selectedDate, "YYYY-MM-DD").isBetween(
+        moment(minDate, "YYYY-MM-DD"),
+        moment(maxDate, "YYYY-MM-DD"),
+        undefined,
+        "[]"
+      )
     ) {
       setIsInvalid(true);
+      return;
     } else {
       setIsInvalid(false);
     }
