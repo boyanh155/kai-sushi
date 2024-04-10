@@ -15,6 +15,7 @@ import { IBookingClient } from "../../../../../../types/Booking";
 import moment from "moment";
 
 const OrderInfoPage = () => {
+  const today = moment().format("YYYY-MM-DD");
   const router = useRouter();
   const bookingState = useBookingStore(selectBookingState);
   const [isOpen, setIsOpen] = useState(false);
@@ -27,16 +28,12 @@ const OrderInfoPage = () => {
 
   // TIME
   const maxTime = "22:00";
-  console.log(_now);
-  const isBetweenTime = _now.isBetween(
+  const isBetweenTime = moment().isBetween(
     moment("16:00", "HH:mm"),
     moment(maxTime, "HH:mm"),
     undefined,
     "[]"
   );
-  console.log(moment(_now, "HH:mm").format("HH:mm"));
-  console.log(moment("16:00", "HH:mm").format("HH:mm"));
-  console.log(moment(maxTime, "HH:mm").format("HH:mm"));
   const minTime = isBetweenTime ? moment().format("HH:mm") : "16:00";
   // save time
   const [selectedTime, setSelectedTime] = useState(
@@ -79,13 +76,20 @@ const OrderInfoPage = () => {
 
   useEffect(() => {
     //  change booking info date
+
+    const _selectedTime = moment(
+      today + " " + selectedTime,
+      "YYYY-MM-DD HH:mm"
+    );
+    const _minTime = moment(today + " " + minTime, "YYYY-MM-DD HH:mm");
+    const _maxTime = moment(today + " " + maxTime, "YYYY-MM-DD HH:mm");
+    console.log(today + " " + minTime);
+    console.log(_minTime.toDate());
+    console.log(today + " " + maxTime);
+
+    console.log(_maxTime.toDate());
     if (
-      !moment(selectedTime, "HH:mm").isBetween(
-        moment(minTime, "HH:mm"),
-        moment(maxTime, "HH:mm"),
-        undefined,
-        "[]"
-      ) ||
+      !_selectedTime.isBetween(_minTime, _maxTime, undefined, "[]") ||
       !moment(selectedDate, "YYYY-MM-DD").isBetween(
         moment(minDate, "YYYY-MM-DD"),
         moment(maxDate, "YYYY-MM-DD"),
