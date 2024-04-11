@@ -53,7 +53,7 @@ const MenuMain = () => {
   sortedMenuData?.sort((a, b) => +a.order - +b.order);
 
   const currentIndex =
-    api?.data?.findIndex((v) => {
+    sortedMenuData.findIndex((v) => {
       return headerType.toLowerCase() === v.slug.toLowerCase();
     }) || 0;
 
