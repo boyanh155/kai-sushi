@@ -8,6 +8,14 @@ import bookingModel from "@/models/Booking";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
 
+export const GET = async (req: NextRequest) => {
+  try {
+  } catch (err: any) {
+    return new NextResponse(err.message || err.stack, {
+      status: err.status || 500,
+    });
+  }
+};
 export const POST = async (req: NextRequest) => {
   await connectDB();
 

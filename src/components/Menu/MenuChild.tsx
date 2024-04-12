@@ -29,7 +29,7 @@ const MenuChild = ({ headerId }: Props) => {
                 className="flex-col mt-4 pt-4 px-2 pb-8  border-[0.4px] border-[#959595] rounded-sm"
               >
                 <div className="flex flex-row justify-between text-white  uppercase">
-                  <p className="font-light w-2/3">
+                  <div className="font-light w-2/3">
                     {" "}
                     {v.title?.split("/").map((line, index, array) => (
                       <div key={`ia__${index}`}>
@@ -41,7 +41,7 @@ const MenuChild = ({ headerId }: Props) => {
                         )}
                       </div>
                     ))}
-                  </p>
+                  </div>
                   <div className="font-light">
                     {v.price?.split("/").map((line, index, array) => (
                       <div key={`ia__${index}`}>

@@ -15,7 +15,7 @@ export const useGetMenu = (type: "food" | "beverage" | "both" = "both") => {
 };
 export const useGetMenuHeaderDetailById = (id: string) => {
   const { get } = useApi<MenuDataResponseBody>({
-    key: ["menuHeaderDetail", id],
+    key: [`menuHeaderDetail-${id}`],
     method: "GET",
     url: `menu/${id}`,
   });

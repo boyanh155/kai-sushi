@@ -1,54 +1,25 @@
 "use client";
 import MenuHeader from "./MenuHeader";
 import MenuChild from "./MenuChild";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
 import { Link } from "@/navigation";
-import { useEffect, useRef } from "react";
 
 const MenuMain = () => {
-  const pathName = usePathname();
-  const menuType = pathName?.split("/")[2] as "food" | "beverage";
+  const { menuType: pMenuType, menuHeader: pMenuHeader } = useParams();
+  const menuType = Array.isArray(pMenuType) ? pMenuType[0] : pMenuType;
+  const menuHeader = Array.isArray(pMenuHeader) ? pMenuHeader[0] : pMenuHeader;
+  // const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType =
-    (pathName?.split("/")[3] as string) ||
-    (menuType === "food" ? "appetizer" : "no-alcohol");
+    menuHeader || (menuType === "food" ? "appetizer" : "no-alcohol");
 
-  const activeHeaderElement = useRef<HTMLDivElement>(null);
-
-  const api = useGetMenu(menuType);
+  const api = useGetMenu(menuType as any);
 
   // Assuming activeHeaderElement is a reference to a DOM element
-  useEffect(() => {
-    // On page load, set the scroll position to the stored value
-    if (!activeHeaderElement.current) return;
-    const scrollPos = localStorage.getItem("scrollPosX");
-
-    if (scrollPos && activeHeaderElement.current) {
-      activeHeaderElement.current.scrollLeft = Number(scrollPos);
-    }
-
-    const handleScroll = () => {
-      if (activeHeaderElement.current) {
-        // On scroll, store the current scroll position
-        localStorage.setItem(
-          "scrollPosX",
-          String(activeHeaderElement.current.scrollLeft)
-        );
-      }
-    };
-
-    activeHeaderElement.current.addEventListener("scroll", handleScroll);
-
-    return () => {
-      if (activeHeaderElement.current) {
-        activeHeaderElement.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
   const sortedMenuData = api?.data ? [...api?.data] : [];
   sortedMenuData?.sort((a, b) => +a.order - +b.order);
 
@@ -58,6 +29,7 @@ const MenuMain = () => {
     }) || 0;
 
   const t = useTranslations("Home");
+
   return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(sortedMenuData) ? (
@@ -86,13 +58,12 @@ const MenuMain = () => {
       {/* NAV HEADER */}
       <div className=" sticky  top-0">
         <div
-          ref={activeHeaderElement}
           className={`flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8 ${
             menuType === "beverage" ? "justify-center" : "justify-start"
           }`}
         >
           {sortedMenuData?.map((v) => (
-            <MenuHeader menuType={menuType} item={v} key={v._id} />
+            <MenuHeader item={v} key={v._id} />
           ))}
         </div>
       </div>
