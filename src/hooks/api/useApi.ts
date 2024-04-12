@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiErrorResponse } from "../../../types/ErrorType";
+import Error from "next/error";
 
 export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/api`;
 export const getUserInfo = () => {
@@ -137,6 +138,6 @@ export default function useApi<ResponseBody>({
       return { deleteObj };
 
     default:
-      throw new Error(`Invalid method ${method}`);
+      throw new Error(`Invalid method ${method}` as any);
   }
 }

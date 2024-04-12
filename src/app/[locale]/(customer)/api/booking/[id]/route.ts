@@ -1,5 +1,6 @@
 import connectDB from "@/libs/connectDb";
 import bookingModel from "@/models/Booking";
+import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 };
 export const GET = async (_: NextRequest, { params: { id } }: Props) => {
   try {
+    if(!id || !isValidObjectId(id)) throw { message: "Invalid booking id", status: 400 };
     await connectDB();
     const booking = await bookingModel.findById(id, {
       expiredDate: 0,
@@ -25,6 +27,9 @@ export const GET = async (_: NextRequest, { params: { id } }: Props) => {
 
 export const DELETE = async (_: NextRequest, { params: { id } }: Props) => {
   try {
+    if (!id || !isValidObjectId(id))
+      throw { message: "Invalid booking id", status: 400 };
+
     await connectDB();
     await bookingModel.findByIdAndUpdate(id, {
       state: "cancelled",

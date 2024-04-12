@@ -1,12 +1,7 @@
-
-
+import Error404 from "@/error/Error404";
 
 const NotFoundPage = () => {
-  return (
-    <html lang="en" className="w-screen h-screen">
-      <div>404</div>
-    </html>
-  );
+  return <Error404 />;
 };
 
 export default NotFoundPage;
