@@ -36,8 +36,8 @@ const MenuHeader = ({ item }: Props) => {
       <div
         ref={isActive ? activedRef : null}
         className={`${
-          isActive ? "active text-white" : "text-[#959595]"
-        } py-5 pe-6 min-w-16 ps-4 cursor-pointer text-nowrap whitespace-nowrap transition-all duration-300 ease-in-out`}
+          isActive ? "active text-white text-base " : "text-[#959595] "
+        }  min-w-16  py-5 cursor-pointer text-nowrap whitespace-nowrap ps-4 pe-6 transition-all duration-300 ease-in-out`}
       >
         {item.title}
       </div>
