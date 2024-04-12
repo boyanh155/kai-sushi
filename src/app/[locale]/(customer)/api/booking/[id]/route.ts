@@ -12,7 +12,6 @@ export const GET = async (_: NextRequest, { params: { id } }: Props) => {
     await connectDB();
     const booking = await bookingModel.findById(id, {
       expiredDate: 0,
-      state: 0,
     });
     if (!booking) throw { message: "Booking not found", status: 404 };
 

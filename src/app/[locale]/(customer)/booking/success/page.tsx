@@ -8,10 +8,11 @@ import moment from "moment";
 import Loading from "@/components/shared/Loading";
 
 import { useRouter, Link } from "@/navigation";
-import { useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import Toast from "@/components/shared/Toast";
 import useApi from "@/hooks/api/useApi";
 import Modal from "@/components/shared/Modal";
+import { EBookingState } from "../../../../../../types/Booking";
 
 type Props = {
   searchParams: {
@@ -43,6 +44,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
   useEffect(() => {
     if (deleteApi?.isSuccess) {
       setIsShowToast(true);
+      api?.refetch();
     }
   }, [deleteApi?.isSuccess]);
   const handleClickCancelBooking = () => {
@@ -50,6 +52,53 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
     deleteApi?.mutateAsync(_orderId);
     setIsOpen(false);
   };
+  const successLetter = <p>{t("success_message")}</p>;
+  const bookingTitle = {
+    [EBookingState.COMPLETED]: successLetter,
+    [EBookingState.CANCELLED]: (
+      <p className="text-red-600"> {t("canceled_title")}</p>
+    ),
+    [EBookingState.PENDING]: successLetter,
+    [EBookingState.CONFIRMED]: successLetter,
+  };
+  const thanksLetter = <p className="mt-9 text-sm font-light">{t("thanks")}</p>;
+
+  const subTitle1: Record<EBookingState, React.ReactNode> = {
+    [EBookingState.COMPLETED]: thanksLetter,
+    [EBookingState.CANCELLED]: (
+      <p className="font-light text-sm text-white mt-14">
+        {t("canceled_message")}
+      </p>
+    ),
+    [EBookingState.PENDING]: thanksLetter, // Add this line
+    [EBookingState.CONFIRMED]: thanksLetter,
+  };
+  const checkLetter = (
+    <div
+      onClick={() => {
+        router.replace("/");
+      }}
+      className="cursor-pointer hover:opacity-60 transition-all mt-7 flex justify-center py-2 w-full font-light text-base uppercase border-[0.4px] border-[#fefefea6] bg-[#0E0E10BF]"
+    >
+      {t("menu_check")}
+    </div>
+  );
+  const subTitle2 = {
+    [EBookingState.COMPLETED]: checkLetter,
+    [EBookingState.CANCELLED]: (
+      <div
+        onClick={() => {
+          router.replace("/booking");
+        }}
+        className="cursor-pointer hover:opacity-60 transition-all mt-7 flex justify-center py-2 w-full font-light text-base uppercase border-[0.4px] border-[#fefefea6] bg-[#0E0E10BF]"
+      >
+        {t("rebooking_title")}
+      </div>
+    ),
+    [EBookingState.PENDING]: checkLetter, // Add this line
+    [EBookingState.CONFIRMED]: checkLetter,
+  };
+  if (api?.error?.status === 404) return notFound();
   return api?.isLoading || deleteApi?.isPending ? (
     <Loading />
   ) : (
@@ -73,7 +122,10 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
           </h2>
           {/* ID */}
           <p className="text-[#959595] font-light mt-6">#{_orderId}</p>
-          <p className="font-light mt-1">{t("success_message")}</p>
+          <p className="font-light mt-1">
+            {console.log(api?.data)}
+            {bookingTitle[api?.data?.state as any]}
+          </p>
           {/* Info card */}
           <Toast isShow={isCopy} setIsShow={setIsCopy}>
             {t("saved")}
@@ -130,7 +182,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
               </div>
             </div>
             {api?.data?.note && (
-              <div className="flex justify-between">
+              <div className="flex justify-start gap-2 -ms-1">
                 <p className="w-[18px] h-[18px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +196,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
                       d="M4.21153 14.25H10.5V10.5H14.25V4.21153C14.25 4.07692 14.2067 3.96634 14.1202 3.87981C14.0337 3.79327 13.9231 3.75 13.7885 3.75H4.21153C4.07692 3.75 3.96634 3.79327 3.87981 3.87981C3.79327 3.96634 3.75 4.07692 3.75 4.21153V13.7885C3.75 13.9231 3.79327 14.0337 3.87981 14.1202C3.96634 14.2067 4.07692 14.25 4.21153 14.25ZM4.21153 15C3.87596 15 3.59014 14.882 3.35408 14.6459C3.11803 14.4099 3 14.124 3 13.7885V4.21153C3 3.87596 3.11803 3.59014 3.35408 3.35407C3.59014 3.11802 3.87596 3 4.21153 3H13.7885C14.124 3 14.4099 3.11802 14.6459 3.35407C14.882 3.59014 15 3.87596 15 4.21153V10.7164L10.7164 15H4.21153ZM5.91345 10.0962V9.34614H9V10.0962H5.91345ZM5.91345 7.125V6.375H12.0866V7.125H5.91345Z"
                       fill="#8C773E"
                     />
-                  </svg>{" "}
+                  </svg>
                 </p>
 
                 <p className="font-light  text-white text-base ">
@@ -229,22 +281,17 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
               />
             </div>
           </div>
-          <p className="mt-9 text-sm font-light">{t("thanks")}</p>
+          {subTitle1[api?.data?.state!]}
           {/* Check menu */}
-          <div
-            onClick={() => {
-              router.replace("/");
-            }}
-            className="cursor-pointer hover:opacity-60 transition-all mt-7 flex justify-center py-2 w-full font-light text-base uppercase border-[0.4px] border-[#fefefea6] bg-[#0E0E10BF]"
-          >
-            {t("menu_check")}
-          </div>
-          <p
-            onClick={() => setIsOpen(true)}
-            className="text-[#959595] font-light text-base hover:opacity-60 transition-all cursor-pointer p-4 mt-1"
-          >
-            {t("booking_cancel")}
-          </p>
+          {subTitle2[api?.data?.state!]}
+          {api?.data?.state !== EBookingState.CANCELLED && (
+            <p
+              onClick={() => setIsOpen(true)}
+              className="text-[#959595] font-light text-base hover:opacity-60 transition-all cursor-pointer p-4 mt-1"
+            >
+              {t("booking_cancel")}
+            </p>
+          )}
         </div>
         <Modal
           title={t("confirm_cancel")}

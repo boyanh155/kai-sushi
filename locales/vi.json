@@ -42,9 +42,15 @@
         "note_placeholder": "Sinh nhật, bàn ngoài trời,...",
         "saved": "Đã lưu",
         "click_outside": "Bấm bên ngoài để tắt",
-        "confirm_cancel": "Huỷ bàn này?",
-        "cancel": "Không",
-        "confirm": "Có",
-        "cancel_success": "Hủy bàn thành công"
+        "confirm_cancel": "Xác nhận huỷ bàn?",
+        "cancel": "Trở lại",
+        "confirm": "Đồng ý",
+        "cancel_success": "Hủy bàn thành công",
+        "canceled_title": "Bàn đã được huỷ!",
+        "canceled_message": "Hẹn gặp lại bạn ở lần sau.",
+        "rebooking_title": "Tôi muốn đặt lại bàn"
+    },
+    "Error": {
+        "404": "Không tìm thấy trang"
     }
 }

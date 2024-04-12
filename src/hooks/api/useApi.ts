@@ -88,11 +88,15 @@ export default function useApi<ResponseBody>({
   customConfig,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
-
+  interface ErrorResponse extends Error {
+    status: number;
+    message: string;
+    error: any;
+  }
   switch (method) {
     case "GET":
       // eslint-disable-next-line
-      const get = useQuery<ResponseBody>({
+      const get = useQuery<ResponseBody, ErrorResponse>({
         queryKey: key,
         queryFn: (obj?: any) => api(method, url, obj, customConfig),
         staleTime: 10000,
