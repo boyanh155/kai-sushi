@@ -41,6 +41,10 @@
         "error_bellow": "Please check the information below:",
         "note_placeholder": "Birthday party, outdoor,...",
         "saved": "Saved",
-        "click_outside": "Click outside to close"
+        "click_outside": "Click outside to close",
+        "confirm_cancel": "Cancel this booking?",
+        "confirm": "Yes",
+        "cancel": "No",
+        "cancel_success": "Your booking has been successfully canceled!"
     }
 }

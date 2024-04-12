@@ -41,6 +41,10 @@
         "error_bellow": "Phát hiện có lỗi sau:",
         "note_placeholder": "Sinh nhật, bàn ngoài trời,...",
         "saved": "Đã lưu",
-        "click_outside": "Bấm bên ngoài để tắt"
+        "click_outside": "Bấm bên ngoài để tắt",
+        "confirm_cancel": "Huỷ bàn này?",
+        "cancel": "Không",
+        "confirm": "Có",
+        "cancel_success": "Hủy bàn thành công"
     }
 }

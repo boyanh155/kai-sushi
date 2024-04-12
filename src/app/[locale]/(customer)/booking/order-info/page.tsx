@@ -83,52 +83,6 @@ const OrderInfoPage = () => {
     );
     const _minTime = moment(today + " " + minTime, "YYYY-MM-DD HH:mm");
     const _maxTime = moment(today + " " + maxTime, "YYYY-MM-DD HH:mm");
-
-    // if (
-    //   !(
-    //     moment(selectedDate, "YYYY-MM-DD").isSame(moment(), "day") &&
-    //     _selectedTime.isBetween(_minTime, _maxTime, undefined, "[]")
-    //   )
-    // ) {
-    //   console.log("aa");
-    //   setIsInvalid(true);
-    //   return;
-    // } else if (
-    //   !(
-    //     _selectedTime.isBetween(
-    //       moment("16:00", "HH:mm"),
-    //       _maxTime,
-    //       undefined,
-    //       "[]"
-    //     ) &&
-    //     moment(selectedDate, "YYYY-MM-DD").isBetween(
-    //       moment(minDate, "YYYY-MM-DD"),
-    //       moment(maxDate, "YYYY-MM-DD"),
-    //       undefined,
-    //       "(]"
-    //     )
-    //   )
-    // ) {
-    //   console.log(
-    //     _selectedTime.isBetween(
-    //       moment("16:00", "HH:mm"),
-    //       _maxTime,
-    //       undefined,
-    //       "[]"
-    //     )
-    //   );
-    //   console.log(
-    //     moment(selectedDate, "YYYY-MM-DD").isBetween(
-    //       moment(minDate, "YYYY-MM-DD"),
-    //       moment(maxDate, "YYYY-MM-DD"),
-    //       undefined,
-    //       "[]"
-    //     )
-    //   );
-    //   setIsInvalid(true);
-    //   return;
-    // }
-
     // check date
     if (
       !moment(selectedDate, "YYYY-MM-DD").isBetween(
@@ -308,6 +262,7 @@ const OrderInfoPage = () => {
             rows={4}
             className={`filled  !text-white resize-none  placeholder:!text-[#959595]`}
             placeholder={t("note_placeholder")}
+            maxLength={100}
           ></textarea>
           <label
             htmlFor="note"

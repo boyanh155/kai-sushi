@@ -46,6 +46,13 @@ const booking = new Schema<IBookingDocument>(
     timestamps: true,
   }
 );
+booking.index(
+  { deletedAt: 1 },
+  {
+    expireAfterSeconds: 60 * 60 * 24 * 7,
+    partialFilterExpression: { state: EBookingState.CANCELLED },
+  }
+);
 
 // booking.pre("save", function (next) {
 //   // console.log(moment(this.bookDate).toDate());

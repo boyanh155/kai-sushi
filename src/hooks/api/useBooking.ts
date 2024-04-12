@@ -9,3 +9,12 @@ export const useGetBookingById = (id: string) => {
   }).get;
   return api;
 };
+
+export const useCancelBooking = (id: string) => {
+  const api = useApi({
+    key: ["cancelBooking", id],
+    method: "DELETE",
+    url: `booking`,
+  }).deleteObj;
+  return api;
+};
