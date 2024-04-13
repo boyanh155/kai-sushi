@@ -1,5 +1,6 @@
 import connectDB from "@/libs/connectDb";
 import { menuHeaderModel } from "@/models/Menu";
+import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
@@ -30,12 +31,11 @@ export const DELETE = async (
   }
 };
 
-export const GET = async (
-  _: NextRequest,
-  { params: { headerId } }: Params
-) => {
+export const GET = async (_: NextRequest, { params: { headerId } }: Params) => {
   try {
     if (!headerId) throw { status: 400, message: "Missing parameter" };
+    if (!isValidObjectId(headerId))
+      throw { status: 404, message: "Invalid headerId" };
 
     await connectDB();
 
@@ -45,7 +45,7 @@ export const GET = async (
 
         __v: 0,
         order: 0,
-        image:0
+        image: 0,
       })
       .populate({
         path: "children",

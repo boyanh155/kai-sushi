@@ -1,6 +1,7 @@
 import { useGetMenuHeaderDetailById } from "@/hooks/api/useMenuApi";
 import Loading from "../shared/Loading";
 import { isEmpty } from "lodash";
+import { notFound } from "next/navigation";
 
 type Props = {
   headerId: string;
@@ -8,6 +9,8 @@ type Props = {
 
 const MenuChild = ({ headerId }: Props) => {
   const api = useGetMenuHeaderDetailById(headerId);
+  console.log(api?.error)
+  if (api?.error?.status === 404) return notFound();
   return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(api?.data) ? (

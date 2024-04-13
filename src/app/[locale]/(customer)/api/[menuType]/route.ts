@@ -4,6 +4,7 @@ import { menuChildModel, menuHeaderModel } from "@/models/Menu";
 import { NextResponse } from "next/server";
 import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
+import { isValidObjectId } from "mongoose";
 
 type MenuType = "food" | "beverage";
 
@@ -20,7 +21,7 @@ export async function GET(
 ) {
   try {
     if (menuType !== "food" && menuType !== "beverage" && menuType !== "both") {
-      throw new Error("Invalid menu type");
+      throw { message: "Invalid menu type", status: 404 };
     }
     await connectDB();
     const data = await menuHeaderModel.find(
@@ -43,7 +44,10 @@ export async function GET(
     // });
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    return NextResponse.json(
+      { message: error.message },
+      { status: error.status || 500 }
+    );
   }
 }
 
