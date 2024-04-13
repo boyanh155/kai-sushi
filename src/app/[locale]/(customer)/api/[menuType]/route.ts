@@ -4,7 +4,6 @@ import { menuChildModel, menuHeaderModel } from "@/models/Menu";
 import { NextResponse } from "next/server";
 import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
-import { isValidObjectId } from "mongoose";
 
 type MenuType = "food" | "beverage";
 
