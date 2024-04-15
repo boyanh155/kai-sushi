@@ -7,15 +7,28 @@ import { sendMessageToManyRecipients } from "@/services/meta";
 import bookingModel from "@/models/Booking";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
+import { ApiFeatures } from "@/libs/ApiFeatures";
 
-// export const GET = async (req: NextRequest) => {
-//   try {
-//   } catch (err: any) {
-//     return new NextResponse(err.message || err.stack, {
-//       status: err.status || 500,
-//     });
-//   }
-// };
+export const GET = async (req: NextRequest) => {
+  try {
+    const query = req.nextUrl.search.slice(1);
+    await connectDB();
+    // const limit = parseInt(query.get("limit") || "10");
+    // const page = parseInt(query.get("page") || "1");
+    // const sort = query.get("sort") || "desc";
+    // const search = query.get("search") || ""; // search by _id
+    // const sortField = query.get("sortField") || "createdAt";
+    const documents = await new ApiFeatures(bookingModel.find(), query)
+      .filter()
+      .exec();
+
+    return NextResponse.json(documents, { status: 200 });
+  } catch (err: any) {
+    return new NextResponse(err.message || err.stack, {
+      status: err.status || 500,
+    });
+  }
+};
 export const POST = async (req: NextRequest) => {
   await connectDB();
 
@@ -23,7 +36,6 @@ export const POST = async (req: NextRequest) => {
     const body: IBookingClient = await req.json();
 
     const { amount, bookDate, name, phone, isNotify, email, note } = body;
-    console.log({ amount, bookDate, name, phone, isNotify, email, note });
 
     // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
     // "7247720955323500", "7420483581350467";
