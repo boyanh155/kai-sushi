@@ -16,7 +16,13 @@ const nextConfig = {
     },  
      async rewrites() {
         return [{
-            source: '/:locale*/api/:path*',
+            source: '/api/:path*',
+            destination: 'https://kaisushilounge.com/:path*',
+        }, ]
+    },
+       async rewrites() {
+        return [{
+            source: '/api/:path*',
             destination: 'https://www.kaisushilounge.com/:path*',
         }, ]
     },
