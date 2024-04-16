@@ -10,7 +10,7 @@
     ],
     "headers": [
         {
-            "source": "/:locale/api/(.*)",
+            "source": "/vi/api/(.*)",
             "headers": [
                 {
                     "key": "Access-Control-Allow-Credentials",
