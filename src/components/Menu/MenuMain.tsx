@@ -16,6 +16,7 @@ const MenuMain = () => {
   // const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType =
     menuHeader || (menuType === "food" ? "appetizer" : "no-alcohol");
+// cors force
 
   const api = useGetMenu(menuType as any);
 
