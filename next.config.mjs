@@ -1,14 +1,28 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-       async rewrites() {
-        return [{
-            source: '/api/:path*',
-            destination: 'https://www.kaisushilounge.com/:path*',
-        }, ]
-    },
-}
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://www.kaisushiandlounge.me/:path*",
+      },
+      {
+        source: "/api/:path*",
+        destination: "https://www.kaisushilounge.com/:path*",
+      },
+      {
+        source: "/api/:path*",
+        destination: "https://kai-sushi.vercel.app/:path*",
+      },
+      {
+        source: "/api/:path*",
+        destination: "https://kaisushilounge.com/:path*",
+      },
+    ];
+  },
+};
 
 const withNextIntl = createNextIntlPlugin("./src/libs/i18n.ts");
 
