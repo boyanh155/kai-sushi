@@ -13,6 +13,11 @@ const nextConfig = {
             source: '/api/:path*',
             destination: 'https://kai-sushi.vercel.app/:path*',
         }, ]
+    },   async rewrites() {
+        return [{
+            source: '/api/:path*',
+            destination: 'https://kaisushilounge.com/:path*',
+        }, ]
     },
 }
 
