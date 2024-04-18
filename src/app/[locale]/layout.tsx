@@ -19,6 +19,7 @@ export async function generateMetadata({ params: { locale } }) {
     description: t("meta_description"),
   };
 }
+//
 export default function LocaleLayout({
   children,
   params: { locale },

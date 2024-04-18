@@ -5,9 +5,13 @@ type Props = {
   children: ReactNode;
 };
 export const metadata = {
-  metadataBase: new URL("https://acme.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL!),
   openGraph: {
-    images: "https://ik.imagekit.io/wpyygwzdr/kai/OG_IMG.HEIC",
+    images: [
+      {
+        url: "https://ik.imagekit.io/wpyygwzdr/kai/OG_IMG.HEIC",
+      },
+    ],
   },
 };
 // Since we have a `not-found.tsx` page on the root, a layout file
