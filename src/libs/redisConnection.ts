@@ -15,7 +15,7 @@ export async function getCache(key: string) {
     const isExist = await client.exists(key);
     if (!isExist) return null;
     const data = await client.get(key);
-
+    if (data) console.log("hit");
     return data;
   } catch (err) {
     console.error(err);
