@@ -7,7 +7,7 @@ type Props = {
 };
 
 const EditMenuPage = ({ params: { id } }: Props) => {
-  return <div>EditMenuPage</div>;
+  return <div>{id}</div>;
 };
 
 export default EditMenuPage;
