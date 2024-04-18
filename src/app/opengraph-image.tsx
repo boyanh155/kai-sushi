@@ -15,8 +15,19 @@ export default async function Image() {
   return new ImageResponse(
     (
       // ImageResponse JSX element
-      <div className="w-full h-full flex items-center justify-center">
-        <img src="https://ik.imagekit.io/wpyygwzdr/kai/OG_IMG.HEIC" className="w-full h-full"/>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          src="https://ik.imagekit.io/wpyygwzdr/kai/OG_IMG.HEIC"
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
     ),
     // ImageResponse options
