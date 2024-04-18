@@ -16,7 +16,7 @@ const MenuMain = () => {
   // const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType =
     menuHeader || (menuType === "food" ? "appetizer" : "no-alcohol");
-// cors force
+  // cors force
 
   const api = useGetMenu(menuType as any);
 
@@ -47,7 +47,7 @@ const MenuMain = () => {
         <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-10">
           <Link
             href="/"
-            className="bg-black px-2 py-2.5 border-[1px] border-[#878787a6] rounded-sm text-xl"
+            className="bg-black px-2 py-2.5 border-[0.8px] border-[#878787a6] rounded-sm text-xl"
           >
             x
           </Link>
