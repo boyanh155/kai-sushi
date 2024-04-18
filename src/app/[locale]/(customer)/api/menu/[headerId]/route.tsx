@@ -1,4 +1,5 @@
 import connectDB from "@/libs/connectDb";
+import { getCache, setCache } from "@/libs/redisConnection";
 import { menuHeaderModel } from "@/models/Menu";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,6 +15,7 @@ export const DELETE = async (
 ) => {
   try {
     if (!headerId) throw { status: 400, message: "Missing parameter" };
+
     await connectDB();
 
     await menuHeaderModel.deleteOne({
@@ -36,7 +38,10 @@ export const GET = async (_: NextRequest, { params: { headerId } }: Params) => {
     if (!headerId) throw { status: 400, message: "Missing parameter" };
     if (!isValidObjectId(headerId))
       throw { status: 404, message: "Invalid headerId" };
-
+    const cacheKey = `menu::header::${headerId}`;
+    const cachedData = await getCache(cacheKey);
+    if (cachedData)
+      return NextResponse.json(JSON.parse(cachedData), { status: 200 });
     await connectDB();
 
     const data = await menuHeaderModel
@@ -53,6 +58,7 @@ export const GET = async (_: NextRequest, { params: { headerId } }: Params) => {
           path: "children",
         },
       });
+    if (data) setCache(cacheKey, JSON.stringify(data));
 
     return NextResponse.json(data, { status: 200 });
   } catch (err: any) {
