@@ -12,7 +12,7 @@ const ApiProvider = ({ children }: Props) => {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
-        queries: { staleTime: 30 * 1000 * 60, gcTime: 30 * 1000 * 60 },
+        queries: { staleTime:5000, gcTime:5000 },
       },
     })
   );

@@ -21,3 +21,7 @@ export async function getCache(key: string) {
     console.error(err);
   }
 }
+
+export async function delCache(key: string) {
+  client.del(key);
+}
