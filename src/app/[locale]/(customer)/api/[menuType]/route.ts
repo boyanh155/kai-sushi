@@ -4,6 +4,7 @@ import { menuChildModel, menuHeaderModel } from "@/models/Menu";
 import { NextResponse } from "next/server";
 import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
+import { getCache, setCache } from "@/libs/redisConnection";
 
 type MenuType = "food" | "beverage";
 
@@ -22,6 +23,11 @@ export async function GET(
     if (menuType !== "food" && menuType !== "beverage" && menuType !== "both") {
       throw { message: "Invalid menu type", status: 404 };
     }
+    const cacheKey = `menu::${menuType}`;
+    const cachedData = await getCache(cacheKey);
+    if (cachedData)
+      return NextResponse.json(JSON.parse(cachedData), { status: 200 });
+
     await connectDB();
     const data = await menuHeaderModel.find(
       menuType === "both"
@@ -35,12 +41,9 @@ export async function GET(
         __v: 0,
       }
     );
-    // .populate({
-    //   path: "children",
-    //   populate: {
-    //     path: "children",
-    //   },
-    // });
+    if (data) {
+      setCache(cacheKey, JSON.stringify(data));
+    }
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(

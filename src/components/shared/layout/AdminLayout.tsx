@@ -10,11 +10,11 @@ type Props = {
 const SideBarData = [
   {
     title: "Dashboard",
-    path: "dashboard",
+    path: "/admin/dashboard",
   },
   {
     title: "Menu",
-    path: "menu",
+    path: "/admin/menu",
   },
 ];
 const AdminLayout = ({ children }: Props) => {
