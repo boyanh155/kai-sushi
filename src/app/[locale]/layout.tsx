@@ -1,5 +1,5 @@
 import FooterMain from "@/components/shared/Footer/FooterMain";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import ApiProvider from "@/libs/ApiProvider";
 import { nunito } from "@/libs/GoogleFont";
@@ -36,6 +36,7 @@ export default function LocaleLayout({
           </div>
           <FooterMain />
         </body>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTIC_ID!} />
       </html>
     </NextIntlClientProvider>
   );

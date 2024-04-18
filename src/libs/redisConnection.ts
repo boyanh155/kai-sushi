@@ -1,9 +1,9 @@
 import Redis from "ioredis";
 
 export const client = new Redis({
-  password: "H456Lyt5cVDH7l9HRc58kuMHrvJOHpX1",
-  host: "redis-10772.c295.ap-southeast-1-1.ec2.cloud.redislabs.com",
-  port: 10772,
+  password: process.env.REDIS_PASSWORD,
+  host: process.env.REDIS_HOST,
+  port: parseInt(process.env.REDIS_PORT || "10772"),
 });
 
 export async function setCache(key: string, value: string) {
