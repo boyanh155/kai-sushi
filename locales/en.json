@@ -1,4 +1,8 @@
 {
+    "MetaData": {
+        "meta_title": "KAI",
+        "meta_description": "KAI sushi&lounge"
+    },
     "Home": {
         "food": "food",
         "beverage": "beverages",
@@ -7,7 +11,9 @@
         "open_time": "Opening hours",
         "specific_time": "Monday - Sunday 16:00 - 22:00",
         "map_show": "Xem KAI map",
-        "google_map": "Open google map"
+        "google_map": "Open google map",
+        "meta_title": "KAI | Menu",
+        "meta_description": "Menu Kai"
     },
     "Navbar": {
         "booking": "booking",
@@ -48,9 +54,13 @@
         "cancel_success": "Your booking has been successfully canceled!",
         "canceled_title": "Booking canceled!",
         "canceled_message": "See you soon.",
-        "rebooking_title": "I want to rebook"
+        "rebooking_title": "I want to rebook",
+        "meta_title": "KAI | Booking",
+        "meta_description": "Booking Kai"
     },
     "Error": {
-        "404": "Page not found"
+        "404": "Page not found",
+        "meta_title": "KAI | Not found",
+        "meta_description": "Not found page Kai"
     }
 }

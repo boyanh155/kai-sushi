@@ -4,6 +4,8 @@ export const client = new Redis({
   password: process.env.REDIS_PASSWORD,
   host: process.env.REDIS_HOST,
   port: parseInt(process.env.REDIS_PORT || "10772"),
+  maxRetriesPerRequest: null,
+
 });
 
 export async function setCache(key: string, value: string) {

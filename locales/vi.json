@@ -1,4 +1,8 @@
 {
+    "MetaData": {
+        "meta_title": "KAI",
+        "meta_description": "KAI sushi&lounge"
+    },
     "Home": {
         "food": "món ăn",
         "beverage": "đồ uống",
@@ -7,7 +11,9 @@
         "open_time": "Giờ hoạt động",
         "specific_time": "Thứ 2 - Chủ nhật 16:00 - 22:00",
         "map_show": "Mở KAI bản đồ",
-        "google_map": "Mở google map"
+        "google_map": "Mở google map",
+        "meta_title": "KAI | Thực đơn",
+        "meta_description": "Thực đơn Kai"
     },
     "Navbar": {
         "booking": "đặt bàn",
@@ -48,9 +54,13 @@
         "cancel_success": "Hủy bàn thành công",
         "canceled_title": "Bàn đã được huỷ!",
         "canceled_message": "Hẹn gặp lại bạn ở lần sau.",
-        "rebooking_title": "Tôi muốn đặt lại bàn"
+        "rebooking_title": "Tôi muốn đặt lại bàn",
+        "meta_title": "KAI | Đặt bàn",
+        "meta_description": "Đặt bàn Kai"
     },
     "Error": {
-        "404": "Không tìm thấy trang"
+        "404": "Không tìm thấy trang",
+        "meta_title": "KAI | Không tìm thấy",
+        "meta_description": "Trang không tìm thấy Kai"
     }
 }

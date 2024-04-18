@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { gideon } from "@/libs/GoogleFont";
 
-
 const HomeMain = () => {
   const t = useTranslations("Home");
   const router = useRouter();

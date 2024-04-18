@@ -13,11 +13,10 @@ type Props = {
 
 const MenuPage = ({ params: { menuType } }: Props) => {
   const api = useGetMenu(menuType as any);
-  console.log(menuType)
   const router = useRouter();
   if (api?.isLoading) return <Loading />;
   if (api?.data)
-    return router.push(("/" + menuType + "/" + api.data[0].slug) as any);
+    return router.replace(("/" + menuType + "/" + api.data[0].slug) as any);
 };
 
 export default MenuPage;

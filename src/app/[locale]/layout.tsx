@@ -4,12 +4,20 @@ import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import ApiProvider from "@/libs/ApiProvider";
 import { nunito } from "@/libs/GoogleFont";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import Loading from "./loading";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "vi" }];
+}
+export async function generateMetadata({ params: { locale } }) {
+  const t = await getTranslations({ locale, namespace: "MetaData" });
+
+  return {
+    title: t("meta_title"),
+    description: t("meta_description"),
+  };
 }
 export default function LocaleLayout({
   children,
