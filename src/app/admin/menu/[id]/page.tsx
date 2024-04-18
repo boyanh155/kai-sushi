@@ -11,6 +11,7 @@ import {
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
 import AddSubMenuData from "@/components/Admin/Menu/AddSubMenuData";
+import { NavChild } from "../../../../../types/NavbarType";
 
 type Props = {
   params: {
@@ -24,7 +25,7 @@ const EditMenuPage = ({ params: { id } }: Props) => {
   const [type, setType] = useState<"food" | "beverage">("food");
 
   const apiPut = useApi<MenuDataResponseBody>({
-    key: ["menu", id],
+    key: [`menuHeaderDetail-${id}`],
     method: "PUT",
     url: `/${type || "food"}`,
     customConfig: {
@@ -72,7 +73,6 @@ const EditMenuPage = ({ params: { id } }: Props) => {
     validation.setFieldValue("slug", api?.data?.slug || "");
     validation.setFieldValue("order", api?.data?.order || "");
     validation.setFieldValue("children", api?.data?.children || []);
-    
   }, [api?.data]);
   console.log(api?.data);
   return api?.isLoading || apiPut.put?.isPending ? (
