@@ -47,7 +47,7 @@ const MenuMain = () => {
         <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-10">
           <Link
             href="/"
-            className="bg-black px-2 py-2.5 outline outline-[1px] outline-[#878787a6] rounded-sm text-xl"
+            className="bg-black px-2 py-2.5 outline outline-[0.8px] outline-[#878787a6] rounded-sm text-xl"
           >
             x
           </Link>
