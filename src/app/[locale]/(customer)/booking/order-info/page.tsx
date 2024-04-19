@@ -130,11 +130,11 @@ const OrderInfoPage = () => {
         <div className="w-[60px] h-[60px] mt-8">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
         </div>
-        <h2
+        <h1
           className={` text-white uppercase text-3xl mt-3 ${gideon.className}`}
         >
           {t("booking")}
-        </h2>
+        </h1>
       </div>
       {/* INPUT BOX */}
       <form className=" flex flex-col justify-center  mt-10" id="form-order">

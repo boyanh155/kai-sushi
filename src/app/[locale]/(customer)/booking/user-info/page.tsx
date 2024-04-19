@@ -90,11 +90,11 @@ const UserInfoPage = () => {
       <Link href="/booking/order-info" className="flex absolute top-16 left-8">
         <BackwardButton />
       </Link>
-      <h2
+      <h1
         className={`pt-32 text-center text-white uppercase text-3xl ${gideon.className}`}
       >
         {t("booking")}
-      </h2>
+      </h1>
       <Alert
         color="error"
         isVisible={isShowAlert}

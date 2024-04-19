@@ -9,7 +9,13 @@ export const client = new Redis({
 });
 
 export async function setCache(key: string, value: string) {
-  client.set(key, value);
+  try{
+
+    client.set(key, value);
+  }catch(err){
+    console.log(err)
+    return null
+  }
 }
 
 export async function getCache(key: string) {
@@ -20,6 +26,7 @@ export async function getCache(key: string) {
     if (data) console.log("hit");
     return data;
   } catch (err) {
+    return null
     console.error(err);
   }
 }
