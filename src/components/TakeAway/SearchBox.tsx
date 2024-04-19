@@ -1,10 +1,15 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { use, useEffect } from "react";
 import type { TypeCategory, TypeTakeAway } from "../../../types/TakeAway";
+import useTakeAwayStore, {
+  selectCategoryData,
+  selectTakeAwayData,
+  setTakeAwayData,
+} from "@/stores/useTakeAwayStore";
 
-const takeAwayMenu: TypeTakeAway[] = [
+const tempTakeAwayData: TypeTakeAway[] = [
   {
     isTitle: true,
     name: "Burger",
@@ -56,15 +61,121 @@ const takeAwayMenu: TypeTakeAway[] = [
       },
     ],
   },
-];
-const category: TypeCategory[] = [
-  ...new Set(takeAwayMenu.map((v) => v.category)),
-  ...new Set(takeAwayMenu.map((v) => v.category)),
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Pasta1",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Pasta2",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Pasta3",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Burger1",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Burger2",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
+  {
+    isTitle: true,
+    name: "Pasta",
+    category: "Burger3",
+    children: [
+      {
+        name: "Cheese Pasta",
+        price: "10",
+        children: [],
+      },
+      {
+        price: "10",
+        name: "Chicken Pasta",
+        children: [],
+      },
+    ],
+  },
 ];
 
 const SearchBox = () => {
   const t = useTranslations("TakeAway");
+
   const [isOpen, setIsOpen] = React.useState(false);
+  const category = useTakeAwayStore(selectCategoryData);
+  const takeAway = useTakeAwayStore(selectTakeAwayData);
+  const setTakeAway = useTakeAwayStore(setTakeAwayData);
+  useEffect(() => {
+    setTakeAway(tempTakeAwayData);
+  }, [ tempTakeAwayData]);
+  //
   return (
     <>
       <div className="w-full flex flex-row capitalize gap-6 text-white">
@@ -96,9 +207,15 @@ const SearchBox = () => {
           {t("search")}
         </div>
       </div>
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className=" before:block before:fixed before:z-[30] before:top-0 before:left-0 before:w-screen before:h-screen before:bg-black before:opacity-60"
+        ></div>
+      )}
       <ul
         tabIndex={0}
-        className="w-full bg-[#8C773E] flex flex-col px-7 text-sm font-bold uppercase text-white transition-all left-0 right-0 fixed rounded-t-xl z-[100] py-4 h-40 overflow-x-hidden overflow-y-scroll"
+        className="w-full bg-[#8C773E] flex flex-col px-7 text-sm font-bold uppercase text-white transition-all left-0 right-0 fixed rounded-t-xl z-[100] py-3 h-40 overflow-x-hidden overflow-y-scroll "
         style={{
           bottom: isOpen ? "0" : "-100%",
         }}
