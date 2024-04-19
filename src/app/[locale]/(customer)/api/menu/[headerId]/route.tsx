@@ -58,8 +58,6 @@ export const GET = async (_: NextRequest, { params: { headerId } }: Params) => {
         imageId: 0,
 
         __v: 0,
-        order: 0,
-        image: 0,
       })
       .populate({
         path: "children",

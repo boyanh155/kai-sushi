@@ -5,7 +5,6 @@ export const client = new Redis({
   host: process.env.REDIS_HOST,
   port: parseInt(process.env.REDIS_PORT || "10772"),
   maxRetriesPerRequest: null,
-
 });
 
 export async function setCache(key: string, value: string) {
@@ -23,7 +22,7 @@ export async function getCache(key: string) {
     console.error(err);
   }
 }
-
+//
 export async function delCache(key: string) {
   client.del(key);
 }
