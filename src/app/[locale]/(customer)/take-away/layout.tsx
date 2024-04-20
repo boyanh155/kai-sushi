@@ -23,7 +23,7 @@ const TakeAwayLayout = ({ children }: Props) => {
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
         {t("take_away_label")}
       </h1>
-      <div className="flex flex-col mt-16 w-full">{children}</div>
+      <div className="flex flex-col mt-11 w-full">{children}</div>
     </div>
   );
 };
