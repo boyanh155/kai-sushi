@@ -62,5 +62,12 @@
         "404": "Không tìm thấy trang",
         "meta_title": "KAI | Không tìm thấy",
         "meta_description": "Trang không tìm thấy Kai"
+    },
+    "TakeAway": {
+        "meta_title": "KAI | Mang về",
+        "meta_description": "Thực đơn mang về Kai",
+        "category": "Loại",
+        "search": "Tìm",
+        "take_away_label": "Mang về"
     }
 }

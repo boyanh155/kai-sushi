@@ -1,5 +1,4 @@
 import Redis from "ioredis";
-
 async function connect(
   fn: (client: Redis) => Promise<string | null | undefined>
 ): Promise<string | null | undefined> {

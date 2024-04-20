@@ -62,5 +62,12 @@
         "404": "Page not found",
         "meta_title": "KAI | Not found",
         "meta_description": "Not found page Kai"
+    },
+    "TakeAway": {
+        "meta_title": "KAI | Takeaway",
+        "meta_description": "Takeaway Kai",
+        "category": "category",
+        "search": "search",
+        "take_away_label": "Takeaway"
     }
 }

@@ -121,11 +121,11 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
         id="kai-booking__screenshot__success-order"
         className="flex flex-col items-center"
       >
-        <h2
+        <h1
           className={`pt-32 text-white uppercase text-3xl ${gideon.className}`}
         >
           {t("booking")}
-        </h2>
+        </h1>
         {/* ID */}
 
         <p className="text-[#959595] font-light mt-6">#{_orderId}</p>
