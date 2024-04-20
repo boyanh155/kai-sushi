@@ -1,28 +1,56 @@
 import Redis from "ioredis";
 
-export const client = new Redis({
-  password: process.env.REDIS_PASSWORD,
-  host: process.env.REDIS_HOST,
-  port: parseInt(process.env.REDIS_PORT || "10772"),
-  maxRetriesPerRequest: null,
-});
-
-export async function setCache(key: string, value: string) {
-  client.set(key, value);
-}
-
-export async function getCache(key: string) {
+async function connect(fn: (client: Redis) => void) {
   try {
-    const isExist = await client.exists(key);
-    if (!isExist) return null;
-    const data = await client.get(key);
-    if (data) console.log("hit");
-    return data;
-  } catch (err) {
-    console.error(err);
+    const client = new Redis({
+      password: process.env.REDIS_PASSWORD,
+      host: process.env.REDIS_HOST,
+      port: parseInt(process.env.REDIS_PORT || "10772"),
+      maxRetriesPerRequest: null,
+    });
+    const status = client.status;
+    if (status === "end" || status === "close") await client.connect();
+    client.on("ready", () => fn(client));
+  } catch (err: any) {
+    throw new Error(err);
   }
 }
+
+export const setCache = async (key: string, value: string) =>
+  connect(async (client) => {
+    try {
+      await client.set(key, value);
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  });
+
+export const getCache = (key: string) =>
+  connect(async (client) => {
+    try {
+      const isExist = await client.exists(key);
+      if (!isExist) {
+        console.log("miss");
+        return null;
+      }
+      const data = await client.get(key);
+      if (data) console.log("hit");
+      return data;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  });
 //
-export async function delCache(key: string) {
-  client.del(key);
-}
+export const delCache = (key: string) =>
+  connect(async (client) => {
+    try {
+      await client.del(key);
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  });
+
+//create index
