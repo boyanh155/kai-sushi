@@ -1,3 +1,3 @@
-export const menuHeaderTags = (headerId: string) => `menu::header::${headerId}`;
+export const menuHeaderTags = (headerId: string) => `menuHeader:${headerId}`;
 
-export const menuTags = (menuType: string) => `menu::${menuType}`;
+export const menuTags = (menuType: string) => `menu:${menuType}`;

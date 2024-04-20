@@ -19,7 +19,7 @@ export async function generateMetadata({ params: { locale } }) {
 const TakeAwayLayout = ({ children }: Props) => {
   const t = useTranslations("TakeAway");
   return (
-    <div className="flex flex-col relative content-container items-center">
+    <div className="flex flex-col relative content-container items-center ">
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
         {t("take_away_label")}
       </h1>

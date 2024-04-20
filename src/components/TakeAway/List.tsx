@@ -4,7 +4,7 @@ type Props = {}
 
 const List = (props: Props) => {
   return (
-    <div>List</div>
+    <div className='flex flex-col px-7'>List</div>
   )
 }
 
