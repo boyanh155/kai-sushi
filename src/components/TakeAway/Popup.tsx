@@ -25,7 +25,7 @@ const Popup = () => {
       )}
       <ul
         tabIndex={0}
-        className="w-full bg-[#8C773E] flex flex-col px-7 text-sm font-bold uppercase text-white transition-all duration-50 left-0 right-0 fixed rounded-t-xl z-[100] py-3 h-40 overflow-x-hidden overflow-y-scroll "
+        className="w-full bg-[#8C773E] flex flex-col px-7 text-sm font-bold uppercase text-white transition-all duration-50 left-0 right-0 fixed rounded-t-xl z-[100] py-3 h-72 overflow-x-hidden overflow-y-scroll "
         style={{
           bottom: isOpen ? "0" : "-100%",
         }}

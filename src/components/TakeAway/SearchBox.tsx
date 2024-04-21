@@ -37,7 +37,7 @@ const SearchBox = () => {
     <div
       className={`w-full flex flex-row capitalize ${
         !isOpenSearch ? "gap-6" : " "
-      } text-white border-golden-1 border-b-[0.4px] px-7 py-5 bg-black transition-all duration-50 sticky top-0`}
+      } text-white border-golden-1 overflow-hidden  border-b-[0.4px] px-7 py-5 bg-black transition-all duration-50 sticky top-0`}
     >
       {/* Category */}
       <div
@@ -45,10 +45,8 @@ const SearchBox = () => {
         onClick={toggleIsOpen}
         ref={headerRef}
         className={`${
-          isOpenSearch
-            ? "basis-0 w-0 overflow-hidden"
-            : "basis-[65%] ps-5 pe-4 py-1"
-        }  rounded-full cursor-pointer bg-[#8C773EBF]  flex flex-row justify-between items-center  transition-all duration-50`}
+          isOpenSearch ? "basis-0 w-0" : "basis-[65%] ps-5 pe-4 py-1"
+        }  rounded-full overflow-hidden cursor-pointer bg-[#8C773EBF]  flex flex-row justify-between items-center  transition-all duration-50`}
       >
         <p className="text-sm">{t("category")}</p>
         <svg
