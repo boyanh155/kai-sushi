@@ -6,3 +6,5 @@ export const taPrefix = "ta:";
 export const taTags = (taId: string) => `ta:${taId}`;
 
 export const indexTaTags = (fields: string) => `ta_${fields}_idx`;
+
+export const takeAwayTags = `takeaway`;

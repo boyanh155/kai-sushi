@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef } from "react";
-import type { TypeTakeAway } from "../../../types/TakeAway";
 import {
-  selectCategoryHeaderElement,
+
   selectSearch,
   setCategoryHeaderElement,
   toggleIsOpenCategory,
@@ -12,208 +11,11 @@ import {
 import { isEmpty } from "lodash";
 import { setSearchTakeAway } from "../../stores/useTakeAwayStore";
 import useTakeAwayStore, {
-  selectCategoryData,
+
   selectIsOpenCategory,
   setTakeAwayData,
 } from "@/stores/useTakeAwayStore";
 
-const tempTakeAwayData: TypeTakeAway[] = [
-  {
-    isTitle: true,
-    name: "Burger",
-    category: "Burger",
-
-    children: [
-      {
-        name: "Cheese Burger",
-        price: "10",
-        _id: "1",
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        children: [],
-      },
-      {
-        name: "Chicken Burger",
-        _id: "2",
-
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        price: "10",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pizza",
-    category: "Pizza",
-    children: [
-      {
-        name: "Cheese Pizza",
-        _id: "3",
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        price: "10",
-        children: [],
-      },
-      {
-        name: "Chicken Pizza",
-        _id: "4",
-
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        children: [],
-        price: "10",
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Pasta",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "5",
-
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "6",
-
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Pasta1",
-    children: [
-      {
-        name: "Cheese Pasta",
-        price: "10",
-        _id: "7",
-
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "8",
-
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Pasta2",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "9",
-
-        description:
-          "Cheese Burger Cheese Burger Cheese BurgerCheese Burger Cheese BurgerCheese Burger",
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "10",
-
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Pasta3",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "11",
-
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "12",
-
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Burger1",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "13",
-
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "14",
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Burger2",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "15",
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        _id: "16",
-        name: "Chicken Pasta",
-        children: [],
-      },
-    ],
-  },
-  {
-    isTitle: true,
-    name: "Pasta",
-    category: "Burger3",
-    children: [
-      {
-        name: "Cheese Pasta",
-        _id: "17",
-        price: "10",
-        children: [],
-      },
-      {
-        price: "10",
-        name: "Chicken Pasta",
-        _id: "18",
-        children: [],
-      },
-    ],
-  },
-];
 
 const SearchBox = () => {
   const t = useTranslations("TakeAway");
@@ -227,9 +29,7 @@ const SearchBox = () => {
   const search = useTakeAwayStore(selectSearch);
   const setSearch = useTakeAwayStore(setSearchTakeAway);
   const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    setTakeAway(tempTakeAwayData);
-  }, [tempTakeAwayData]);
+
   useEffect(() => {
     if (!headerRef.current) return;
     _setCategoryHeader(headerRef.current);
@@ -237,9 +37,9 @@ const SearchBox = () => {
   //
   return (
     <div
-      className={`w-full flex flex-row capitalize mb-10 ${
+      className={`w-full flex flex-row capitalize ${
         !isOpenSearch ? "gap-6" : " "
-      } text-white border-golden border-b-[0.4px] px-7 py-5 bg-black transition-all duration-50 sticky top-0`}
+      } text-white border-golden-1 border-b-[0.4px] px-7 py-5 bg-black transition-all duration-50 sticky top-0`}
     >
       {/* Category */}
       <div

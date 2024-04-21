@@ -16,11 +16,11 @@ const LoadingContainer = styled.div`
   inset: 0;
   display: flex;
   position: relative;
+  flex-grow: 1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  flex-grow: 1;
   width: 100vw;
   height: auto;
   z-index: 200;

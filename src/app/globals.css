@@ -58,7 +58,7 @@ body {
     @apply w-full outline-none bg-[#0E0E10] text-base border-[0.4px] rounded-sm text-[#959595] font-light border-[#515151] ps-9 py-4 pe-4 text-white;
     &:focus,
     &:hover {
-      @apply border-golden bg-[#0E0E10];
+      @apply border-golden-1 bg-[#0E0E10];
     }
     &::placeholder {
       @apply text-transparent text-base font-light transition-all duration-300;

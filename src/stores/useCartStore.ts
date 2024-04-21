@@ -1,8 +1,10 @@
 import { create } from "zustand";
-import { TypeCart } from "../../types/CartType";
-import { persist, devtools } from "zustand/middleware";
-
-interface CartState extends TypeCart {}
+import { TypeCart, TypeCartItem } from "../../types/CartType";
+import { persist } from "zustand/middleware";
+import useTakeAwayStore, { selectTakeAwayData } from "./useTakeAwayStore";
+interface CartState extends TypeCart {
+  totalPrice: number;
+}
 
 interface CartStore extends CartState {
   addToCart: (id: string, quantity: number) => void;
@@ -13,6 +15,7 @@ interface CartStore extends CartState {
 const initialState: Pick<CartStore, keyof CartState> = {
   items: [],
   totalQuantity: 0,
+  totalPrice: 0,
 };
 
 const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
@@ -24,14 +27,16 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           const existingItemIndex = prev.items.findIndex(
             (item) => item._id === id
           );
+          const data = useTakeAwayStore(selectTakeAwayData);
           const existingItem = prev.items[existingItemIndex];
-          const updatedTotalQuantity = prev.totalQuantity + quantity;
+          const updatedTotalQuantity = +prev.totalQuantity + +quantity;
+   
 
           let updatedItems;
           if (existingItem) {
             const updatedItem = {
               ...existingItem,
-              quantity: existingItem.quantity + quantity,
+              quantity: +existingItem.quantity + +quantity,
             };
             updatedItems = [...prev.items];
             updatedItems[existingItemIndex] = updatedItem;
@@ -43,7 +48,7 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           }
 
           return {
-            items: updatedItems,
+            items: [...updatedItems],
             totalQuantity: updatedTotalQuantity,
           };
         }),
@@ -52,10 +57,9 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           const existingItemIndex = prev.items.findIndex(
             (item) => item._id === id
           );
-          if (existingItemIndex === -1) return prev;
+          if (existingItemIndex === -1) return { ...prev };
           const existingItem = prev.items[existingItemIndex];
-          const updatedTotalQuantity =
-            prev.totalQuantity - existingItem.quantity;
+          const updatedTotalQuantity = +prev.totalQuantity - 1;
 
           let updatedItems;
           if (existingItem.quantity === 1) {
@@ -63,17 +67,31 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           } else {
             const updatedItem = {
               ...existingItem,
-              quantity: existingItem.quantity - 1,
+              quantity: +existingItem.quantity - 1,
             };
             updatedItems = [...prev.items];
             updatedItems[existingItemIndex] = updatedItem;
           }
 
           return {
-            items: updatedItems,
+            items: [...updatedItems],
             totalQuantity: updatedTotalQuantity,
           };
         }),
+      setDetailItems: (items) => {
+        set((prev) => {
+          let price = 0;
+          items.forEach((item) => {
+            price += item.price * item.quantity;
+          });
+          return {
+            ...prev,
+            detailItems: [...items],
+            totalPrice: price,
+          };
+        });
+      },
+
       clearCart: () => set(initialState),
     }),
     {
@@ -88,6 +106,7 @@ export default useCartStore;
 export const selectCartInfo = (state: CartStore) => ({
   items: state.items,
   totalQuantity: state.totalQuantity,
+  totalPrice: state.totalPrice,
 });
 
 export const addToCart = (state: CartStore) => state.addToCart;

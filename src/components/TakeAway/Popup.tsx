@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import useTakeAwayStore, {
   selectCategoryData,
@@ -6,6 +6,7 @@ import useTakeAwayStore, {
   toggleIsOpenCategory,
 } from "@/stores/useTakeAwayStore";
 import React from "react";
+import CartInfo from "./CartInfo";
 
 const Popup = () => {
   const isOpen = useTakeAwayStore(selectIsOpenCategory);
@@ -13,11 +14,14 @@ const Popup = () => {
   const category = useTakeAwayStore(selectCategoryData);
   return (
     <>
-      {isOpen && (
+      {isOpen ? (
         <div
           onClick={toggleIsOpen}
           className=" before:block before:fixed before:z-[30] before:top-0 before:left-0 before:w-screen before:h-screen before:bg-black before:opacity-60"
         ></div>
+      ) : (
+        // CART
+        <CartInfo />
       )}
       <ul
         tabIndex={0}
@@ -35,7 +39,7 @@ const Popup = () => {
           </li>
         ))}
       </ul>
-      ;
+      
     </>
   );
 };

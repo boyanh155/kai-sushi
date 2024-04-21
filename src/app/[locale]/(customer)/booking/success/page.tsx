@@ -137,7 +137,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
           {t("saved")}
         </Toast>
 
-        <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden border px-5 p-4">
+        <div className="flex flex-col gap-2 w-full text-base mt-9 text-white border-golden-1 border px-5 p-4">
           <p className=" capitalize  text-base">{(api?.data as any)?.name}</p>
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">

@@ -1,0 +1,11 @@
+export interface IProductDocument extends Document {
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+}
+
+export interface ICategoryDocument extends Document {
+  name: string;
+  products: IProductDocument[];
+}

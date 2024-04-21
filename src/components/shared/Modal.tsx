@@ -18,7 +18,7 @@ const Modal = ({
   return (
     isOpen && (
       <div className="flex justify-center px-7 items-center content-container h-screen  bg-[rgba(0,0,0,0.75)] z-40 fixed">
-        <div className=" relative bottom-[15%] w-full  flex justify-start items-center flex-col bg-black z-50 p-5 rounded-sm border-golden border">
+        <div className=" relative bottom-[15%] w-full  flex justify-start items-center flex-col bg-black z-50 p-5 rounded-sm border-golden-1 border">
           <p className="text-base text-start w-full">{title}</p>
           <div className="flex flex-row w-full gap-5 mt-4 justify-end">
             <div

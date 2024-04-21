@@ -3,7 +3,7 @@ export type TypeCartItem = {
   quantity: number;
 };
 export type TypeCart = {
-  items: TypeCartItem[];
+  items: (TypeCartItem)[];
   totalQuantity: number;
  
 };

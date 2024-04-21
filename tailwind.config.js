@@ -15,9 +15,11 @@ module.exports = {
                 "golden": "linear-gradient(0deg, #8C773E 26.32%, rgba(215, 206, 184, 0.88) 100%)",
             },
             colors:{
-                "golden":"#8C773E"
+                "golden":"#8C773E",
+                "golden-1":"#8C773E"
             }
         },
+      
     },
     plugins: [require('daisyui')],
     daisyui: { themes: ['winter'] }

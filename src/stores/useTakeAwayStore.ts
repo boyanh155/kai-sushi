@@ -29,7 +29,8 @@ export const useTakeAwayStore = create<TakeAwayStore>((set) => ({
   setTakeAwayData: (takeAwayData: TypeTakeAway[]) =>
     set((prev) => {
       if (takeAwayData.length === 0) return { ...prev };
-      const category = [...new Set(takeAwayData.map((v) => v.category))];
+      const category = [...new Set(takeAwayData.map((v) => v.name))];
+
       return { ...prev, takeAwayData, categoryData: category };
     }),
   toggleCategory: () =>

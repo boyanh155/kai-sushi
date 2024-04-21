@@ -7,10 +7,13 @@ import useCartStore, {
 import useTakeAwayStore, {
   selectCategoryHeaderElement,
   selectTakeAwayData,
+  setTakeAwayData,
 } from "@/stores/useTakeAwayStore";
 
 import React, { useEffect, useRef } from "react";
-import { setCategoryHeaderElement } from "../../stores/useTakeAwayStore";
+
+import { useGetTakeAwayMenu } from "@/hooks/api/useTakeAwayMenu";
+import Loading from "../shared/Loading";
 
 const List = () => {
   const listTakeAway = useTakeAwayStore(selectTakeAwayData);
@@ -28,11 +31,11 @@ const List = () => {
     )?.quantity;
     return (
       <div
-        className={` gap-3 rounded-full ${
+        className={` gap-3 rounded-full  ${
           currentItemQuantity
             ? "basis-20 bg-[#8C773E] text-white font-light"
             : "basis-6 text-[#8C773E]"
-        } h-6 border-golden border-[1.8px] transition-all flex justify-center items-center`}
+        } h-6 border-golden-1 border-[1.8px] transition-all flex justify-center items-center`}
       >
         {currentItemQuantity && currentItemQuantity > 0 && (
           <p
@@ -56,13 +59,13 @@ const List = () => {
       const text = itemsRef.current.find((v, index) => {
         if (
           v.getBoundingClientRect().top < 62 &&
-          itemsRef.current[index +1].getBoundingClientRect().top > 62
+          itemsRef.current[index + 1].getBoundingClientRect().top > 62
         ) {
           console.log(v.getBoundingClientRect().top, v.textContent);
         }
         return (
           v.getBoundingClientRect().top < 62 &&
-          itemsRef.current[index +1].getBoundingClientRect().top > 62
+          itemsRef.current[index + 1].getBoundingClientRect().top > 62
         );
       })?.textContent;
       console.log(text);
@@ -77,7 +80,7 @@ const List = () => {
     };
   }, [itemsRef.current, pCategoryHeader]);
   return (
-    <div className="flex flex-col px-7" ref={_ref}>
+    <div className="flex flex-col px-7 gap-16 mt-10" ref={_ref}>
       {listTakeAway.length > 0 ? (
         listTakeAway.map((v, id) => {
           return (
@@ -90,7 +93,7 @@ const List = () => {
                 }}
                 className="text-category-fixed text-base font-extrabold golden-title uppercase"
               >
-                {v.category}
+                {v.name}
               </div>
               {/*  CHILDREN */}
               {v.children &&
@@ -123,6 +126,6 @@ const List = () => {
       )}
     </div>
   );
-};
+}
 
 export default List;
