@@ -6,10 +6,8 @@ import SearchBox from "@/components/TakeAway/SearchBox";
 import { useGetTakeAwayMenu } from "@/hooks/api/useTakeAwayMenu";
 import useTakeAwayStore, { setTakeAwayData } from "@/stores/useTakeAwayStore";
 import React, { useEffect } from "react";
-
-type Props = {};
-
-const TakeAwayPage = (props: Props) => {
+export const dynamic = "force-dynamic";
+const TakeAwayPage = () => {
   const api = useGetTakeAwayMenu();
   const setTakeAway = useTakeAwayStore(setTakeAwayData);
 

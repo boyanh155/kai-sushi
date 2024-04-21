@@ -13,7 +13,6 @@ import { setSearchTakeAway } from "../../stores/useTakeAwayStore";
 import useTakeAwayStore, {
 
   selectIsOpenCategory,
-  setTakeAwayData,
 } from "@/stores/useTakeAwayStore";
 
 
@@ -25,7 +24,6 @@ const SearchBox = () => {
   const toggleIsOpen = useTakeAwayStore(toggleIsOpenCategory);
   const _setCategoryHeader = useTakeAwayStore(setCategoryHeaderElement);
   const headerRef = useRef<HTMLDivElement>(null);
-  const setTakeAway = useTakeAwayStore(setTakeAwayData);
   const search = useTakeAwayStore(selectSearch);
   const setSearch = useTakeAwayStore(setSearchTakeAway);
   const inputRef = useRef<HTMLInputElement>(null);

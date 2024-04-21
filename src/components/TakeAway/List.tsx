@@ -68,6 +68,13 @@ const List = () => {
   const pCategoryHeader = useTakeAwayStore(selectCategoryHeaderElement);
 
   const _ref = useRef<HTMLDivElement>(null);
+
+
+
+
+  
+
+
   useEffect(() => {
     const handleScroll = () => {
       const text = itemsRef.current.find((v, index) => {

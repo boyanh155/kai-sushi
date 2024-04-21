@@ -6,6 +6,7 @@ import React from "react";
 type Props = {
   children: React.ReactNode;
 };
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params: { locale } }) {
   const t = await getTranslations({ locale, namespace: "TakeAway" });
