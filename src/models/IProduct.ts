@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export interface IProductDocument extends Document {
   name: string;
   price: number;

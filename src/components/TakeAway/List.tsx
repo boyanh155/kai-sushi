@@ -7,52 +7,66 @@ import useCartStore, {
 import useTakeAwayStore, {
   selectCategoryHeaderElement,
   selectTakeAwayData,
-  setTakeAwayData,
+
 } from "@/stores/useTakeAwayStore";
 
 import React, { useEffect, useRef } from "react";
 
-import { useGetTakeAwayMenu } from "@/hooks/api/useTakeAwayMenu";
-import Loading from "../shared/Loading";
-
-const List = () => {
-  const listTakeAway = useTakeAwayStore(selectTakeAwayData);
-  const itemsRef = useRef<HTMLDivElement[]>([]);
+const RenderAddButton = ({ child: _item }) => {
+  const [isShow, setIsShow] = React.useState(false);
   const cart = useCartStore(selectCartInfo);
 
   const _addToCart = useCartStore(addToCart);
 
   const _removeFromCart = useCartStore(removeFromCart);
-  const pCategoryHeader = useTakeAwayStore(selectCategoryHeaderElement);
+  const currentItemQuantity = cart.items.find(
+    (item) => _item._id === item._id
+  )?.quantity;
 
-  const renderAddButton = (id: string) => {
-    const currentItemQuantity = cart.items.find(
-      (item) => item._id === id
-    )?.quantity;
-    return (
-      <div
-        className={` gap-3 rounded-full  ${
-          currentItemQuantity
-            ? "basis-20 bg-[#8C773E] text-white font-light"
-            : "basis-6 text-[#8C773E]"
-        } h-6 border-golden-1 border-[1.8px] transition-all flex justify-center items-center`}
-      >
-        {currentItemQuantity && currentItemQuantity > 0 && (
-          <p
-            className="text-xl  font-light"
-            onClick={() => _removeFromCart(id)}
-          >
-            -
-          </p>
-        )}
-        {currentItemQuantity}
+  return (
+    <div
+      onClick={() => setIsShow(true)}
+      onMouseEnter={() => setIsShow(true)}
+      onMouseLeave={() =>
+        setTimeout(() => {
+          setIsShow(false);
+          console.log("ss");
+        }, 2000)
+      }
 
-        <p className="text-xl  font-light" onClick={() => _addToCart(id, 1)}>
+      className={` gap-3 rounded-full  ${
+        currentItemQuantity && currentItemQuantity > 0
+          ? `${
+              isShow ? "basis-20 " : "basis-6 "
+            } bg-[#8C773E] text-white font-light`
+          : `basis-6 text-[#8C773E]`
+      } h-6 w-6 border-golden-1 border-[1.8px] transition-all flex justify-center items-center`}
+    >
+      {currentItemQuantity && currentItemQuantity > 0 && isShow && (
+        <p
+          className="text-xl  font-light"
+          onClick={() => _removeFromCart(_item._id)}
+        >
+          -
+        </p>
+      )}
+      {currentItemQuantity}
+
+      {(!currentItemQuantity ||
+        (currentItemQuantity && currentItemQuantity > 0 && isShow)) && (
+        <p className="text-xl  font-light" onClick={() => _addToCart(_item, 1)}>
           +
         </p>
-      </div>
-    );
-  };
+      )}
+    </div>
+  );
+};
+const List = () => {
+  const listTakeAway = useTakeAwayStore(selectTakeAwayData);
+  const itemsRef = useRef<HTMLDivElement[]>([]);
+
+  const pCategoryHeader = useTakeAwayStore(selectCategoryHeaderElement);
+
   const _ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleScroll = () => {
@@ -114,7 +128,7 @@ const List = () => {
                     </div>
                     {/* add button */}
                     <div className="py-6 flex-grow flex justify-end">
-                      {renderAddButton(child._id)}
+                      <RenderAddButton child={child} />
                     </div>
                   </div>
                 ))}
@@ -126,6 +140,6 @@ const List = () => {
       )}
     </div>
   );
-}
+};
 
 export default List;

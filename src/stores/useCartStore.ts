@@ -1,13 +1,14 @@
 import { create } from "zustand";
-import { TypeCart, TypeCartItem } from "../../types/CartType";
+import { TypeCart } from "../../types/CartType";
 import { persist } from "zustand/middleware";
-import useTakeAwayStore, { selectTakeAwayData } from "./useTakeAwayStore";
+import { IProductDocument } from "@/models/IProduct";
+
 interface CartState extends TypeCart {
   totalPrice: number;
 }
 
 interface CartStore extends CartState {
-  addToCart: (id: string, quantity: number) => void;
+  addToCart: (_item: IProductDocument, quantity: number) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
 }
@@ -22,15 +23,15 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
   persist<CartStore>(
     (set) => ({
       ...initialState,
-      addToCart: (id, quantity) =>
+      addToCart: (_item, quantity) =>
         set((prev) => {
           const existingItemIndex = prev.items.findIndex(
-            (item) => item._id === id
+            (item) => item._id === _item._id
           );
-          const data = useTakeAwayStore(selectTakeAwayData);
+
           const existingItem = prev.items[existingItemIndex];
           const updatedTotalQuantity = +prev.totalQuantity + +quantity;
-   
+          const totalPrice = prev.totalPrice + _item.price * quantity;
 
           let updatedItems;
           if (existingItem) {
@@ -41,15 +42,19 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
             updatedItems = [...prev.items];
             updatedItems[existingItemIndex] = updatedItem;
           } else {
-            updatedItems = prev.items.concat({
-              _id: id,
-              quantity: quantity,
-            });
+            updatedItems = [
+              ...prev.items,
+              {
+                ..._item,
+                quantity: quantity,
+              },
+            ];
           }
 
           return {
             items: [...updatedItems],
             totalQuantity: updatedTotalQuantity,
+            totalPrice,
           };
         }),
       removeFromCart: (id) =>
@@ -60,7 +65,7 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           if (existingItemIndex === -1) return { ...prev };
           const existingItem = prev.items[existingItemIndex];
           const updatedTotalQuantity = +prev.totalQuantity - 1;
-
+          const updatedTotalPrice = prev.totalPrice - existingItem.price;
           let updatedItems;
           if (existingItem.quantity === 1) {
             updatedItems = prev.items.filter((item) => item._id !== id);
@@ -76,6 +81,7 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           return {
             items: [...updatedItems],
             totalQuantity: updatedTotalQuantity,
+            totalPrice: updatedTotalPrice,
           };
         }),
       setDetailItems: (items) => {
