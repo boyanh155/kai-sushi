@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef } from "react";
 import {
-
   selectSearch,
   setCategoryHeaderElement,
   toggleIsOpenCategory,
@@ -11,10 +10,8 @@ import {
 import { isEmpty } from "lodash";
 import { setSearchTakeAway } from "../../stores/useTakeAwayStore";
 import useTakeAwayStore, {
-
   selectIsOpenCategory,
 } from "@/stores/useTakeAwayStore";
-
 
 const SearchBox = () => {
   const t = useTranslations("TakeAway");
@@ -33,6 +30,7 @@ const SearchBox = () => {
     _setCategoryHeader(headerRef.current);
   }, [headerRef.current]);
   //
+
   return (
     <div
       className={`w-full flex flex-row capitalize ${
@@ -42,13 +40,13 @@ const SearchBox = () => {
       {/* Category */}
       <div
         tabIndex={0}
-        onClick={toggleIsOpen}
+        onClick={()=>toggleIsOpen(true)}
         ref={headerRef}
         className={`${
           isOpenSearch ? "basis-0 w-0" : "basis-[65%] ps-5 pe-4 py-1"
         }  rounded-full overflow-hidden cursor-pointer bg-[#8C773EBF]  flex flex-row justify-between items-center  transition-all duration-50`}
       >
-        <p className="text-sm">{t("category")}</p>
+        <p className="text-base">{t("category")}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"
@@ -90,7 +88,7 @@ const SearchBox = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          className={`bg-[#8C773EBF] text-sm placeholder:text-white capitalize transition-all duration-100  ${
+          className={`bg-[#8C773EBF] text-base placeholder:text-white capitalize transition-all duration-100  ${
             isOpenSearch ? "w-full" : "w-12"
           }`}
           placeholder={t("search")}

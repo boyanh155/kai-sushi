@@ -16,7 +16,6 @@ const DeleteHeaderModal = ({ deleteId, handleClose }: Props) => {
   });
   const router = useRouter();
   const confirmDelete = () => {
-    console.log(deleteId);
     api?.deleteObj?.mutateAsync(deleteId);
   };
   useEffect(() => {

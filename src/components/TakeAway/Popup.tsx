@@ -7,16 +7,18 @@ import useTakeAwayStore, {
 } from "@/stores/useTakeAwayStore";
 import React from "react";
 import CartInfo from "./CartInfo";
+import { setSelectedCategory } from "../../stores/useTakeAwayStore";
 
 const Popup = () => {
   const isOpen = useTakeAwayStore(selectIsOpenCategory);
   const toggleIsOpen = useTakeAwayStore(toggleIsOpenCategory);
   const category = useTakeAwayStore(selectCategoryData);
+  const _setSelectedCategory = useTakeAwayStore(setSelectedCategory);
   return (
     <>
       {isOpen ? (
         <div
-          onClick={toggleIsOpen}
+          onClick={() => toggleIsOpen(false)}
           className=" before:block before:fixed before:z-[30] before:top-0 before:left-0 before:w-screen before:h-screen before:bg-black before:opacity-60"
         ></div>
       ) : (
@@ -33,13 +35,16 @@ const Popup = () => {
         {category.map((v, key) => (
           <li
             key={key}
+            onClick={() => {
+              _setSelectedCategory(v);
+              toggleIsOpen(false);
+            }}
             className=" last:!border-b-0 text-sm py-4 border-b-[0.5px] border-white w-full text-left"
           >
             {v}
           </li>
         ))}
       </ul>
-      
     </>
   );
 };

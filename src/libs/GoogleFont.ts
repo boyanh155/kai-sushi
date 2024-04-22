@@ -6,7 +6,7 @@ export const gideon = Gideon_Roman({
   subsets: ["latin"],
 });
 export const nunito = Nunito({
-  weight: ["400", "700", "500", "300",'900'],
+  weight: ["400", "700", "500","600", "300",'900'],
   style: ["normal", "italic"],
   subsets: ["latin"],
 });
