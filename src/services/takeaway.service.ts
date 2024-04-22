@@ -14,6 +14,7 @@ export const getMenuTakeAway = async () => {
     setCache(cacheKey, JSON.stringify(categories));
     return categories;
   } catch (err) {
-    throw err;
+    console.error(err);
+    return null
   }
 };

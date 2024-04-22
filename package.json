@@ -15,6 +15,7 @@
     "@next/third-parties": "^14.2.2",
     "@tanstack/react-query": "^5.28.6",
     "@types/ioredis": "^5.0.0",
+    "@types/lunr": "^2.3.7",
     "@types/qs": "^6.9.14",
     "axios": "^1.6.8",
     "cloudinary": "^2.0.3",

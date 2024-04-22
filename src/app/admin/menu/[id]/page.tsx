@@ -74,7 +74,6 @@ const EditMenuPage = ({ params: { id } }: Props) => {
     validation.setFieldValue("order", api?.data?.order || "");
     validation.setFieldValue("children", api?.data?.children || []);
   }, [api?.data]);
-  console.log(api?.data);
   return api?.isLoading || apiPut.put?.isPending ? (
     <Loading />
   ) : (
