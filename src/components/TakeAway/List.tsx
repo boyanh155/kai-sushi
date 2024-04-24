@@ -12,6 +12,7 @@ import useTakeAwayStore, {
 } from "@/stores/useTakeAwayStore";
 
 import React, { useEffect, useRef } from "react";
+import { isEmpty } from "lodash";
 
 const RenderAddButton = ({ child: _item }) => {
   const [isShow, setIsShow] = React.useState(false);
@@ -94,7 +95,7 @@ const List = () => {
   useEffect(() => {
     const handleScroll = () => {
       const text = itemsRef.current.find((v, index) => {
-        if (!v) return;
+        if (!v || !itemsRef?.current?.[index + 1]) return;
         if (
           v.getBoundingClientRect().top < 91 &&
           itemsRef.current[index + 1].getBoundingClientRect().top > 91
@@ -117,8 +118,9 @@ const List = () => {
   }, [itemsRef.current, pCategoryHeader]);
 
   useEffect(() => {
+    if (isEmpty(listTakeAway)) return;
     if (!search) setRenderTakeAway(listTakeAway);
-
+    console.log(listTakeAway);
     const _result = listTakeAway.filter(
       (category) =>
         category.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -136,7 +138,6 @@ const List = () => {
         (v) => v.name === _selectedCategory
       );
       if (_index > -1) {
-        
         const elementTop =
           itemsRef.current[_index]?.getBoundingClientRect().top || 0;
         const scrollTop =
