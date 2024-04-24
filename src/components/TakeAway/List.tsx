@@ -10,6 +10,7 @@ import useTakeAwayStore, {
   selectSearch,
   selectTakeAwayData,
 } from "@/stores/useTakeAwayStore";
+import { _normalize } from "@/libs/format";
 
 import React, { useEffect, useRef } from "react";
 import { isEmpty } from "lodash";
@@ -61,23 +62,29 @@ const RenderAddButton = ({ child: _item }) => {
   );
 };
 const HighlightText = ({ text, search }) => {
-  if (!search) {
+  if (!search || !text) {
     return <>{text}</>;
   }
 
-  const parts = text.split(new RegExp(`(${search})`, "gi"));
+  const normalizedSearch = _normalize(search);
+  const normalizedText = _normalize(text);
 
+  const parts = normalizedText.split(new RegExp(`(${normalizedSearch})`, "gi"));
+
+  let currentIndex = 0;
   return (
     <>
-      {parts.map((part, i) =>
-        part.toLowerCase() === search.toLowerCase() ? (
+      {parts.map((part, i) => {
+        const originalPart = text.substr(currentIndex, part.length);
+        currentIndex += part.length;
+        return part.toLowerCase() === normalizedSearch.toLowerCase() ? (
           <span key={i} style={{ backgroundColor: "#ffff0a7d" }}>
-            {part}
+            {originalPart}
           </span>
         ) : (
-          <span key={i}>{part}</span>
-        )
-      )}
+          <span key={i}>{originalPart}</span>
+        );
+      })}
     </>
   );
 };
@@ -89,7 +96,8 @@ const List = () => {
   const pCategoryHeader = useTakeAwayStore(selectCategoryHeaderElement);
 
   const _ref = useRef<HTMLDivElement>(null);
-  const search = useTakeAwayStore(selectSearch);
+  const _search = useTakeAwayStore(selectSearch);
+  const search = _normalize(_search);
   const [renderTakeAway, setRenderTakeAway] = React.useState<any[]>([]);
 
   useEffect(() => {
@@ -120,14 +128,14 @@ const List = () => {
   useEffect(() => {
     if (isEmpty(listTakeAway)) return;
     if (!search) setRenderTakeAway(listTakeAway);
-    console.log(listTakeAway);
     const _result = listTakeAway.filter(
       (category) =>
-        category.name.toLowerCase().includes(search.toLowerCase()) ||
+        _normalize(category?.name).includes(search) ||
         category?.children?.some(
           (product: any) =>
-            product.name.toLowerCase().includes(search.toLowerCase()) ||
-            product.description.toLowerCase().includes(search.toLowerCase())
+            (product?.name && _normalize(product.name).includes(search)) ||
+            (product?.description &&
+              _normalize(product.description).includes(search))
         )
     );
     setRenderTakeAway(_result);

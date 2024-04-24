@@ -20,7 +20,7 @@ const SearchBox = () => {
   const isOpen = useTakeAwayStore(selectIsOpenCategory);
   const toggleIsOpen = useTakeAwayStore(toggleIsOpenCategory);
   const _setCategoryHeader = useTakeAwayStore(setCategoryHeaderElement);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLParagraphElement>(null);
   const search = useTakeAwayStore(selectSearch);
   const setSearch = useTakeAwayStore(setSearchTakeAway);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,13 +40,17 @@ const SearchBox = () => {
       {/* Category */}
       <div
         tabIndex={0}
-        onClick={()=>toggleIsOpen(true)}
-        ref={headerRef}
+        onClick={() => toggleIsOpen(true)}
         className={`${
           isOpenSearch ? "basis-0 w-0" : "basis-[65%] ps-5 pe-4 py-1"
         }  rounded-full overflow-hidden cursor-pointer bg-[#8C773EBF]  flex flex-row justify-between items-center  transition-all duration-50`}
       >
-        <p className="text-base">{t("category")}</p>
+        <p
+          className="text-base overflow-hidden whitespace-nowrap overflow-ellipsis max-w-full"
+          ref={headerRef}
+        >
+          {t("category")}
+        </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"

@@ -13,7 +13,7 @@ interface TakeAwayState {
 interface TakeAwayStore extends TakeAwayState {
   setTakeAwayData: (takeAwayData: TypeTakeAway[]) => void;
   setSearch: (search: string) => void;
-  toggleCategory: (state:boolean) => void;
+  toggleCategory: (state: boolean) => void;
   setCateGoryHeaderElement: (element: HTMLElement) => void;
   setSelectedCategory: (category: string) => void;
 }
@@ -38,7 +38,11 @@ export const useTakeAwayStore = create<TakeAwayStore>((set) => ({
     }),
   toggleCategory: (state: boolean) =>
     set((prev) => ({ ...prev, isOpenCategory: state })),
-  setSearch: (search: string) => set((prev) => ({ ...prev, search })),
+  setSearch: (search: string) =>
+    set((prev) => {
+      const _search = search.replace(/[|&;$%@"<>()+,]/g, "");
+      return { ...prev, search: _search };
+    }),
   setCateGoryHeaderElement: (element: HTMLElement) => {
     set((prev) => ({ ...prev, categoryHeaderElement: element }));
   },
@@ -57,7 +61,8 @@ export const selectIsOpenCategory = (state: TakeAwayStore) =>
 
 export const selectCategoryHeaderElement = (state: TakeAwayStore) =>
   state.categoryHeaderElement;
-export const selectedSelectedCategory = (state: TakeAwayStore) => state.selectedCategory;
+export const selectedSelectedCategory = (state: TakeAwayStore) =>
+  state.selectedCategory;
 export const selectSearch = (state: TakeAwayStore) => state.search;
 export const toggleIsOpenCategory = (state: TakeAwayStore) =>
   state.toggleCategory;
@@ -66,4 +71,5 @@ export const setSearchTakeAway = (state: TakeAwayStore) => state.setSearch;
 export const setTakeAwayData = (state: TakeAwayStore) => state.setTakeAwayData;
 export const setCategoryHeaderElement = (state: TakeAwayStore) =>
   state.setCateGoryHeaderElement;
-export const setSelectedCategory = (state: TakeAwayStore) => state.setSelectedCategory;
+export const setSelectedCategory = (state: TakeAwayStore) =>
+  state.setSelectedCategory;
