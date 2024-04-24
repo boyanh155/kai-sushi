@@ -13,7 +13,11 @@
         "map_show": "Mở KAI bản đồ",
         "google_map": "Mở google map",
         "meta_title": "KAI | Thực đơn",
-        "meta_description": "Thực đơn Kai"
+        "meta_description": "Thực đơn Kai",
+        "lunch": "Ăn trưa",
+        "lunch_label": "Lunch time",
+        "dinner_label": "Sushi & Lounge",
+        "lunch_set": "Set cơm trưa"
     },
     "Navbar": {
         "booking": "đặt bàn",

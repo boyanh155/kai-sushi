@@ -44,7 +44,7 @@ const RenderAddButton = ({ child: _item }) => {
       onMouseEnter={() => setIsShow(true)}
       onMouseLeave={() => setIsShow(false)}
 
-      className={` gap-3 rounded-full  ${
+      className={` rounded-full  ${
         currentItemQuantity && currentItemQuantity > 0
           ? `${
               isShow ? "basis-20 " : "basis-6 "
@@ -54,7 +54,7 @@ const RenderAddButton = ({ child: _item }) => {
     >
       {currentItemQuantity && currentItemQuantity > 0 && isShow && (
         <p
-          className="text-xl  font-light"
+          className="text-xl  font-light px-3"
           onClick={() => _removeFromCart(_item._id)}
         >
           -
@@ -64,7 +64,7 @@ const RenderAddButton = ({ child: _item }) => {
 
       {(!currentItemQuantity ||
         (currentItemQuantity && currentItemQuantity > 0 && isShow)) && (
-        <p className="text-xl  font-light" onClick={() => _addToCart(_item, 1)}>
+        <p className="text-xl px-3  font-light" onClick={() => _addToCart(_item, 1)}>
           +
         </p>
       )}

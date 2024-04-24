@@ -13,7 +13,11 @@
         "map_show": "Xem KAI map",
         "google_map": "Open google map",
         "meta_title": "KAI | Menu",
-        "meta_description": "Menu Kai"
+        "meta_description": "Menu Kai",
+        "lunch": "Lunch",
+        "lunch_label": "Lunch time",
+        "dinner_label": "Sushi & Lounge",
+        "lunch_set": "Lunch set"
     },
     "Navbar": {
         "booking": "booking",
