@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { isEmpty } from "lodash";
+import Image from "next/image";
 
 const data = [
   {
@@ -61,7 +62,9 @@ const LunchPage = () => {
                   <div>{v.price}</div>
                 </div>
                 <div className="w-full h-[120px] overflow-hidden rounded-sm">
-                  <img
+                  <Image
+                  objectFit="cover"
+                  layout="fill"
                     src={v.image}
                     alt="lunch_img "
                     className="w-full h-[140px] block object-cover"

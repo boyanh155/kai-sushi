@@ -27,7 +27,7 @@ const HomeMain = () => {
       <div className="flex flex-col items-center mt-16 gap-2 ">
         {/* LUNCH BOX */}
         <div className="golden-title font-bold text-xl">
-          {t("lunch_label")}| 11am - 2pm
+          {t("lunch_label")}| <span className="uppercase">11am - 2pm</span>
         </div>
         <div
           onClick={() => moveToListMenu("lunch")}
@@ -37,7 +37,8 @@ const HomeMain = () => {
         </div>
         {/* MAIN MENU */}
         <div className="golden-title font-bold text-xl mt-20">
-          {t("dinner_label")} | 4pm - 10pm
+          {t("dinner_label")} &nbsp; |{" "}
+          <span className="uppercase">4pm - 10pm</span>
         </div>
 
         <div
