@@ -14,6 +14,7 @@ import { _normalize } from "@/libs/format";
 
 import React, { useEffect, useRef } from "react";
 import { isEmpty } from "lodash";
+import { useTranslations } from "next-intl";
 
 const RenderAddButton = ({ child: _item }) => {
   const [isShow, setIsShow] = React.useState(false);
@@ -24,16 +25,25 @@ const RenderAddButton = ({ child: _item }) => {
   const currentItemQuantity = cart.items.find(
     (item) => _item._id === item._id
   )?.quantity;
+  const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!listRef.current) return;
+    const handleClickOutside = () => {
+      setIsShow(false);
+    };
 
+    document.addEventListener("scroll", handleClickOutside);
+    return () => {
+      document.removeEventListener("scroll", handleClickOutside);
+    };
+  }, [listRef.current]);
   return (
     <div
+      ref={listRef}
       onClick={() => setIsShow(true)}
       onMouseEnter={() => setIsShow(true)}
-      onMouseLeave={() =>
-        setTimeout(() => {
-          setIsShow(false);
-        }, 2000)
-      }
+      onMouseLeave={() => setIsShow(false)}
+
       className={` gap-3 rounded-full  ${
         currentItemQuantity && currentItemQuantity > 0
           ? `${
@@ -99,9 +109,12 @@ const List = () => {
   const _search = useTakeAwayStore(selectSearch);
   const search = _normalize(_search);
   const [renderTakeAway, setRenderTakeAway] = React.useState<any[]>([]);
+  const t = useTranslations("TakeAway");
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!pCategoryHeader) return;
+      if (window.scrollY < 209) pCategoryHeader.textContent = t("category");
       const text = itemsRef.current.find((v, index) => {
         if (!v || !itemsRef?.current?.[index + 1]) return;
         if (

@@ -29,6 +29,7 @@ const SearchBox = () => {
     if (!headerRef.current) return;
     _setCategoryHeader(headerRef.current);
   }, [headerRef.current]);
+
   //
 
   return (
