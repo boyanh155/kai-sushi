@@ -1,3 +1,4 @@
+'use client'
 import { gideon } from "@/libs/GoogleFont";
 import React from "react";
 import { Link } from "@/navigation";
@@ -24,7 +25,9 @@ const data = [
       "https://s3-alpha-sig.figma.com/img/45d0/65e3/a69543b49080f9277d598ae54676a0a5?Expires=1714953600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=S7VpTaxE06HWv7enw4sgr8-qdiQcZsIOiONL5MnIkx4nn3fDSxCLPLamKp7db3YGC8rmZw15O7W2z8Iqo5FROL6RyMkJAZbtcuFbD1TpWJ2yXb71-I3uCPQobPo~S0HGRB10dLD1CofTjjUsuycHlhaM2MjFxikObGARXauSIQf~jCFTm-0G7z6jA7EJGQiIMvxZ5nJT1FZwl~QpSU7QNcS78jjKqDaKVtvCvCeOgImdgucO0QS~8Ov1M8polavWEQgMBADcKbpfGRXKWFBqIykGuG8L9PW-37XeunNP5EutZXa6VZNYgEfqtBGy3NkKNfOWEDhZvHu~ocou79QMhA__",
   },
 ];
+
 const LunchPage = () => {
+
   const t = useTranslations("Home");
   return (
     <div className="relative overflow-visible flex flex-col min-h-[calc(100vh-110px)] items-center content-container pb-24">

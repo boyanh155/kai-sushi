@@ -34,15 +34,24 @@ export const pathnames = {
     vi: "/dat-lich/:path*",
     en: "/booking/:path*",
   },
+
   // menu
-  // "/food": {
-  //   vi: "/mon-an",
-  //   en: "/food",
-  // },
-  // "/beverage": {
-  //   vi: "/do-uong",
-  //   en: "/beverage",
-  // },
+  "/food": {
+    vi: "/mon-an",
+    en: "/food",
+  },
+  "/beverage": {
+    vi: "/do-uong",
+    en: "/beverage",
+  },
+  "/food/:path*": {
+    vi: "/mon-an/:path*",
+    en: "/food/:path*",
+  },
+  "/beverage/:path*": {
+    vi: "/do-uong/:path*",
+    en: "/beverage/:path*",
+  },
   // "/food/[...rest]": {
   //   vi: "/mon-an/[...rest]",
   //   en: "/food/[...rest]",
@@ -55,6 +64,10 @@ export const pathnames = {
   "/take-away": {
     vi: "/mang-ve",
     en: "/take-away",
+  },
+  "/lunch": {
+    vi: "/menu-trua",
+    en: "/lunch",
   },
   // "/take-away/:path*": {
   //   vi: "/mang-ve/:path*",
