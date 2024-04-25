@@ -69,11 +69,36 @@ export const pathnames = {
     vi: "/menu-trua",
     en: "/lunch",
   },
+  "/basket": {
+    vi: "/gio-hang",
+    en: "/basket",
+  },
+  "/basket/success": {
+    vi: "/gio-hang/thanh-cong",
+    en: "/basket/success",
+  },
+  "/basket/success?:query": {
+    vi: "/gio-hang/thanh-cong?:query",
+    en: "/basket/success?:query",
+  },
+  "/basket/user-info": {
+    vi: "/gio-hang/thong-tin-lien-lac",
+    en: "/basket/user-info",
+  },
+  "/basket/checkout": {
+    vi: "/gio-hang/kiem-tra-don-hang",
+    en: "/basket/checkout",
+  },
+  "/basket/:path*": {
+    vi: "/gio-hang/:path*",
+    en: "/basket/:path*",
+  },
   // "/take-away/:path*": {
   //   vi: "/mang-ve/:path*",
   //   en: "/take-away/:path*",
   // },
 } satisfies Pathnames<typeof locales>;
+
 
 export const AppConfig: {
   name: string;

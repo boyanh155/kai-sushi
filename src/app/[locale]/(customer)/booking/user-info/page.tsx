@@ -1,5 +1,5 @@
 "use client";
-import BackwardButton from "@/components/Booking/BackwardButton";
+import BackwardButton from "@/components/shared/BackwardButton";
 import { gideon } from "@/libs/GoogleFont";
 import useBookingStore, {
   selectBookingState,

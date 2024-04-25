@@ -8,6 +8,7 @@ import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
 import { Link } from "@/navigation";
+import CloseButton from "../shared/CloseButton";
 
 const MenuMain = () => {
   const { menuType: pMenuType, menuHeader: pMenuHeader } = useParams();
@@ -45,12 +46,7 @@ const MenuMain = () => {
         className={`w-screen   uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
       >
         <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-10">
-          <Link
-            href="/"
-            className="bg-black px-2 py-2.5 outline outline-[1px] outline-[#878787a6] rounded-sm text-xl"
-          >
-            x
-          </Link>
+          <CloseButton href="/" />
           <p className={`uppercase ${gideon.className}`}>
             {menuType === "food" ? t("food") : t("beverage")}
           </p>

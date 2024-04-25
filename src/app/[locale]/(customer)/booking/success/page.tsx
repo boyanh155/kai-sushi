@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useGetBookingById } from "../../../../../hooks/api/useBooking";
-import BackwardButton from "@/components/Booking/BackwardButton";
 import { useTranslations } from "next-intl";
 import { gideon } from "@/libs/GoogleFont";
 import moment from "moment";
@@ -14,6 +13,7 @@ import useApi from "@/hooks/api/useApi";
 import Modal from "@/components/shared/Modal";
 import { EBookingState } from "../../../../../../types/Booking";
 import Alert from "@/components/shared/Alert";
+import BackwardButton from "@/components/shared/BackwardButton";
 
 type Props = {
   searchParams: {
@@ -114,7 +114,7 @@ const SuccessPage = ({ searchParams: { orderId } }: Props) => {
         href={`/booking/order-info?orderId=${_orderId}` as any}
         className="flex absolute top-16 left-8"
       >
-        <BackwardButton />
+        <BackwardButton/>
       </Link>
       {/* SCREEN SHOT PART */}
       <div

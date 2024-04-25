@@ -73,5 +73,17 @@
         "category": "category",
         "search": "search",
         "take_away_label": "Takeaway"
+    },
+    "Basket": {
+        "pickup_label": "Come to pick up",
+        "address1": "17A Street 6, Quarter 1, Thanh My Loi Ward, District 2",
+        "cart_summary": "Cart summary",
+        "add_item": "Add item",
+        "next": "Continue",
+        "user_info": "Order information",
+        "in_day_only": "Kai only serves takeaway orders in the day",
+        "fullname": "name",
+        "phone": "phone",
+        "label_time": "time"
     }
 }

@@ -73,5 +73,17 @@
         "category": "Loại",
         "search": "Tìm",
         "take_away_label": "Mang về"
+    },
+    "Basket": {
+        "pickup_label": "Tự đến lấy",
+        "address1": "17A Đường số 6, khu phố 1, phường Thạnh Mỹ Lợi, Quận 2, TP.HCM",
+        "cart_summary": "Tóm tắt giỏ hàng",
+        "add_item": "Thêm món",
+        "next": "Tiếp theo",
+        "user_info": "Thông tin đặt hàng",
+        "in_day_only": "Kai chỉ nhận đơn đặt hàng trong ngày!",
+        "fullname": "tên",
+        "phone": "số điện thoại",
+        "label_time": "giờ"
     }
 }
