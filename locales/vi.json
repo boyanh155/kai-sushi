@@ -84,6 +84,7 @@
         "in_day_only": "Kai chỉ nhận đơn đặt hàng trong ngày!",
         "fullname": "tên",
         "phone": "số điện thoại",
-        "label_time": "giờ"
+        "label_time": "giờ",
+        "place_order": "Đặt đơn"
     }
 }

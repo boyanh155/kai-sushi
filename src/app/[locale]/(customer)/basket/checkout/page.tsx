@@ -2,16 +2,15 @@
 
 import CloseButton from "@/components/shared/CloseButton";
 import { useRouter } from "@/navigation";
-import useCartStore, { selectCartInfo } from "@/stores/useCartStore";
+// import useCartStore, { selectCartInfo } from "@/stores/useCartStore";
 import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
 
-type Props = {};
 
-const CheckoutPage = (props: Props) => {
+const CheckoutPage = () => {
   const t = useTranslations("Basket");
   const router = useRouter();
-  const cart = useCartStore(selectCartInfo);
+//   const cart = useCartStore(selectCartInfo);
   useEffect(() => {});
   return (
     <div className="flex flex-col  w-full">

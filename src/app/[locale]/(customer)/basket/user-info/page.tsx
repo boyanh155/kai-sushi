@@ -7,17 +7,16 @@ import useCartStore, {
   selectCartUserInfo,
   setCartUserInfo,
 } from "@/stores/useCartStore";
-import { isEmpty } from "lodash";
+import {  isEmpty } from "lodash";
 import moment from "moment";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect } from "react";
 
-type Props = {};
 
 const today = moment().format("YYYY:MM:DD");
-const UserInfoPage = (props: Props) => {
+const UserInfoPage = () => {
   const cartUserInfo = useCartStore(selectCartUserInfo);
-  const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
+  const [isSubmit, _] = React.useState<boolean>(false);
   const [isInvalid, setIsInvalid] = React.useState<boolean>(false);
   const _setCartUserInfo = useCartStore(setCartUserInfo);
   const t = useTranslations("Basket");
@@ -37,6 +36,22 @@ const UserInfoPage = (props: Props) => {
   const maxTime = "22:00";
   const minDate = moment(`${today}-${minTime}`, "YYYY:MM:DD-HH:mm");
   const maxDate = moment(`${today}-${maxTime}`, "YYYY:MM:DD-HH:mm");
+  const filterTime = (time: string) => {
+    const selectedDate = moment(`${today}-${time}`, "YYYY:MM:DD-HH:mm");
+
+    if (
+      selectedDate.isBefore(moment(), undefined) ||
+      !selectedDate.isBetween(minDate, maxDate, undefined, "[]")
+    ) {
+      setIsInvalid(true);
+
+      return;
+    }
+    setIsInvalid(false);
+  };
+  useEffect(() => {
+    filterTime(cartUserInfo.time);
+  }, [cartUserInfo.time]);
 
   return (
     <div className="flex flex-col w-full">
@@ -105,22 +120,7 @@ const UserInfoPage = (props: Props) => {
               nunito.className
             }
             onChange={(e) => {
-              const selectedDate = moment(
-                `${today}-${e.target.value}`,
-                "YYYY:MM:DD-HH:mm"
-              );
-
-              if (
-                selectedDate.isBefore(moment(), undefined) ||
-                !selectedDate.isBetween(minDate, maxDate, undefined, "[]")
-              ) {
-                setIsInvalid(true);
-                handleInput(e);
-
-                return;
-              }
-              console.log(false);
-              setIsInvalid(false);
+              filterTime(e.target.value);
               handleInput(e);
             }}
             min={minTime}
@@ -133,6 +133,19 @@ const UserInfoPage = (props: Props) => {
             {t("label_time")}
           </label>
         </div>
+      </div>
+      {/* NEXT BUTTON */}
+      <div className="w-full flex justify-end  mt-4">
+        {/* Continue */}
+        <button
+          onClick={() => {
+            if (isInvalid) return;
+            router.push("/basket/success");
+          }}
+          className="bg-golden-1 mt-4 cursor-pointer hover:opacity-60 transition-all py-2 w-full text-center rounded-[4px]"
+        >
+          {t("next")}
+        </button>
       </div>
     </div>
   );

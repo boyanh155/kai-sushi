@@ -7,7 +7,6 @@ import { useGetMenu } from "@/hooks/api/useMenuApi";
 import { isEmpty } from "lodash";
 import Loading from "../shared/Loading";
 import { gideon } from "@/libs/GoogleFont";
-import { Link } from "@/navigation";
 import CloseButton from "../shared/CloseButton";
 
 const MenuMain = () => {

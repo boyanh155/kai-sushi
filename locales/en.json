@@ -84,6 +84,7 @@
         "in_day_only": "Kai only serves takeaway orders in the day",
         "fullname": "name",
         "phone": "phone",
-        "label_time": "time"
+        "label_time": "time",
+        "place_order": "Place order"
     }
 }

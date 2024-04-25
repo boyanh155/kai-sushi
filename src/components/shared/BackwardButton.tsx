@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-const BackwardButton = (props: Props) => {
+const BackwardButton = () => {
   return (
     <div className="border-[0.6px] cursor-pointer transition-all rounded-sm hover:opacity-60 border-[#878787] text-white p-[10px] bg-[#0E0E10BF]">
       <svg

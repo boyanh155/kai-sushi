@@ -1,7 +1,6 @@
 "use client";
 import { gideon } from "@/libs/GoogleFont";
 import React from "react";
-import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { isEmpty } from "lodash";
 import Image from "next/image";
