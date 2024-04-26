@@ -2,8 +2,9 @@ import axios, { AxiosRequestConfig } from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiErrorResponse } from "../../../types/ErrorType";
 import Error from "next/error";
+import { getLocale } from "next-intl/server";
 
-export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/vi/api`;
+export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/locale/api`;
 export const getUserInfo = () => {
   const _user = localStorage.getItem("user");
   return typeof window !== "undefined" && _user
@@ -11,7 +12,9 @@ export const getUserInfo = () => {
     : null;
 };
 
-export const config = () => {
+export const config = async () => {
+  const _locale = await getLocale();
+  console.log(_locale);
   const _user = getUserInfo();
   if (!_user) return;
   return {
@@ -29,16 +32,18 @@ export async function api(
   customConfig = {}
 ) {
   try {
+    const _config = await config();
+    console.log(_config);
     switch (method) {
       case "GET":
         return await axios
-          .get(`${baseUrl}/${url}`, { ...config(), ...customConfig })
+          .get(`${baseUrl}/${url}`, { ..._config, ...customConfig })
           .then((res) => res.data);
 
       case "POST":
         return await axios
           .post(`${baseUrl}/${url}`, obj, {
-            ...config(),
+            ..._config,
             ...customConfig,
           })
           .then((res) => res.data);
@@ -46,14 +51,14 @@ export async function api(
       case "PUT":
         return await axios
           .put(`${baseUrl}/${url}`, obj, {
-            ...config(),
+            ..._config,
             ...customConfig,
           })
           .then((res) => res.data);
 
       case "DELETE":
         return await axios
-          .delete(`${baseUrl}/${url}`, { ...config(), ...customConfig })
+          .delete(`${baseUrl}/${url}`, { ..._config, ...customConfig })
           .then((res) => res.data);
     }
   } catch (error: any) {

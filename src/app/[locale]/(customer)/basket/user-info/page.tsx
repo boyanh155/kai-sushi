@@ -7,11 +7,10 @@ import useCartStore, {
   selectCartUserInfo,
   setCartUserInfo,
 } from "@/stores/useCartStore";
-import {  isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import moment from "moment";
 import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
-
 
 const today = moment().format("YYYY:MM:DD");
 const UserInfoPage = () => {
@@ -139,7 +138,7 @@ const UserInfoPage = () => {
         {/* Continue */}
         <button
           onClick={() => {
-            if (isInvalid) return;
+            // if (isInvalid) return;
             router.push("/basket/success");
           }}
           className="bg-golden-1 mt-4 cursor-pointer hover:opacity-60 transition-all py-2 w-full text-center rounded-[4px]"

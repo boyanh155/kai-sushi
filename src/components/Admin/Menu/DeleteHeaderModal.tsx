@@ -30,7 +30,7 @@ const DeleteHeaderModal = ({ deleteId, handleClose }: Props) => {
       {api.deleteObj?.isPending ? (
         <Loading />
       ) : (
-        <div className="w-screen flex justify-center">
+        <div className="w-full flex justify-center">
           <div className=" flex flex-col gap-2 p-4 bg-white rounded-lg w-1/2 text-black">
             <div className="text-center">
               <h3 className="font-bold text-lg uppercase">Delete confirm </h3>

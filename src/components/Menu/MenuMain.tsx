@@ -34,7 +34,7 @@ const MenuMain = () => {
   return api?.isLoading ? (
     <Loading />
   ) : !isEmpty(sortedMenuData) ? (
-    <div className="relative overflow-visible flex flex-col min-h-[calc(100vh-110px)]">
+    <div className="relative overflow-visible flex flex-col w-full min-h-[calc(100vh-110px)]">
       {/* IMAGE  */}
       <div
         style={{
@@ -42,7 +42,7 @@ const MenuMain = () => {
             sortedMenuData?.[currentIndex]?.image &&
             `url('${sortedMenuData[currentIndex]?.image}')`,
         }}
-        className={`w-screen   uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
+        className={`uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
       >
         <div className="absolute z-50  flex justify-center items-center w-full h-full flex-col gap-10">
           <CloseButton href="/" />
@@ -54,7 +54,7 @@ const MenuMain = () => {
       {/* NAV HEADER */}
       <div className=" sticky  top-0">
         <div
-          className={`flex flex-row bg-black gap-4 w-screen overflow-x-scroll px-8 ${
+          className={`flex flex-row bg-black gap-4 w-full overflow-x-scroll px-8 ${
             menuType === "beverage" ? "justify-center" : "justify-start"
           }`}
         >

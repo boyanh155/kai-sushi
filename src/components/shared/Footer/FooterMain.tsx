@@ -77,7 +77,7 @@ const navData: { to: "/booking" | "/take-away" | "/"; icon: any; text: string }[
 const FooterMain = () => {
   const t = useTranslations("Navbar");
   return (
-    <div className=" overflow-hidden fixed z-20 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-screen flex justify-center">
+    <div className=" overflow-hidden fixed z-20 bg-black bottom-0 border-t-[0.5px] border-[#515151] mx-0 w-full flex justify-center">
       <div className=" flex flex-row justify-between content-container px-7 py-1 ">
         {navData.map((navItem) => (
           <Link href={navItem.to} key={navItem.to} className="p-4">

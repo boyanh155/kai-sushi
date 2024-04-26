@@ -17,9 +17,15 @@ const TakeAwayPage = () => {
     setTakeAway(api.data as any);
   }, [api?.isPending]);
   return (
-    <div className="flex flex-col w-full flex-grow">
+    <div className="flex flex-col w-full flex-grow ">
       <SearchBox />
-      {api?.isLoading ? <Loading /> : <List />}
+      {api?.isLoading ? (
+        <div className=" flex flex-grow">
+          <Loading />
+        </div>
+      ) : (
+        <List />
+      )}
 
       <Popup />
     </div>

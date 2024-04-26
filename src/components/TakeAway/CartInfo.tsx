@@ -8,7 +8,7 @@ const CartInfo = () => {
   const router = useRouter();
   const handlerNavigateToBasket = () => {
     if (cart.items.length > 0) {
-      router.push("/basket");
+      router.push("/basket/checkout");
     }
   };
   return (
@@ -18,7 +18,7 @@ const CartInfo = () => {
         // cart.items.length > 0 ? "bottom-28 " : " -bottom-12"
       } 
       
-      py-2 cursor-pointer flex-row justify-between bottom-28  rounded-lg hover:opacity-60 px-5 text-white z-30 right-0 left-0 mx-5`}
+      py-2 cursor-pointer flex-row justify-between bottom-28  rounded-lg  px-5 text-white z-30 right-0 left-0 mx-5`}
       onClick={handlerNavigateToBasket}
     >
       <div className="flex flex-row items-center gap-2">

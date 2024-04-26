@@ -170,7 +170,7 @@ const List = () => {
     }
   }, [_selectedCategory]);
   return (
-    <div className="flex flex-col px-7 gap-16 mt-10" ref={_ref}>
+    <div className="flex flex-col px-7 gap-16 mt-10  pb-28" ref={_ref}>
       {renderTakeAway.length > 0 ? (
         renderTakeAway.map((v, id) => {
           return (

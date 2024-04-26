@@ -12,11 +12,10 @@ const BasketLayout = ({ children }: Props) => {
     success: 100,
     checkout: 33.33,
     "user-info": 66.66,
+    undefined: 0,
   };
-  console.log(pathName.split("/")[2]);
-
   return (
-    <div className=" content-container flex flex-col w-full pt-12 gap-12 px-8">
+    <div className=" content-container flex flex-col w-full pt-14 gap-12 px-8">
       {/* Step bar */}
       <div className="w-full flex justify-start ">
         <div className="h-[0.5rem] bg-[#959595] rounded-[5px] w-full">

@@ -26,7 +26,7 @@ const TakeAwayLayout = ({ children }: Props) => {
       >
         {t("take_away_label")}
       </h1>
-      <div className="flex flex-col w-full flex-grow pb-28">{children}</div>
+      <div className="flex flex-col w-full flex-grow">{children}</div>
     </div>
   );
 };
