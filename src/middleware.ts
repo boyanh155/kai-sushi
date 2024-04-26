@@ -1,7 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import { AppConfig, pathnames } from "./libs/AppConfig";
 import { NextRequest, NextResponse } from "next/server";
-import Negotiator from "negotiator";
 // function getLocale(req) {
 //   const acceptLanguage = req.headers.get("accept-language");
 //   const locale = acceptLanguage?.split(",")[0];
@@ -9,10 +8,9 @@ import Negotiator from "negotiator";
 // }
 
 export default async function middleware(request: NextRequest) {
-  let languages = new Negotiator({ headers: request.headers }).languages();
-  console.log(languages);
   const localeTags = "x-current-locale";
   let currentLocale = request.headers.get(localeTags);
+  console.log("currentLocale", currentLocale);
   const pathName = request.nextUrl.pathname;
   const pathSplit = pathName.split("/");
   console.log(pathSplit[1]);

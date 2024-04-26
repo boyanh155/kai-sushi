@@ -2,26 +2,15 @@ import axios, { AxiosRequestConfig } from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiErrorResponse } from "../../../types/ErrorType";
 import Error from "next/error";
-import { getLocale } from "next-intl/server";
+import { useLocale } from "next-intl";
 
-export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/locale/api`;
+export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/data/api`;
 export const getUserInfo = () => {
+  if (typeof window === "undefined") return null;
   const _user = localStorage.getItem("user");
-  return typeof window !== "undefined" && _user
+  return _user
     ? JSON.parse(typeof window !== "undefined" && (_user as string | any))
     : null;
-};
-
-export const config = async () => {
-  const _locale = await getLocale();
-  console.log(_locale);
-  const _user = getUserInfo();
-  if (!_user) return;
-  return {
-    headers: {
-      Authorization: `Bearer ${_user.token}`,
-    },
-  };
 };
 
 //interceptor
@@ -32,18 +21,15 @@ export async function api(
   customConfig = {}
 ) {
   try {
-    const _config = await config();
-    console.log(_config);
     switch (method) {
       case "GET":
         return await axios
-          .get(`${baseUrl}/${url}`, { ..._config, ...customConfig })
+          .get(`${baseUrl}/${url}`, { ...customConfig })
           .then((res) => res.data);
 
       case "POST":
         return await axios
           .post(`${baseUrl}/${url}`, obj, {
-            ..._config,
             ...customConfig,
           })
           .then((res) => res.data);
@@ -51,14 +37,13 @@ export async function api(
       case "PUT":
         return await axios
           .put(`${baseUrl}/${url}`, obj, {
-            ..._config,
             ...customConfig,
           })
           .then((res) => res.data);
 
       case "DELETE":
         return await axios
-          .delete(`${baseUrl}/${url}`, { ..._config, ...customConfig })
+          .delete(`${baseUrl}/${url}`, { ...customConfig })
           .then((res) => res.data);
     }
   } catch (error: any) {
@@ -94,11 +79,22 @@ export default function useApi<ResponseBody>({
   customConfig,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
+  const locale = useLocale();
+
   interface ErrorResponse extends Error {
     status: number;
     message: string;
     error: any;
   }
+  const _config = customConfig || {};
+  if (!_config.headers) _config.headers = {};
+
+  _config.headers!["x-current-locale"] = locale || "en";
+  _config.headers!["Content-Type"] = "application/json";
+  const _user = getUserInfo();
+
+  if (_user) _config.headers.Authorization = `Bearer ${_user.token}`;
+
   switch (method) {
     case "GET":
       // eslint-disable-next-line

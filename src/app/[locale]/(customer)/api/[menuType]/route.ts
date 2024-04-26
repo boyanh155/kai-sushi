@@ -21,6 +21,7 @@ export async function GET(
   { params: { menuType = "both" } }: Params
 ) {
   try {
+    console.log(_.headers.get("x-current-locale"));
     if (menuType !== "food" && menuType !== "beverage" && menuType !== "both") {
       throw { message: "Invalid menu type", status: 404 };
     }
