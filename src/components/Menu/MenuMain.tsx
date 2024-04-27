@@ -26,7 +26,7 @@ const MenuMain = () => {
 
   const currentIndex =
     sortedMenuData.findIndex((v) => {
-      return headerType.toLowerCase() === v.slug.toLowerCase();
+      return headerType?.toLowerCase() === v?.slug?.toLowerCase();
     }) || 0;
 
   const t = useTranslations("Home");

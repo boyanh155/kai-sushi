@@ -8,6 +8,9 @@ export interface IMenuChild extends Document {
   order: number;
   description?: string;
   price?: string;
+  // en
+  enTitle?: string;
+  enDescription?: string;
 }
 
 export interface IMenuHeader extends Document {
@@ -18,4 +21,7 @@ export interface IMenuHeader extends Document {
   order: number;
   slug: string;
   children: IMenuChild[];
+  //en
+  enTitle?: string;
+  
 }

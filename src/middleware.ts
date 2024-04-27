@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { AppConfig, pathnames } from "./libs/AppConfig";
 import { NextRequest, NextResponse } from "next/server";
+import { headerLocaleKey } from "../constant/apiHelper";
 // function getLocale(req) {
 //   const acceptLanguage = req.headers.get("accept-language");
 //   const locale = acceptLanguage?.split(",")[0];
@@ -8,12 +9,10 @@ import { NextRequest, NextResponse } from "next/server";
 // }
 
 export default async function middleware(request: NextRequest) {
-  const localeTags = "x-current-locale";
+  const localeTags = headerLocaleKey;
   let currentLocale = request.headers.get(localeTags);
-  console.log("currentLocale", currentLocale);
   const pathName = request.nextUrl.pathname;
   const pathSplit = pathName.split("/");
-  console.log(pathSplit[1]);
 
   if (pathSplit[1] === "vi" || pathSplit[1] === "en") {
     currentLocale = pathSplit[1];
@@ -27,15 +26,13 @@ export default async function middleware(request: NextRequest) {
     defaultLocale,
     pathnames,
   });
-  console.log("---------------");
-  console.log(defaultLocale);
 
-  if (pathSplit[1] === "locale") {
-    // Prepend the locale to the pathname and redirect the request
-    pathSplit[1] = defaultLocale;
-    request.nextUrl.pathname = pathSplit.join("/");
-    return NextResponse.redirect(request.nextUrl);
-  }
+  // if (pathSplit[1] === "locale") {
+  //   // Prepend the locale to the pathname and redirect the request
+  //   pathSplit[1] = defaultLocale;
+  //   request.nextUrl.pathname = pathSplit.join("/");
+  //   return NextResponse.redirect(request.nextUrl);
+  // }
   const response = handleI18nRouting(request);
   response.headers.set(localeTags, defaultLocale);
 

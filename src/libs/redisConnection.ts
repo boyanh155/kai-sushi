@@ -1,5 +1,8 @@
 import Redis from "ioredis";
 
+
+
+
 async function connect(
   fn: (client: Redis) => Promise<string | null | undefined>
 ): Promise<string | null | undefined> {
@@ -10,6 +13,7 @@ async function connect(
         host: process.env.REDIS_HOST,
         port: parseInt(process.env.REDIS_PORT || "10772"),
         maxRetriesPerRequest: 10,
+        connectTimeout: 10000,
       });
       const status = client.status;
       client.on('error',(err)=>{

@@ -6,6 +6,7 @@ import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
 import { delCache, getCache, setCache } from "@/libs/redisConnection";
 import { menuTags } from "@/libs/cacheTags";
+import { headerLocaleKey } from "../../../../../../constant/apiHelper";
 
 type MenuType = "food" | "beverage";
 
@@ -17,34 +18,41 @@ type Params = {
 };
 
 export async function GET(
-  _: Request,
+  req: Request,
   { params: { menuType = "both" } }: Params
 ) {
   try {
-    console.log(_.headers.get("x-current-locale"));
     if (menuType !== "food" && menuType !== "beverage" && menuType !== "both") {
       throw { message: "Invalid menu type", status: 404 };
     }
-    const cacheKey = menuTags(menuType);
-    const cachedData = await getCache(cacheKey);
-    if (cachedData)
-      return NextResponse.json(JSON.parse(cachedData), { status: 200 });
+    const locale = req.headers.get(headerLocaleKey) || "en";
 
-    await connectDB();
-    const data = await menuHeaderModel.find(
-      menuType === "both"
-        ? {}
-        : {
-            type: menuType,
-          },
-      {
-        imageId: 0,
-        children: 0,
-        __v: 0,
-      }
-    );
-    if (data) {
+    const cacheKey = menuTags(menuType, locale);
+    const cachedData = await getCache(cacheKey);
+    let data: Array<any> = [];
+    if (!cachedData) {
+      await connectDB();
+      data = await menuHeaderModel.find(
+        menuType === "both"
+          ? {}
+          : {
+              type: menuType,
+            },
+        {
+          imageId: 0,
+          children: 0,
+          __v: 0,
+        }
+      );
       setCache(cacheKey, JSON.stringify(data));
+    } else {
+      data = JSON.parse(cachedData);
+    }
+    if (locale === "en") {
+      data = [...data].map((item) => ({
+        ...item,
+        title: item.enTitle,
+      }));
     }
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
@@ -162,8 +170,9 @@ export async function POST(
       image: _imgInfo.url,
       imageId: _imgInfo.id,
     });
-    const cacheKey = menuTags(menuType);
-    const cacheKey2 = menuTags("both");
+    const locale = request.headers.get(headerLocaleKey) || "en";
+    const cacheKey = menuTags(menuType, locale);
+    const cacheKey2 = menuTags("both", locale);
     delCache(cacheKey);
     delCache(cacheKey2);
     return NextResponse.json(

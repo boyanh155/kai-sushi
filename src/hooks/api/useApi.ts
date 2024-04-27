@@ -3,8 +3,9 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiErrorResponse } from "../../../types/ErrorType";
 import Error from "next/error";
 import { useLocale } from "next-intl";
+import { headerLocaleKey } from "../../../constant/apiHelper";
 
-export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/data/api`;
+export let baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/locale/api`;
 export const getUserInfo = () => {
   if (typeof window === "undefined") return null;
   const _user = localStorage.getItem("user");
@@ -79,7 +80,6 @@ export default function useApi<ResponseBody>({
   customConfig,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
-  const locale = useLocale();
 
   interface ErrorResponse extends Error {
     status: number;
@@ -88,8 +88,13 @@ export default function useApi<ResponseBody>({
   }
   const _config = customConfig || {};
   if (!_config.headers) _config.headers = {};
+  try {
+    const locale = useLocale();
 
-  _config.headers!["x-current-locale"] = locale || "en";
+    _config.headers![headerLocaleKey] = locale || "en";
+  } catch (e) {
+    console.log(e);
+  }
   _config.headers!["Content-Type"] = "application/json";
   const _user = getUserInfo();
 
@@ -100,7 +105,7 @@ export default function useApi<ResponseBody>({
       // eslint-disable-next-line
       const get = useQuery<ResponseBody, ErrorResponse>({
         queryKey: key,
-        queryFn: (obj?: any) => api(method, url, obj, customConfig),
+        queryFn: (obj?: any) => api(method, url, obj, _config),
         retry: 0,
       });
       return { get };
@@ -108,7 +113,7 @@ export default function useApi<ResponseBody>({
     case "POST":
       // eslint-disable-next-line
       const post = useMutation({
-        mutationFn: (obj: any) => api(method, url, obj, customConfig),
+        mutationFn: (obj: any) => api(method, url, obj, _config),
         retry: 0,
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: key });
@@ -120,7 +125,7 @@ export default function useApi<ResponseBody>({
       // eslint-disable-next-line
       const put = useMutation({
         mutationFn: (obj: any) =>
-          api(method, `${url}/${obj?.id}`, obj, customConfig),
+          api(method, `${url}/${obj?.id}`, obj, _config),
         retry: 0,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
       });
@@ -130,8 +135,7 @@ export default function useApi<ResponseBody>({
     case "DELETE":
       // eslint-disable-next-line
       const deleteObj = useMutation({
-        mutationFn: (id: string) =>
-          api(method, `${url}/${id}`, {}, customConfig),
+        mutationFn: (id: string) => api(method, `${url}/${id}`, {}, _config),
         retry: 0,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
       });

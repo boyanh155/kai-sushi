@@ -37,7 +37,7 @@ const AdminLayout = ({ children }: Props) => {
             </div>
             {/* content */}
             <Suspense fallback={<Loading />}>
-              <div className="content-container py-10">{children}</div>
+              <div className="w-full py-10">{children}</div>
             </Suspense>
           </div>
         </ApiProvider>

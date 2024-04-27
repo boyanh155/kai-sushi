@@ -22,10 +22,15 @@ const menuChild = new Schema<IMenuChild>({
   price: {
     type: String,
   },
+  enTitle: {
+    type: String,
+  },
+  enDescription: {
+    type: String,
+  },
 });
 
-menuChild.index({ type: "text" });
-menuChild.index({ slug: "text" }, { unique: true });
+menuChild.index({ type: -1 });
 menuChild.add({
   children: [
     {
@@ -75,6 +80,9 @@ const menuHeader = new Schema<IMenuHeader>({
       ref: "MenuChild",
     },
   ],
+  enTitle: {
+    type: String,
+  },
 });
 
 menuHeader.post("findOneAndDelete", async function (next) {
@@ -98,6 +106,8 @@ menuHeader.post("findOneAndDelete", async function (next) {
   });
   next();
 });
+
+menuHeader.index({ type: -1, slug: 1 });
 
 const menuHeaderModel =
   models.MenuHeader || model<IMenuHeader>("MenuHeader", menuHeader);
