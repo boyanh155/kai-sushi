@@ -27,12 +27,12 @@ export default async function middleware(request: NextRequest) {
     pathnames,
   });
 
-  // if (pathSplit[1] === "locale") {
-  //   // Prepend the locale to the pathname and redirect the request
-  //   pathSplit[1] = defaultLocale;
-  //   request.nextUrl.pathname = pathSplit.join("/");
-  //   return NextResponse.redirect(request.nextUrl);
-  // }
+  if (pathSplit[1] === "locale") {
+    // Prepend the locale to the pathname and redirect the request
+    pathSplit[1] = defaultLocale;
+    request.nextUrl.pathname = pathSplit.join("/");
+    return NextResponse.redirect(request.nextUrl);
+  }
   const response = handleI18nRouting(request);
   response.headers.set(localeTags, defaultLocale);
 
