@@ -90,7 +90,6 @@ export default function useApi<ResponseBody>({
   if (!_config.headers) _config.headers = {};
   try {
     const locale = useLocale();
-
     _config.headers![headerLocaleKey] = locale || "en";
   } catch (e) {
     console.log(e);
@@ -99,7 +98,7 @@ export default function useApi<ResponseBody>({
   const _user = getUserInfo();
 
   if (_user) _config.headers.Authorization = `Bearer ${_user.token}`;
-
+console.log(_config)
   switch (method) {
     case "GET":
       // eslint-disable-next-line

@@ -26,7 +26,9 @@ export default async function middleware(request: NextRequest) {
     defaultLocale,
     pathnames,
   });
-
+  console.log(pathSplit)
+  console.log('pathSplit[1]')
+console.log(pathSplit[1]);
   if (pathSplit[1] === "locale") {
     // Prepend the locale to the pathname and redirect the request
     pathSplit[1] = defaultLocale;

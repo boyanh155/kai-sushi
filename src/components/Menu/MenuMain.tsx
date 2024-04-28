@@ -52,7 +52,7 @@ const MenuMain = () => {
         </div>
       </div>
       {/* NAV HEADER */}
-      <div className=" sticky  top-0">
+      <div className=" sticky  top-0 z-20">
         <div
           className={`flex flex-row bg-black gap-4 w-full overflow-x-scroll px-8 ${
             menuType === "beverage" ? "justify-center" : "justify-start"

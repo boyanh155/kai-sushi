@@ -1,7 +1,7 @@
 import cloudinary from "@/libs/cloudinary";
 import connectDB from "@/libs/connectDb";
 import { menuChildModel, menuHeaderModel } from "@/models/Menu";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { NavChild } from "@/../types/NavbarType";
 import { isEmpty } from "lodash";
 import { delCache, getCache, setCache } from "@/libs/redisConnection";
@@ -18,7 +18,7 @@ type Params = {
 };
 
 export async function GET(
-  req: Request,
+  req: NextRequest,
   { params: { menuType = "both" } }: Params
 ) {
   try {
@@ -26,8 +26,10 @@ export async function GET(
       throw { message: "Invalid menu type", status: 404 };
     }
     const locale = req.headers.get(headerLocaleKey) || "en";
-
-    const cacheKey = menuTags(menuType, locale);
+//
+console.log('teo r')
+    console.log(locale)
+    const cacheKey = menuTags(menuType);
     const cachedData = await getCache(cacheKey);
     let data: Array<any> = [];
     if (!cachedData) {
@@ -170,9 +172,8 @@ export async function POST(
       image: _imgInfo.url,
       imageId: _imgInfo.id,
     });
-    const locale = request.headers.get(headerLocaleKey) || "en";
-    const cacheKey = menuTags(menuType, locale);
-    const cacheKey2 = menuTags("both", locale);
+    const cacheKey = menuTags(menuType);
+    const cacheKey2 = menuTags("both");
     delCache(cacheKey);
     delCache(cacheKey2);
     return NextResponse.json(

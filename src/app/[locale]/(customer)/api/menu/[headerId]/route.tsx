@@ -4,10 +4,13 @@ import { delCache, getCache, setCache } from "@/libs/redisConnection";
 import { menuHeaderModel } from "@/models/Menu";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+import { headerLocaleKey } from "../../../../../../../constant/apiHelper";
+import { isEmpty } from "lodash";
 
 type Params = {
   params: {
     headerId: string;
+    locale:string
   };
 };
 export const DELETE = async (
@@ -42,31 +45,63 @@ export const DELETE = async (
   }
 };
 
-export const GET = async (_: NextRequest, { params: { headerId } }: Params) => {
+export const GET = async (
+  req: NextRequest,
+  { params: { headerId, locale } }: Params
+) => {
   try {
     if (!headerId) throw { status: 400, message: "Missing parameter" };
     if (!isValidObjectId(headerId))
       throw { status: 404, message: "Invalid headerId" };
     const cacheKey = menuHeaderTags(headerId);
     const cachedData = await getCache(cacheKey);
-    if (cachedData)
-      return NextResponse.json(JSON.parse(cachedData), { status: 200 });
-    await connectDB();
+    let data: any = {};
+    if (!cachedData) {
+      await connectDB();
 
-    const data = await menuHeaderModel
-      .findById(headerId, {
-        imageId: 0,
+      data = await menuHeaderModel
+        .findById(headerId, {
+          imageId: 0,
 
-        __v: 0,
-      })
-      .populate({
-        path: "children",
-        populate: {
+          __v: 0,
+        })
+        .populate({
           path: "children",
-        },
-      });
-    if (data) setCache(cacheKey, JSON.stringify(data));
-
+          populate: {
+            path: "children",
+          },
+        });
+      if (data) setCache(cacheKey, JSON.stringify(data));
+    } else {
+      data = JSON.parse(cachedData);
+    }
+    const _locale = req.headers.get(headerLocaleKey) || "en";
+    console.log('-------')
+    console.log(locale);
+    console.log(_locale);
+    if (locale === "en") {
+      data = {
+        ...data,
+        children: data.children.map((item) => ({
+          ...item,
+          title: item.enTitle || item.title,
+          children: isEmpty(item.children)
+            ? []
+            : item.children.map((_item) => ({
+                ..._item,
+                title: _item.enTitle || _item.title,
+                description: _item.enDescription || _item.description,
+                children: isEmpty(_item.children)
+                  ? []
+                  : _item.children.map((__item) => ({
+                      ...__item,
+                      title: __item.enTitle || __item.title,
+                      description: __item.enDescription || __item.description,
+                    })),
+              })),
+        })),
+      };
+    }
     return NextResponse.json(data, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(

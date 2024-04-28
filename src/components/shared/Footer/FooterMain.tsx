@@ -85,7 +85,7 @@ const FooterMain = () => {
               <div className="h-7 w-full flex justify-center items-center">
                 {navItem.icon}
               </div>
-              <p className="uppercase text-sm font-light golden-title">
+              <p className="uppercase text-sm font-light golden-title whitespace-nowrap text-nowrap">
                 {t(navItem.text)}
               </p>
             </div>

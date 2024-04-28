@@ -1,31 +1,60 @@
 import Redis from "ioredis";
 
+declare global {
+  var redis: any;
+}
+const password = process.env.REDIS_PASSWORD;
+const host = process.env.REDIS_HOST;
+const port = parseInt(process.env.REDIS_PORT || "10772");
 
+if (!password || !host)
+  throw new Error("REDIS_PASSWORD or REDIS_HOST is not defined");
 
+let cached = global.redis;
+
+if (!cached) {
+  cached = global.redis = {
+    client: new Redis({
+      password,
+      host,
+      port,
+      maxRetriesPerRequest: 10,
+      connectTimeout: 10000,
+    }),
+    promise: null,
+  };
+}
 
 async function connect(
   fn: (client: Redis) => Promise<string | null | undefined>
 ): Promise<string | null | undefined> {
   return new Promise(async (resolve, _) => {
     try {
-      const client = new Redis({
-        password: process.env.REDIS_PASSWORD,
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT || "10772"),
-        maxRetriesPerRequest: 10,
-        connectTimeout: 10000,
-      });
-      const status = client.status;
-      client.on('error',(err)=>{
+      let client: Redis | null = null;
+      if (cached.client) {
+        client = cached.client;
+      }
+      if (!client) throw new Error("Redis client is not defined");
 
-        setTimeout(()=>{throw err},0)
-      
-      })
-      if (status === "end" || status === "close") await client.connect((err)=>setTimeout(()=>{throw err},0));
+      const status = client.status;
+      if (status === "ready") return resolve(fn(client));
+      client.on("error", (err) => {
+        setTimeout(() => {
+          throw err;
+        }, 0);
+      });
+      if ((status === "end" || status === "close") && !cached.promise)
+        cached.promise = client.connect((err) =>
+          setTimeout(() => {
+            throw err;
+          }, 0)
+        );
+
+      await cached.promise;
       client.on("ready", () => resolve(fn(client)));
     } catch (err: any) {
-      console.log(err)
-      return null
+      console.log(err);
+      return null;
     }
   });
 }
@@ -49,7 +78,6 @@ export const getCache = (key: string) =>
         return null;
       }
       const data = await client.get(key);
-      if (data) console.log("hit");
       return data;
     } catch (err) {
       console.error(err);
