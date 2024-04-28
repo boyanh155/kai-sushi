@@ -8,6 +8,7 @@ interface TakeAwayState {
   // current element
   categoryHeaderElement: HTMLElement | null;
   selectedCategory: string;
+
 }
 
 interface TakeAwayStore extends TakeAwayState {

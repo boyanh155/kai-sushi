@@ -15,62 +15,9 @@ import { _normalize } from "@/libs/format";
 import React, { useEffect, useRef } from "react";
 import { isEmpty } from "lodash";
 import { useTranslations } from "next-intl";
+import { setCurrentDetailItem } from "../../stores/useCartStore";
+import RenderAddButton from "./RenderAddButton";
 
-const RenderAddButton = ({ child: _item }) => {
-  const [isShow, setIsShow] = React.useState(false);
-  const cart = useCartStore(selectCartInfo);
-
-  const _addToCart = useCartStore(addToCart);
-  const _removeFromCart = useCartStore(removeFromCart);
-  const currentItemQuantity = cart.items.find(
-    (item) => _item._id === item._id
-  )?.quantity;
-  const listRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!listRef.current) return;
-    const handleClickOutside = () => {
-      setIsShow(false);
-    };
-
-    document.addEventListener("scroll", handleClickOutside);
-    return () => {
-      document.removeEventListener("scroll", handleClickOutside);
-    };
-  }, [listRef.current]);
-  return (
-    <div
-      ref={listRef}
-      onClick={() => setIsShow(true)}
-      onMouseEnter={() => setIsShow(true)}
-      onMouseLeave={() => setIsShow(false)}
-
-      className={` rounded-full  ${
-        currentItemQuantity && currentItemQuantity > 0
-          ? `${
-              isShow ? "basis-20 " : "basis-6 "
-            } bg-[#8C773E] text-white font-light`
-          : `basis-6 text-[#8C773E]`
-      } h-6 w-6 border-golden-1 border-[1.8px] transition-all flex justify-center items-center`}
-    >
-      {currentItemQuantity && currentItemQuantity > 0 && isShow && (
-        <p
-          className="text-xl  font-light px-3"
-          onClick={() => _removeFromCart(_item._id)}
-        >
-          -
-        </p>
-      )}
-      {currentItemQuantity}
-
-      {(!currentItemQuantity ||
-        (currentItemQuantity && currentItemQuantity > 0 && isShow)) && (
-        <p className="text-xl px-3  font-light" onClick={() => _addToCart(_item, 1)}>
-          +
-        </p>
-      )}
-    </div>
-  );
-};
 const HighlightText = ({ text, search }) => {
   if (!search || !text) {
     return <>{text}</>;
@@ -110,6 +57,7 @@ const List = () => {
   const search = _normalize(_search);
   const [renderTakeAway, setRenderTakeAway] = React.useState<any[]>([]);
   const t = useTranslations("TakeAway");
+  const _setCurrentDetailItem = useCartStore(setCurrentDetailItem);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -190,24 +138,40 @@ const List = () => {
                 v.children.map((child, childIndex) => (
                   <div
                     key={childIndex}
-                    className="flex flex-row gap-1 text-white items-end justify-between"
+                    className="flex flex-row gap-4 text-white items-center "
+                    // click open popup
+
+                    onClick={() => {
+                      _setCurrentDetailItem(child);
+                    }}
                   >
+                    {child.image && (
+                      <img
+                        src={child.image}
+                        alt={child.name}
+                        className="w-[56px] h-[56px] rounded-sm"
+                      />
+                    )}
                     {/* content */}
-                    <div className="flex flex-col gap-1 py-3 basis-9/12">
-                      <div className="text-base font-light uppercase">
-                        <HighlightText text={child.name} search={search} />
+                    <div className="flex flex-row justify-between gap-1 flex-grow items-end">
+                      <div className="flex flex-col gap-1 py-3 basis-9/12">
+                        <div className="text-base font-light uppercase">
+                          <HighlightText text={child.name} search={search} />
+                        </div>
+                        <div className="text-xs font-light text-[#959595]">
+                          <HighlightText
+                            text={child.description}
+                            search={search}
+                          />
+                        </div>
+                        <div className="font-medium text-base">
+                          {child.price}
+                        </div>
                       </div>
-                      <div className="text-xs font-light text-[#959595]">
-                        <HighlightText
-                          text={child.description}
-                          search={search}
-                        />
+                      {/* add button */}
+                      <div className="py-6 flex-grow flex justify-end">
+                        <RenderAddButton child={child} />
                       </div>
-                      <div className="font-medium text-base">{child.price}</div>
-                    </div>
-                    {/* add button */}
-                    <div className="py-6 flex-grow flex justify-end">
-                      <RenderAddButton child={child} />
                     </div>
                   </div>
                 ))}

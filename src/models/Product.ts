@@ -18,6 +18,9 @@ const product = new Schema<IProductDocument>(
     description: {
       type: String,
     },
+    image: {
+      type: String,
+    },
   },
   {
     timestamps: true,

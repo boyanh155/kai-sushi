@@ -7,6 +7,7 @@ import { NextIntlClientProvider, useMessages } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import Loading from "./loading";
+import DetailItemPopup from "@/components/TakeAway/DetailItemPopup";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "vi" }];
@@ -44,6 +45,7 @@ export default function LocaleLayout({
             </ApiProvider>
           </div>
           <FooterMain />
+          <DetailItemPopup />
         </body>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTIC_ID!} />
       </html>

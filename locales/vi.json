@@ -85,6 +85,7 @@
         "fullname": "tên",
         "phone": "số điện thoại",
         "label_time": "giờ",
-        "place_order": "Đặt đơn"
+        "place_order": "Đặt đơn",
+        "edit_button": "Chỉnh sửa"
     }
 }

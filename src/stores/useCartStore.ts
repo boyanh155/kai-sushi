@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { TypeCart } from "../../types/CartType";
+import { TypeCart, TypeCartItem } from "../../types/CartType";
 import { persist } from "zustand/middleware";
 import { IProductDocument } from "@/models/IProduct";
 
@@ -10,6 +10,9 @@ interface CartState extends TypeCart {
     phone: string;
     time: string;
   };
+
+  //modal detail item
+  currentDetailItem: IProductDocument | null;
 }
 
 interface CartStore extends CartState {
@@ -17,6 +20,8 @@ interface CartStore extends CartState {
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   setUserInfo: (userInfo: CartState["userInfo"]) => void;
+  setCurrentDetailItem: (_item: IProductDocument | null) => void;
+  setItemNote: (itemID: string, note: string) => void;
 }
 
 const initialState: Pick<CartStore, keyof CartState> = {
@@ -28,6 +33,7 @@ const initialState: Pick<CartStore, keyof CartState> = {
     phone: "",
     time: "16:00",
   },
+  currentDetailItem: null,
 };
 
 const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
@@ -110,7 +116,6 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
       },
 
       clearCart: () => set(initialState),
-
       // user
       setUserInfo: (_userInfo: Partial<CartState["userInfo"]>) =>
         set((prev) => {
@@ -122,9 +127,36 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
             },
           };
         }),
+      setCurrentDetailItem: (item) =>
+        set((prev) => ({ ...prev, currentDetailItem: item })),
+      setItemNote: (itemID, note) =>
+        set((prev) => {
+          const existingItemIndex = prev.items.findIndex(
+            (item) => item._id === itemID
+          );
+
+          if (existingItemIndex === -1) return { ...prev };
+          const existingItem = prev.items[existingItemIndex];
+          const updatedItem = {
+            ...existingItem,
+            note,
+          };
+          const updatedItems = [...prev.items];
+          updatedItems[existingItemIndex] = updatedItem as any;
+          return {
+            ...prev,
+            items: updatedItems,
+          };
+        }),
     }),
     {
       name: "cartStore", // unique name
+      partialize: (state) =>
+        Object.fromEntries(
+          Object.entries(state).filter(
+            ([key]) => !["currentDetailItem"].includes(key)
+          )
+        ) as any,
     }
   )
 );
@@ -139,7 +171,16 @@ export const selectCartInfo = (state: CartStore) => ({
 });
 export const selectCartUserInfo = (state: CartStore) => state.userInfo;
 
+export const selectCurrentDetailItem = (state: CartStore) =>
+  state.currentDetailItem;
+
 export const addToCart = (state: CartStore) => state.addToCart;
 export const removeFromCart = (state: CartStore) => state.removeFromCart;
 export const clearCart = (state: CartStore) => state.clearCart;
 export const setCartUserInfo = (state: CartStore) => state.setUserInfo;
+
+export const setCurrentDetailItem = (state: CartStore) =>
+  state.setCurrentDetailItem;
+
+export const setItemNote = (state: CartStore) => state.setItemNote;
+

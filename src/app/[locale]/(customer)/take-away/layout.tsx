@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 
+
 type Props = {
   children: React.ReactNode;
 };

@@ -5,6 +5,7 @@ export interface IProductDocument extends Document {
   price: number;
   category: string;
   description: string;
+  image: string;
 }
 
 export interface ICategoryDocument extends Document {

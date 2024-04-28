@@ -85,6 +85,7 @@
         "fullname": "name",
         "phone": "phone",
         "label_time": "time",
-        "place_order": "Place order"
+        "place_order": "Place order",
+        "edit_button": "Edit"
     }
 }
