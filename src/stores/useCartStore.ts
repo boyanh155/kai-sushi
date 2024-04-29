@@ -21,7 +21,9 @@ interface CartStore extends CartState {
   clearCart: () => void;
   setUserInfo: (userInfo: CartState["userInfo"]) => void;
   setCurrentDetailItem: (_item: IProductDocument | null) => void;
-  setItemNote: (itemID: string, note: string) => void;
+  setItemNote: (itemID: string | null, note: string | null) => void;
+  setItemCart: (_item: IProductDocument, quantity: number) => void;
+  removeItemCart: (_itemID: string) => void;
 }
 
 const initialState: Pick<CartStore, keyof CartState> = {
@@ -38,7 +40,7 @@ const initialState: Pick<CartStore, keyof CartState> = {
 
 const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
   persist<CartStore>(
-    (set) => ({
+    (set, get) => ({
       ...initialState,
       addToCart: (_item, quantity) =>
         set((prev) => {
@@ -131,21 +133,43 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
         set((prev) => ({ ...prev, currentDetailItem: item })),
       setItemNote: (itemID, note) =>
         set((prev) => {
+          console.log(prev.items, itemID);
           const existingItemIndex = prev.items.findIndex(
             (item) => item._id === itemID
           );
-
+          console.log("existingItemIndex", existingItemIndex);
           if (existingItemIndex === -1) return { ...prev };
           const existingItem = prev.items[existingItemIndex];
           const updatedItem = {
             ...existingItem,
             note,
           };
+          console.log("updatedItem", updatedItem);
           const updatedItems = [...prev.items];
           updatedItems[existingItemIndex] = updatedItem as any;
           return {
             ...prev,
             items: updatedItems,
+          };
+        }),
+      setItemCart: (_item: IProductDocument, quantity: number) => {
+        const currentQuantity =
+          get().items.find((item) => item._id === _item._id)?.quantity || 0;
+        get().addToCart(_item, quantity - currentQuantity);
+      },
+      removeItemCart: (_itemID: string) =>
+        set((prev) => {
+          const existingItemIndex = prev.items.findIndex(
+            (item) => item._id === _itemID
+          );
+          if (existingItemIndex === -1) return { ...prev };
+          const updatedItems = [...prev.items].filter(
+            (item) => item._id !== _itemID
+          );
+          console.log("updatedItems", updatedItems);
+          return {
+            ...prev,
+            items: [...updatedItems],
           };
         }),
     }),
@@ -174,13 +198,22 @@ export const selectCartUserInfo = (state: CartStore) => state.userInfo;
 export const selectCurrentDetailItem = (state: CartStore) =>
   state.currentDetailItem;
 
+export const selectCurrentInCartFRomDetailId = (state: CartStore) => {
+  return (
+    state.currentDetailItem &&
+    state.items.find((item) => item._id === state.currentDetailItem?._id)
+  );
+};
+
 export const addToCart = (state: CartStore) => state.addToCart;
 export const removeFromCart = (state: CartStore) => state.removeFromCart;
 export const clearCart = (state: CartStore) => state.clearCart;
+
 export const setCartUserInfo = (state: CartStore) => state.setUserInfo;
 
 export const setCurrentDetailItem = (state: CartStore) =>
   state.setCurrentDetailItem;
 
 export const setItemNote = (state: CartStore) => state.setItemNote;
-
+export const setItemCart = (state: CartStore) => state.setItemCart;
+export const removeItemCart = (state: CartStore) => state.removeItemCart;

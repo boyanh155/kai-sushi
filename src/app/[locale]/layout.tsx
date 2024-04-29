@@ -29,6 +29,7 @@ export default function LocaleLayout({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
+   
   const messages = useMessages();
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>

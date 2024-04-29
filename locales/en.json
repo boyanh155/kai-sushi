@@ -86,6 +86,10 @@
         "phone": "phone",
         "label_time": "time",
         "place_order": "Place order",
-        "edit_button": "Edit"
+        "edit_button": "Edit",
+        "note_placeholder": "The fulfillment of the request depends on the shop",
+        "note_label": "Add note for the shop",
+        "save_button": "Add to cart",
+        "remove_button": "Remove"
     }
 }

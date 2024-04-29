@@ -86,6 +86,10 @@
         "phone": "số điện thoại",
         "label_time": "giờ",
         "place_order": "Đặt đơn",
-        "edit_button": "Chỉnh sửa"
+        "edit_button": "Chỉnh sửa",
+        "note_placeholder": "Việc thực hiện yêu cầu còn phụ thuộc vào quán",
+        "note_label": "Thêm lưu ý cho quán",
+        "save_button": "Thêm vào giỏ hàng",
+        "remove_button": "Xóa"
     }
 }

@@ -98,7 +98,6 @@ export default function useApi<ResponseBody>({
   const _user = getUserInfo();
 
   if (_user) _config.headers.Authorization = `Bearer ${_user.token}`;
-console.log(_config)
   switch (method) {
     case "GET":
       // eslint-disable-next-line
