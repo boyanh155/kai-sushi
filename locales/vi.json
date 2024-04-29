@@ -90,6 +90,11 @@
         "note_placeholder": "Việc thực hiện yêu cầu còn phụ thuộc vào quán",
         "note_label": "Thêm lưu ý cho quán",
         "save_button": "Thêm vào giỏ hàng",
-        "remove_button": "Xóa"
+        "remove_button": "Xóa",
+        "other_note_label": "Ghi chú khác",
+        "other_note_placeholder": "Lấy nhiều dụng cụ ăn uống",
+        "discount": "Mã giảm giá",
+        "enter_discount": "Nhập mã",
+        "total": "Tổng cộng"
     }
 }

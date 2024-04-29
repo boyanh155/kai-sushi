@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "@/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -14,6 +14,20 @@ const BasketLayout = ({ children }: Props) => {
     "user-info": 66.66,
     undefined: 0,
   };
+  useEffect(() => {
+    const contentWrapper = document.querySelector("#content_wrapper");
+    const mainWrapper = document.querySelector("#main_wrapper");
+    if (!contentWrapper || !mainWrapper) return;
+    console.log(contentWrapper);
+    contentWrapper.classList.remove("before:opacity-90");
+    contentWrapper.classList.add("z-[40]");
+    mainWrapper.classList.remove("pb-[101px]");
+    return () => {
+      contentWrapper.classList.add("before:opacity-90");
+      contentWrapper.classList.remove("z-[40]");
+      mainWrapper.classList.add("pb-[101px]");
+    };
+  }, []);
   return (
     <div className=" content-container flex flex-col w-full pt-14 gap-8 px-8">
       {/* Step bar */}

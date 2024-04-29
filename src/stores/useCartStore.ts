@@ -9,6 +9,7 @@ interface CartState extends TypeCart {
     name: string;
     phone: string;
     time: string;
+    note: string;
   };
 
   //modal detail item
@@ -19,7 +20,7 @@ interface CartStore extends CartState {
   addToCart: (_item: IProductDocument, quantity: number) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
-  setUserInfo: (userInfo: CartState["userInfo"]) => void;
+  setUserInfo: (userInfo: Partial<CartState["userInfo"]>) => void;
   setCurrentDetailItem: (_item: IProductDocument | null) => void;
   setItemNote: (itemID: string | null, note: string | null) => void;
   setItemCart: (_item: IProductDocument, quantity: number) => void;
@@ -34,6 +35,7 @@ const initialState: Pick<CartStore, keyof CartState> = {
     name: "",
     phone: "",
     time: "16:00",
+    note: "",
   },
   currentDetailItem: null,
 };
