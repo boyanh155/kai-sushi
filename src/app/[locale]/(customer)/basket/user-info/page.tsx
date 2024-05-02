@@ -54,8 +54,8 @@ const UserInfoPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex w-full" onClick={() => router.back()}>
-        <BackwardButton />
+      <div className="flex w-full">
+        <BackwardButton onClick={() => router.back()} />
       </div>
       <p className="text-white font-bold mt-9">{t("user_info")}</p>
       {/* FORM */}

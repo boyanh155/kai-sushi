@@ -1,9 +1,11 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 
-
-const BackwardButton = () => {
+const BackwardButton: React.FC<ComponentProps<"div">> = ({ ...props }) => {
   return (
-    <div className="border-[0.6px] cursor-pointer transition-all rounded-sm hover:opacity-60 border-[#878787] text-white p-[10px] bg-[#0E0E10BF]">
+    <div
+      {...props}
+      className="border-[0.6px] cursor-pointer transition-all rounded-sm hover:opacity-60 border-[#878787] text-white p-[10px] bg-[#0E0E10BF]"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="12"
