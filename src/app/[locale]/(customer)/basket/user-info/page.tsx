@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 const today = moment().format("YYYY:MM:DD");
 const UserInfoPage = () => {
   const cartUserInfo = useCartStore(selectCartUserInfo);
-  const [isSubmit, _] = React.useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [isInvalid, setIsInvalid] = React.useState<boolean>(false);
   const _setCartUserInfo = useCartStore(setCartUserInfo);
   const t = useTranslations("Basket");
@@ -138,7 +138,13 @@ const UserInfoPage = () => {
         {/* Continue */}
         <button
           onClick={() => {
-            // if (isInvalid) return;
+            setIsSubmit(true);
+            if (
+              isInvalid ||
+              isEmpty(cartUserInfo.name) ||
+              isEmpty(cartUserInfo.phone)
+            )
+              return;
             router.push("/basket/success");
           }}
           className="bg-golden-1 mt-4 cursor-pointer hover:opacity-60 transition-all py-2 w-full text-center rounded-[4px]"

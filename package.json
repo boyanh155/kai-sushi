@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.13",
     "@next/third-parties": "^14.2.2",
+    "@payos/node": "^1.0.6",
     "@tanstack/react-query": "^5.28.6",
     "@types/ioredis": "^5.0.0",
     "@types/lunr": "^2.3.7",
