@@ -39,6 +39,9 @@ export const POST = async (req: NextRequest) => {
 
     // "recipientId"🙁"7247720955323500","7420483581350467","t_122093450708266926"]
     // "7247720955323500", "7420483581350467";
+    //main
+    //    "7247720955323500",
+    //  "7420483581350467"
     const _date = formatLocaleDateString(bookDate);
 
     if (
@@ -73,7 +76,11 @@ export const POST = async (req: NextRequest) => {
 
     // const _url = new URL(outputQr, process.env.NEXT_PUBLIC_API_URL!);
 
-    const _url = await generateQRCodeWithLogo(bookingUrl, newBooking);
+    const _url = await generateQRCodeWithLogo(
+      bookingUrl,
+      newBooking._id,
+      "qrcode-booking"
+    );
     newBooking.qrcode = _url;
 
     await newBooking.save();

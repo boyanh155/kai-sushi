@@ -9,6 +9,10 @@ import { headerLocaleKey } from "../constant/apiHelper";
 // }
 
 export default async function middleware(request: NextRequest) {
+  // force cors
+  // add the CORS headers to the response
+  // retrieve the current response
+
   const localeTags = headerLocaleKey;
   let currentLocale = request.headers.get(localeTags);
   const pathName = request.nextUrl.pathname;
@@ -26,19 +30,16 @@ export default async function middleware(request: NextRequest) {
     defaultLocale,
     pathnames,
   });
-  console.log(pathSplit)
-  console.log('pathSplit[1]')
-console.log(pathSplit[1]);
+
   if (pathSplit[1] === "locale") {
     // Prepend the locale to the pathname and redirect the request
     pathSplit[1] = defaultLocale;
     request.nextUrl.pathname = pathSplit.join("/");
     return NextResponse.redirect(request.nextUrl);
   }
+
   const response = handleI18nRouting(request);
   response.headers.set(localeTags, defaultLocale);
-
-  // Check if the request's pathname starts with /api
 
   return response;
 }

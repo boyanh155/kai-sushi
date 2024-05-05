@@ -8,7 +8,7 @@ import useCartStore, {
   setCartUserInfo,
 } from "@/stores/useCartStore";
 import { useTranslations } from "next-intl";
-import React, { useEffect } from "react";
+import React from "react";
 import { formatVND } from "../../../../../libs/format";
 
 const CheckoutPage = () => {

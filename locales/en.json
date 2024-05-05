@@ -92,6 +92,9 @@
         "save_button": "Add to cart",
         "remove_button": "Remove",
         "other_note_label": "Other notes",
-        "other_note_placeholder": "Take more eating utensils"
+        "other_note_placeholder": "Take more eating utensils",
+        "discount": "Discount code",
+        "enter_discount": "Enter discount code",
+        "total": "Total"
     }
 }

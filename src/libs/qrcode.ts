@@ -2,11 +2,11 @@ import Jimp from "jimp";
 import path from "path";
 import QRCode from "qrcode";
 import cloudinary from "./cloudinary";
-import { IBooking } from "../../types/Booking";
 
 export async function generateQRCodeWithLogo(
   text: string,
-  bookingInfo: IBooking
+  publicID?: string,
+  folder?:string,
 ) {
   // Generate QR code
 
@@ -46,9 +46,9 @@ export async function generateQRCodeWithLogo(
         .upload_stream(
           {
             resource_type: "raw",
-            public_id: bookingInfo._id,
-            folder: "qrcode-booking",
-            filename_override: `${bookingInfo._id}.png`,
+            public_id: publicID,
+            folder,
+            filename_override: `${publicID}.png`,
           },
           (error: any, result) => {
             if (error) reject(error);

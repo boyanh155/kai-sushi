@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 
-
 type AlertProps = {
   messages: string[] | string;
   isVisible: boolean;
@@ -41,11 +40,16 @@ const Alert: React.FC<AlertProps> = ({
                 </li>
               ))
             ) : (
-              <li className="text-base font-normal text-black">{messages}</li>
+              <li className="text-base font-normal text-black">
+                {(messages as any).message || messages}
+              </li>
             )}
           </ul>
         </div>
-        <div className="text-[#656565] cursor-pointer hover:opacity-60 transition-all font-base" onClick={closeAlert}>
+        <div
+          className="text-[#656565] cursor-pointer hover:opacity-60 transition-all font-base"
+          onClick={closeAlert}
+        >
           x
         </div>
       </div>

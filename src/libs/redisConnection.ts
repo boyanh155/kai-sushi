@@ -59,10 +59,20 @@ async function connect(
   });
 }
 
-export const setCache = async (key: string, value: string) =>
+export const setCache = async (
+  key: string,
+  value: string,
+  expirationTimeInSeconds?: number
+) =>
   connect(async (client) => {
     try {
-      await client.set(key, value);
+      if (expirationTimeInSeconds) {
+        // Set the key with an expiration time
+        await client.set(key, value, "EX", expirationTimeInSeconds);
+      } else {
+        // Set the key without an expiration time
+        await client.set(key, value);
+      }
     } catch (err) {
       console.error(err);
       return null;
@@ -72,11 +82,13 @@ export const setCache = async (key: string, value: string) =>
 export const getCache = (key: string) =>
   connect(async (client) => {
     try {
+      console.log("redis get key", key);
       const isExist = await client.exists(key);
       if (!isExist) {
         console.log("miss");
         return null;
       }
+      console.log("hit");
       const data = await client.get(key);
       return data;
     } catch (err) {

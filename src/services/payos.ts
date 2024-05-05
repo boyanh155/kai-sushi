@@ -10,15 +10,17 @@ if (!clientID || !apiKey || !checksumKey) {
 }
 const payOS = new PayOS(clientID, apiKey, checksumKey);
 
-export class PayOSService {
+class PayOSService {
   constructor(private readonly payOS: PayOS) {
     this.payOS = payOS;
   }
 
   createPaymentLink: (
     body: PayOsType.CheckoutRequestType
-  ) => Promise<PayOsType.CheckoutResponseDataType> = (body) =>
-    this.payOS.createPaymentLink(body);
+  ) => Promise<PayOsType.CheckoutResponseDataType> = (body) => {
+
+    return this.payOS.createPaymentLink(body);
+  };
 
   getPaymentLinkInformation: (
     id: string | number
@@ -31,3 +33,5 @@ export class PayOSService {
   ) => Promise<PayOsType.PaymentLinkDataType> = (id, cancelReason) =>
     this.payOS.cancelPaymentLink(id, cancelReason);
 }
+
+export const payOSService = new PayOSService(payOS);

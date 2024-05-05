@@ -1,12 +1,16 @@
 "use client";
 
+import Alert from "@/components/shared/Alert";
 import BackwardButton from "@/components/shared/BackwardButton";
+import useApi from "@/hooks/api/useApi";
 import { nunito } from "@/libs/GoogleFont";
 import { useRouter } from "@/navigation";
 import useCartStore, {
+  selectCartInfo,
   selectCartUserInfo,
   setCartUserInfo,
 } from "@/stores/useCartStore";
+import { useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
 import moment from "moment";
 import { useTranslations } from "next-intl";
@@ -15,6 +19,7 @@ import React, { useEffect } from "react";
 const today = moment().format("YYYY:MM:DD");
 const UserInfoPage = () => {
   const cartUserInfo = useCartStore(selectCartUserInfo);
+  const cart = useCartStore(selectCartInfo);
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [isInvalid, setIsInvalid] = React.useState<boolean>(false);
   const _setCartUserInfo = useCartStore(setCartUserInfo);
@@ -52,14 +57,79 @@ const UserInfoPage = () => {
     filterTime(cartUserInfo.time);
   }, [cartUserInfo.time]);
 
+  const apiPost = useApi({
+    key: ["takeaway", "make"],
+    url: "takeaway/make",
+    method: "POST",
+  }).post;
+  const handleSubmit = async () => {
+    setIsSubmit(true);
+    if (isInvalid || isEmpty(cartUserInfo.name) || isEmpty(cartUserInfo.phone))
+      return;
+
+    //
+    const _items = [...cart.items].map((v) => ({
+      productId: v._id,
+      quantity: v.quantity,
+    }));
+    await apiPost?.mutateAsync({
+      phone: cartUserInfo.phone,
+      name: cartUserInfo.name,
+      items: _items,
+      time: cartUserInfo.time,
+      note: cartUserInfo.note,
+    });
+
+    //
+    // router.push("/basket/success");
+  };
+  const [isAlert, setIsAlert] = React.useState(false);
+  React.useEffect(() => {
+    console.log(apiPost?.error);
+    if (apiPost?.isError) {
+      setIsAlert(true);
+    }
+  }, [apiPost?.isError]);
+  const client = useQueryClient();
+
+  useEffect(() => {
+    if (apiPost?.isPending || apiPost?.isError || !apiPost?.data) return;
+
+    console.log(apiPost?.data);
+    const key = ["takeaway", "payment", apiPost.data?.order?._id];
+    client.setQueryDefaults(key, {
+      staleTime: 1000 * 60 * 5,
+    });
+    client.setQueryData(key, apiPost?.data);
+
+    router.push({
+      pathname: `/basket/success`,
+      query: {
+        orderId: apiPost.data?.order?._id,
+      },
+    });
+  }, [apiPost?.isPending]);
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex w-full">
         <BackwardButton onClick={() => router.back()} />
       </div>
       <p className="text-white font-bold mt-9">{t("user_info")}</p>
+      {/* ERROR */}
+      <Alert
+        isVisible={isAlert}
+        setIsVisible={setIsAlert}
+        color="error"
+        className="mt-3"
+        messages={(apiPost?.error as any)?.error || "Lỗi không xác định"}
+      />
       {/* FORM */}
-      <div className="flex flex-col gap-12 mt-6">
+      <div
+        className={`
+      ${apiPost?.isPending ? "opacity-0 invisible" : ""}
+       flex flex-col gap-12 mt-6`}
+      >
         {/* Name */}
         <div className="input-float">
           <input
@@ -137,19 +207,16 @@ const UserInfoPage = () => {
       <div className="w-full flex justify-end  mt-4">
         {/* Continue */}
         <button
-          onClick={() => {
-            setIsSubmit(true);
-            if (
-              isInvalid ||
-              isEmpty(cartUserInfo.name) ||
-              isEmpty(cartUserInfo.phone)
-            )
-              return;
-            router.push("/basket/success");
-          }}
-          className="bg-golden-1 mt-4 cursor-pointer hover:opacity-60 transition-all py-2 w-full text-center rounded-[4px]"
+          onClick={handleSubmit}
+          className={`bg-golden-1 mt-4 cursor-pointer hover:opacity-60 transition-all py-2 w-full text-center rounded-[4px] duration-300
+          relative ${apiPost?.isPending ? "-top-64" : "top-0"}
+          `}
         >
-          {t("next")}
+          {apiPost?.isPending ? (
+            <span className="loading loading-spinner"></span>
+          ) : (
+            <span>{t("next")}</span>
+          )}
         </button>
       </div>
     </div>

@@ -7,8 +7,14 @@ export interface IOrderDocument extends Document {
   phone: string;
   note?: string;
   time: string;
+  amount: number;
   items: IProductDocument[];
   createdAt: Date;
   updatedAt: Date;
   payStatus: boolean;
+  qrCodeImage?: string;
+  active: boolean;
+  order?: number;
+  paymentInfo: Partial<PayOsType.CheckoutResponseDataType>;
+  paidInfo?: PayOsType.WebhookDataType;
 }

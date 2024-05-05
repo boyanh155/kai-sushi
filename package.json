@@ -20,6 +20,7 @@
     "@types/qs": "^6.9.14",
     "axios": "^1.6.8",
     "cloudinary": "^2.0.3",
+    "create-hmac": "^1.1.7",
     "formik": "^2.4.5",
     "ioredis": "^5.4.1",
     "jimp": "^0.22.12",
@@ -35,6 +36,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-toastify": "^10.0.5",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "styled-components": "^6.1.8",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"

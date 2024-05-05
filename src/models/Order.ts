@@ -1,8 +1,12 @@
-import { Schema, Types } from "mongoose";
+import { model, models, Schema } from "mongoose";
 import { IOrderDocument } from "./IOrder";
 
-const;
+const CounterSchema = new Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 },
+});
 
+const counterModel = models.Counter || model("Counter", CounterSchema);
 const order = new Schema<IOrderDocument>(
   {
     name: {
@@ -20,18 +24,106 @@ const order = new Schema<IOrderDocument>(
       type: String,
       required: true,
     },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    paymentInfo: {
+      description: {
+        type: String,
+      },
+      buyerName: {
+        type: String,
+      },
+      buyerPhone: {
+        type: String,
+      },
+      paymentLinkId: {
+        type: String,
+      },
+      checkoutUrl: {
+        type: String,
+      },
+      status: {
+        type: String,
+        default: "PENDING",
+      },
+      qrCode: {
+        type: String,
+      },
+      expiredAt: {
+        type: Number,
+      },
+    },
+
+    paidInfo: {
+      type: Schema.Types.Mixed,
+      required: false,/* */
+    },
+
+    qrCodeImage: {
+      type: String,
+    },
+    order: {
+      type: Number,
+    },
     items: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
       },
     ],
+    payStatus: {
+      type: Boolean,
+      default: false,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
-    _id: false,
+  }
+);
+order.pre("save", async function (next) {
+  var doc = this;
+  try {
+    const counter = await counterModel.findByIdAndUpdate(
+      { _id: "entityId" },
+      { $inc: { seq: 1 } },
+      {
+        new: true,
+        upsert: true,
+      }
+    );
+
+    doc.order = counter.seq;
+    next();
+  } catch (error: any) {
+    next(error);
+  }
+});
+
+// if expireAt is less than current time, set status to CANCELLED
+order.index(
+  { createdAt: 1 },
+  {
+    expireAfterSeconds: 60 * 30,
+    partialFilterExpression: {
+      active: false,
+      payStatus: false,
+      "paymentInfo.status": "CANCELLED",
+    },
   }
 );
 
+const orderModel = models.Order || model<IOrderDocument>("Order", order);
 
-export 
+export default orderModel;
