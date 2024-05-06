@@ -10,7 +10,7 @@ import { isEmpty } from "lodash";
 type Params = {
   params: {
     headerId: string;
-    locale:string
+    locale: string;
   };
 };
 export const DELETE = async (
@@ -53,6 +53,7 @@ export const GET = async (
     if (!headerId) throw { status: 400, message: "Missing parameter" };
     if (!isValidObjectId(headerId))
       throw { status: 404, message: "Invalid headerId" };
+    const locale = req.headers.get(headerLocaleKey) || "en";
     const cacheKey = menuHeaderTags(headerId);
     const cachedData = await getCache(cacheKey);
     let data: any = {};
@@ -76,7 +77,7 @@ export const GET = async (
       data = JSON.parse(cachedData);
     }
     const _locale = req.headers.get(headerLocaleKey) || "en";
-    console.log('-------')
+    console.log("-------");
     console.log(locale);
     console.log(_locale);
     if (locale === "en") {
@@ -85,6 +86,7 @@ export const GET = async (
         children: data.children.map((item) => ({
           ...item,
           title: item.enTitle || item.title,
+          description: item.enDescription || item.description,
           children: isEmpty(item.children)
             ? []
             : item.children.map((_item) => ({

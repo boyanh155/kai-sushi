@@ -26,10 +26,17 @@ async function connectDB() {
       connectTimeoutMS: 30000,
     };
 
-    cached.promise = mongoose.connect(url, opts).then((mongoose) => {
-      console.log("DB CONNECTED");
-      return mongoose;
-    });
+    cached.promise = mongoose
+      .connect(url, opts)
+      .then((mongoose) => {
+        console.log("DB CONNECTED");
+        return mongoose;
+      })
+      .catch((err: any) =>
+        setTimeout(() => {
+          throw err;
+        }, 0)
+      );
   }
   try {
     cached.conn = await cached.promise;
