@@ -27,8 +27,7 @@ export async function GET(
     }
     const locale = req.headers.get(headerLocaleKey) || "en";
 //
-console.log('teo r')
-    console.log(locale)
+
     const cacheKey = menuTags(menuType);
     const cachedData = await getCache(cacheKey);
     let data: Array<any> = [];

@@ -33,6 +33,8 @@ async function connectDB() {
   try {
     cached.conn = await cached.promise;
   } catch (e) {
+    console.log("DB ERROR ");
+    console.error(e);
     cached.promise = null;
     throw e;
   }
