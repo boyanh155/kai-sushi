@@ -21,7 +21,7 @@ const HomeMain = () => {
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
-        {t("beverage")}
+        {t("menu")}
       </h1>
       {/* Button group */}
       <div className="flex flex-col items-center mt-16 gap-2 ">
@@ -34,7 +34,7 @@ const HomeMain = () => {
           onClick={() => moveToListMenu("cafe")}
           className="active:bg-[#8C773E99] active:border-0 font-light uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
         >
-          {t("cafe")}
+          {t("beverage")}
         </div>
         {/* MAIN MENU */}
         <div className="golden-title font-bold text-xl mt-20">
