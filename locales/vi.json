@@ -18,7 +18,7 @@
         "lunch_label": "Lunch time",
         "dinner_label": "Sushi & Lounge",
         "lunch_set": "Set cơm trưa",
-        "cafe_label": "Morning ",
+        "cafe_label": "Buổi sáng",
         "cafe": "Café"
     },
     "Navbar": {
@@ -69,6 +69,12 @@
         "meta_title": "KAI | Không tìm thấy",
         "meta_description": "Trang không tìm thấy Kai"
     },
+    "Comingsoon": {
+        "title": "Trang web đang được xây dựng",
+        "meta_title": "KAI | Trang web đang được xây dựng",
+        "meta_description": "Trang web đang được xây dựng Kai",
+        "coming_soon":"Sắp ra mắt"
+    },
     "TakeAway": {
         "meta_title": "KAI | Mang về",
         "meta_description": "Thực đơn mang về Kai",
@@ -106,4 +112,5 @@
         "download_qr": "Tải mã QR",
         "order_expired": "Đơn hàng sẽ hết hạn sau"
     }
+    
 }

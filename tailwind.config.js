@@ -18,7 +18,9 @@ module.exports = {
                 "golden": "#8C773E",
                 "golden-1": "#8C773E",
                 "subtle-1": "#959595",
-            }
+            },
+   
+        
         },
 
     },

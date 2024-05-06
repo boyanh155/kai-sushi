@@ -17,7 +17,9 @@
         "lunch": "Lunch",
         "lunch_label": "Lunch time",
         "dinner_label": "Sushi & Lounge",
-        "lunch_set": "Lunch set"
+        "lunch_set": "Lunch set",
+        "cafe_label": "Morning",
+        "cafe": "Café"
     },
     "Navbar": {
         "booking": "booking",
@@ -67,6 +69,12 @@
         "meta_title": "KAI | Not found",
         "meta_description": "Not found page Kai"
     },
+    "Comingsoon": {
+        "coming_soon": "Coming soon",
+        "meta_title": "KAI | Coming soon",
+        "meta_description": "Coming soon Kai",
+        "title": "KAI is coming soon"
+    },
     "TakeAway": {
         "meta_title": "KAI | Takeaway",
         "meta_description": "Takeaway Kai",
@@ -103,6 +111,5 @@
         "download_qr": "Download QR code",
         "order_success": "Your order has been successfully placed!",
         "order_expired": "Your order has expired!"
-
     }
 }

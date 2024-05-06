@@ -11,7 +11,7 @@ const HomeMain = () => {
   const t = useTranslations("Home");
   const router = useRouter();
 
-  const moveToListMenu = (type: "food" | "beverage" | "lunch") => {
+  const moveToListMenu = (type: "food" | "beverage" | "lunch" | "cafe") => {
     router.push("/" + type);
   };
   return (
@@ -25,28 +25,16 @@ const HomeMain = () => {
       </h1>
       {/* Button group */}
       <div className="flex flex-col items-center mt-16 gap-2 ">
-        {/* LUNCH BOX */}
-        <div className="golden-title font-bold text-xl">
-          {t("lunch_label")}&nbsp;|&nbsp;
-          <span className="uppercase">11am - 2pm</span>
-        </div>
-        <div
-          onClick={() => moveToListMenu("lunch")}
-          className="active:bg-[#8C773E99] active:border-0 font-light uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
-        >
-          {t("lunch")}
-        </div>
-
         {/* CAFE */}
         <div className="golden-title font-bold text-xl">
-          {t("lunch_label")}&nbsp;|&nbsp;
+          {t("cafe_label")}&nbsp;|&nbsp;
           <span className="uppercase">8am - 2pm</span>
         </div>
         <div
-          onClick={() => moveToListMenu("lunch")}
+          onClick={() => moveToListMenu("cafe")}
           className="active:bg-[#8C773E99] active:border-0 font-light uppercase hover:opacity-60 transition-all cursor-pointer border border-[#B7B4B1] text-base rounded-sm p-4 w-56 text-center"
         >
-          {t("lunch")}
+          {t("cafe")}
         </div>
         {/* MAIN MENU */}
         <div className="golden-title font-bold text-xl mt-20">
