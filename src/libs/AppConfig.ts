@@ -69,6 +69,10 @@ export const pathnames = {
     vi: "/menu-trua",
     en: "/lunch",
   },
+  cafe: {
+    vi: "/cafe",
+    en: "/cafe",
+  },
   "/basket": {
     vi: "/gio-hang",
     en: "/basket",
@@ -98,7 +102,6 @@ export const pathnames = {
   //   en: "/take-away/:path*",
   // },
 } satisfies Pathnames<typeof locales>;
-
 
 export const AppConfig: {
   name: string;
