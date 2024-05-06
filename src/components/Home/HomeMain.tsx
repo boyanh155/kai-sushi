@@ -21,7 +21,7 @@ const HomeMain = () => {
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
-        {t("menu")}
+        {t("beverage")}
       </h1>
       {/* Button group */}
       <div className="flex flex-col items-center mt-16 gap-2 ">
