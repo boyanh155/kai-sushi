@@ -1,10 +1,7 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useCartStore, {
-  addToCart,
-  removeFromCart,
   removeItemCart,
-  selectCartInfo,
   selectCurrentDetailItem,
   selectCurrentInCartFRomDetailId,
   setCurrentDetailItem,
@@ -22,7 +19,6 @@ import { formatVND } from "@/libs/format";
 const DetailItemPopup = () => {
   const t = useTranslations("Basket");
   const currentDetailItem = useCartStore(selectCurrentDetailItem);
-  const cart = useCartStore(selectCartInfo);
   const currentInCart = useCartStore(selectCurrentInCartFRomDetailId);
   const _setCurrentDetailItem = useCartStore(setCurrentDetailItem);
 
@@ -84,7 +80,7 @@ const DetailItemPopup = () => {
     if (!currentItem?.quantity) item.quantity = 1;
     item.note = e.target.value;
   };
-  const handleConfirm = (e) => {
+  const handleConfirm = (_) => {
     if (!currentDetailItem) return;
     if (!currentItem.quantity) {
       console.log("yo");
@@ -158,7 +154,7 @@ const DetailItemPopup = () => {
           </div>
         </div>
         {/* ADD BUTTON */}
-        <div className="w-full flex justify-center text-white items-center gap-6">
+        <div className="w-full flex justify-center mt-10 text-white items-center gap-6">
           <div
             onClick={() => {
               if (!currentItem?.quantity) return;

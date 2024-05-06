@@ -4,19 +4,19 @@ import orderModel from "@/models/Order";
 import { NextRequest, NextResponse } from "next/server";
 
 // socket io
-export const POST = async (req: NextRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
-    console.log("sdsd");
-    const body = await req.json();
-    const signature = req.headers.get("x-hmac-sign") || "";
-    const { orderID } = body;
+    const search =  req.nextUrl.searchParams;
+    const orderID = search.get("orderId") || "";
+    const signature = search.get('signature') || "";
     if (!orderID) {
       throw {
         message: "Missing required fields",
         status: 400,
       };
     }
-    const isVerified = await verifyBodyHmac(signature, body);
+    console.log(`orderId=${orderID}`)
+    const isVerified = await verifyBodyHmac(signature, `orderId=${orderID}`);
 
     if (!isVerified) {
       throw {
@@ -25,12 +25,11 @@ export const POST = async (req: NextRequest) => {
       };
     }
     await connectDB();
-    const order = await orderModel.findById(orderID, {
-      active: 1,
-      "paymentInfo.expiredAt": 1,
-      "paymentInfo.status": 1,
-      payStatus: 1,
-    });
+    const order = await orderModel.findById(orderID);
+    if(!order) throw {
+      message: "Order not found",
+      status: 404,
+    }
     return NextResponse.json(order, {
       status: 200,
     });

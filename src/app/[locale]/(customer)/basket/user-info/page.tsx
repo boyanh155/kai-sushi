@@ -98,7 +98,7 @@ const UserInfoPage = () => {
     console.log(apiPost?.data);
     const key = ["takeaway", "payment", apiPost.data?.order?._id];
     client.setQueryDefaults(key, {
-      staleTime: 1000 * 60 * 5,
+      staleTime: 1000 * 60 * 30,
     });
     client.setQueryData(key, apiPost?.data);
 

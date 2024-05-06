@@ -95,6 +95,14 @@
         "other_note_placeholder": "Take more eating utensils",
         "discount": "Discount code",
         "enter_discount": "Enter discount code",
-        "total": "Total"
+        "total": "Total",
+        "order_code": "Order code",
+        "order_description": "Order description",
+        "order_amount": "Total",
+        "scan_qr": "Scan QR code to payment",
+        "download_qr": "Download QR code",
+        "order_success": "Your order has been successfully placed!",
+        "order_expired": "Your order has expired!"
+
     }
 }

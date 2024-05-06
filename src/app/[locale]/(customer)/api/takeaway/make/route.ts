@@ -1,4 +1,4 @@
-import { generateHmac, verifyBodyHmac } from "@/libs/apiMiddleware/hmac";
+import { generateHmac } from "@/libs/apiMiddleware/hmac";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
 import orderModel from "@/models/Order";
@@ -76,15 +76,9 @@ export const POST = async (req: NextRequest) => {
     newOrder.paymentInfo = link;
     newOrder.qrCodeImage = qrCodeImage;
     newOrder.save();
-    return NextResponse.json(
-      {
-        qrCodeImage,
-        order: newOrder,
-      },
-      {
-        status: 200,
-      }
-    );
+    return NextResponse.json(newOrder, {
+      status: 200,
+    });
   } catch (err: any) {
     return NextResponse.json(
       { error: err.stack || err.message },

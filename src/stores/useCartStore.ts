@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { TypeCart, TypeCartItem } from "../../types/CartType";
+import { TypeCart } from "../../types/CartType";
 import { persist } from "zustand/middleware";
 import { IProductDocument } from "@/models/IProduct";
 

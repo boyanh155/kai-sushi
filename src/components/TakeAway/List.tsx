@@ -1,8 +1,5 @@
 "use client";
 import useCartStore, {
-  addToCart,
-  removeFromCart,
-  selectCartInfo,
 } from "@/stores/useCartStore";
 import useTakeAwayStore, {
   selectCategoryHeaderElement,
