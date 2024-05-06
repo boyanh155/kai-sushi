@@ -69,7 +69,7 @@ export const pathnames = {
     vi: "/menu-trua",
     en: "/lunch",
   },
-  cafe: {
+  "/cafe": {
     vi: "/cafe",
     en: "/cafe",
   },
