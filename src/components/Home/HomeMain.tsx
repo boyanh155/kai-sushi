@@ -40,7 +40,7 @@ const HomeMain = () => {
         {/* CAFE */}
         <div className="golden-title font-bold text-xl">
           {t("lunch_label")}&nbsp;|&nbsp;
-          <span className="uppercase">11am - 2pm</span>
+          <span className="uppercase">8am - 2pm</span>
         </div>
         <div
           onClick={() => moveToListMenu("lunch")}
