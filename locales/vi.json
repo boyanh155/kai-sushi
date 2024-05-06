@@ -17,7 +17,9 @@
         "lunch": "Ăn trưa",
         "lunch_label": "Lunch time",
         "dinner_label": "Sushi & Lounge",
-        "lunch_set": "Set cơm trưa"
+        "lunch_set": "Set cơm trưa",
+        "cafe_label": "Morning ",
+        "cafe": "Café"
     },
     "Navbar": {
         "booking": "đặt bàn",
