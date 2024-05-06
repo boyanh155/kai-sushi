@@ -47,7 +47,7 @@ export const DELETE = async (
 
 export const GET = async (
   req: NextRequest,
-  { params: { headerId, locale } }: Params
+  { params: { headerId } }: Params
 ) => {
   try {
     if (!headerId) throw { status: 400, message: "Missing parameter" };
@@ -77,9 +77,7 @@ export const GET = async (
       data = JSON.parse(cachedData);
     }
     const _locale = req.headers.get(headerLocaleKey) || "en";
-    console.log("-------");
-    console.log(locale);
-    console.log(_locale);
+
     if (locale === "en") {
       data = {
         ...data,
