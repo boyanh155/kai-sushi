@@ -76,7 +76,6 @@ export const GET = async (
     } else {
       data = JSON.parse(cachedData);
     }
-    const _locale = req.headers.get(headerLocaleKey) || "en";
 
     if (locale === "en") {
       data = {
