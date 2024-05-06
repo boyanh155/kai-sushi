@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (_: NextRequest) => {
   try {
     const menu = await getMenuTakeAway();
-    const _menu = menu.map(({
+    const _menu = menu?.map(({
       products,
       ...v
     }) => {
