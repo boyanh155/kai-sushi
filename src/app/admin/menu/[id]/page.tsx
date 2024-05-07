@@ -22,7 +22,7 @@ type Props = {
 const EditMenuPage = ({ params: { id } }: Props) => {
   const api = useGetMenuHeaderDetailById(id);
   const [img, setImg] = useState<File | undefined>(undefined);
-  const [type, setType] = useState<"food" | "beverage">("food");
+  const [type, setType] = useState<"food" | "beverage" | "cafe">("food");
 
   const apiPut = useApi<MenuDataResponseBody>({
     key: [`menuHeaderDetail-${id}`],
@@ -152,11 +152,14 @@ const EditMenuPage = ({ params: { id } }: Props) => {
       {/* TYPE */}
       <select
         className="select select-bordered w-full"
-        onChange={(e) => setType(e.target.value as "food" | "beverage")}
+        onChange={(e) =>
+          setType(e.target.value as "food" | "beverage" | "cafe")
+        }
         value={type}
       >
         <option value="food">Food</option>
         <option value="beverage">Beverage</option>
+        <option value="cafe">Cafe</option>
       </select>
       {/* IMAGE */}
       <input

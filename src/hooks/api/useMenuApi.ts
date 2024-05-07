@@ -5,7 +5,9 @@ import {
 import useApi from "./useApi";
 import _ from "lodash";
 
-export const useGetMenu = (type: "food" | "beverage" | "both" = "both") => {
+export const useGetMenu = (
+  type: "food" | "beverage" | "cafe" | "both" = "both"
+) => {
   const { get } = useApi<MenuDataResponseBody[]>({
     key: ["menu", type],
     method: "GET",
@@ -25,7 +27,7 @@ export const useGetMenuHeaderDetailById = (id: string) => {
 
 export const usePostMenu = (input?: {
   bodyData?: MenuDataRequestBody;
-  type?: "food" | "beverage";
+  type?: "food" | "beverage" | "cafe";
 }) => {
   const { post } = useApi<MenuDataResponseBody>({
     key: ["menu"],

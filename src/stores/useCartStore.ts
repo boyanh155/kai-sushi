@@ -219,3 +219,4 @@ export const setCurrentDetailItem = (state: CartStore) =>
 export const setItemNote = (state: CartStore) => state.setItemNote;
 export const setItemCart = (state: CartStore) => state.setItemCart;
 export const removeItemCart = (state: CartStore) => state.removeItemCart;
+export const setClearCart = (state: CartStore) => state.clearCart;

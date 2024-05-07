@@ -15,7 +15,12 @@ const MenuMain = () => {
   const menuHeader = Array.isArray(pMenuHeader) ? pMenuHeader[0] : pMenuHeader;
   // const menuType = pathName?.split("/")[2] as "food" | "beverage";
   const headerType =
-    menuHeader || (menuType === "food" ? "appetizer" : "no-alcohol");
+    menuHeader ||
+    (menuType === "food"
+      ? "appetizer"
+      : menuType === "cafe"
+      ? "coffee"
+      : "no-alcohol");
   // cors force
 
   const api = useGetMenu(menuType as any);
@@ -23,7 +28,6 @@ const MenuMain = () => {
   // Assuming activeHeaderElement is a reference to a DOM element
   const validData = api?.data ? [...api?.data] : [];
   // validData?.sort((a, b) => +a.order - +b.order);
-console.log(validData)
   const currentIndex =
     validData.findIndex((v) => {
       return headerType?.toLowerCase() === v?.slug?.toLowerCase();
@@ -55,7 +59,9 @@ console.log(validData)
       <div className=" sticky  top-0 z-20">
         <div
           className={`flex flex-row bg-black gap-4 w-full overflow-x-scroll px-8 ${
-            menuType === "beverage" ? "justify-center" : "justify-start"
+            menuType === "beverage" || menuType === "cafe"
+              ? "justify-center"
+              : "justify-start"
           }`}
         >
           {validData?.map((v) => (

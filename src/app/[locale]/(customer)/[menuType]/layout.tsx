@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { locale } }) {
   };
 }
 const LayoutPage = ({ children, params: { menuType } }: Props) => {
-  if (!(menuType === "food" || menuType === "beverage" || menuType === "both"))
+  if (!(menuType==="cafe"||menuType === "food" || menuType === "beverage" || menuType === "both"))
     return notFound();
 
   return children;

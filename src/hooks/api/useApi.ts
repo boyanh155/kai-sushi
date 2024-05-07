@@ -92,10 +92,11 @@ export default function useApi<ResponseBody>({
     const locale = useLocale();
     _config.headers![headerLocaleKey] = locale || "en";
   } catch (e) {
-    console.log('yoo')
+    console.log("yoo");
     // console.log(e);
   }
-  _config.headers!["Content-Type"] = "application/json";
+  if (!_config.headers["Content-Type"])
+    _config.headers!["Content-Type"] = "application/json";
   const _user = getUserInfo();
 
   if (_user) _config.headers.Authorization = `Bearer ${_user.token}`;

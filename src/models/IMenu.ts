@@ -17,7 +17,7 @@ export interface IMenuHeader extends Document {
   title: string;
   image?: string;
   imageId?: string;
-  type: "food" | "beverage";
+  type: "food" | "beverage" |"cafe";
   order: number;
   slug: string;
   children: IMenuChild[];

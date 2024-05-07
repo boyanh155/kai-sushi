@@ -11,7 +11,7 @@ export type NavHeader =
       image: string;
       slug: string;
       order: number;
-      type: "food" | "beverage";
+      type: "food" | "beverage" | "cafe";
       children?: NavChild[];
     }
   | MenuDataResponseBody;

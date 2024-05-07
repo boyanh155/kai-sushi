@@ -9,6 +9,7 @@ import useCartStore, {
   selectCartInfo,
   selectCartUserInfo,
   setCartUserInfo,
+  setClearCart,
 } from "@/stores/useCartStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
@@ -18,6 +19,7 @@ import React, { useEffect } from "react";
 
 const today = moment().format("YYYY:MM:DD");
 const UserInfoPage = () => {
+  const _clearCart = useCartStore(setClearCart);
   const cartUserInfo = useCartStore(selectCartUserInfo);
   const cart = useCartStore(selectCartInfo);
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
@@ -101,7 +103,7 @@ const UserInfoPage = () => {
       staleTime: 1000 * 60 * 30,
     });
     client.setQueryData(key, apiPost?.data);
-
+    _clearCart();
     router.push({
       pathname: `/basket/success`,
       query: {

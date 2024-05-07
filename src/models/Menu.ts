@@ -67,7 +67,7 @@ const menuHeader = new Schema<IMenuHeader>({
   type: {
     type: String,
     required: true,
-    enum: ["food", "beverage"],
+    enum: ["food", "beverage","cafe"],
   },
   slug: {
     type: String,

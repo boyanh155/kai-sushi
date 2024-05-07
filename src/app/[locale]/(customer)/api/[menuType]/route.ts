@@ -8,7 +8,7 @@ import { delCache, getCache, setCache } from "@/libs/redisConnection";
 import { menuTags } from "@/libs/cacheTags";
 import { headerLocaleKey } from "../../../../../../constant/apiHelper";
 
-type MenuType = "food" | "beverage";
+type MenuType = "food" | "beverage" | 'cafe';
 
 type Params = {
   params: {
@@ -22,29 +22,36 @@ export async function GET(
   { params: { menuType = "both" } }: Params
 ) {
   try {
-    if (menuType !== "food" && menuType !== "beverage" && menuType !== "both") {
+    if (
+      menuType !== "food" &&
+      menuType !== "beverage" &&
+      menuType !== "both" &&
+      menuType !== "cafe"
+    ) {
       throw { message: "Invalid menu type", status: 404 };
     }
     const locale = req.headers.get(headerLocaleKey) || "en";
-//
+    //
 
     const cacheKey = menuTags(menuType);
     const cachedData = await getCache(cacheKey);
     let data: Array<any> = [];
     if (!cachedData) {
       await connectDB();
-      data = await menuHeaderModel.find(
-        menuType === "both"
-          ? {}
-          : {
-              type: menuType,
-            },
-        {
-          imageId: 0,
-          children: 0,
-          __v: 0,
-        }
-      ).sort({ order: 1 });
+      data = await menuHeaderModel
+        .find(
+          menuType === "both"
+            ? {}
+            : {
+                type: menuType,
+              },
+          {
+            imageId: 0,
+            children: 0,
+            __v: 0,
+          }
+        )
+        .sort({ order: 1 });
       setCache(cacheKey, JSON.stringify(data));
     } else {
       data = JSON.parse(cachedData);
