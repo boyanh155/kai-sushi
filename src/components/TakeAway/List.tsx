@@ -119,7 +119,7 @@ const List = () => {
       {renderTakeAway.length > 0 ? (
         renderTakeAway.map((v, id) => {
           return (
-            <div key={id} className="flex flex-col gap-2">
+            <div key={id} className="flex flex-col gap-5">
               {/* CATE */}
               <div
                 ref={(el) => {
@@ -135,7 +135,7 @@ const List = () => {
                 v.children.map((child, childIndex) => (
                   <div
                     key={childIndex}
-                    className="flex flex-row gap-4 text-white items-center "
+                    className="flex flex-row gap-4 rounded-[3px] text-white items-center border-[0.6px] border-golden-1 px-[10px] py-3 bg-black bg-opacity-40"
                     // click open popup
 
                     onClick={() => {
@@ -151,7 +151,7 @@ const List = () => {
                     )}
                     {/* content */}
                     <div className="flex flex-row justify-between gap-1 flex-grow items-end">
-                      <div className="flex flex-col gap-1 py-3 basis-9/12">
+                      <div className="flex flex-col gap-1 basis-9/12">
                         <div className="text-base font-light uppercase">
                           <HighlightText text={child.name} search={search} />
                         </div>
@@ -166,7 +166,7 @@ const List = () => {
                         </div>
                       </div>
                       {/* add button */}
-                      <div className="py-6 flex-grow flex justify-end">
+                      <div className=" flex-grow flex justify-end">
                         <RenderAddButton child={child} />
                       </div>
                     </div>

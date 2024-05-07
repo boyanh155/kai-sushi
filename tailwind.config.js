@@ -19,8 +19,29 @@ module.exports = {
                 "golden-1": "#8C773E",
                 "subtle-1": "#959595",
             },
-   
-        
+
+            animation: {
+                "bounce-fade-in": "_bounce-fade-in 1s linear infinite",
+            },
+            keyframes: {
+                "_bounce-fade-in": {
+                    "0%": {
+                        opacity: 0,
+                        transform: "translateY(-10px)"
+                    },
+                    "50%": {
+                        opacity: 1,
+                        transform: "translateY(0)"
+                    },
+                    "100%": {
+                        opacity: 1,
+                        transform: "translateY(-10px)"
+                    }
+                },
+            },
+            screens: {
+                "xxs": "380px",
+            }
         },
 
     },

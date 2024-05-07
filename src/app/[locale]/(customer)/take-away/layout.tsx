@@ -20,7 +20,7 @@ export async function generateMetadata({ params: { locale } }) {
 
 const TakeAwayLayout = ({ children }: Props) => {
   const t = useTranslations("TakeAway");
-  const isClose = true;
+  const isClose = false;
   return isClose ? (
     <Comingsoon />
   ) : (

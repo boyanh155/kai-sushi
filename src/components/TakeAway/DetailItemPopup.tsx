@@ -110,7 +110,7 @@ const DetailItemPopup = () => {
               className={` block object-cover relative w-full z-[5]`}
             />
           )}
-          <div className="absolute z-30 flex items-center left-[30px]">
+          <div className="absolute z-30 flex items-center right-[30px]">
             <CloseButton
               onClick={(e) => {
                 e.preventDefault();

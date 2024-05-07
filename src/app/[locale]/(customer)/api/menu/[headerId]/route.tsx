@@ -68,8 +68,14 @@ export const GET = async (
         })
         .populate({
           path: "children",
+          options: {
+            sort: { order: 1 },
+          },
           populate: {
             path: "children",
+            options: {
+              sort: { order: 1 },
+            },
           },
         });
       if (data) setCache(cacheKey, JSON.stringify(data));

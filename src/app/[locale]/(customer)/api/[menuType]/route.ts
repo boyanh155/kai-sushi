@@ -44,7 +44,7 @@ export async function GET(
           children: 0,
           __v: 0,
         }
-      );
+      ).sort({ order: 1 });
       setCache(cacheKey, JSON.stringify(data));
     } else {
       data = JSON.parse(cachedData);

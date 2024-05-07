@@ -11,6 +11,7 @@
         "open_time": "Giờ hoạt động",
         "specific_time": "Thứ 2 - Chủ nhật 16:00 - 22:00",
         "map_show": "Mở KAI bản đồ",
+        "follow_us": "Đồng hành với chúng tôi",
         "google_map": "Mở google map",
         "meta_title": "KAI | Thực đơn",
         "meta_description": "Thực đơn Kai",
@@ -73,7 +74,7 @@
         "title": "Trang web đang được xây dựng",
         "meta_title": "KAI | Trang web đang được xây dựng",
         "meta_description": "Trang web đang được xây dựng Kai",
-        "coming_soon":"Sắp ra mắt"
+        "coming_soon": "Sắp ra mắt"
     },
     "TakeAway": {
         "meta_title": "KAI | Mang về",
@@ -112,5 +113,5 @@
         "download_qr": "Tải mã QR",
         "order_expired": "Đơn hàng sẽ hết hạn sau"
     }
-    
+
 }

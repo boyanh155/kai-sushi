@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import {
@@ -13,10 +13,9 @@ import { NavChild } from "../../../../../types/NavbarType";
 import useApi from "@/hooks/api/useApi";
 import Loading from "@/components/shared/Loading";
 
-
 const CreateMenu = () => {
   const [img, setImg] = useState<File | undefined>(undefined);
-  const [type, setType] = useState<"food" | "beverage">("food");
+  const [type, setType] = useState<"food" | "beverage" | "cafe">("food");
   const apiPost = useApi<MenuDataResponseBody>({
     key: ["menu"],
     method: "POST",
@@ -138,11 +137,14 @@ const CreateMenu = () => {
       {/* TYPE */}
       <select
         className="select select-bordered w-full"
-        onChange={(e) => setType(e.target.value as "food" | "beverage")}
+        onChange={(e) =>
+          setType(e.target.value as "food" | "beverage" | "cafe")
+        }
         value={type}
       >
         <option value="food">Food</option>
         <option value="beverage">Beverage</option>
+        <option value="cafe">Cafe</option>
       </select>
       {/* IMAGE */}
       <input

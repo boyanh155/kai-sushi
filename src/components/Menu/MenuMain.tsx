@@ -21,11 +21,11 @@ const MenuMain = () => {
   const api = useGetMenu(menuType as any);
 
   // Assuming activeHeaderElement is a reference to a DOM element
-  const sortedMenuData = api?.data ? [...api?.data] : [];
-  sortedMenuData?.sort((a, b) => +a.order - +b.order);
-
+  const validData = api?.data ? [...api?.data] : [];
+  // validData?.sort((a, b) => +a.order - +b.order);
+console.log(validData)
   const currentIndex =
-    sortedMenuData.findIndex((v) => {
+    validData.findIndex((v) => {
       return headerType?.toLowerCase() === v?.slug?.toLowerCase();
     }) || 0;
 
@@ -33,14 +33,14 @@ const MenuMain = () => {
 
   return api?.isLoading ? (
     <Loading />
-  ) : !isEmpty(sortedMenuData) ? (
+  ) : !isEmpty(validData) ? (
     <div className="relative overflow-visible flex flex-col w-full min-h-[calc(100vh-110px)]">
       {/* IMAGE  */}
       <div
         style={{
           backgroundImage:
-            sortedMenuData?.[currentIndex]?.image &&
-            `url('${sortedMenuData[currentIndex]?.image}')`,
+            validData?.[currentIndex]?.image &&
+            `url('${validData[currentIndex]?.image}')`,
         }}
         className={`uppercase text-4xl h-56  relative after:absolute after:w-full after:h-full after:bg-black after:inset-0 after:opacity-80 after:z-40 ${`bg-no-repeat bg-contain bg-center`}`}
       >
@@ -58,18 +58,18 @@ const MenuMain = () => {
             menuType === "beverage" ? "justify-center" : "justify-start"
           }`}
         >
-          {sortedMenuData?.map((v) => (
+          {validData?.map((v) => (
             <MenuHeader item={v} key={v._id} />
           ))}
         </div>
       </div>
 
       {/* CONTENT */}
-      {/* {sortedMenuData?.[currentIndex]?.children?.map((v, id) => (
-          <MenuChild item={v} key={id} headerId={sortedMenuData[currentIndex]._id} />
+      {/* {validData?.[currentIndex]?.children?.map((v, id) => (
+          <MenuChild item={v} key={id} headerId={validData[currentIndex]._id} />
         ))} */}
       <div className="flex-grow basis-auto flex flex-col">
-        <MenuChild headerId={sortedMenuData?.[currentIndex]?._id!} />
+        <MenuChild headerId={validData?.[currentIndex]?._id} />
       </div>
     </div>
   ) : (
