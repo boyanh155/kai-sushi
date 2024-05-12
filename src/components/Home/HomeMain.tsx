@@ -15,16 +15,17 @@ const HomeMain = () => {
     router.push("/" + type);
   };
   return (
-    <div className="flex flex-col content-container items-center pt-14 pb-32">
+    <div className="flex flex-col content-container items-center pt-14 pb-32   overflow-x-visible">
       {/* Center logo */}
-      <div className="w-[60px] max-h-[60px]">
+      <div className="w-[60px] max-h-[60px] snap-start">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
         {t("menu")}
       </h1>
-      {/* Button group */}
-      <div className="flex flex-col items-center mt-16 gap-2 ">
+      {/* --------------MENU-------------- */}
+      {/* Button group - MENU*/}
+      <div className="flex flex-col items-center mt-16 gap-2  snap-start">
         {/* CAFE */}
         <div className="golden-title font-bold text-xl">
           {t("cafe_label")}&nbsp;|&nbsp;
@@ -55,6 +56,8 @@ const HomeMain = () => {
           {t("beverage")}
         </div>
       </div>
+      {/* --------------MENU-------------- */}
+
       {/* BOUNCE SCROLL */}
       <div className="mt-14">
         <svg
@@ -74,8 +77,8 @@ const HomeMain = () => {
           />
         </svg>
       </div>
-      {/* Bottom content */}
-      <div className="mt-28 flex flex-col items-center">
+      {/* Address content */}
+      <div className="mt-28 flex flex-col items-center  snap-start">
         {/* Small log */}
         <div className="w-[60px] max-h-[60px]">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />

@@ -15,6 +15,15 @@
     }
 } */
 
+/* reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* IOS HANDLE INPUT DATE */
 input[type="date"],
 input[type="time"],
@@ -36,6 +45,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  /* overflow-y: hidden;
+  margin: 0;
+  padding: 0; */
 }
 
 @layer utilities {
@@ -48,7 +60,7 @@ body {
 
 .content-container {
   width: 390px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 
 /* layer */
