@@ -217,7 +217,7 @@ const UserInfoPage = () => {
           {apiPost?.isPending ? (
             <span className="loading loading-spinner"></span>
           ) : (
-            <span>{t("next")}</span>
+            <span>{t("send_order")}</span>
           )}
         </button>
       </div>

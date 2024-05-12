@@ -111,6 +111,7 @@
         "scan_qr": "Scan QR code to payment",
         "download_qr": "Download QR code",
         "order_success": "Your order has been successfully placed!",
-        "order_expired": "Your order has expired!"
+        "order_expired": "Your order has expired!",
+        "send_order": "Send order"
     }
 }
