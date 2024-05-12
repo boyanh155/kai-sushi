@@ -37,6 +37,9 @@ input[type="month"] {
   min-height: 1.2em;
   min-width: 95%;
 }
+html{
+ scroll-snap-type: y mandatory;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

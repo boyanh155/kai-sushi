@@ -3,7 +3,7 @@
 import Image from "next/image";
 import logoSquare from "@/public/logo.svg";
 import { useTranslations } from "next-intl";
-
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { gideon } from "@/libs/GoogleFont";
 
@@ -14,10 +14,12 @@ const HomeMain = () => {
   const moveToListMenu = (type: "food" | "beverage" | "lunch" | "cafe") => {
     router.push("/" + type);
   };
+  const addressRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="flex flex-col content-container items-center pt-14 pb-32   overflow-x-visible">
+    <div className="flex flex-col content-container items-center pt-14 pb-32 snap-start   overflow-x-visible">
       {/* Center logo */}
-      <div className="w-[60px] max-h-[60px] snap-start">
+      <div className="w-[60px] max-h-[60px] ">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
       </div>
       <h1 className={`text-white mt-6 uppercase text-3xl ${gideon.className}`}>
@@ -25,7 +27,7 @@ const HomeMain = () => {
       </h1>
       {/* --------------MENU-------------- */}
       {/* Button group - MENU*/}
-      <div className="flex flex-col items-center mt-16 gap-2  snap-start">
+      <div className="flex flex-col items-center mt-16 gap-2  ">
         {/* CAFE */}
         <div className="golden-title font-bold text-xl">
           {t("cafe_label")}&nbsp;|&nbsp;
@@ -59,7 +61,12 @@ const HomeMain = () => {
       {/* --------------MENU-------------- */}
 
       {/* BOUNCE SCROLL */}
-      <div className="mt-14">
+      <div
+        onClick={(_) => {
+          addressRef?.current?.scrollIntoView({ behavior: "smooth" });
+        }}
+        className="mt-14 p-4"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -78,7 +85,11 @@ const HomeMain = () => {
         </svg>
       </div>
       {/* Address content */}
-      <div className="mt-28 flex flex-col items-center  snap-start">
+      <div
+        ref={addressRef}
+        id="kai_menu_address_section"
+        className="mt-28 flex flex-col items-center  snap-start scroll-mt-7"
+      >
         {/* Small log */}
         <div className="w-[60px] max-h-[60px]">
           <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
