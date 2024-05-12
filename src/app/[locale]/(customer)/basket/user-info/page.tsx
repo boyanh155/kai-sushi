@@ -95,10 +95,12 @@ const UserInfoPage = () => {
   const client = useQueryClient();
 
   useEffect(() => {
+    console.log(apiPost?.data);
+
     if (apiPost?.isPending || apiPost?.isError || !apiPost?.data) return;
 
     console.log(apiPost?.data);
-    const key = ["takeaway", "payment", apiPost.data?.order?._id];
+    const key = ["takeaway", "payment", apiPost.data?._id];
     client.setQueryDefaults(key, {
       staleTime: 1000 * 60 * 30,
     });
@@ -107,7 +109,7 @@ const UserInfoPage = () => {
     router.push({
       pathname: `/basket/success`,
       query: {
-        orderId: apiPost.data?.order?._id,
+        orderId: apiPost.data?._id,
       },
     });
   }, [apiPost?.isPending]);
@@ -119,13 +121,19 @@ const UserInfoPage = () => {
       </div>
       <p className="text-white font-bold mt-9">{t("user_info")}</p>
       {/* ERROR */}
-      <Alert
-        isVisible={isAlert}
-        setIsVisible={setIsAlert}
-        color="error"
-        className="mt-3"
-        messages={(apiPost?.error as any)?.error || "Lỗi không xác định"}
-      />
+      {apiPost?.isError && (
+        <Alert
+          isVisible={isAlert}
+          setIsVisible={setIsAlert}
+          color="error"
+          className="mt-3"
+          messages={
+            (apiPost?.error as any)?.error.message ||
+            (apiPost?.error as any)?.error ||
+            "Lỗi không xác định"
+          }
+        />
+      )}
       {/* FORM */}
       <div
         className={`

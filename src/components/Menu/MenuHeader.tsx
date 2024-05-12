@@ -31,6 +31,7 @@ const MenuHeader = ({ item }: Props) => {
       });
     }
   }, [activedRef.current]);
+  console.log(item);
   return (
     <Link href={`/${menuTypeParam}/${item.slug}` as any}>
       <div

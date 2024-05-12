@@ -19,6 +19,7 @@ const Alert: React.FC<AlertProps> = ({
     setIsVisible(false);
   };
   const t = useTranslations("Booking");
+  console.log(messages);
   return (
     isVisible && (
       <div
@@ -33,7 +34,7 @@ const Alert: React.FC<AlertProps> = ({
         >
           <p className="font-bold">{t("error_bellow")}</p>
           <ul className="list-disc ps-6">
-            {Array.isArray(messages) ? (
+            {typeof messages != "string" ? (
               messages.map((message, index) => (
                 <li className="text-base font-normal text-black" key={index}>
                   {message}
