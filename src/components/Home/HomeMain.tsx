@@ -17,7 +17,7 @@ const HomeMain = () => {
   const addressRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="flex flex-col content-container items-center pt-14 pb-32 snap-start   overflow-x-visible">
+    <div className="flex flex-col content-container items-center pt-14 pb-20   overflow-x-visible">
       {/* Center logo */}
       <div className="w-[60px] max-h-[60px] ">
         <Image src={logoSquare} className="w-full h-auto" alt="Kai logo" />
@@ -88,7 +88,7 @@ const HomeMain = () => {
       <div
         ref={addressRef}
         id="kai_menu_address_section"
-        className="mt-28 flex flex-col items-center  snap-start scroll-mt-7"
+        className="mt-28 flex flex-col items-center  scroll-mt-7"
       >
         {/* Small log */}
         <div className="w-[60px] max-h-[60px]">
@@ -138,7 +138,7 @@ const HomeMain = () => {
         </div> */}
         {/* social media */}
 
-        <div className="flex flex-col gap-4 mt-28 items-center">
+        <div className="flex flex-col gap-4 mt-16 items-center">
           <div className="font-light uppercase text-lg golden-title">
             {t("follow_us")}
           </div>
