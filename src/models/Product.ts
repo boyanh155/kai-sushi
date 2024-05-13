@@ -31,7 +31,10 @@ const category = new Schema<ICategoryDocument>({
     type: String,
     required: true,
   },
-  products: [product],
+  products: [{
+    type: Schema.Types.ObjectId,
+    ref: "Product",
+  }],
 });
 
 product.index({ name: 1 }, { unique: true });
