@@ -51,14 +51,11 @@ const SuccessPage = () => {
         <CloseButton href="/take-away" />
       </div>
       {/* INFORMATION */}
-      {apiGet?.isLoading ? (
-        <Loading />
-      ) : (
-        <div className="flex flex-col">
-          {/* ID CODE */}
-          <LineTexts title={t("order_code")} value={apiGet?.data?._id} />
-        </div>
-      )}
+
+      <div className="flex flex-col">
+        {/* ID CODE */}
+        <LineTexts title={t("order_code")} value={apiGet?.data?._id} />
+      </div>
     </div>
   );
 };
