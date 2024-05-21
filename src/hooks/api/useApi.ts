@@ -71,6 +71,7 @@ interface ApiHookParams {
   method: Method;
   url: string;
   customConfig?: AxiosRequestConfig;
+  staleTime?: number;
 }
 
 export default function useApi<ResponseBody>({
@@ -78,6 +79,7 @@ export default function useApi<ResponseBody>({
   method,
   url,
   customConfig,
+  staleTime,
 }: ApiHookParams) {
   const queryClient = new QueryClient();
 
@@ -107,6 +109,11 @@ export default function useApi<ResponseBody>({
         queryKey: key,
         queryFn: (obj?: any) => api(method, url, obj, _config),
         retry: 0,
+        ...(staleTime
+          ? {
+              staleTime,
+            }
+          : {}),
       });
       return { get };
 
@@ -118,6 +125,7 @@ export default function useApi<ResponseBody>({
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: key });
         },
+        
       });
       return { post };
 

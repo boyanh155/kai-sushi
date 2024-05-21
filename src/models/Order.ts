@@ -79,7 +79,7 @@ const order = new Schema<IOrderDocument>(
         },
       },
     ],
-    payStatus: {
+    isPaid: {
       type: Boolean,
       default: false,
     },
@@ -118,7 +118,7 @@ order.index(
     expireAfterSeconds: 60 * 30,
     partialFilterExpression: {
       active: false,
-      payStatus: false,
+      isPaid: false,
       "paymentInfo.status": "CANCELLED",
     },
   }

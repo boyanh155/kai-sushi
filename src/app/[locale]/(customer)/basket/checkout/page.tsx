@@ -85,7 +85,7 @@ const CheckoutPage = () => {
                     </p>
                   </div>
                   {/* PRICE */}
-                  <div className="flex">{formatVND(item.price * 1000)}</div>
+                  <div className="flex">{formatVND((item.price *item.quantity) * 1000)}</div>
                 </div>
               </div>
             ))

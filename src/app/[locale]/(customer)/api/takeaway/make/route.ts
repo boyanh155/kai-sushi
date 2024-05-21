@@ -1,6 +1,7 @@
 import { generateHmac } from "@/libs/apiMiddleware/hmac";
 import connectDB from "@/libs/connectDb";
 import { generateQRCodeWithLogo } from "@/libs/qrcode";
+import { setCache } from "@/libs/redisConnection";
 import orderModel from "@/models/Order";
 import { payOSService } from "@/services/payos";
 import { getProductById } from "@/services/product.service";
@@ -76,6 +77,9 @@ export const POST = async (req: NextRequest) => {
     newOrder.paymentInfo = link;
     newOrder.qrCodeImage = qrCodeImage;
     newOrder.save();
+
+    setCache(`order:payment:${newOrder._id}`, "unpaid");
+
     return NextResponse.json(newOrder, {
       status: 200,
     });

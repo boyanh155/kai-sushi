@@ -11,7 +11,7 @@ export interface IOrderDocument extends Document {
   items: IProductDocument[];
   createdAt: Date;
   updatedAt: Date;
-  payStatus: boolean;
+  isPaid: boolean;
   qrCodeImage?: string;
   active: boolean;
   order?: number;

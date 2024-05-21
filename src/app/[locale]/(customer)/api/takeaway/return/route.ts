@@ -27,7 +27,7 @@ export const GET = async (req: NextRequest) => {
       },
       {
         "paymentInfo.status": status,
-        payStatus: error == "1" ? false : true,
+        isPaid: error == "1" ? false : true,
         active: 0,
       },
       {

@@ -1,5 +1,6 @@
 import { verifyBodyHmac } from "@/libs/apiMiddleware/hmac";
 import connectDB from "@/libs/connectDb";
+import { getCache } from "@/libs/redisConnection";
 import orderModel from "@/models/Order";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
@@ -18,7 +19,7 @@ export const GET = async (req: NextRequest) => {
     }
 
     console.log(`orderId=${orderID}`);
-    
+
     const isVerified = await verifyBodyHmac(signature, `orderId=${orderID}`);
 
     if (!isVerified) {
@@ -27,16 +28,56 @@ export const GET = async (req: NextRequest) => {
         status: 401,
       };
     }
-    await connectDB();
-    const order = await orderModel.findById(orderID);
-    if (!order)
-      throw {
-        message: "Order not found",
-        status: 404,
-      };
-    return NextResponse.json(order, {
-      status: 200,
-    });
+
+    const currentPaidStatus = await getCache(`order:payment:${orderID}`);
+
+    if (!currentPaidStatus) {
+      await connectDB();
+      const order = await orderModel.findOne(
+        {
+          $and: [
+            { _id: orderID },
+            {
+              "paymentInfo.expiredAt": {
+                $gte: Date.now() / 1000,
+              },
+            },
+            {
+              active: 1,
+            },
+            {
+              isPaid: 0,
+            }
+          ],
+        },
+        {
+          isPaid: 1,
+        }
+      );
+      if (!order) {
+        throw {
+          message: "Order not found",
+          status: 404,
+        };
+      }
+      return NextResponse.json(
+        {
+          isPaid: order.isPaid,
+        },
+        {
+          status: 200,
+        }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        isPaid: currentPaidStatus === "paid",
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (err: any) {
     return NextResponse.json(
       { error: err.stack || err.message },

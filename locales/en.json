@@ -84,7 +84,7 @@
         "take_away_label": "Takeaway"
     },
     "Basket": {
-        "pickup_label": "Come to pick up",
+        "pickup_label": "Pick up at",
         "address1": "17A Street 6, Quarter 1, Thanh My Loi Ward, District 2",
         "cart_summary": "Cart summary",
         "add_item": "Add item",
