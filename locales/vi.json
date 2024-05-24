@@ -110,8 +110,12 @@
         "order_amount": "Tổng tiền",
         "scan_qr": "Quét mã QR để thanh toán",
         "order_success": "Đặt hàng thành công",
+        "payment_status": "Trạng thái thanh toán",
+        "is_paid_true": "Đã thanh toán",
+        "is_paid_false": "Chưa thanh toán",
         "download_qr": "Tải mã QR",
         "order_expired": "Đơn hàng sẽ hết hạn sau",
-        "send_order": "Đặt món"
+        "send_order": "Đặt món",
+        "expire_after": "Đơn hàng sẽ hết hạn sau"
     }
 }

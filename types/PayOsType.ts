@@ -38,6 +38,7 @@ namespace PayOsType {
     status: string; // Trạng thái của link thanh toán
     checkoutUrl: string; // Đường dẫn trang thanh toán
     qrCode: string; // Mã QR thanh toán
+    expiredAt?: number; // Thời gian hết hạn của link thanh toán
   };
 
   type TransactionType = {

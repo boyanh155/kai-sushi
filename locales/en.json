@@ -108,10 +108,14 @@
         "order_code": "Order code",
         "order_description": "Order description",
         "order_amount": "Total",
+        "payment_status": "Payment status",
+        "is_paid_true": "Paid",
+        "is_paid_false": "Unpaid",
         "scan_qr": "Scan QR code to payment",
         "download_qr": "Download QR code",
         "order_success": "Your order has been successfully placed!",
         "order_expired": "Your order has expired!",
-        "send_order": "Send order"
+        "send_order": "Send order",
+        "expire_after": "Your order will expire after"
     }
 }
