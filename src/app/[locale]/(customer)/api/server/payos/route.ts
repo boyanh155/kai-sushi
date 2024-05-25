@@ -1,4 +1,5 @@
 import { verifyPayOSSignature } from "@/libs/apiMiddleware/payosVerify";
+import connectDB from "@/libs/connectDb";
 import { setCache } from "@/libs/redisConnection";
 import orderModel from "@/models/Order";
 import { NextRequest, NextResponse } from "next/server";
@@ -20,8 +21,8 @@ export const POST = verifyPayOSSignature(
         };
       }
       console.log(orderCode);
-      console.log("I'm here")
-
+      console.log("I'm here");
+      await connectDB();
       const _o = await orderModel.findOneAndUpdate(
         {
           order: orderCode,
