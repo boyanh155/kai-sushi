@@ -60,7 +60,7 @@ const SuccessPage = () => {
     if (intervalId) clearInterval(intervalId);
     if (isPaid) return;
     if (!apiGetCheckOrder) return;
-    console.log(apiGetCheckOrder.error);
+
     if (
       apiGetCheckOrder.status === "error" &&
       apiGetCheckOrder.error?.status == 404
@@ -80,10 +80,10 @@ const SuccessPage = () => {
     };
   }, [apiGetCheckOrder]);
 
-  React.useEffect(() => {
-    if (!apiGet?.data) return;
-    console.log(apiGet?.data);
-  }, [apiGet?.data]);
+  // React.useEffect(() => {
+  //   if (!apiGet?.data) return;
+  //   console.log(apiGet?.data);
+  // }, [apiGet?.data]);
 
   const [timeLeft, setTimeLeft] = React.useState("");
 
@@ -101,16 +101,13 @@ const SuccessPage = () => {
         setTimeLeft("Time expired");
         clearInterval(intervalId);
       } else {
-        setTimeLeft(
-          `${duration.hours()}h ${duration.minutes()}m ${duration.seconds()}s`
-        );
+        setTimeLeft(`${duration.minutes()}m ${duration.seconds()}s`);
       }
     }, 1000);
 
     return () => clearInterval(intervalId); // This will clear the interval when the component unmounts
   }, [apiGet?.data?.paymentInfo.expiredAt]);
-  console.log(apiGet?.data?.isPaid);
-  console.log(isPaid);
+
   return apiGet?.isLoading ? (
     <Loading />
   ) : (

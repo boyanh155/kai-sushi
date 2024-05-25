@@ -18,8 +18,6 @@ export const GET = async (req: NextRequest) => {
       };
     }
 
-    console.log(`orderId=${orderID}`);
-
     const isVerified = await verifyBodyHmac(signature, `orderId=${orderID}`);
 
     if (!isVerified) {
@@ -30,7 +28,6 @@ export const GET = async (req: NextRequest) => {
     }
 
     let currentPaidStatus = await getCache(`order:payment:${orderID}`);
-    console.log(currentPaidStatus);
 
     if (!currentPaidStatus) {
       await connectDB();
@@ -72,7 +69,7 @@ export const GET = async (req: NextRequest) => {
         }
       );
     }
- 
+
     if (currentPaidStatus === "paid") delCache(`order:payment:${orderID}`);
 
     return NextResponse.json(

@@ -18,7 +18,7 @@ const BasketLayout = ({ children }: Props) => {
     const contentWrapper = document.querySelector("#content_wrapper");
     const mainWrapper = document.querySelector("#main_wrapper");
     if (!contentWrapper || !mainWrapper) return;
-    console.log(contentWrapper);
+
     contentWrapper.classList.remove("before:opacity-90");
     contentWrapper.classList.add("z-[40]");
     mainWrapper.classList.remove("pb-[101px]");

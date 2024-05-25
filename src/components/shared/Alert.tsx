@@ -14,12 +14,10 @@ const Alert: React.FC<AlertProps> = ({
   color,
   ...props
 }) => {
-  console.log(messages);
   const closeAlert = () => {
     setIsVisible(false);
   };
   const t = useTranslations("Booking");
-  console.log(messages);
   return (
     isVisible && (
       <div

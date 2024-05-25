@@ -135,18 +135,18 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
         set((prev) => ({ ...prev, currentDetailItem: item })),
       setItemNote: (itemID, note) =>
         set((prev) => {
-          console.log(prev.items, itemID);
+      
           const existingItemIndex = prev.items.findIndex(
             (item) => item._id === itemID
           );
-          console.log("existingItemIndex", existingItemIndex);
+      
           if (existingItemIndex === -1) return { ...prev };
           const existingItem = prev.items[existingItemIndex];
           const updatedItem = {
             ...existingItem,
             note,
           };
-          console.log("updatedItem", updatedItem);
+     
           const updatedItems = [...prev.items];
           updatedItems[existingItemIndex] = updatedItem as any;
           return {
@@ -168,7 +168,7 @@ const useCartStore = create<CartStore, [["zustand/persist", unknown]]>(
           const updatedItems = [...prev.items].filter(
             (item) => item._id !== _itemID
           );
-          console.log("updatedItems", updatedItems);
+        
           return {
             ...prev,
             items: [...updatedItems],

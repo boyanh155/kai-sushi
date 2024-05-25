@@ -8,7 +8,7 @@ type Props = {
 };
 
 const MenuChild = ({ headerId }: Props) => {
-  console.log(headerId);
+
   const api = useGetMenuHeaderDetailById(headerId);
   if (api?.error?.status === 404) return notFound();
   return api?.isLoading ? (

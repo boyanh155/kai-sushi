@@ -88,15 +88,14 @@ const menuHeader = new Schema<IMenuHeader>({
 menuHeader.post("findOneAndDelete", async function (next) {
   // 'this' is the MenuHeader being removed. Provide callbacks here if you want
   // to be notified of the calls' result.
-  console.log("remove children");
-  console.log((this as any).children);
+
   const removedChildren = [...(this as any).children];
   const contentChildren = await model("MenuChild").find({
     _id: { $in: removedChildren },
   });
 
   for (const _child of contentChildren) {
-    console.log(_child.children);
+   
     await model("MenuChild").deleteMany({
       _id: { $in: _child.children },
     });

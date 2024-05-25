@@ -3,7 +3,7 @@
 import crypto from "crypto";
 
 const secret = process.env.PAYMENT_SECRET_KEY;
-console.log(secret);
+
 
 if (!secret) throw new Error("Payment secret key is not defined");
 export const verifyBodyHmac = async (sign: string, body: any) => {

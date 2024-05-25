@@ -32,9 +32,7 @@ const DetailItemPopup = () => {
     quantity: 1,
   });
   // current state
-  console.log(currentDetailItem);
-  console.log(currentInCart);
-  console.log(currentItem);
+ 
   useEffect(() => {
     if (!currentDetailItem) return;
     if (currentInCart) {
@@ -83,7 +81,7 @@ const DetailItemPopup = () => {
   const handleConfirm = (_) => {
     if (!currentDetailItem) return;
     if (!currentItem.quantity) {
-      console.log("yo");
+
       _removeItemCart(currentDetailItem?._id);
       _setCurrentDetailItem(null);
       return;

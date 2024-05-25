@@ -35,7 +35,7 @@ export const sendMessageToManyRecipients: (
               _resolve(res.data);
             })
             .catch((err: AxiosError) => {
-              console.log(err.response?.data);
+        
               _reject(err.response?.data);
             });
         })

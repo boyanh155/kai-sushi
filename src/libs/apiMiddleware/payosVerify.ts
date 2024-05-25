@@ -59,7 +59,7 @@ export const verifyPayOSSignature =
     ...args: any[]
   ) => {
     const body = await req.json();
-    console.log(body);
+   
     const { code, data, signature } = body;
     if (code != "00" || !data || !signature) {
       return NextResponse.json({ error: "Illegal request" }, { status: 400 });

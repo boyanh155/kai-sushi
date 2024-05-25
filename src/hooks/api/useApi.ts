@@ -94,7 +94,7 @@ export default function useApi<ResponseBody>({
     const locale = useLocale();
     _config.headers![headerLocaleKey] = locale || "en";
   } catch (e) {
-    console.log("yoo");
+ 
     // console.log(e);
   }
   if (!_config.headers["Content-Type"])

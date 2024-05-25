@@ -8,7 +8,6 @@ export const GET = async (req: NextRequest) => {
     const orderID = params.get("orderId");
     const _signature = params.get("signature");
     const signature = await generateHmac(orderID);
-    console.log(signature, _signature);
 
     if (signature !== _signature) {
       throw {
@@ -18,7 +17,6 @@ export const GET = async (req: NextRequest) => {
     }
     const status = params.get("status");
     const error = params.get("error");
-    console.log(Date.now() / 1000);
     const _order = await orderModel.findOneAndUpdate(
       {
         _id: orderID,

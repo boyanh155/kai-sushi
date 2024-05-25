@@ -82,13 +82,13 @@ export const setCache = async (
 export const getCache = (key: string) =>
   connect(async (client) => {
     try {
-      console.log("redis get key", key);
+      // console.log("redis get key", key);
       const isExist = await client.exists(key);
       if (!isExist) {
-        console.log("miss");
+        // console.log("miss");
         return null;
       }
-      console.log("hit");
+      // console.log("hit");
       const data = await client.get(key);
       return data;
     } catch (err) {

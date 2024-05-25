@@ -15,9 +15,6 @@ export const GET = async (req: NextRequest) => {
         status: 400,
       };
     }
-
-    console.log(`orderId=${orderID}`);
-
     const isVerified = await verifyBodyHmac(signature, `orderId=${orderID}`);
 
     if (!isVerified) {
