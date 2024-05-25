@@ -1,6 +1,6 @@
 import { verifyBodyHmac } from "@/libs/apiMiddleware/hmac";
 import connectDB from "@/libs/connectDb";
-import { delCache, getCache, setCache } from "@/libs/redisConnection";
+import { delCache, getCache } from "@/libs/redisConnection";
 import orderModel from "@/models/Order";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
