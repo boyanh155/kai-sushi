@@ -20,6 +20,7 @@ export const POST = verifyPayOSSignature(
         };
       }
       console.log(orderCode);
+      console.log("I'm here")
 
       const _o = await orderModel.findOneAndUpdate(
         {
@@ -33,8 +34,9 @@ export const POST = verifyPayOSSignature(
           new: true,
         }
       );
-      console.log();
+      console.log(_o);
       if (_o) setCache(`order:payment:${_o._id}`, "paid");
+      console.log("XOnb");
 
       return new NextResponse(null, {
         status: 200,
