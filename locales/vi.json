@@ -105,6 +105,7 @@
         "discount": "Mã giảm giá",
         "enter_discount": "Nhập mã",
         "total": "Tổng cộng",
+        "waiting_to_confirm": "Mất từ 5 giây đến 1 phút để xác nhận sau khi bạn thanh toán",
         "order_code": "Mã đơn hàng",
         "order_description": "Mô tả",
         "order_amount": "Tổng tiền",

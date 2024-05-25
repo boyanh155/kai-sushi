@@ -109,7 +109,8 @@ const SuccessPage = () => {
 
     return () => clearInterval(intervalId); // This will clear the interval when the component unmounts
   }, [apiGet?.data?.paymentInfo.expiredAt]);
-
+  console.log(apiGet?.data?.isPaid);
+  console.log(isPaid);
   return apiGet?.isLoading ? (
     <Loading />
   ) : (
@@ -152,6 +153,7 @@ const SuccessPage = () => {
 
         <div className="flex flex-col gap-4 items-center mt-12">
           <p className="text-base font-light text-center">{t("scan_qr")}</p>
+
           <Image
             priority
             src={apiGet?.data?.qrCodeImage!}
@@ -159,13 +161,20 @@ const SuccessPage = () => {
             height={218}
             alt="payment-qr"
           />
+          <p className="text-sm font-light text-center text-[#ffffffab]">
+            {t("waiting_to_confirm")}
+          </p>
         </div>
 
         {/* Expire */}
-        {(!isPaid || !apiGet?.data?.isPaid) && (
-          <div className="flex flex-col text-red-500 items-center">
+        {!isPaid && !apiGet?.data?.isPaid ? (
+          <div className="flex flex-col text-red-500 items-center text-lg">
             <div>{t("expire_after")}</div>
             <div>{timeLeft}</div>
+          </div>
+        ) : (
+          <div className="flex flex-col text-green-500 items-center text-lg">
+            {t("is_paid_true")}
           </div>
         )}
       </div>

@@ -58,7 +58,7 @@ const order = new Schema<IOrderDocument>(
 
     paidInfo: {
       type: Schema.Types.Mixed,
-      required: false,/* */
+      required: false /* */,
     },
 
     qrCodeImage: {
@@ -94,6 +94,7 @@ const order = new Schema<IOrderDocument>(
 );
 order.pre("save", async function (next) {
   var doc = this;
+  if (!this.isNew) return;
   try {
     const counter = await counterModel.findByIdAndUpdate(
       { _id: "entityId" },

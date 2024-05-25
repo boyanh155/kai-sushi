@@ -111,6 +111,7 @@
         "payment_status": "Payment status",
         "is_paid_true": "Paid",
         "is_paid_false": "Unpaid",
+        "waiting_to_confirm": "It cost 5 seconds to 1 minute to confirm after your payment",
         "scan_qr": "Scan QR code to payment",
         "download_qr": "Download QR code",
         "order_success": "Your order has been successfully placed!",

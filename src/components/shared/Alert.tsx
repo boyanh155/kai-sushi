@@ -1,13 +1,12 @@
 import { useTranslations } from "next-intl";
 
 type AlertProps = {
-  messages: string[] | string;
+  messages: string[] | string | Record<string, any>;
   isVisible: boolean;
   color: "error" | "success" | "warning";
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   [x: string]: any;
 };
-
 const Alert: React.FC<AlertProps> = ({
   messages,
   isVisible,
@@ -15,6 +14,7 @@ const Alert: React.FC<AlertProps> = ({
   color,
   ...props
 }) => {
+  console.log(messages);
   const closeAlert = () => {
     setIsVisible(false);
   };
@@ -35,11 +35,15 @@ const Alert: React.FC<AlertProps> = ({
           <p className="font-bold">{t("error_bellow")}</p>
           <ul className="list-disc ps-6">
             {typeof messages != "string" ? (
-              messages.map((message, index) => (
-                <li className="text-base font-normal text-black" key={index}>
-                  {message}
-                </li>
-              ))
+              Array.isArray(messages) ? (
+                messages?.map((message, index) => (
+                  <li className="text-base font-normal text-black" key={index}>
+                    {message}
+                  </li>
+                ))
+              ) : (
+                messages.error || null
+              )
             ) : (
               <li className="text-base font-normal text-black">
                 {(messages as any).message || messages}

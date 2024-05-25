@@ -10,7 +10,9 @@ export const getMenuTakeAway = async () => {
     const data = await getCache(cacheKey);
     if (data) return JSON.parse(data);
     await connectDB();
-    const categories = await CategoryModel.find().populate("products");
+    const categories = await CategoryModel.find().sort({
+      "order":-1
+    }).populate("products");
     setCache(cacheKey, JSON.stringify(categories));
     return categories;
   } catch (err) {

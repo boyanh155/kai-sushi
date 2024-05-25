@@ -1,6 +1,6 @@
 import { verifyBodyHmac } from "@/libs/apiMiddleware/hmac";
 import connectDB from "@/libs/connectDb";
-import { getCache } from "@/libs/redisConnection";
+import { delCache, getCache, setCache } from "@/libs/redisConnection";
 import orderModel from "@/models/Order";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
@@ -29,7 +29,8 @@ export const GET = async (req: NextRequest) => {
       };
     }
 
-    const currentPaidStatus = await getCache(`order:payment:${orderID}`);
+    let currentPaidStatus = await getCache(`order:payment:${orderID}`);
+    console.log(currentPaidStatus);
 
     if (!currentPaidStatus) {
       await connectDB();
@@ -47,7 +48,7 @@ export const GET = async (req: NextRequest) => {
             },
             {
               isPaid: 0,
-            }
+            },
           ],
         },
         {
@@ -60,6 +61,8 @@ export const GET = async (req: NextRequest) => {
           status: 404,
         };
       }
+      if (order.isPaid) delCache(`order:payment:${orderID}`);
+
       return NextResponse.json(
         {
           isPaid: order.isPaid,
@@ -69,6 +72,8 @@ export const GET = async (req: NextRequest) => {
         }
       );
     }
+ 
+    if (currentPaidStatus === "paid") delCache(`order:payment:${orderID}`);
 
     return NextResponse.json(
       {
