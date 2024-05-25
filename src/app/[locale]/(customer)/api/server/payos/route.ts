@@ -33,13 +33,15 @@ export const POST = verifyPayOSSignature(
           new: true,
         }
       );
-      setCache(`order:payment:${_o._id}`, "paid");
+      console.log();
+      if (_o) setCache(`order:payment:${_o._id}`, "paid");
 
       return new NextResponse(null, {
         status: 200,
       });
     } catch (err: any) {
       console.log(err);
+
       return NextResponse.json(
         { error: err.message },
         { status: err.status || 500 }
